@@ -25,6 +25,9 @@ controlled
 environment settings. conftest.py supplies isolation for all tests.
 """
 
+from pathlib import Path
+from unittest.mock import Mock
+
 import pytest
 
 from blitzer.config import (
@@ -33,6 +36,8 @@ from blitzer.config import (
     resolve_path,
     validate_pattern,
 )
+
+from blitzer import config as config_module
 
 
 def test_defaults_read_nothing(tmp_path):
@@ -136,3 +141,55 @@ def test_old_prototype_paths_are_not_selected(tmp_path):
     assert config["locations"]["plugins_dir"] == (
         tmp_path / "data" / "bltzr" / "languages"
     )
+
+
+def test_home_config_loads_automatically():
+    """Check home config and relative known-list paths."""
+    directory = Path.home() / ".config" / "bltzr"
+    directory.mkdir(parents=True)
+    (directory / "bltzr.toml").write_text(
+        "[defaults]\nfreq = true\n[languages.eng]\n"
+        'known_file = "./known.txt"\n'
+    )
+    config = get_config()
+    assert config["defaults"]["freq"] is True
+    assert config["languages"]["eng"]["known_file"] == directory / "known.txt"
+    assert get_config(use_config=False)["defaults"]["freq"] is False
+
+
+def test_explicit_config_overrides_home(tmp_path, monkeypatch):
+    """Check file and environment overrides still win over discovery."""
+    directory = Path.home() / ".config" / "bltzr"
+    directory.mkdir(parents=True)
+    (directory / "bltzr.toml").write_text('[defaults]\nsort="appearance"\n')
+    override = tmp_path / "override.toml"
+    override.write_text('[defaults]\nsort="alphabetical"\n')
+    assert get_config(override)["defaults"]["sort"] == "alphabetical"
+    monkeypatch.setenv("BLITZER_CONFIG", str(override))
+    assert get_config()["defaults"]["sort"] == "alphabetical"
+
+
+def test_xdg_config_overrides_home(tmp_path):
+    """Check an existing XDG configuration takes priority over home."""
+    home = Path.home() / ".config" / "bltzr"
+    home.mkdir(parents=True)
+    (home / "bltzr.toml").write_text('[defaults]\nsort="appearance"\n')
+    xdg = tmp_path / "config" / "bltzr"
+    xdg.mkdir(parents=True)
+    (xdg / "bltzr.toml").write_text('[defaults]\nsort="alphabetical"\n')
+    assert get_config()["defaults"]["sort"] == "alphabetical"
+
+
+def test_home_config_precedes_native_location(tmp_path, monkeypatch):
+    """Check home lookup works on platforms with another native path."""
+    monkeypatch.delenv("XDG_CONFIG_HOME")
+    native = tmp_path / "native"
+    native.mkdir()
+    (native / "bltzr.toml").write_text('[defaults]\nsort="appearance"\n')
+    monkeypatch.setattr(
+        config_module, "_platform_dir", Mock(return_value=native)
+    )
+    home = Path.home() / ".config" / "bltzr"
+    home.mkdir(parents=True)
+    (home / "bltzr.toml").write_text('[defaults]\nsort="alphabetical"\n')
+    assert get_config()["defaults"]["sort"] == "alphabetical"

@@ -1,90 +1,104 @@
-# Publishing language packs
+# Language packs
 
-For automated patch bumps, Git pushes, changed-pack uploads and PyPI
-publication, use the [one-command release guide](../maintenance/RELEASING.md).
-After its one-time setup, run `make release` from the project root.
+- Ready packs live in three-letter folders such as `slv/` and `pol/`.
+- Unfinished packs belong in `dev/` and are excluded from releases.
+- Pack databases and generated ZIPs are excluded from Git.
 
-Run these commands from the project root (`~/dev/blitzer-py`). This
-repository uses **`master`**, so release commands must target `master`.
+## Publish a release
 
-Usable packs live here in three-letter folders such as `slv/` and `pol/`.
-Unfinished packs live in `dev/` and must stay out of releases. This README
-does not affect language discovery.
-
-## 1. Prepare the changed packs
-
-Update each changed pack's `config.toml` metadata version. Leave unchanged
-packs at their existing versions. Then validate and package the changed
-packs, for example Slovenian:
+Complete the [one-time GitHub/PyPI setup](../maintenance/RELEASING.md),
+then run from the project root:
 
 ```sh
-.venv/bin/bltzr dev package-plugin slv \
-  --no-config --plugins-dir language-packs --output-dir release-assets
+cd ~/dev/blitzer-py
+git status
+git diff
+make release
 ```
 
-Repeat for other changed codes. Packaging validates the database and
-replaces that pack's ZIP and checksum in `release-assets/`.
+Do not bump the application version, create a tag, or package each language
+manually. `make release` handles these steps:
 
-Keep filenames like `blitzer-slv-v1.zip` unchanged. **`v1` is the pack
-format**, not the dictionary version. Existing archives for unchanged
-packs can be included again.
+1. Check source changes and compare language-pack contents with published
+   packs. If nothing changed, stop.
+2. Test the application and validate and package only changed packs.
+3. Increment the application's patch version, such as `0.2.4` to `0.2.5`.
+4. Build and check the Python package, commit all non-ignored changes,
+   and push `master` and the version tag.
+5. Upload changed packs and a content manifest, then publish the GitHub
+   release. GitHub Actions publishes the application to PyPI.
 
-## 2. Push the source changes
+Unchanged packs remain on their earlier releases. The installer finds the
+newest stable release for each language, so no download links need editing.
+The first automated release compares existing published ZIPs; later ones
+use the small manifest. Large dictionaries can take time to check.
 
-If there are uncommitted source or documentation changes:
+The automatic version bump applies to the application and release tag.
+Each pack's `config.toml` metadata version is retained; you can update it
+when preparing changes to that dictionary.
+
+## Check publication or retry
 
 ```sh
-git add -A
-git commit -m "Prepare the next language-pack release"
+gh run list --workflow publish.yml
+gh run watch RUN_ID --exit-status
 ```
 
-Then push:
+Replace `RUN_ID` with the numeric ID from the list. A successful job means
+the application reached PyPI. Check a released pack with:
 
 ```sh
-git push origin master
-```
-
-The databases and release archives are deliberately excluded from Git.
-The README is tracked; the ZIPs are uploaded separately below.
-
-## 3. Publish the release
-
-For manual pack-only releases, use a tag with a **`packs-`** prefix so it
-does not trigger application publication to PyPI:
-
-```sh
-gh release create packs-v0.3.0 release-assets/*.zip \
-  --repo samiddhi/blitzer-py \
-  --target master \
-  --latest=false \
-  --title "Blitzer language packs 0.3.0" \
-  --notes "Describe the updated dictionaries and added languages."
-```
-
-This uploads every prepared ZIP. `--latest=false` keeps a pack-only release
-from becoming the headline application release. Publish a regular release;
-the installer ignores drafts and prereleases.
-
-## 4. Check it
-
-```sh
-gh release view packs-v0.3.0 --repo samiddhi/blitzer-py
 bltzr install-plugin slv --replace
 ```
 
-The installer finds the newest stable release containing each language's
-ZIP. No download links need updating.
+If `make release` stops, fix the reported error and run it again. Keep the
+pending-release checkpoint: it resumes the same version. If only the PyPI
+job fails, fix its error and use `gh run rerun RUN_ID --failed`.
 
-If a release already exists and an upload was interrupted, finish it with:
+## Use local packs while developing
+
+Read directly from this folder without installing or downloading:
 
 ```sh
-gh release upload packs-v0.3.0 release-assets/*.zip \
-  --repo samiddhi/blitzer-py --clobber
+bltzr list-languages -n -P ./language-packs
+bltzr blitz -l slv -t "Sem. Smo!" -n -P ./language-packs
 ```
 
-`--clobber` replaces same-named assets. Use it to finish or correct that
-release; normally publish changed dictionaries under a new tag.
+To use these packs by default, add this to
+`~/.config/bltzr/bltzr.toml`, which is loaded automatically:
 
-Adding new language codes also requires shipping the updated application
-catalog. Publishing pack ZIPs does not publish the application to PyPI.
-See [the full release guide](../PLUGIN-RELEASES.org) for details.
+```toml
+[locations]
+plugins_dir = "~/dev/blitzer-py/language-packs"
+```
+
+If your checkout is elsewhere, change that path. `-P PATH` overrides it;
+`-n` ignores your config. An explicit config file or existing XDG config
+can override the default home config; see the main README's config section.
+
+To install a local pack as an independent copy instead:
+
+```sh
+bltzr install-plugin ./language-packs/slv -n
+```
+
+## Validate or package manually
+
+These commands prepare files locally without publishing a release:
+
+```sh
+.venv/bin/bltzr dev check-plugin slv -n -P ./language-packs
+.venv/bin/bltzr dev package-plugin slv -n -P ./language-packs -o release-assets
+```
+
+Packaging reads the current pack, validates it, and replaces its ZIP and
+checksum in `release-assets/`. A filename such as `blitzer-slv-v1.zip`
+keeps `v1` because that is the pack format, not the release version.
+
+Before releasing a new language, add its code and name to
+`blitzer/language-registry.json` and put its ready pack in this folder.
+Retain the dictionary's license and attribution files.
+
+Use `make release` for publication so the release manifest stays current.
+Any separate manual pack-only release should use a `packs-` tag prefix,
+such as `packs-v0.3.0`, to avoid triggering application publication.

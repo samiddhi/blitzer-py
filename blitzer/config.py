@@ -234,20 +234,22 @@ def _path_setting(value, base, label) -> Path:
 
 
 def _select_config_path(override, use_config) -> Path | None:
-    """Select the configuration file using precedence."""
+    """Select explicit, XDG, home or native configuration in order."""
     if not use_config and override is not None:
         raise ValueError("--config and --no-config cannot be combined")
     if not use_config:
         return None
     selected = override or os.environ.get(CONFIG_ENV_VAR)
-    path = (
-        resolve_path(selected)
-        if selected
-        else _platform_dir("config") / CONFIG_FILE_NAME
+    if selected:
+        return resolve_path(selected)
+    home = Path.home() / ".config" / APP / CONFIG_FILE_NAME
+    platform = _platform_dir("config") / CONFIG_FILE_NAME
+    candidates = (
+        (platform, home)
+        if os.environ.get("XDG_CONFIG_HOME")
+        else (home, platform)
     )
-    if selected or path.exists():
-        return path
-    return None
+    return next((path for path in candidates if path.exists()), None)
 
 
 def _read_toml(path: Path) -> dict:
@@ -306,7 +308,7 @@ def get_config(
     """Return validated settings without creating resources.
 
     Selection uses an explicit file, then BLITZER_CONFIG, then the
-    platform file. Missing optional platform files use defaults; missing
+    XDG, home or native file. Missing default files use defaults; absent
     explicit files raise an error. An explicit plugin directory
     overrides the file.
     """

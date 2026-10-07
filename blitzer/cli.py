@@ -259,7 +259,7 @@ def _handle_context_saving(service, language, entries, saving):
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
-@click.version_option(VERSION)
+@click.version_option(VERSION, "--version", "-V")
 def cli():
     """Extract vocabulary using local data-only language packs."""
 
@@ -284,71 +284,83 @@ def dev():
 )
 @click.option(
     "--lemmatize/--no-lemmatize",
+    "-L",
     default=None,
     help="Display lemmas instead of forms.",
 )
 @click.option(
     "--filter-by",
+    "-F",
     type=click.Choice(["forms", "lemmas"]),
     help="What the known list excludes; independent of display.",
 )
-@click.option("--exclude-unknown/--include-unknown", default=None)
-@click.option("--freq/--no-freq", default=None)
-@click.option("--context/--no-context", default=None)
+@click.option("--exclude-unknown/--include-unknown", "-x", default=None)
+@click.option("--freq/--no-freq", "-f", default=None)
+@click.option("--context/--no-context", "-c", default=None)
 @click.option(
     "--exclude",
+    "-e",
     "exclusions",
     multiple=True,
     type=click.Path(dir_okay=False, path_type=Path),
 )
 @click.option(
     "--exclude-forms",
+    "-E",
     "forms_only",
     multiple=True,
     type=click.Path(dir_okay=False, path_type=Path),
 )
-@click.option("--no-exclusions", is_flag=True)
+@click.option("--no-exclusions", "-N", is_flag=True)
 @click.option(
     "--known-file",
+    "-k",
     type=click.Path(dir_okay=False, path_type=Path),
     help="Primary known list; missing means initially empty.",
 )
-@click.option("--sort", type=click.Choice(SORTS))
+@click.option("--sort", "-S", type=click.Choice(SORTS))
 @click.option(
     "--custom-order",
+    "-O",
     type=click.Path(exists=True, dir_okay=False, path_type=Path),
 )
 @click.option(
     "--sentence-pattern",
+    "-d",
     help="Regex matching sentence-ending delimiters (not empty boundaries).",
 )
-@click.option("--context-limit", type=click.IntRange(1, 20))
-@click.option("--bold", type=click.Choice(MARKUPS))
-@click.option("--format", "output_format", type=click.Choice(FORMATS))
-@click.option("--prompt/--no-prompt", default=None)
-@click.option("--src/--no-src", default=None)
+@click.option("--context-limit", "-m", type=click.IntRange(1, 20))
+@click.option("--bold", "-b", type=click.Choice(MARKUPS))
+@click.option("--format", "-o", "output_format", type=click.Choice(FORMATS))
+@click.option("--prompt/--no-prompt", "-p", default=None)
+@click.option("--src/--no-src", "-s", default=None)
 @click.option(
     "--save-context/--no-save-context",
+    "-H",
     default=None,
     help="Explicitly save/decline surviving contexts.",
 )
 @click.option(
     "--update-known/--no-update-known",
+    "-u",
     default=None,
     help="Discouraged: text occurrence does not mean learned vocabulary.",
 )
 @click.option(
     "--test-known",
+    "-T",
     is_flag=True,
     help=(
         "Preview proposed known additions; "
         "write neither known list nor history."
     ),
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def blitz(
     language,
@@ -438,10 +450,12 @@ def blitz(
 
 
 @cli.command("list-languages")
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def list_languages(config, no_config, plugins_dir):
     """List installed languages available for text processing."""
@@ -457,10 +471,12 @@ def list_languages(config, no_config, plugins_dir):
 
 @dev.command("check-plugin")
 @click.argument("code")
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def check_plugin(code, config, no_config, plugins_dir):
     """Report all validation checks for an installed pack."""
@@ -478,26 +494,31 @@ def check_plugin(code, config, no_config, plugins_dir):
 )
 @click.option(
     "--database",
+    "-D",
     type=click.Path(exists=True, dir_okay=False, path_type=Path),
     help="Import a compatible SQLite database instead of forms.tsv.",
 )
 @click.option(
     "--skip-orphans",
+    "-A",
     is_flag=True,
     help="Explicitly omit/count SQLite source forms with missing lemma IDs.",
 )
 @click.option(
     "--skip-unsupported",
+    "-U",
     is_flag=True,
     help=(
         "Explicitly omit unsupported multiword/symbol entries; "
         "count them in build-info.json."
     ),
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def build_plugin(
     source_dir,
@@ -529,11 +550,13 @@ def build_plugin(
 @click.argument(
     "additional", type=click.Path(exists=True, file_okay=False, path_type=Path)
 )
-@click.option("--pack-version", default="0.2.0", show_default=True)
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
+@click.option("--pack-version", "-v", default="0.2.0", show_default=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def expand_plugin(
     code, additional, pack_version, config, no_config, plugins_dir
@@ -549,13 +572,16 @@ def expand_plugin(
 @click.argument("source", metavar="CODE_OR_DIRECTORY")
 @click.option(
     "--replace",
+    "-R",
     is_flag=True,
     help="Replace an installed pack with the selected version.",
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def install_plugin(source, replace, config, no_config, plugins_dir):
     """Install a registered language or a local directory."""
@@ -578,14 +604,17 @@ def install_plugin(source, replace, config, no_config, plugins_dir):
 @click.argument("code")
 @click.option(
     "--output-dir",
+    "-o",
     type=click.Path(file_okay=False, path_type=Path),
     default="release-assets",
     show_default=True,
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def package_plugin(code, output_dir, config, no_config, plugins_dir):
     """Prepare a validated pack archive for publication."""
@@ -596,11 +625,15 @@ def package_plugin(code, output_dir, config, no_config, plugins_dir):
 
 @cli.command("remove-plugin")
 @click.argument("code")
-@click.option("--yes", is_flag=True, help="Skip the removal confirmation.")
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--yes", "-y", is_flag=True, help="Skip the removal confirmation."
+)
+@click.option(
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def remove_plugin(code, yes, config, no_config, plugins_dir):
     """Remove an installed language pack."""
@@ -625,13 +658,16 @@ def remove_plugin(code, yes, config, no_config, plugins_dir):
 )
 @click.option(
     "--apply",
+    "-a",
     is_flag=True,
     help="Normalize/deduplicate in place, preserving PATH.bak.",
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def cleanup_known(code, path, apply, config, no_config, plugins_dir):
     """Preview or apply known-list deduplication."""
@@ -646,12 +682,14 @@ def cleanup_known(code, path, apply, config, no_config, plugins_dir):
 @click.argument("code")
 @click.argument("term", required=False)
 @click.option(
-    "--limit", type=click.IntRange(1), default=100, show_default=True
+    "--limit", "-m", type=click.IntRange(1), default=100, show_default=True
 )
-@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
-@click.option("--no-config", is_flag=True)
 @click.option(
-    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+    "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
+)
+@click.option("--no-config", "-n", is_flag=True)
+@click.option(
+    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
 )
 def history(code, term, limit, config, no_config, plugins_dir):
     """Show saved sentences containing encountered words."""

@@ -1,9 +1,42 @@
 This directory contains repository maintenance tools. They are excluded
 from the installed application and its wheel/source distributions.
 
-For one-command GitHub and PyPI releases, follow
-[RELEASING.md](RELEASING.md). The local command is `make release`; account
-setup is required before its first use.
+## Publish a new release
+
+Complete the [one-time GitHub/PyPI setup](RELEASING.md) first. After that,
+run these commands from the project root:
+
+```sh
+cd ~/dev/blitzer-py
+.venv/bin/python -m pip install -e '.[dev]'
+git status
+git diff
+make release
+```
+
+Do not manually change the version. The command increments the final
+number (`0.2.4` becomes `0.2.5`), runs tests, builds and checks the package,
+commits all non-ignored changes, and pushes the commit and tag. It uploads
+only changed language packs and publishes the GitHub release. GitHub
+Actions then publishes the application to PyPI automatically. If nothing
+changed, the command does nothing.
+
+Check the PyPI job:
+
+```sh
+gh run list --workflow publish.yml
+gh run watch RUN_ID --exit-status
+```
+
+Replace `RUN_ID` with the numeric ID from the list. A successful job means
+the new version was published to PyPI.
+
+If `make release` stops, fix the reported error and run it again; the
+checkpoint resumes the same version. If only the PyPI job fails, fix its
+error and run `gh run rerun RUN_ID --failed` instead of creating another
+release.
+
+## Convert UniMorph data
 
 Run the one-time UniMorph conversion from the project root with the
 project environment installed:
