@@ -30,6 +30,7 @@ use.
 """
 
 import json
+import shutil
 import sqlite3
 from contextlib import closing
 
@@ -250,7 +251,7 @@ def test_install_is_independent_remove_only_one(service, tmp_path):
             other.remove_plugin(code)
     assert "slv" in other.list_languages()
     other.remove_plugin("slv")
-    assert other.list_languages() == ["base"]
+    assert other.list_languages() == ["base", "eng"]
 
 
 def test_missing_and_broken_db_visible(service):
@@ -412,3 +413,48 @@ def test_invalid_row_is_not_an_unknown(service):
     with pytest.raises(ValueError, match="Invalid lemma"):
         service.blitz("sem", "slv", lemmatize=True)
     assert any(x.status == "fail" for x in service.check_plugin("slv"))
+
+
+def test_bundled_english_is_available_offline(tmp_path):
+    """Check fresh services provide real English without user files."""
+    root = tmp_path / "absent"
+    service = BlitzerService(use_config=False, plugins_dir=root)
+    assert service.list_languages() == ["base", "eng"]
+    assert service.language_name("eng") == "English"
+    assert terms(service.blitz("dogs", "eng", lemmatize=True)) == [
+        ("dog", 1)
+    ]
+    assert not root.exists()
+    with pytest.raises(ValueError, match="bundled"):
+        service.remove_plugin("eng")
+
+
+def test_user_english_overrides_bundle(service, tmp_path):
+    """Check local English overrides and restores bundled data."""
+    root = tmp_path / "override"
+    root.mkdir()
+    pack = root / "eng"
+    shutil.copytree(service.plugins_dir / "slv", pack)
+    config = pack / "config.toml"
+    config.write_text(
+        config.read_text().replace('"slv"', '"eng"')
+        .replace('"Slovenian"', '"Test English"')
+    )
+    selected = BlitzerService(use_config=False, plugins_dir=root)
+    assert selected.language_name("eng") == "Test English"
+    assert terms(selected.blitz("sem", "eng", lemmatize=True)) == [
+        ("biti", 1)
+    ]
+    selected.remove_plugin("eng")
+    assert selected.language_name("eng") == "English"
+
+
+def test_symlinked_pack_root_is_readable(service, tmp_path):
+    """Check linking a pack directory permits lookup and listing."""
+    linked = tmp_path / "linked"
+    linked.symlink_to(service.plugins_dir, target_is_directory=True)
+    selected = BlitzerService(use_config=False, plugins_dir=linked)
+    assert selected.language_name("slv") == "Slovenian"
+    assert terms(selected.blitz("sem", "slv", lemmatize=True)) == [
+        ("biti", 1)
+    ]

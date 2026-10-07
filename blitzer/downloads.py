@@ -31,6 +31,7 @@ import hashlib
 import json
 import re
 import shutil
+import ssl
 import stat
 import zipfile
 from contextlib import closing
@@ -39,7 +40,14 @@ from itertools import count
 from pathlib import Path, PurePosixPath
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import (
+    HTTPRedirectHandler,
+    HTTPSHandler,
+    Request,
+    build_opener,
+)
+
+import certifi
 
 from blitzer.config import validate_code
 
@@ -219,12 +227,25 @@ def _open_response(url, accept):
         raise ValueError("Downloads require HTTPS")
     request = Request(url, headers={"User-Agent": "blitzer", "Accept": accept})
     try:
-        return build_opener(_HttpsRedirects()).open(request, timeout=TIMEOUT)
+        return build_opener(
+            _HttpsRedirects(), HTTPSHandler(context=_tls_context())
+        ).open(request, timeout=TIMEOUT)
     except HTTPError as error:
         error.close()
         raise ValueError(_http_error_message(error.code, url)) from error
     except URLError as error:
         raise OSError(f"Cannot contact GitHub: {error.reason}") from error
+
+
+def _tls_context() -> ssl.SSLContext:
+    """Trust system and bundled roots while verifying HTTPS identities.
+
+    Keep system and SSL_CERT_FILE certificates available, and add
+    Mozilla roots for Python installations without a working CA store.
+    """
+    context = ssl.create_default_context()
+    context.load_verify_locations(cafile=certifi.where())
+    return context
 
 
 def _http_error_message(status, url) -> str:

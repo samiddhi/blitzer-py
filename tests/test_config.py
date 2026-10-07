@@ -124,3 +124,15 @@ def test_pack_rejects_code_and_unknown_fields(source):
     )
     with pytest.raises(ValueError):
         load_plugin_config(source)
+
+
+def test_old_prototype_paths_are_not_selected(tmp_path):
+    """Check defaults leave old prototype packs and config untouched."""
+    legacy = tmp_path / "config" / "blitzer"
+    legacy.mkdir(parents=True)
+    (legacy / "blitzer.toml").write_text("[defaults]\nfreq = true\n")
+    config = get_config()
+    assert config["defaults"]["freq"] is False
+    assert config["locations"]["plugins_dir"] == (
+        tmp_path / "data" / "bltzr" / "languages"
+    )

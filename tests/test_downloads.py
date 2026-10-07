@@ -30,10 +30,12 @@ import hashlib
 import io
 import json
 import shutil
+import ssl
 import stat
 import zipfile
 from copy import deepcopy
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
 from click.testing import CliRunner
@@ -433,3 +435,15 @@ def test_https_is_required_for_requests_and_redirects():
         downloads._HttpsRedirects().redirect_request(
             None, None, 302, "Found", {}, "http://example.com/pack"
         )
+
+
+def test_https_uses_verified_bundled_and_system_roots(monkeypatch):
+    """Check GitHub requests verify certificates using trusted roots."""
+    opener = Mock()
+    monkeypatch.setattr(downloads, "build_opener", opener)
+    downloads._open_response("https://api.github.com/test", "text/plain")
+    handlers = opener.call_args.args
+    context = handlers[1]._context
+    assert context.verify_mode == ssl.CERT_REQUIRED
+    assert context.check_hostname is True
+    assert context.cert_store_stats()["x509_ca"] > 0

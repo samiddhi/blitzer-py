@@ -36,9 +36,9 @@ from pathlib import Path
 
 from platformdirs import user_config_dir, user_data_dir
 
-APP = "blitzer"
+APP = "bltzr"
 CONFIG_ENV_VAR = "BLITZER_CONFIG"
-CONFIG_FILE_NAME = "blitzer.toml"
+CONFIG_FILE_NAME = "bltzr.toml"
 SORTS = (
     "textual-frequency",
     "alphabetical",
@@ -330,7 +330,10 @@ def load_plugin_config(plugin_dir: Path) -> dict:
     ):
         raise ValueError(
             f"{path}: expected format_version = 1; "
-            "convert unversioned packs explicitly"
+            "this pack belongs to an older format. Install a current pack "
+            f"with bltzr install-plugin {plugin_dir.name} --replace, "
+            "or select your "
+            "current packs with --plugins-dir PATH"
         )
     metadata = _table(
         data.get("metadata"),

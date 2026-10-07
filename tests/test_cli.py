@@ -311,7 +311,7 @@ def test_management_commands(service, source, tmp_path):
     result = runner.invoke(
         cli, ["list-languages", "--no-config", "--plugins-dir", root]
     )
-    assert result.stdout == "base\n"
+    assert result.stdout == "Basic (base)\nEnglish (eng)\n"
 
 
 def test_configured_saving_policies_and_override(service, tmp_path):
@@ -368,3 +368,18 @@ def test_empty_results_all_formats(service):
         result = invoke(service, "-t", "...!", "--format", fmt)
         assert result.exit_code == 0, result.output
         assert result.stdout == expected
+
+
+def test_language_listing_uses_metadata_names(service):
+    """Check installed and bundled packs display names with codes."""
+    result = make_runner().invoke(
+        cli,
+        [
+            "list-languages", "--no-config", "--plugins-dir",
+            str(service.plugins_dir),
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert result.stdout == (
+        "Basic (base)\nEnglish (eng)\nSlovenian (slv)\n"
+    )

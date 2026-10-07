@@ -1,0 +1,38 @@
+{
+  "source_rows": 628080,
+  "duplicate_pairs": 58614,
+  "unsupported_rows": 0,
+  "orphan_source_rows": 0,
+  "self_forms_added": 1,
+  "lemmas": 376907,
+  "forms": 569467,
+  "format_version": 1,
+  "source_sha256": "2fb5c7f90542b7a88e23f9c9330e89c0d8eb941b763a1b303c5fb3be828c00ea",
+  "source": "/Users/smdi/dev/blitzer-py/unimorph-output/tmpv2_t38vs/forms.tsv",
+  "config_sha256": "bf611cc3e8dec021d23a4ba0f071137b9e48b1cd6e9731c5fd100090f7c75952",
+  "unimorph": {
+    "code": "eng",
+    "name": "English",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "eng",
+        "sha256": "20a191cefdc7cad6fa74b00f49d6f658684f17b14541aae372e5a3d5a8c15c67"
+      }
+    ],
+    "source_rows": 652472,
+    "accepted_rows": 628093,
+    "unsupported_rows": 24379,
+    "malformed_rows": 0,
+    "ignored_rows": 5,
+    "non_latin_rows": 38,
+    "latin_rows": 628080,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK",
+      "MICRO"
+    ],
+    "excluded_non_latin_rows": 13
+  }
+}

@@ -1,0 +1,11 @@
+format_version = 1
+
+[metadata]
+language_name = "English"
+language_code = "eng"
+version = "0.1.0"
+author = "UniMorph contributors"
+
+[normalization]
+lowercase = true
+substitutions = []

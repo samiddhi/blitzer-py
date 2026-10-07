@@ -2,3 +2,4 @@ include README.org PLAN.md PLUGIN-RELEASES.org config.example.toml
 recursive-include tests *.py
 prune maintenance
 exclude tests/test_unimorph.py
+exclude tests/test_release.py

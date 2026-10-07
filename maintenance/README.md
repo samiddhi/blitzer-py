@@ -1,6 +1,10 @@
 This directory contains repository maintenance tools. They are excluded
 from the installed application and its wheel/source distributions.
 
+For one-command GitHub and PyPI releases, follow
+[RELEASING.md](RELEASING.md). The local command is `make release`; account
+setup is required before its first use.
+
 Run the one-time UniMorph conversion from the project root with the
 project environment installed:
 
@@ -70,4 +74,3 @@ Only publish ZIPs in `ready/assets/`. Review upstream licenses first:
 passing technical checks does not establish redistribution permission.
 The existing Slovenian, Polish and Pali registry entries retain their
 original sources. See `PLUGIN-RELEASES.org` for registry and release steps.
-

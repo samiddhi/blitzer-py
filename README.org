@@ -16,7 +16,7 @@ From the project root:
 #+begin_src sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[dev]'
-.venv/bin/blitzer --help
+.venv/bin/bltzr --help
 .venv/bin/python -m pytest -q
 #+end_src
 
@@ -33,7 +33,7 @@ that contacts GitHub; ordinary text processing stays offline.
 Plugin-free processing works immediately:
 
 #+begin_src sh
-.venv/bin/blitzer blitz --no-config -l base -t 'Cats cats dogs!' --freq
+.venv/bin/bltzr blitz --no-config -l base -t 'Cats cats dogs!' --freq
 #+end_src
 
 Expected output is =cats<TAB>2= followed by =dogs<TAB>1=.
@@ -42,9 +42,9 @@ The completed local Slovenian pack, when present at =language-packs/slv=,
 is selected by the example config:
 
 #+begin_src sh
-.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Je je.' --lemmatize --freq
-.venv/bin/blitzer blitz --config config.example.toml -l slv --file chapter.txt --context --format tsv
-printf '%s\n' 'Je je.' | .venv/bin/blitzer blitz --config config.example.toml -l slv --lemmatize --format json
+.venv/bin/bltzr blitz --config config.example.toml -l slv -t 'Je je.' --lemmatize --freq
+.venv/bin/bltzr blitz --config config.example.toml -l slv --file chapter.txt --context --format tsv
+printf '%s\n' 'Je je.' | .venv/bin/bltzr blitz --config config.example.toml -l slv --lemmatize --format json
 #+end_src
 
 =Je je.= yields =biti=, =jesti= and =on=, each counted twice. These are
@@ -116,7 +116,7 @@ a limitation. Override =sentence_pattern= per language in config, or
 =--sentence-pattern= with a regex matching consuming delimiters:
 
 #+begin_src sh
-.venv/bin/blitzer blitz --no-config -l base -t 'First;Second;Third' --context --sentence-pattern ';'
+.venv/bin/bltzr blitz --no-config -l base -t 'First;Second;Third' --context --sentence-pattern ';'
 #+end_src
 
 Punctuation delimiters remain in the example. Zero-length boundaries
@@ -129,8 +129,8 @@ Offsets are Python string indexes, not UTF-8 byte offsets.
 * Known-list cleanup and updating
 
 #+begin_src sh
-.venv/bin/blitzer cleanup-known base known.txt --no-config
-.venv/bin/blitzer cleanup-known base known.txt --no-config --apply
+.venv/bin/bltzr cleanup-known base known.txt --no-config
+.venv/bin/bltzr cleanup-known base known.txt --no-config --apply
 #+end_src
 
 The first command reports duplicate normalized terms. =--apply= writes a
@@ -145,7 +145,7 @@ in text does not mean you have learned it. It is disabled by default.
 Prefer a manual review. The safe test mode is:
 
 #+begin_src sh
-.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Sem smo xyzzy' --test-known
+.venv/bin/bltzr blitz --config config.example.toml -l slv -t 'Sem smo xyzzy' --test-known
 #+end_src
 
 Proposed additions appear on stderr; vocabulary remains on stdout.
@@ -172,9 +172,9 @@ by a confirmation prompt. History collection does not require displaying
 Repeated identical contexts for a term are deduplicated.
 
 #+begin_src sh
-.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Smo doma.' --save-context
-.venv/bin/blitzer history slv --config config.example.toml
-.venv/bin/blitzer history slv biti --config config.example.toml --limit 20
+.venv/bin/bltzr blitz --config config.example.toml -l slv -t 'Smo doma.' --save-context
+.venv/bin/bltzr history slv --config config.example.toml
+.venv/bin/bltzr history slv biti --config config.example.toml --limit 20
 #+end_src
 
 History uses a separate SQLite file. Dictionary lookups stay read-only.
@@ -185,7 +185,7 @@ application does not send data to an LLM or connect to Anki automatically.
 
 Copy/edit =config.example.toml= or pass it directly. Select a config with
 =--config PATH=, then =BLITZER_CONFIG=, then the platform config directory
-plus =blitzer.toml=. A missing optional default uses built-in values;
+plus =bltzr.toml=. A missing optional default uses built-in values;
 missing selected or malformed config errors. =--no-config= bypasses config
 files, including the environment override. It conflicts with =--config=.
 
@@ -193,6 +193,37 @@ Paths from config are relative to that file. =~= and =$NAME=/=${NAME}=
 are expanded; referenced unset variables error. CLI paths use the current
 directory. Explicit absolute =XDG_CONFIG_HOME= and =XDG_DATA_HOME= are
 honored on every platform; otherwise platformdirs provides the roots.
+
+The application uses its own =bltzr= config and data directories. It does
+not automatically load old =blitzer= dictionaries or configuration.
+=BLITZER_CONFIG= is still supported as an explicit config-file override.
+
+* Languages available immediately
+
+A fresh installation provides =Basic (base)= without a dictionary and
+=English (eng)= with the bundled UniMorph dictionary. English works
+offline and retains its upstream CC BY-SA 3.0 attribution. User-installed
+English overrides the bundled dictionary; removing that user copy
+restores the bundled one. Other languages require installation or an
+explicit local pack directory.
+
+To use every ready pack in this checkout without copying or downloading:
+
+#+begin_src sh
+bltzr list-languages --plugins-dir "$HOME/dev/blitzer-py/language-packs"
+bltzr blitz -l slv -t 'nisem tako prepričan' --plugins-dir "$HOME/dev/blitzer-py/language-packs"
+#+end_src
+
+For a permanent choice, set =[locations]= / =plugins_dir= in your
+=bltzr.toml= to the absolute checkout path. A symlink at the default data
+directory's =languages= path also works. Pack reads follow symlinks;
+removal refuses individual symlinked packs. Development changes affect
+every program reading the same directory.
+
+Downloads verify HTTPS certificates using both Python's system roots
+and the Mozilla root bundle supplied by =certifi=.
+
+* Configuration precedence
 
 Precedence: explicit flag, =[languages.CODE]=, =[defaults]=, built-in.
 All defaults can be overridden by language. Config fields are validated;
@@ -208,14 +239,14 @@ replaced; an explicit =--known-file= always selects the primary file.
 * Installing a language by code or local path
 
 #+begin_src sh
-.venv/bin/blitzer install-plugin slv
-.venv/bin/blitzer install-plugin pol
-.venv/bin/blitzer install-plugin pli
-.venv/bin/blitzer install-plugin slv --replace
+.venv/bin/bltzr install-plugin slv
+.venv/bin/bltzr install-plugin pol
+.venv/bin/bltzr install-plugin pli
+.venv/bin/bltzr install-plugin slv --replace
 
 # Offline development installation:
-.venv/bin/blitzer install-plugin ./my-pack/slv
-.venv/bin/blitzer install-plugin ./my-pack/slv --replace
+.venv/bin/bltzr install-plugin ./my-pack/slv
+.venv/bin/bltzr install-plugin ./my-pack/slv --replace
 #+end_src
 
 Registered codes resolve to the newest stable GitHub release containing
@@ -233,9 +264,9 @@ local folder takes precedence over a bare code and never uses the network.
 To prepare archives from built packs:
 
 #+begin_src sh
-.venv/bin/blitzer dev package-plugin slv --no-config --plugins-dir language-packs
-.venv/bin/blitzer dev package-plugin pol --no-config --plugins-dir language-packs
-.venv/bin/blitzer dev package-plugin pli --no-config --plugins-dir language-packs
+.venv/bin/bltzr dev package-plugin slv --no-config --plugins-dir language-packs
+.venv/bin/bltzr dev package-plugin pol --no-config --plugins-dir language-packs
+.venv/bin/bltzr dev package-plugin pli --no-config --plugins-dir language-packs
 #+end_src
 
 Read =PLUGIN-RELEASES.org= for the ready local archives, first publication,
@@ -253,9 +284,9 @@ conversion and =PLUGIN-RELEASES.org= for publishing prepared archives.
 Merge additional pairs from a compatible pack into an existing one:
 
 #+begin_src sh
-.venv/bin/blitzer dev expand-plugin slv ./additional-packs/slv \
+.venv/bin/bltzr dev expand-plugin slv ./additional-packs/slv \
   --no-config --plugins-dir language-packs --pack-version 0.2.0
-.venv/bin/blitzer dev expand-plugin pol ./additional-packs/pol \
+.venv/bin/bltzr dev expand-plugin pol ./additional-packs/pol \
   --no-config --plugins-dir language-packs --pack-version 0.2.0
 #+end_src
 
@@ -269,11 +300,11 @@ installed pack unchanged. Repackage expanded packs with =package-plugin=.
 * Data-only language packs
 
 #+begin_src sh
-.venv/bin/blitzer dev build-plugin maintenance/examples/demo-source --no-config --plugins-dir maintenance/work/demo-packs
-.venv/bin/blitzer dev check-plugin slv --no-config --plugins-dir maintenance/work/demo-packs
-.venv/bin/blitzer install-plugin maintenance/work/demo-packs/slv --no-config --plugins-dir maintenance/work/installed
-.venv/bin/blitzer list-languages --no-config --plugins-dir maintenance/work/installed
-.venv/bin/blitzer remove-plugin slv --no-config --plugins-dir maintenance/work/installed --yes
+.venv/bin/bltzr dev build-plugin maintenance/examples/demo-source --no-config --plugins-dir maintenance/work/demo-packs
+.venv/bin/bltzr dev check-plugin slv --no-config --plugins-dir maintenance/work/demo-packs
+.venv/bin/bltzr install-plugin maintenance/work/demo-packs/slv --no-config --plugins-dir maintenance/work/installed
+.venv/bin/bltzr list-languages --no-config --plugins-dir maintenance/work/installed
+.venv/bin/bltzr remove-plugin slv --no-config --plugins-dir maintenance/work/installed --yes
 #+end_src
 
 Build input: =config.toml=, =forms.tsv= with exact =form<TAB>lemma= header,
@@ -300,7 +331,7 @@ Orphaned source forms will be treated as unknown by this pack.
 Repeat the local real build into a fresh root:
 
 #+begin_src sh
-.venv/bin/blitzer dev build-plugin maintenance/examples/slv-source --database ../blitzer-language-plugins/blitzer-language-slv/lemmas.db --skip-orphans --skip-unsupported --no-config --plugins-dir scratch/rebuilt
+.venv/bin/bltzr dev build-plugin maintenance/examples/slv-source --database ../blitzer-language-plugins/blitzer-language-slv/lemmas.db --skip-orphans --skip-unsupported --no-config --plugins-dir scratch/rebuilt
 #+end_src
 
 Full checking verifies versioned config, metadata code, read-only opening,
@@ -352,7 +383,7 @@ building/checking/installing/removing, cleanup, known preview and history.
 
 * Reading and changing the code
 
-Ordinary commands appear in =blitzer --help=. Pack construction, validation,
+Ordinary commands appear in =bltzr --help=. Pack construction, validation,
 expansion and release packaging live under =blitzer dev --help=.
 The development group is hidden from the ordinary help page.
 Repository-only maintenance tools live in =maintenance/=.

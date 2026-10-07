@@ -446,9 +446,11 @@ def blitz(
 def list_languages(config, no_config, plugins_dir):
     """List installed languages available for text processing."""
     with _errors():
+        service = _service(config, no_config, plugins_dir)
         click.echo(
             "\n".join(
-                _service(config, no_config, plugins_dir).list_languages()
+                f"{service.language_name(code)} ({code})"
+                for code in service.list_languages()
             )
         )
 

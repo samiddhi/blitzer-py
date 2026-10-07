@@ -1,12 +1,13 @@
 [project]
 name = "bltzr"
-version = "0.2.2"
+version = "0.2.4"
 description = "Vocabulary extraction for language learners"
 authors = [{name = "Samiddhi"}]
-license = "CC-BY-SA-3.0"
+license = {text = "CC-BY-SA-3.0"}
 readme = {file = "README.org", content-type = "text/plain"}
 requires-python = ">=3.11"
 dependencies = [
+    "certifi>=2024.2.2",
     "click>=8.1",
     "platformdirs>=4.5.1",
 ]
@@ -19,13 +20,23 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "bump-my-version>=1", "build>=1.2", "twine>=6"]
 
 [tool.setuptools.packages.find]
 include = ["blitzer*"]
 
 [tool.setuptools.package-data]
-blitzer = ["language-registry.json"]
+blitzer = ["language-registry.json", "language-packs/eng/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.bumpversion]
+commit = false
+tag = false
+allow_dirty = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'

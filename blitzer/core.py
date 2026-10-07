@@ -12,6 +12,7 @@ In scope
 - Loading dictionary candidates, exclusions, ranks and corpus
   frequencies.
 - SQLite schema checks and full language-pack readiness reports.
+- Read-only bundled English with user-installed pack overrides.
 - Pack building, provenance, staged installation and selected removal.
 - Staged expansion with compatible dictionaries and addition counts.
 - Registered downloads, explicit pack updates and release packaging.
@@ -792,13 +793,26 @@ class BlitzerService:
         files.
         """
         validate_code(code, allow_base=False)
-        directory = self.plugins_dir / code
+        directory = self._pack_directory(code)
         config = load_plugin_config(directory)
         if config["metadata"]["language_code"] != code:
             raise ValueError(
                 f"{directory}: metadata language code does not match directory"
             )
         return directory, config
+
+    def _pack_directory(self, code: str) -> Path:
+        """Prefer a user pack and otherwise use bundled English data."""
+        directory = self.plugins_dir / code
+        if code == "eng" and not directory.exists():
+            return Path(__file__).with_name("language-packs") / code
+        return directory
+
+    def language_name(self, code: str) -> str:
+        """Return the display name from installed pack metadata."""
+        if code == "base":
+            return "Basic"
+        return self._pack(code)[1]["metadata"]["language_name"]
 
     def _normalization(self, code: str) -> dict:
         """Return normalization rules for the chosen language."""
@@ -875,7 +889,9 @@ class BlitzerService:
             if key and key not in known and key not in exact
         }
         candidates, frequencies = _load_vocabulary_data(
-            self.plugins_dir,
+            self.plugins_dir
+            if language_code == "base"
+            else self._pack_directory(language_code).parent,
             language_code,
             keys,
             needs_lookup,
@@ -901,14 +917,14 @@ class BlitzerService:
         return sort_vocabulary(entries, options["sort"], order, normal)
 
     def list_languages(self) -> list[str]:
-        """Return sorted pack-shaped directories together with base.
+        """Return sorted user pack codes plus built-in base and English.
 
         This checks required file presence only. Use check_plugin to
         validate metadata, schema and data before relying on an
         installed pack.
         """
         if not self.plugins_dir.exists():
-            return ["base"]
+            return ["base", "eng"]
         codes = []
         for path in self.plugins_dir.iterdir():
             if not re.fullmatch(r"[a-z]{3}", path.name) or not path.is_dir():
@@ -917,7 +933,7 @@ class BlitzerService:
                 path / "lemmas.db"
             ).is_file():
                 codes.append(path.name)
-        return sorted(["base", *codes])
+        return sorted({"base", "eng", *codes})
 
     def check_plugin(self, code: str) -> list[CheckResult]:
         """Report all validation checks for an installed pack.
@@ -927,7 +943,7 @@ class BlitzerService:
         ValueError.
         """
         validate_code(code, allow_base=False)
-        return _check_pack(self.plugins_dir / code, code)
+        return _check_pack(self._pack_directory(code), code)
 
     def build_plugin(
         self,
@@ -1110,6 +1126,11 @@ class BlitzerService:
         """
         validate_code(code, allow_base=False)
         path = self.plugins_dir / code
+        if code == "eng" and not path.exists():
+            raise ValueError(
+                "English is bundled with bltzr; there is no user pack "
+                "to remove"
+            )
         with _lock(self.plugins_dir / ".mutation.lock"):
             if path.is_symlink():
                 raise ValueError(
