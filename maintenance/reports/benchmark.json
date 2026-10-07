@@ -1,0 +1,13 @@
+{
+  "workload": "synthetic chapter-size repeated Slovenian sentences",
+  "characters": 100000,
+  "tokens": 18000,
+  "vocabulary_entries": 10,
+  "processing_seconds": 0.0776,
+  "peak_process_memory_mib": 25.08,
+  "query_plan": [
+    "SEARCH f USING COVERING INDEX sqlite_autoindex_forms_1 (form_representation=?)",
+    "SEARCH l USING INTEGER PRIMARY KEY (rowid=?)",
+    "USE TEMP B-TREE FOR DISTINCT"
+  ]
+}

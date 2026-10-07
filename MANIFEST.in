@@ -1,3 +1,4 @@
 include README.org PLAN.md PLUGIN-RELEASES.org config.example.toml
 recursive-include tests *.py
-recursive-include examples *.toml *.tsv *.md
+prune maintenance
+exclude tests/test_unimorph.py

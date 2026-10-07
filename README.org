@@ -2,11 +2,12 @@
 #+OPTIONS: toc:2 num:nil
 
 A local vocabulary workhorse for language learners. Python 3.11+, Click,
-SQLite and data-only language packs. Five modules keep the responsibilities
+SQLite and data-only language packs. Six modules keep the responsibilities
 visible: =cli.py= handles commands and presentation, =config.py= handles
 settings, =core.py= supplies =BlitzerService= and local data operations,
 =processing.py= contains the pure text algorithms and vocabulary records,
-and =downloads.py= owns the registry and verified release downloads.
+=downloads.py= owns the registry and verified release downloads, and
+=merging.py= prepares compatible dictionary unions without losing data.
 
 * Install and start
 
@@ -105,7 +106,7 @@ unknown filtering, matched-known updating and global sorting error clearly.
   unlisted words follow in alphabetical order.
 
 The real Slovenian source supplies no corpus frequency data. The tiny
-=examples/demo-source= includes explicitly synthetic frequencies to
+=maintenance/examples/demo-source= includes explicitly synthetic frequencies to
 exercise the feature. Do not use those numbers as a real corpus ranking.
 
 Context defaults to the first two distinct surviving sentence texts.
@@ -218,7 +219,7 @@ replaced; an explicit =--known-file= always selects the primary file.
 #+end_src
 
 Registered codes resolve to the newest stable GitHub release containing
-=blitzer-CODE-v1.zip= in =samiddhi/blitzer-language-plugins=. Each language
+=blitzer-CODE-v1.zip= in =samiddhi/blitzer-py=. Each language
 can be released independently. Fixed filenames and release discovery avoid
 editing versioned download links. These assets must first be published by
 the maintainer; the old raw-database releases are not compatible archives.
@@ -232,23 +233,47 @@ local folder takes precedence over a bare code and never uses the network.
 To prepare archives from built packs:
 
 #+begin_src sh
-.venv/bin/blitzer package-plugin slv --no-config --plugins-dir language-packs
-.venv/bin/blitzer package-plugin pol --no-config --plugins-dir language-packs
-.venv/bin/blitzer package-plugin pli --no-config --plugins-dir language-packs
+.venv/bin/blitzer dev package-plugin slv --no-config --plugins-dir language-packs
+.venv/bin/blitzer dev package-plugin pol --no-config --plugins-dir language-packs
+.venv/bin/blitzer dev package-plugin pli --no-config --plugins-dir language-packs
 #+end_src
 
 Read =PLUGIN-RELEASES.org= for the ready local archives, first publication,
 independent updates and exact GitHub release commands. Uploading a new stable
 release asset with the same filename requires no registry/application update.
 
+* Repository maintenance
+
+One-time conversion tools live in =maintenance/= and are excluded from
+installed distributions. See =maintenance/README.md= for UniMorph batch
+conversion and =PLUGIN-RELEASES.org= for publishing prepared archives.
+
+* Expanding existing dictionaries
+
+Merge additional pairs from a compatible pack into an existing one:
+
+#+begin_src sh
+.venv/bin/blitzer dev expand-plugin slv ./additional-packs/slv \
+  --no-config --plugins-dir language-packs --pack-version 0.2.0
+.venv/bin/blitzer dev expand-plugin pol ./additional-packs/pol \
+  --no-config --plugins-dir language-packs --pack-version 0.2.0
+#+end_src
+
+The packs must share their language code and normalization settings.
+Expansion keeps every original pair and frequency, adds missing pairs
+once, retains ambiguous matches, and combines attribution and provenance.
+It validates staging before atomic replacement and reports added lemmas,
+added pairs and final totals. A repeated merge adding nothing leaves the
+installed pack unchanged. Repackage expanded packs with =package-plugin=.
+
 * Data-only language packs
 
 #+begin_src sh
-.venv/bin/blitzer build-plugin examples/demo-source --no-config --plugins-dir language-packs-demo
-.venv/bin/blitzer check-plugin slv --no-config --plugins-dir language-packs-demo
-.venv/bin/blitzer install-plugin language-packs-demo/slv --no-config --plugins-dir scratch/installed
-.venv/bin/blitzer list-languages --no-config --plugins-dir scratch/installed
-.venv/bin/blitzer remove-plugin slv --no-config --plugins-dir scratch/installed --yes
+.venv/bin/blitzer dev build-plugin maintenance/examples/demo-source --no-config --plugins-dir maintenance/work/demo-packs
+.venv/bin/blitzer dev check-plugin slv --no-config --plugins-dir maintenance/work/demo-packs
+.venv/bin/blitzer install-plugin maintenance/work/demo-packs/slv --no-config --plugins-dir maintenance/work/installed
+.venv/bin/blitzer list-languages --no-config --plugins-dir maintenance/work/installed
+.venv/bin/blitzer remove-plugin slv --no-config --plugins-dir maintenance/work/installed --yes
 #+end_src
 
 Build input: =config.toml=, =forms.tsv= with exact =form<TAB>lemma= header,
@@ -275,7 +300,7 @@ Orphaned source forms will be treated as unknown by this pack.
 Repeat the local real build into a fresh root:
 
 #+begin_src sh
-.venv/bin/blitzer build-plugin examples/slv-source --database ../blitzer-language-plugins/blitzer-language-slv/lemmas.db --skip-orphans --skip-unsupported --no-config --plugins-dir scratch/rebuilt
+.venv/bin/blitzer dev build-plugin maintenance/examples/slv-source --database ../blitzer-language-plugins/blitzer-language-slv/lemmas.db --skip-orphans --skip-unsupported --no-config --plugins-dir scratch/rebuilt
 #+end_src
 
 Full checking verifies versioned config, metadata code, read-only opening,
@@ -326,6 +351,11 @@ cross-call execution state. See the readable method signatures for pack
 building/checking/installing/removing, cleanup, known preview and history.
 
 * Reading and changing the code
+
+Ordinary commands appear in =blitzer --help=. Pack construction, validation,
+expansion and release packaging live under =blitzer dev --help=.
+The development group is hidden from the ordinary help page.
+Repository-only maintenance tools live in =maintenance/=.
 
 Every Python file begins with a purpose, an explicit =In scope= list,
 an =Out of scope= list and a =Start here= guide. Read those headers first

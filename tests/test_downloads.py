@@ -101,10 +101,10 @@ def test_registered_language_installs_via_cli(
 
 def test_registry_lookup_and_asset_names():
     """Check registry codes and version-independent filenames."""
-    assert set(downloads.REGISTRY) == {"slv", "pol", "pli"}
+    assert {"slv", "pol", "pli"} <= set(downloads.REGISTRY)
     assert downloads.asset_name("pol") == "blitzer-pol-v1.zip"
     with pytest.raises(ValueError, match="No registered"):
-        downloads.registry_entry("fra")
+        downloads.registry_entry("zzz")
     with pytest.raises(ValueError):
         downloads.registry_entry("base")
 
@@ -355,6 +355,7 @@ def test_package_command_emits_installable_archive(service, tmp_path):
     result = CliRunner().invoke(
         cli,
         [
+            "dev",
             "package-plugin",
             "slv",
             "--no-config",

@@ -7,7 +7,7 @@ that core.py can validate and install through its normal staging flow.
 
 In scope
 --------
-- The small registry of GitHub repositories and fixed pack asset names.
+- The language registry, language catalog and fixed asset names.
 - Finding the newest stable release that contains a requested pack.
 - HTTPS requests, bounded streaming downloads and SHA-256 verification.
 - Validating ZIP members and extracting only the supported pack files.
@@ -43,8 +43,25 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from blitzer.config import validate_code
 
-REPOSITORY = "samiddhi/blitzer-language-plugins"
+REPOSITORY = "samiddhi/blitzer-py"
+
+
+def load_language_registry(path: Path) -> dict:
+    """Read the packaged catalog without downloading language data."""
+    catalog = json.loads(path.read_text(encoding="utf-8"))
+    entries = {}
+    for code, metadata in catalog.items():
+        validate_code(code, allow_base=False)
+        if not isinstance(metadata.get("name"), str):
+            raise ValueError(f"Invalid language registry name for {code}")
+        entries[code] = {"name": metadata["name"], "repository": REPOSITORY}
+    return entries
+
+
 REGISTRY = {
+    **load_language_registry(
+        Path(__file__).with_name("language-registry.json")
+    ),
     "slv": {"name": "Slovenian", "repository": REPOSITORY},
     "pol": {"name": "Polish", "repository": REPOSITORY},
     "pli": {"name": "Pali", "repository": REPOSITORY},
@@ -241,9 +258,12 @@ def _read_json(url):
 def _download_archive(asset: ReleaseAsset, path: Path) -> None:
     """Download an archive and verify its size and digest."""
     digest = hashlib.sha256()
-    with closing(
-        _open_response(asset.url, "application/octet-stream")
-    ) as response, path.open("wb") as stream:
+    with (
+        closing(
+            _open_response(asset.url, "application/octet-stream")
+        ) as response,
+        path.open("wb") as stream,
+    ):
         received = _copy_download(response, stream, digest, asset.size)
     if received != asset.size or digest.hexdigest() != asset.sha256:
         raise ValueError(

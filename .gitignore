@@ -12,3 +12,9 @@ language-packs/
 language-packs-demo/
 scratch/
 release-assets/
+unimorph
+unimorph-output/
+
+maintenance/unimorph-data
+maintenance/dist/
+maintenance/work/

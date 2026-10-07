@@ -24,5 +24,8 @@ dev = ["pytest>=8"]
 [tool.setuptools.packages.find]
 include = ["blitzer*"]
 
+[tool.setuptools.package-data]
+blitzer = ["language-registry.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

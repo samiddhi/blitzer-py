@@ -13,6 +13,7 @@ In scope
   frequencies.
 - SQLite schema checks and full language-pack readiness reports.
 - Pack building, provenance, staged installation and selected removal.
+- Staged expansion with compatible dictionaries and addition counts.
 - Registered downloads, explicit pack updates and release packaging.
 - Known-list cleanup, update previews, backups and atomic replacements.
 - Context-history reads, deduplicated writes and per-operation
@@ -953,12 +954,13 @@ class BlitzerService:
             else source / "forms.tsv"
         )
         _validate_build_source(input_path, source_database, skip_orphans)
-        with _lock(
-            self.plugins_dir / ".mutation.lock"
-        ), tempfile.TemporaryDirectory(
-            prefix=".build-",
-            dir=self.plugins_dir,
-        ) as temporary:
+        with (
+            _lock(self.plugins_dir / ".mutation.lock"),
+            tempfile.TemporaryDirectory(
+                prefix=".build-",
+                dir=self.plugins_dir,
+            ) as temporary,
+        ):
             _require_absent(destination)
             stage = Path(temporary) / code
             _copy_build_metadata(source, stage)
@@ -996,6 +998,34 @@ class BlitzerService:
         if is_code and not source.is_dir():
             return self._install_download(str(source_dir), replace)
         return self._install_local(source, replace)
+
+    def expand_plugin(
+        self, code: str, additional: Path, *, version: str = "0.2.0"
+    ) -> dict:
+        """Add missing pairs and atomically replace a validated pack.
+
+        Preserve existing pairs, frequencies, settings and attribution.
+        A merge adding no pairs leaves the installed pack unchanged.
+        Validation failures discard staging before touching the base.
+        """
+        from blitzer.merging import merge_packs
+
+        validate_code(code, allow_base=False)
+        destination = self.plugins_dir / code
+        additional = resolve_path(additional)
+        with (
+            _lock(self.plugins_dir / ".mutation.lock"),
+            tempfile.TemporaryDirectory(dir=self.plugins_dir) as temporary,
+        ):
+            _require_valid(destination, code)
+            _require_valid(additional, code)
+            stage = Path(temporary) / code
+            stats = merge_packs(destination, additional, stage, version)
+            if not stats["pairs_added"]:
+                return stats
+            _require_valid(stage, code)
+            _publish_install(stage, destination, True)
+        return stats
 
     def _install_download(self, code: str, replace: bool) -> Path:
         """Download staging before normal pack installation."""
@@ -1036,12 +1066,13 @@ class BlitzerService:
             )
         _check_install_destination(destination, replace)
         _require_valid(source)
-        with _lock(
-            self.plugins_dir / ".mutation.lock"
-        ), tempfile.TemporaryDirectory(
-            prefix=".install-",
-            dir=self.plugins_dir,
-        ) as temporary:
+        with (
+            _lock(self.plugins_dir / ".mutation.lock"),
+            tempfile.TemporaryDirectory(
+                prefix=".install-",
+                dir=self.plugins_dir,
+            ) as temporary,
+        ):
             _check_install_destination(destination, replace)
             stage = Path(temporary) / code
             shutil.copytree(source, stage)

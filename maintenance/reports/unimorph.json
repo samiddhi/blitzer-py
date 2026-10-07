@@ -1,0 +1,5436 @@
+[
+  {
+    "code": "ady",
+    "name": "Adyghe",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "ady",
+        "sha256": "a00b7b1617cb9abf7fcd00cc29d544d588bbf9f87017ff1bb24f5190d45a49a4"
+      }
+    ],
+    "source_rows": 20475,
+    "accepted_rows": 20091,
+    "unsupported_rows": 384,
+    "malformed_rows": 0,
+    "ignored_rows": 1727,
+    "non_latin_rows": 20475,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ady",
+    "duplicate_pairs_removed": 696,
+    "unique_lemmas": 1634,
+    "unique_forms": 20354,
+    "self_forms_added": 959
+  },
+  {
+    "code": "afb",
+    "name": "Gulf Arabic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "afb",
+        "sha256": "525d5e9bd66d0213cfbdbcee8277eb3e50bd3682c6277fdb489780154acccec7"
+      }
+    ],
+    "source_rows": 32236,
+    "accepted_rows": 32221,
+    "unsupported_rows": 15,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 32236,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/afb",
+    "duplicate_pairs_removed": 7440,
+    "unique_lemmas": 6333,
+    "unique_forms": 30129,
+    "self_forms_added": 5348
+  },
+  {
+    "code": "afr",
+    "name": "Afrikaans",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "afr",
+        "sha256": "dcdf6278cda8c252b776e6974b14a5232eee60be91f8a0259b085e701ba55bed"
+      }
+    ],
+    "source_rows": 335067,
+    "accepted_rows": 323335,
+    "unsupported_rows": 11732,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 9,
+    "latin_rows": 323335,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/afr",
+    "archive": "release-assets/blitzer-afr-v1.zip",
+    "duplicate_pairs_removed": 27922,
+    "unique_lemmas": 167340,
+    "unique_forms": 295509,
+    "self_forms_added": 96
+  },
+  {
+    "code": "ail",
+    "name": "Eibela",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ail",
+        "sha256": "e17d26ab3548d2204ae321b63377fb3beed64bb89fae403af4ca7874b1710172"
+      }
+    ],
+    "source_rows": 2718,
+    "accepted_rows": 2666,
+    "unsupported_rows": 52,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1,
+    "latin_rows": 2665,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 1,
+    "pack": "language-packs/ail",
+    "archive": "release-assets/blitzer-ail-v1.zip",
+    "duplicate_pairs_removed": 173,
+    "unique_lemmas": 633,
+    "unique_forms": 3114,
+    "self_forms_added": 622
+  },
+  {
+    "code": "aka",
+    "name": "Akan",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "aka",
+        "sha256": "3995f2eaff5ebfe1e70aec3906f8b0c660040a595fa71170e566dc82784af9d9"
+      }
+    ],
+    "source_rows": 4182,
+    "accepted_rows": 2295,
+    "unsupported_rows": 1887,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2295,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/aka",
+    "archive": "release-assets/blitzer-aka-v1.zip",
+    "duplicate_pairs_removed": 399,
+    "unique_lemmas": 79,
+    "unique_forms": 1896,
+    "self_forms_added": 0
+  },
+  {
+    "code": "ame",
+    "name": "Yanesha",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ame",
+        "sha256": "f76cab6da578b5aa9db9af780beffbfa68f570f6f234ee4722a9687ede2cf860"
+      }
+    ],
+    "source_rows": 3767,
+    "accepted_rows": 3377,
+    "unsupported_rows": 390,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 3377,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ame",
+    "archive": "release-assets/blitzer-ame-v1.zip",
+    "duplicate_pairs_removed": 918,
+    "unique_lemmas": 306,
+    "unique_forms": 2459,
+    "self_forms_added": 0
+  },
+  {
+    "code": "amh",
+    "name": "Amharic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ETHIOPIC"
+    ],
+    "sources": [
+      {
+        "file": "amh",
+        "sha256": "42014c1c3066495613a5cd1bc7375e4cb3572b779d80f1dc5508d99c753e267f"
+      }
+    ],
+    "source_rows": 46224,
+    "accepted_rows": 46224,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 46224,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ETHIOPIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/amh",
+    "duplicate_pairs_removed": 3796,
+    "unique_lemmas": 2461,
+    "unique_forms": 42462,
+    "self_forms_added": 34
+  },
+  {
+    "code": "ang",
+    "name": "Old English",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ang",
+        "sha256": "e1568ebdf73db88cf3adc1f9d976524d458ef0c9fc69fbef926d0af9dfe8d580"
+      }
+    ],
+    "source_rows": 178373,
+    "accepted_rows": 178088,
+    "unsupported_rows": 285,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 178088,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ang",
+    "archive": "release-assets/blitzer-ang-v1.zip",
+    "duplicate_pairs_removed": 110505,
+    "unique_lemmas": 7141,
+    "unique_forms": 67583,
+    "self_forms_added": 0
+  },
+  {
+    "code": "ara",
+    "name": "Modern Standard Arabic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "ara",
+        "sha256": "01663d08dbc6bb2a4207749cb4c000926c72c7cf9ec3faa8521e4cb5e9d690f1"
+      },
+      {
+        "file": "ara_atb",
+        "sha256": "7591a52634b0bbe6b6e28b4f4455d863a0c2580653526d23c04217e5f08b0961"
+      },
+      {
+        "file": "ara_new",
+        "sha256": "2295e4db73427cf1690f04a7615c6cf64015d3341285e6914a672c177285602c"
+      }
+    ],
+    "source_rows": 1117176,
+    "accepted_rows": 1115468,
+    "unsupported_rows": 1708,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 1117176,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ara",
+    "duplicate_pairs_removed": 552166,
+    "unique_lemmas": 16735,
+    "unique_forms": 570232,
+    "self_forms_added": 6930
+  },
+  {
+    "code": "arn",
+    "name": "Mapudungun",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "arn",
+        "sha256": "ea791e08374673880795aaf7fd0a0ca8222ff60b387f48885ed2c7c92b270a31"
+      }
+    ],
+    "source_rows": 783,
+    "accepted_rows": 667,
+    "unsupported_rows": 116,
+    "malformed_rows": 0,
+    "ignored_rows": 31,
+    "non_latin_rows": 0,
+    "latin_rows": 667,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/arn",
+    "archive": "release-assets/blitzer-arn-v1.zip",
+    "duplicate_pairs_removed": 121,
+    "unique_lemmas": 26,
+    "unique_forms": 548,
+    "self_forms_added": 2
+  },
+  {
+    "code": "arz",
+    "name": "Egyptian Arabic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "arz",
+        "sha256": "971457a56dc9a67d5bdc04aae14fa0a0aeb18f3360e15023acbc43b682a4210a"
+      }
+    ],
+    "source_rows": 25394,
+    "accepted_rows": 25394,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 25394,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/arz",
+    "duplicate_pairs_removed": 7985,
+    "unique_lemmas": 6004,
+    "unique_forms": 18344,
+    "self_forms_added": 935
+  },
+  {
+    "code": "asm",
+    "name": "Assamese",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: BENGALI"
+    ],
+    "sources": [
+      {
+        "file": "asm",
+        "sha256": "043bc127d1ea3d370872c602a06b0710df8dfc1d455bcbd2bde07f9dd257d164"
+      }
+    ],
+    "source_rows": 94147,
+    "accepted_rows": 75946,
+    "unsupported_rows": 18201,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 94147,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "BENGALI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/asm",
+    "duplicate_pairs_removed": 7265,
+    "unique_lemmas": 1445,
+    "unique_forms": 68691,
+    "self_forms_added": 10
+  },
+  {
+    "code": "ast",
+    "name": "Asturian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ast",
+        "sha256": "d99feb0e85492b6c5d711892dc1ca890d4bdcb8cb581cc7bedbcaac1de170311"
+      }
+    ],
+    "source_rows": 29797,
+    "accepted_rows": 29775,
+    "unsupported_rows": 22,
+    "malformed_rows": 0,
+    "ignored_rows": 438,
+    "non_latin_rows": 0,
+    "latin_rows": 29775,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ast",
+    "archive": "release-assets/blitzer-ast-v1.zip",
+    "duplicate_pairs_removed": 7955,
+    "unique_lemmas": 436,
+    "unique_forms": 21820,
+    "self_forms_added": 0
+  },
+  {
+    "code": "aym",
+    "name": "Aymara",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "aym",
+        "sha256": "206848391fe3ddb17ba350e6a10e44534314e29a08097ceeef60889b89ab5b2d"
+      }
+    ],
+    "source_rows": 336342,
+    "accepted_rows": 324212,
+    "unsupported_rows": 12130,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 324212,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/aym",
+    "archive": "release-assets/blitzer-aym-v1.zip",
+    "duplicate_pairs_removed": 15325,
+    "unique_lemmas": 3319,
+    "unique_forms": 310107,
+    "self_forms_added": 1220
+  },
+  {
+    "code": "aze",
+    "name": "Azerbaijani",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "aze",
+        "sha256": "1736642125985f6da4a7491dc708b45cfb6f7c4ef93575dc6025bd2b873d14bc"
+      }
+    ],
+    "source_rows": 8004,
+    "accepted_rows": 8004,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 8004,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/aze",
+    "archive": "release-assets/blitzer-aze-v1.zip",
+    "duplicate_pairs_removed": 1343,
+    "unique_lemmas": 340,
+    "unique_forms": 6671,
+    "self_forms_added": 10
+  },
+  {
+    "code": "azg",
+    "name": "San Pedro Amuzgos Amuzgo",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "azg",
+        "sha256": "a24f810f9e446a4e1eddadcf4974ea161160d2874ab1aa66d3af5156f47c228e"
+      }
+    ],
+    "source_rows": 12204,
+    "accepted_rows": 0,
+    "unsupported_rows": 12204,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 31,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ]
+  },
+  {
+    "code": "bak",
+    "name": "Bashkir",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "bak",
+        "sha256": "6704a3959a555e7628b41fbdb88329bca69341be628d47a6bc501f8199956e6d"
+      }
+    ],
+    "source_rows": 12168,
+    "accepted_rows": 11856,
+    "unsupported_rows": 312,
+    "malformed_rows": 0,
+    "ignored_rows": 1126,
+    "non_latin_rows": 12168,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/bak",
+    "duplicate_pairs_removed": 1185,
+    "unique_lemmas": 1052,
+    "unique_forms": 10671,
+    "self_forms_added": 0
+  },
+  {
+    "code": "bel",
+    "name": "Belarusian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "bel",
+        "sha256": "07073665ab13b448624933b8643998cf40b89529d6b32317adeadb161dc960ee"
+      }
+    ],
+    "source_rows": 16113,
+    "accepted_rows": 15044,
+    "unsupported_rows": 1069,
+    "malformed_rows": 0,
+    "ignored_rows": 1030,
+    "non_latin_rows": 16113,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/bel",
+    "duplicate_pairs_removed": 5010,
+    "unique_lemmas": 1020,
+    "unique_forms": 10963,
+    "self_forms_added": 929
+  },
+  {
+    "code": "ben",
+    "name": "Bengali",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: BENGALI"
+    ],
+    "sources": [
+      {
+        "file": "ben",
+        "sha256": "b0f1e2d005bce183dfcc2a570de1ce3d4d9a17feafa6c222b3f72b3e6ff894b2"
+      }
+    ],
+    "source_rows": 4443,
+    "accepted_rows": 3293,
+    "unsupported_rows": 1150,
+    "malformed_rows": 0,
+    "ignored_rows": 138,
+    "non_latin_rows": 4443,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "BENGALI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ben",
+    "duplicate_pairs_removed": 438,
+    "unique_lemmas": 111,
+    "unique_forms": 2855,
+    "self_forms_added": 0
+  },
+  {
+    "code": "bod",
+    "name": "Tibetan",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: TIBETAN",
+      "Language requires a dedicated word segmenter",
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "bod",
+        "sha256": "e99fb22cd41b575065255bf312dfdb0d0c4625a223ec10ee1a46d29a32e882f2"
+      }
+    ],
+    "source_rows": 5067,
+    "accepted_rows": 0,
+    "unsupported_rows": 5067,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 5067,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "TIBETAN"
+    ]
+  },
+  {
+    "code": "bra",
+    "name": "Braj",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: DEVANAGARI"
+    ],
+    "sources": [
+      {
+        "file": "bra",
+        "sha256": "d111e1cc3be7da430e1acc555e68a77f1696eabbde2a353c07958b52cf883a1b"
+      }
+    ],
+    "source_rows": 1821,
+    "accepted_rows": 1814,
+    "unsupported_rows": 7,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1821,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/bra",
+    "duplicate_pairs_removed": 32,
+    "unique_lemmas": 1241,
+    "unique_forms": 2028,
+    "self_forms_added": 246
+  },
+  {
+    "code": "bre",
+    "name": "Breton",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "bre",
+        "sha256": "0c972479ee89e93fa49e14ac2ccf408d25bac26ea6f414e33ccce3bc2d1d8435"
+      }
+    ],
+    "source_rows": 2294,
+    "accepted_rows": 2220,
+    "unsupported_rows": 74,
+    "malformed_rows": 0,
+    "ignored_rows": 49,
+    "non_latin_rows": 0,
+    "latin_rows": 2220,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/bre",
+    "archive": "release-assets/blitzer-bre-v1.zip",
+    "duplicate_pairs_removed": 313,
+    "unique_lemmas": 44,
+    "unique_forms": 1940,
+    "self_forms_added": 33
+  },
+  {
+    "code": "bul",
+    "name": "Bulgarian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "bul",
+        "sha256": "bccdd8b4e279e1aa75c8c4667711270289fe15cf6b3c7ecde244a04eca126727"
+      }
+    ],
+    "source_rows": 55730,
+    "accepted_rows": 44810,
+    "unsupported_rows": 10920,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 55730,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/bul",
+    "duplicate_pairs_removed": 7354,
+    "unique_lemmas": 2412,
+    "unique_forms": 37456,
+    "self_forms_added": 0
+  },
+  {
+    "code": "cat",
+    "name": "Catalan",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cat",
+        "sha256": "22d8ec53f9f6bb40ad97619c01961ca60c0c046804173a9f395c6bf54194ca15"
+      }
+    ],
+    "source_rows": 81576,
+    "accepted_rows": 78119,
+    "unsupported_rows": 3457,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 78119,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/cat",
+    "archive": "release-assets/blitzer-cat-v1.zip",
+    "duplicate_pairs_removed": 16212,
+    "unique_lemmas": 1483,
+    "unique_forms": 61913,
+    "self_forms_added": 6
+  },
+  {
+    "code": "ceb",
+    "name": "Cebuano",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ceb",
+        "sha256": "d84f9923795f5914cce2a299191686c4b66e8c6c0c8c0bd5c368edfb9c0cbcde"
+      }
+    ],
+    "source_rows": 618,
+    "accepted_rows": 546,
+    "unsupported_rows": 72,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 546,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ceb",
+    "archive": "release-assets/blitzer-ceb-v1.zip",
+    "duplicate_pairs_removed": 154,
+    "unique_lemmas": 90,
+    "unique_forms": 392,
+    "self_forms_added": 0
+  },
+  {
+    "code": "ces",
+    "name": "• ces.xz",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ces",
+        "sha256": "4c0a1841a78d45cfa8a3f447943f9c2135baa9c986ae9de0ba704b3d99da5d42"
+      }
+    ],
+    "source_rows": 134527,
+    "accepted_rows": 108834,
+    "unsupported_rows": 25693,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 108834,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ces",
+    "archive": "release-assets/blitzer-ces-v1.zip",
+    "duplicate_pairs_removed": 57502,
+    "unique_lemmas": 5094,
+    "unique_forms": 51490,
+    "self_forms_added": 158
+  },
+  {
+    "code": "chu",
+    "name": "Old Church Slavic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC, GLAGOLITIC"
+    ],
+    "sources": [
+      {
+        "file": "chu",
+        "sha256": "3d7226d29c443d0c46bfb4bfb81ac4e8992608c4cb4b6127983a1e27c2385c51"
+      }
+    ],
+    "source_rows": 4148,
+    "accepted_rows": 4148,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 154,
+    "non_latin_rows": 4148,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC",
+      "GLAGOLITIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/chu",
+    "duplicate_pairs_removed": 2124,
+    "unique_lemmas": 152,
+    "unique_forms": 2030,
+    "self_forms_added": 6
+  },
+  {
+    "code": "ckb",
+    "name": "Central Kurdish",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "ckb-context-complete.tsv",
+        "sha256": "3272b7c46321a071ddfbb888fde9f97bfe81f694560b6d3340e256d27fd85021"
+      }
+    ],
+    "source_rows": 1001,
+    "accepted_rows": 997,
+    "unsupported_rows": 4,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1000,
+    "latin_rows": 1,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ckb",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 806,
+    "unique_forms": 1431,
+    "self_forms_added": 434
+  },
+  {
+    "code": "ckt",
+    "name": "Chukchi",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC",
+      "Malformed input rows require inspection"
+    ],
+    "sources": [
+      {
+        "file": "ckt",
+        "sha256": "488ad4bfeff6aef4b8d5de536251c7a3887e05f66be68d0901688d6db88e65da"
+      }
+    ],
+    "source_rows": 242,
+    "accepted_rows": 242,
+    "unsupported_rows": 0,
+    "malformed_rows": 1,
+    "ignored_rows": 0,
+    "non_latin_rows": 242,
+    "latin_rows": 0,
+    "malformed_examples": [
+      "ckt:67: Expected nonblank lemma, form and features"
+    ],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 1,
+    "unique_lemmas": 196,
+    "unique_forms": 309,
+    "self_forms_added": 68,
+    "pack": "language-packs/dev/ckt"
+  },
+  {
+    "code": "cly",
+    "name": "Eastern Highland Chatino",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "cly",
+        "sha256": "788a59683a1ac0c735eb6ab00021c916a6bade4b54cd7991d22e3594e8fe552c"
+      }
+    ],
+    "source_rows": 4716,
+    "accepted_rows": 0,
+    "unsupported_rows": 4716,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "cni",
+    "name": "Ashaninka",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cni",
+        "sha256": "c746746193d21f993f07ec947f9fcc4eadb94f99bf5a9bad12debc4170744dc0"
+      }
+    ],
+    "source_rows": 20070,
+    "accepted_rows": 20070,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 20070,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/cni",
+    "archive": "release-assets/blitzer-cni-v1.zip",
+    "duplicate_pairs_removed": 9941,
+    "unique_lemmas": 407,
+    "unique_forms": 10129,
+    "self_forms_added": 0
+  },
+  {
+    "code": "cor",
+    "name": "Cornish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cor",
+        "sha256": "5fceb463470007a5e80e5b794eef6f1ea3ab9a3ceea0e532fade51874b0a90a6"
+      }
+    ],
+    "source_rows": 469,
+    "accepted_rows": 207,
+    "unsupported_rows": 262,
+    "malformed_rows": 0,
+    "ignored_rows": 11,
+    "non_latin_rows": 0,
+    "latin_rows": 207,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/cor",
+    "archive": "release-assets/blitzer-cor-v1.zip",
+    "duplicate_pairs_removed": 38,
+    "unique_lemmas": 8,
+    "unique_forms": 174,
+    "self_forms_added": 5
+  },
+  {
+    "code": "cpa",
+    "name": "Tlatepuzco Chinantec",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "cpa",
+        "sha256": "14ea7578991ba5f607fb4ed84aaa5907ab8970a298ee898787f9f12fbc86f633"
+      }
+    ],
+    "source_rows": 7893,
+    "accepted_rows": 0,
+    "unsupported_rows": 7893,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "cre",
+    "name": "Cree",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cre",
+        "sha256": "07a939a8cb715b825877ed6de35459c4e7fc325839773bc63eeb11d2c8522906"
+      }
+    ],
+    "source_rows": 9577,
+    "accepted_rows": 1527,
+    "unsupported_rows": 8050,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1527,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/cre",
+    "archive": "release-assets/blitzer-cre-v1.zip",
+    "duplicate_pairs_removed": 461,
+    "unique_lemmas": 32,
+    "unique_forms": 1076,
+    "self_forms_added": 10
+  },
+  {
+    "code": "crh",
+    "name": "Crimean Tatar",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "crh",
+        "sha256": "831b471b6266a3536533c25bc20ce743f7fdf230c5b062159ac8984664a3b6a6"
+      }
+    ],
+    "source_rows": 7514,
+    "accepted_rows": 7391,
+    "unsupported_rows": 123,
+    "malformed_rows": 0,
+    "ignored_rows": 1265,
+    "non_latin_rows": 0,
+    "latin_rows": 7391,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/crh",
+    "archive": "release-assets/blitzer-crh-v1.zip",
+    "duplicate_pairs_removed": 198,
+    "unique_lemmas": 1209,
+    "unique_forms": 7193,
+    "self_forms_added": 0
+  },
+  {
+    "code": "csb",
+    "name": "Kashubian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "csb",
+        "sha256": "d0ed4a231e1dab2c081d56af1f7996ad77f40bb38c281391052f4f51a42ee9dd"
+      }
+    ],
+    "source_rows": 509,
+    "accepted_rows": 509,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 39,
+    "non_latin_rows": 0,
+    "latin_rows": 509,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/csb",
+    "archive": "release-assets/blitzer-csb-v1.zip",
+    "duplicate_pairs_removed": 154,
+    "unique_lemmas": 37,
+    "unique_forms": 355,
+    "self_forms_added": 0
+  },
+  {
+    "code": "ctp",
+    "name": "Yaitepec Chatino",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CANADIAN",
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "ctp",
+        "sha256": "44c971c0a58890b22dd787e01f6801ff39dbef7e466330ae3d85006a7578ac8f"
+      }
+    ],
+    "source_rows": 3796,
+    "accepted_rows": 0,
+    "unsupported_rows": 3796,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1019,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CANADIAN"
+    ]
+  },
+  {
+    "code": "cym",
+    "name": "CYM",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cym",
+        "sha256": "9f0ea78662a71898d70e5940b0f1030a25a018a0fd44ac282ba1f791c758e75c"
+      }
+    ],
+    "source_rows": 10641,
+    "accepted_rows": 7564,
+    "unsupported_rows": 3077,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 7564,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/cym",
+    "archive": "release-assets/blitzer-cym-v1.zip",
+    "duplicate_pairs_removed": 1337,
+    "unique_lemmas": 183,
+    "unique_forms": 6242,
+    "self_forms_added": 15
+  },
+  {
+    "code": "czn",
+    "name": "Zenzontepec Chatino",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "czn",
+        "sha256": "97320a5eae3a7e431e7818e1b7de3184133b205b2ba575d0113aebc9e194900f"
+      }
+    ],
+    "source_rows": 1567,
+    "accepted_rows": 13,
+    "unsupported_rows": 1554,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 13,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/czn",
+    "archive": "release-assets/blitzer-czn-v1.zip",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 13,
+    "unique_forms": 22,
+    "self_forms_added": 9
+  },
+  {
+    "code": "dak",
+    "name": "Dakota",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "dak",
+        "sha256": "22e3bb08024f02cb41d6008d32476d58903ce8851eecdbf2ae51534194cbbe4a"
+      }
+    ],
+    "source_rows": 3766,
+    "accepted_rows": 3317,
+    "unsupported_rows": 449,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 3317,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dak",
+    "archive": "release-assets/blitzer-dak-v1.zip",
+    "duplicate_pairs_removed": 11,
+    "unique_lemmas": 473,
+    "unique_forms": 3357,
+    "self_forms_added": 51
+  },
+  {
+    "code": "dan",
+    "name": "Danish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "dan",
+        "sha256": "3fa7338992f9e49deb9d033426d29de156575648de22b5783e32ac1604255605"
+      }
+    ],
+    "source_rows": 31903,
+    "accepted_rows": 31266,
+    "unsupported_rows": 637,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 31266,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dan",
+    "archive": "release-assets/blitzer-dan-v1.zip",
+    "duplicate_pairs_removed": 3435,
+    "unique_lemmas": 4164,
+    "unique_forms": 27833,
+    "self_forms_added": 2
+  },
+  {
+    "code": "deu",
+    "name": "German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "deu",
+        "sha256": "8bc98487e3caf86188e2c072ebf2dc734f2ca35afef016bb399eb5a43e69d7c0"
+      }
+    ],
+    "source_rows": 519116,
+    "accepted_rows": 447405,
+    "unsupported_rows": 71711,
+    "malformed_rows": 0,
+    "ignored_rows": 27,
+    "non_latin_rows": 0,
+    "latin_rows": 447405,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/deu",
+    "archive": "release-assets/blitzer-deu-v1.zip",
+    "duplicate_pairs_removed": 273985,
+    "unique_lemmas": 39111,
+    "unique_forms": 178249,
+    "self_forms_added": 4829
+  },
+  {
+    "code": "dje",
+    "name": "Zarma",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "dje",
+        "sha256": "b56899db64dc093417f880ed1849d1bd29fcfaa3c30b12a46671db0cb9ad9fd4"
+      }
+    ],
+    "source_rows": 84,
+    "accepted_rows": 81,
+    "unsupported_rows": 3,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 81,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dje",
+    "archive": "release-assets/blitzer-dje-v1.zip",
+    "duplicate_pairs_removed": 3,
+    "unique_lemmas": 26,
+    "unique_forms": 78,
+    "self_forms_added": 0
+  },
+  {
+    "code": "dsb",
+    "name": "Lower Sorbian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "dsb",
+        "sha256": "b02f3ac94a8bac60c1bf016ce340d6e8f10bec551d56b7f81a13e7746b582491"
+      }
+    ],
+    "source_rows": 20121,
+    "accepted_rows": 20061,
+    "unsupported_rows": 60,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 20061,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dsb",
+    "archive": "release-assets/blitzer-dsb-v1.zip",
+    "duplicate_pairs_removed": 8003,
+    "unique_lemmas": 990,
+    "unique_forms": 12196,
+    "self_forms_added": 138
+  },
+  {
+    "code": "ell",
+    "name": "(Modern) Greek",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: GREEK"
+    ],
+    "sources": [
+      {
+        "file": "ell",
+        "sha256": "68f71b889fa29d31d975ebbc29f9f0f1b3a2dd6cca4f40a21b2c06f443811941"
+      }
+    ],
+    "source_rows": 199757,
+    "accepted_rows": 148078,
+    "unsupported_rows": 51679,
+    "malformed_rows": 0,
+    "ignored_rows": 12166,
+    "non_latin_rows": 199757,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ell",
+    "duplicate_pairs_removed": 68560,
+    "unique_lemmas": 11871,
+    "unique_forms": 79785,
+    "self_forms_added": 267
+  },
+  {
+    "code": "eng",
+    "name": "English",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "eng",
+        "sha256": "20a191cefdc7cad6fa74b00f49d6f658684f17b14541aae372e5a3d5a8c15c67"
+      }
+    ],
+    "source_rows": 652472,
+    "accepted_rows": 628093,
+    "unsupported_rows": 24379,
+    "malformed_rows": 0,
+    "ignored_rows": 5,
+    "non_latin_rows": 38,
+    "latin_rows": 628080,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK",
+      "MICRO"
+    ],
+    "excluded_non_latin_rows": 13,
+    "pack": "language-packs/eng",
+    "archive": "release-assets/blitzer-eng-v1.zip",
+    "duplicate_pairs_removed": 58614,
+    "unique_lemmas": 376907,
+    "unique_forms": 569467,
+    "self_forms_added": 1
+  },
+  {
+    "code": "epo",
+    "name": "Esperanto",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "est",
+    "name": "Estonian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "est",
+        "sha256": "602b778567b4607514ee380152fe8a6ccd70dbc15190339f7f5a6d9a710b899f"
+      }
+    ],
+    "source_rows": 38215,
+    "accepted_rows": 27454,
+    "unsupported_rows": 10761,
+    "malformed_rows": 0,
+    "ignored_rows": 890,
+    "non_latin_rows": 0,
+    "latin_rows": 27454,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/est",
+    "archive": "release-assets/blitzer-est-v1.zip",
+    "duplicate_pairs_removed": 2564,
+    "unique_lemmas": 886,
+    "unique_forms": 24890,
+    "self_forms_added": 0
+  },
+  {
+    "code": "eus",
+    "name": "Basque",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "eus",
+        "sha256": "b80f253838429c5aa4326342cd2e2f30b3b7c2dd9f9dcee64297c3f7c5ad8ab5"
+      }
+    ],
+    "source_rows": 11889,
+    "accepted_rows": 11889,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 11889,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/eus",
+    "archive": "release-assets/blitzer-eus-v1.zip",
+    "duplicate_pairs_removed": 399,
+    "unique_lemmas": 26,
+    "unique_forms": 11509,
+    "self_forms_added": 19
+  },
+  {
+    "code": "evn",
+    "name": "Evenki",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC, GREEK"
+    ],
+    "sources": [
+      {
+        "file": "evn",
+        "sha256": "9406c3d0779ac05d2ce731cbc20f7db525a0e81459917ac47c6b7b581eb8ecff"
+      }
+    ],
+    "source_rows": 11371,
+    "accepted_rows": 11367,
+    "unsupported_rows": 4,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 386,
+    "latin_rows": 10982,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC",
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/evn",
+    "duplicate_pairs_removed": 373,
+    "unique_lemmas": 4493,
+    "unique_forms": 13654,
+    "self_forms_added": 2660
+  },
+  {
+    "code": "fao",
+    "name": "Faroese",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fao",
+        "sha256": "8c5282080aa840158c2073c9b9a658374ed3c96e28c7c0e42ef94ebbb039ca23"
+      }
+    ],
+    "source_rows": 45474,
+    "accepted_rows": 45474,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 45474,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/fao",
+    "archive": "release-assets/blitzer-fao-v1.zip",
+    "duplicate_pairs_removed": 12165,
+    "unique_lemmas": 3077,
+    "unique_forms": 33333,
+    "self_forms_added": 24
+  },
+  {
+    "code": "fas",
+    "name": "Persian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "fas",
+        "sha256": "58e271562c184ed0bc38d85bf91e0d5427c32e4b5a55f2bf42bbdeb0843ca232"
+      }
+    ],
+    "source_rows": 37128,
+    "accepted_rows": 5589,
+    "unsupported_rows": 31539,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 37128,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/fas",
+    "duplicate_pairs_removed": 1888,
+    "unique_lemmas": 69,
+    "unique_forms": 3701,
+    "self_forms_added": 0
+  },
+  {
+    "code": "fra",
+    "name": "French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fra.um4",
+        "sha256": "4365f2f4660b9f933c6b76ee81c1445e8a02b67ee2526a84575e7f8e656ac9ce"
+      }
+    ],
+    "source_rows": 448447,
+    "accepted_rows": 446058,
+    "unsupported_rows": 2389,
+    "malformed_rows": 0,
+    "ignored_rows": 55,
+    "non_latin_rows": 0,
+    "latin_rows": 446058,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/fra",
+    "archive": "release-assets/blitzer-fra-v1.zip",
+    "duplicate_pairs_removed": 94140,
+    "unique_lemmas": 57596,
+    "unique_forms": 362263,
+    "self_forms_added": 10345
+  },
+  {
+    "code": "frm",
+    "name": "Middle French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "frm",
+        "sha256": "45af05cce1284b1c07fac6a4179adf075e56691c5f0885323c33ba3eba800927"
+      }
+    ],
+    "source_rows": 36970,
+    "accepted_rows": 36260,
+    "unsupported_rows": 710,
+    "malformed_rows": 0,
+    "ignored_rows": 835,
+    "non_latin_rows": 0,
+    "latin_rows": 36260,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/frm",
+    "archive": "release-assets/blitzer-frm-v1.zip",
+    "duplicate_pairs_removed": 8946,
+    "unique_lemmas": 603,
+    "unique_forms": 27314,
+    "self_forms_added": 0
+  },
+  {
+    "code": "fro",
+    "name": "Old French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fro",
+        "sha256": "18dcf34c57321db9c8646435bf34ca3f69d4142a22e90a8387d71a7a0d3083f3"
+      }
+    ],
+    "source_rows": 123374,
+    "accepted_rows": 121636,
+    "unsupported_rows": 1738,
+    "malformed_rows": 0,
+    "ignored_rows": 2005,
+    "non_latin_rows": 0,
+    "latin_rows": 121636,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/fro",
+    "archive": "release-assets/blitzer-fro-v1.zip",
+    "duplicate_pairs_removed": 16349,
+    "unique_lemmas": 1700,
+    "unique_forms": 105302,
+    "self_forms_added": 15
+  },
+  {
+    "code": "frr",
+    "name": "North Frisian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "frr",
+        "sha256": "da965a38e2a824cc778d2bf98b36c6ea5d42882dc4c86c47c222919bfbe66131"
+      }
+    ],
+    "source_rows": 3204,
+    "accepted_rows": 1267,
+    "unsupported_rows": 1937,
+    "malformed_rows": 0,
+    "ignored_rows": 53,
+    "non_latin_rows": 0,
+    "latin_rows": 1267,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/frr",
+    "archive": "release-assets/blitzer-frr-v1.zip",
+    "duplicate_pairs_removed": 886,
+    "unique_lemmas": 51,
+    "unique_forms": 381,
+    "self_forms_added": 0
+  },
+  {
+    "code": "fry",
+    "name": "FRY",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fry",
+        "sha256": "d630fb1606179eb475f20323e27e876c4166bbec2c8d3a6802c6fceb4292a80b"
+      }
+    ],
+    "source_rows": 1429,
+    "accepted_rows": 1416,
+    "unsupported_rows": 13,
+    "malformed_rows": 0,
+    "ignored_rows": 87,
+    "non_latin_rows": 0,
+    "latin_rows": 1416,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/fry",
+    "archive": "release-assets/blitzer-fry-v1.zip",
+    "duplicate_pairs_removed": 717,
+    "unique_lemmas": 85,
+    "unique_forms": 699,
+    "self_forms_added": 0
+  },
+  {
+    "code": "fur",
+    "name": "Friulian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fur",
+        "sha256": "7f8242fe8d5b2d70ab6f014ab63811e6952956b520e803751c27e0ec7bcc5c2d"
+      }
+    ],
+    "source_rows": 8071,
+    "accepted_rows": 8071,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 170,
+    "non_latin_rows": 0,
+    "latin_rows": 8071,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/fur",
+    "archive": "release-assets/blitzer-fur-v1.zip",
+    "duplicate_pairs_removed": 3056,
+    "unique_lemmas": 168,
+    "unique_forms": 5017,
+    "self_forms_added": 2
+  },
+  {
+    "code": "gaa",
+    "name": "Gã",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gaa",
+        "sha256": "64af244dd2337519b702866f3b42fd4c14c1e43049e9b3443824baf7f9769952"
+      }
+    ],
+    "source_rows": 909,
+    "accepted_rows": 900,
+    "unsupported_rows": 9,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 900,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gaa",
+    "archive": "release-assets/blitzer-gaa-v1.zip",
+    "duplicate_pairs_removed": 430,
+    "unique_lemmas": 94,
+    "unique_forms": 470,
+    "self_forms_added": 0
+  },
+  {
+    "code": "gal",
+    "name": "Galician",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gal",
+        "sha256": "93945d193c6bb8ee3370446ba722f04a4c893c20082edd9ca735b677f135b1fc"
+      }
+    ],
+    "source_rows": 36801,
+    "accepted_rows": 36801,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 508,
+    "non_latin_rows": 0,
+    "latin_rows": 36801,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gal",
+    "archive": "release-assets/blitzer-gal-v1.zip",
+    "duplicate_pairs_removed": 10615,
+    "unique_lemmas": 486,
+    "unique_forms": 26195,
+    "self_forms_added": 9
+  },
+  {
+    "code": "gla",
+    "name": "GLA",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gla",
+        "sha256": "641adebe1aca2e55837464f6388527b782dfb646f242a1e28ba23f52abff686e"
+      }
+    ],
+    "source_rows": 781,
+    "accepted_rows": 732,
+    "unsupported_rows": 49,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 732,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gla",
+    "archive": "release-assets/blitzer-gla-v1.zip",
+    "duplicate_pairs_removed": 481,
+    "unique_lemmas": 70,
+    "unique_forms": 265,
+    "self_forms_added": 14
+  },
+  {
+    "code": "gle",
+    "name": "Irish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gle",
+        "sha256": "88b9c0dee797fc16a20486ff300b70f94770847406364f473a03e86cc30173cb"
+      }
+    ],
+    "source_rows": 107298,
+    "accepted_rows": 43577,
+    "unsupported_rows": 63721,
+    "malformed_rows": 0,
+    "ignored_rows": 7499,
+    "non_latin_rows": 0,
+    "latin_rows": 43577,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gle",
+    "archive": "release-assets/blitzer-gle-v1.zip",
+    "duplicate_pairs_removed": 19870,
+    "unique_lemmas": 7035,
+    "unique_forms": 23737,
+    "self_forms_added": 30
+  },
+  {
+    "code": "glv",
+    "name": "Manx",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "glv",
+        "sha256": "ba9f01f469f8227cdf338db2a7305abbfa3061f458bb42d60d71b10024d940bd"
+      }
+    ],
+    "source_rows": 14,
+    "accepted_rows": 14,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 3,
+    "non_latin_rows": 0,
+    "latin_rows": 14,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/glv",
+    "archive": "release-assets/blitzer-glv-v1.zip",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 1,
+    "unique_forms": 15,
+    "self_forms_added": 1
+  },
+  {
+    "code": "gmh",
+    "name": "Middle High German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gmh",
+        "sha256": "65dde098c278090626ee3daf80e7a86e303b6022a406263d23082932fa9cdcdb"
+      }
+    ],
+    "source_rows": 708,
+    "accepted_rows": 708,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 31,
+    "non_latin_rows": 0,
+    "latin_rows": 708,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gmh",
+    "archive": "release-assets/blitzer-gmh-v1.zip",
+    "duplicate_pairs_removed": 331,
+    "unique_lemmas": 29,
+    "unique_forms": 384,
+    "self_forms_added": 7
+  },
+  {
+    "code": "gml",
+    "name": "Middle Low German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gml",
+        "sha256": "590f04652e2135241b99decde4e83d46c70901cf79ce7daded3c20cd0753872f"
+      }
+    ],
+    "source_rows": 1529,
+    "accepted_rows": 1288,
+    "unsupported_rows": 241,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1288,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gml",
+    "archive": "release-assets/blitzer-gml-v1.zip",
+    "duplicate_pairs_removed": 653,
+    "unique_lemmas": 54,
+    "unique_forms": 635,
+    "self_forms_added": 0
+  },
+  {
+    "code": "goh",
+    "name": "Old High German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "goh",
+        "sha256": "5473f0085d7779dd760033d0e4deef5bbddbe8f48d17c40862eae22ae991b7da"
+      }
+    ],
+    "source_rows": 7247,
+    "accepted_rows": 7242,
+    "unsupported_rows": 5,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 7242,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/goh",
+    "archive": "release-assets/blitzer-goh-v1.zip",
+    "duplicate_pairs_removed": 1942,
+    "unique_lemmas": 482,
+    "unique_forms": 5300,
+    "self_forms_added": 0
+  },
+  {
+    "code": "got",
+    "name": "Gothic",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: GOTHIC"
+    ],
+    "sources": [
+      {
+        "file": "got",
+        "sha256": "90983d0a16f46b34dc1056d29637d5aeabbb54d744ab37be8edfe22d5bc5b42b"
+      }
+    ],
+    "source_rows": 204166,
+    "accepted_rows": 203922,
+    "unsupported_rows": 244,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 102059,
+    "latin_rows": 101984,
+    "malformed_examples": [],
+    "scripts": [
+      "GOTHIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/got",
+    "duplicate_pairs_removed": 66164,
+    "unique_lemmas": 6225,
+    "unique_forms": 137759,
+    "self_forms_added": 1
+  },
+  {
+    "code": "grc",
+    "name": "Ancient Greek",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: GREEK"
+    ],
+    "sources": [
+      {
+        "file": "grc",
+        "sha256": "09ff9231d90dbe481942bba143f04800ab919a31ab11801c01301488605cadd9"
+      }
+    ],
+    "source_rows": 41593,
+    "accepted_rows": 19575,
+    "unsupported_rows": 22018,
+    "malformed_rows": 0,
+    "ignored_rows": 2433,
+    "non_latin_rows": 41593,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/grc",
+    "duplicate_pairs_removed": 6986,
+    "unique_lemmas": 2431,
+    "unique_forms": 14229,
+    "self_forms_added": 1640
+  },
+  {
+    "code": "grn",
+    "name": "Guarani",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "gsw",
+    "name": "Swiss German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gsw",
+        "sha256": "cec99240124fe57d262ebf5b48fec33e8053897318fbaad40d09f83218a8b580"
+      }
+    ],
+    "source_rows": 2063,
+    "accepted_rows": 2063,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 4,
+    "non_latin_rows": 0,
+    "latin_rows": 2063,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gsw",
+    "archive": "release-assets/blitzer-gsw-v1.zip",
+    "duplicate_pairs_removed": 884,
+    "unique_lemmas": 145,
+    "unique_forms": 1190,
+    "self_forms_added": 11
+  },
+  {
+    "code": "guj",
+    "name": "Gujarati",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: GUJARATI"
+    ],
+    "sources": [
+      {
+        "file": "guj",
+        "sha256": "fb6437c6544b823c00c85d78e3ba614bec80d1ee8a8982770ff24181f6a503a3"
+      },
+      {
+        "file": "guj_ddu",
+        "sha256": "c485227398b4fd1259df407504bf65f246b23817d195a30e318719c8a43a290d"
+      }
+    ],
+    "source_rows": 24027,
+    "accepted_rows": 16135,
+    "unsupported_rows": 7892,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 24027,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "GUJARATI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/guj",
+    "duplicate_pairs_removed": 2832,
+    "unique_lemmas": 6774,
+    "unique_forms": 15092,
+    "self_forms_added": 1789
+  },
+  {
+    "code": "gup",
+    "name": "Kunwinjku",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "gup",
+        "sha256": "5a172d8d0bcda3da2c6b8152520be669aa80fceb76c078e07011a436319eecf6"
+      }
+    ],
+    "source_rows": 307,
+    "accepted_rows": 307,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 307,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/gup",
+    "archive": "release-assets/blitzer-gup-v1.zip",
+    "duplicate_pairs_removed": 4,
+    "unique_lemmas": 73,
+    "unique_forms": 371,
+    "self_forms_added": 68
+  },
+  {
+    "code": "hai",
+    "name": "Haida",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hai",
+        "sha256": "fda51f0839412e42f5450b686967dcb35f48a75d9f1e2059741b3bffd18b58ed"
+      }
+    ],
+    "source_rows": 7040,
+    "accepted_rows": 4699,
+    "unsupported_rows": 2341,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 4699,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/hai",
+    "archive": "release-assets/blitzer-hai-v1.zip",
+    "duplicate_pairs_removed": 197,
+    "unique_lemmas": 33,
+    "unique_forms": 4504,
+    "self_forms_added": 2
+  },
+  {
+    "code": "hbs",
+    "name": "Serbo-Croatian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "hbs",
+        "sha256": "736bf8f0cb726f2c6f88af67c01cd72271889169b227e05a1f665af874a54bf0"
+      },
+      {
+        "file": "hbs.4",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "source_rows": 840799,
+    "accepted_rows": 685431,
+    "unsupported_rows": 155368,
+    "malformed_rows": 0,
+    "ignored_rows": 39526,
+    "non_latin_rows": 11136,
+    "latin_rows": 674427,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/hbs",
+    "duplicate_pairs_removed": 413694,
+    "unique_lemmas": 24386,
+    "unique_forms": 278027,
+    "self_forms_added": 6290
+  },
+  {
+    "code": "heb",
+    "name": "Hebrew",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: HEBREW"
+    ],
+    "sources": [
+      {
+        "file": "heb",
+        "sha256": "d671647f0a4fb55c97d27ebe9ebe3321c956d8560afb0f08ef95174beb97174d"
+      },
+      {
+        "file": "heb_voc",
+        "sha256": "063e0e3624812d815bacc7b29f0fa6d299c3ee4dd509001c9702b345e813d1bd"
+      }
+    ],
+    "source_rows": 66355,
+    "accepted_rows": 66353,
+    "unsupported_rows": 2,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 66355,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "HEBREW"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/heb",
+    "duplicate_pairs_removed": 7681,
+    "unique_lemmas": 2358,
+    "unique_forms": 58673,
+    "self_forms_added": 1
+  },
+  {
+    "code": "hil",
+    "name": "Hiligaynon",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hil",
+        "sha256": "063cc3b75e5eeb7bd576f64578ccfa94e3d4fcd38b20ccbd564918fc564739f4"
+      }
+    ],
+    "source_rows": 1256,
+    "accepted_rows": 561,
+    "unsupported_rows": 695,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 561,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/hil",
+    "archive": "release-assets/blitzer-hil-v1.zip",
+    "duplicate_pairs_removed": 253,
+    "unique_lemmas": 80,
+    "unique_forms": 308,
+    "self_forms_added": 0
+  },
+  {
+    "code": "hin",
+    "name": "Hindi",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: DEVANAGARI"
+    ],
+    "sources": [
+      {
+        "file": "hin",
+        "sha256": "3c9228053925a69fa5c20c5bafc880268c294afd8d267504258ee405597fb18a"
+      }
+    ],
+    "source_rows": 54438,
+    "accepted_rows": 2249,
+    "unsupported_rows": 52189,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 54438,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/hin",
+    "duplicate_pairs_removed": 346,
+    "unique_lemmas": 173,
+    "unique_forms": 1903,
+    "self_forms_added": 0
+  },
+  {
+    "code": "hsb",
+    "name": "Upper Sorbian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hsb",
+        "sha256": "a62d4ac203560350420509c97d51272e4396ea7609c7f996f8664f09e4162426"
+      }
+    ],
+    "source_rows": 400,
+    "accepted_rows": 399,
+    "unsupported_rows": 1,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 399,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/hsb",
+    "archive": "release-assets/blitzer-hsb-v1.zip",
+    "duplicate_pairs_removed": 1,
+    "unique_lemmas": 344,
+    "unique_forms": 664,
+    "self_forms_added": 266
+  },
+  {
+    "code": "hsi",
+    "name": "Kholosi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hsi",
+        "sha256": "3a98087f7d0c4e38071e935de36e5488f59b098a431024174a83006e81c153d3"
+      }
+    ],
+    "source_rows": 174,
+    "accepted_rows": 174,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 174,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/hsi",
+    "archive": "release-assets/blitzer-hsi-v1.zip",
+    "duplicate_pairs_removed": 15,
+    "unique_lemmas": 49,
+    "unique_forms": 159,
+    "self_forms_added": 0
+  },
+  {
+    "code": "hun",
+    "name": "Hungarian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hun",
+        "sha256": "b2dea372d041b44558d207714b0a8c3eda3b47c77739fc5a3a8e4e4e8c6f89ad"
+      }
+    ],
+    "source_rows": 1036931,
+    "accepted_rows": 1022692,
+    "unsupported_rows": 14239,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1022692,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/hun",
+    "archive": "release-assets/blitzer-hun-v1.zip",
+    "duplicate_pairs_removed": 118773,
+    "unique_lemmas": 19159,
+    "unique_forms": 903954,
+    "self_forms_added": 35
+  },
+  {
+    "code": "hye",
+    "name": "Armenian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARMENIAN"
+    ],
+    "sources": [
+      {
+        "file": "hye",
+        "sha256": "850ca7b5fa06398795edc35daf0e202adab8765946b8920ab3307c3fb22ce091"
+      }
+    ],
+    "source_rows": 333870,
+    "accepted_rows": 253599,
+    "unsupported_rows": 80271,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 333870,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARMENIAN"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/hye",
+    "duplicate_pairs_removed": 10450,
+    "unique_lemmas": 6948,
+    "unique_forms": 243150,
+    "self_forms_added": 1
+  },
+  {
+    "code": "ind",
+    "name": "Indonesian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ind",
+        "sha256": "77c709f98b581a80051d0e18aa899e0d84d70436223054efa09831d71cdc2ac6"
+      }
+    ],
+    "source_rows": 27714,
+    "accepted_rows": 27714,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 27714,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ind",
+    "archive": "release-assets/blitzer-ind-v1.zip",
+    "duplicate_pairs_removed": 10293,
+    "unique_lemmas": 3877,
+    "unique_forms": 21298,
+    "self_forms_added": 3877
+  },
+  {
+    "code": "isl",
+    "name": "Icelandic",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "isl",
+        "sha256": "a944234d2d62775d2d0490664630ddaf1ce50ae164218582bc8fedb45ea26422"
+      }
+    ],
+    "source_rows": 76915,
+    "accepted_rows": 76819,
+    "unsupported_rows": 96,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 76819,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/isl",
+    "archive": "release-assets/blitzer-isl-v1.zip",
+    "duplicate_pairs_removed": 23504,
+    "unique_lemmas": 4768,
+    "unique_forms": 53346,
+    "self_forms_added": 31
+  },
+  {
+    "code": "ita",
+    "name": "Italian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ita",
+        "sha256": "6347bb15b3d2c3dafcbe4adc0e7beaa97a8bc61bcccc345079afb154c03f1321"
+      }
+    ],
+    "source_rows": 509574,
+    "accepted_rows": 412331,
+    "unsupported_rows": 97243,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 412331,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ita",
+    "archive": "release-assets/blitzer-ita-v1.zip",
+    "duplicate_pairs_removed": 84807,
+    "unique_lemmas": 10009,
+    "unique_forms": 327538,
+    "self_forms_added": 14
+  },
+  {
+    "code": "itl",
+    "name": "Itelmen",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC, GREEK"
+    ],
+    "sources": [
+      {
+        "file": "itl",
+        "sha256": "c254fb236cf925187983584419091f1a7d6d0755a087034053bddcc9b6f5cc69"
+      }
+    ],
+    "source_rows": 2701,
+    "accepted_rows": 2686,
+    "unsupported_rows": 15,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 527,
+    "latin_rows": 2161,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC",
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/itl",
+    "duplicate_pairs_removed": 4,
+    "unique_lemmas": 1624,
+    "unique_forms": 3644,
+    "self_forms_added": 962
+  },
+  {
+    "code": "izh",
+    "name": "Ingrian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "izh",
+        "sha256": "b0d669893b477a4bb468f6da31fc7f30c19e574a98c851380f2e90e0e4c93c03"
+      }
+    ],
+    "source_rows": 1099,
+    "accepted_rows": 1099,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 52,
+    "non_latin_rows": 0,
+    "latin_rows": 1099,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/izh",
+    "archive": "release-assets/blitzer-izh-v1.zip",
+    "duplicate_pairs_removed": 73,
+    "unique_lemmas": 50,
+    "unique_forms": 1026,
+    "self_forms_added": 0
+  },
+  {
+    "code": "jpn",
+    "name": "Japanese",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CJK, HIRAGANA",
+      "Language requires a dedicated word segmenter"
+    ],
+    "sources": [
+      {
+        "file": "jpn",
+        "sha256": "6ba4589cd43846c8afab5bdf5f4c498e03e32849f95c3e5c9840be2975d4b888"
+      }
+    ],
+    "source_rows": 12687,
+    "accepted_rows": 12687,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 12687,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CJK",
+      "HIRAGANA"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/jpn",
+    "duplicate_pairs_removed": 1095,
+    "unique_lemmas": 107,
+    "unique_forms": 11592,
+    "self_forms_added": 0
+  },
+  {
+    "code": "kal",
+    "name": "Greenlandic",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "kal",
+        "sha256": "5a7ce83bf3349dc7e881f91a7a778c9449337658acae57112e220ee77349f110"
+      }
+    ],
+    "source_rows": 368,
+    "accepted_rows": 368,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 25,
+    "non_latin_rows": 0,
+    "latin_rows": 368,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/kal",
+    "archive": "release-assets/blitzer-kal-v1.zip",
+    "duplicate_pairs_removed": 47,
+    "unique_lemmas": 23,
+    "unique_forms": 321,
+    "self_forms_added": 0
+  },
+  {
+    "code": "kan",
+    "name": "Kannada",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: KANNADA"
+    ],
+    "sources": [
+      {
+        "file": "kan",
+        "sha256": "9ed7830f7f49f7afd2d9843b52a0ba87f2cbdc7360cbffab4b6ab5bbab56987b"
+      }
+    ],
+    "source_rows": 6402,
+    "accepted_rows": 6402,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 168,
+    "non_latin_rows": 6402,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "KANNADA"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kan",
+    "duplicate_pairs_removed": 2334,
+    "unique_lemmas": 159,
+    "unique_forms": 4167,
+    "self_forms_added": 99
+  },
+  {
+    "code": "kat",
+    "name": "Georgian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: GEORGIAN"
+    ],
+    "sources": [
+      {
+        "file": "kat",
+        "sha256": "0525c4946cc86618a9c5af2681f5befff29aad5822da0e5c1bdcebf4b6607822"
+      }
+    ],
+    "source_rows": 92095,
+    "accepted_rows": 92000,
+    "unsupported_rows": 95,
+    "malformed_rows": 0,
+    "ignored_rows": 2,
+    "non_latin_rows": 92095,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "GEORGIAN"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kat",
+    "duplicate_pairs_removed": 15881,
+    "unique_lemmas": 3847,
+    "unique_forms": 76120,
+    "self_forms_added": 1
+  },
+  {
+    "code": "kaz",
+    "name": "Kazakh",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "kaz",
+        "sha256": "2474e66a4a112528c6b2cbeed498a75c87c4de5f36da276143e8fa90aa5a7488"
+      },
+      {
+        "file": "kaz.noun.tsv",
+        "sha256": "6ba352297a03423fdd21b3a1875d230c0f3c4153d5e33d1e5dcd37980efc0579"
+      },
+      {
+        "file": "kaz.sm",
+        "sha256": "af873ae1660456bcdf98846e3f82c47d3080a4412c15f5f48e40a8c38366b3b4"
+      }
+    ],
+    "source_rows": 40640,
+    "accepted_rows": 37093,
+    "unsupported_rows": 3547,
+    "malformed_rows": 0,
+    "ignored_rows": 28,
+    "non_latin_rows": 40640,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kaz",
+    "duplicate_pairs_removed": 1923,
+    "unique_lemmas": 1743,
+    "unique_forms": 35264,
+    "self_forms_added": 94
+  },
+  {
+    "code": "kbd",
+    "name": "Kabardian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "kbd",
+        "sha256": "eeca11e3218db22444fcc7ed886c229c4b8f59d5bfbf10a5d776ef009da65593"
+      }
+    ],
+    "source_rows": 3092,
+    "accepted_rows": 3080,
+    "unsupported_rows": 12,
+    "malformed_rows": 0,
+    "ignored_rows": 262,
+    "non_latin_rows": 3092,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kbd",
+    "duplicate_pairs_removed": 118,
+    "unique_lemmas": 249,
+    "unique_forms": 3054,
+    "self_forms_added": 92
+  },
+  {
+    "code": "kca",
+    "name": "Khanty",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC, GREEK"
+    ],
+    "sources": [
+      {
+        "file": "kca",
+        "sha256": "bba40220fe8cb46449609887e8c382da03fbc06d63d741fb134a111689d44055"
+      }
+    ],
+    "source_rows": 2055,
+    "accepted_rows": 2055,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1072,
+    "latin_rows": 983,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC",
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kca",
+    "duplicate_pairs_removed": 59,
+    "unique_lemmas": 661,
+    "unique_forms": 2198,
+    "self_forms_added": 202
+  },
+  {
+    "code": "ket",
+    "name": "Data",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "ket",
+        "sha256": "fb19c9492bc14572242573046327df9c182dd3001196ba6f81d8b5f3e6e0b9d1"
+      }
+    ],
+    "source_rows": 1184,
+    "accepted_rows": 972,
+    "unsupported_rows": 212,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1184,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ket",
+    "duplicate_pairs_removed": 1,
+    "unique_lemmas": 538,
+    "unique_forms": 1197,
+    "self_forms_added": 226
+  },
+  {
+    "code": "khk",
+    "name": "Khalkha Mongolian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "khk",
+        "sha256": "4ff606bbf23b8de81a6f6ec9aedab44136f38c11e45607130a328e1a2d388630"
+      }
+    ],
+    "source_rows": 30143,
+    "accepted_rows": 30143,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 30143,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/khk",
+    "duplicate_pairs_removed": 14652,
+    "unique_lemmas": 2140,
+    "unique_forms": 17593,
+    "self_forms_added": 2102
+  },
+  {
+    "code": "kir",
+    "name": "Kyrgyz",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "kir",
+        "sha256": "05ab494323aa83a3b27be2264ea450a28957bf48c32804b743c77ccc6a066e73"
+      }
+    ],
+    "source_rows": 5544,
+    "accepted_rows": 3066,
+    "unsupported_rows": 2478,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 5544,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kir",
+    "duplicate_pairs_removed": 141,
+    "unique_lemmas": 72,
+    "unique_forms": 2997,
+    "self_forms_added": 72
+  },
+  {
+    "code": "kjh",
+    "name": "Khakas",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "kjh",
+        "sha256": "c3da9ee8c891f6d744dc772fed11a5554439183437e01b3edc1d8991f5fc60b4"
+      }
+    ],
+    "source_rows": 1200,
+    "accepted_rows": 1184,
+    "unsupported_rows": 16,
+    "malformed_rows": 0,
+    "ignored_rows": 77,
+    "non_latin_rows": 1200,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/kjh",
+    "duplicate_pairs_removed": 12,
+    "unique_lemmas": 74,
+    "unique_forms": 1172,
+    "self_forms_added": 0
+  },
+  {
+    "code": "klr",
+    "name": "Khaling",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "klr",
+        "sha256": "e14f454911ebcdeb94b621658ac7025937796389196795472a060b9a76a67007"
+      }
+    ],
+    "source_rows": 156097,
+    "accepted_rows": 156097,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 156097,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/klr",
+    "archive": "release-assets/blitzer-klr-v1.zip",
+    "duplicate_pairs_removed": 96993,
+    "unique_lemmas": 591,
+    "unique_forms": 59637,
+    "self_forms_added": 533
+  },
+  {
+    "code": "kmr",
+    "name": "KMR",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "kmr",
+        "sha256": "f1450888ea2ab13503e71c3249e2fa5ad295e9460bf5bff8a8bad05c52c68bd6"
+      }
+    ],
+    "source_rows": 216370,
+    "accepted_rows": 192393,
+    "unsupported_rows": 23977,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 192393,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/kmr",
+    "archive": "release-assets/blitzer-kmr-v1.zip",
+    "duplicate_pairs_removed": 1,
+    "unique_lemmas": 13995,
+    "unique_forms": 192427,
+    "self_forms_added": 35
+  },
+  {
+    "code": "kod",
+    "name": "Kodi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "kod",
+        "sha256": "cba29eb89117afa8486e1f88117564fd1956861717ad981768cae8cc4bbe4810"
+      }
+    ],
+    "source_rows": 462,
+    "accepted_rows": 462,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 462,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/kod",
+    "archive": "release-assets/blitzer-kod-v1.zip",
+    "duplicate_pairs_removed": 3,
+    "unique_lemmas": 65,
+    "unique_forms": 524,
+    "self_forms_added": 65
+  },
+  {
+    "code": "kon",
+    "name": "Kongo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "kon",
+        "sha256": "be87a642a8666adb82a4ef9b9b953be9cbf1ba5fa2357866a3b48ab6707b3b62"
+      }
+    ],
+    "source_rows": 828,
+    "accepted_rows": 400,
+    "unsupported_rows": 428,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 400,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/kon",
+    "archive": "release-assets/blitzer-kon-v1.zip",
+    "duplicate_pairs_removed": 14,
+    "unique_lemmas": 200,
+    "unique_forms": 586,
+    "self_forms_added": 200
+  },
+  {
+    "code": "kor",
+    "name": "Korean",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CJK, HANGUL"
+    ],
+    "sources": [
+      {
+        "file": "kor",
+        "sha256": "fcf730bfa5f51bfa15285a619f53283054fd38045a1ad426fbdc3336c9b99195"
+      }
+    ],
+    "source_rows": 241323,
+    "accepted_rows": 233716,
+    "unsupported_rows": 7607,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 241323,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CJK",
+      "HANGUL"
+    ],
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 41964,
+    "unique_lemmas": 2672,
+    "unique_forms": 193763,
+    "self_forms_added": 2011,
+    "pack": "language-packs/dev/kor"
+  },
+  {
+    "code": "krl",
+    "name": "Karelian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "krl",
+        "sha256": "44f7d33c6d68e09d45d0c7e6a711beea43be15bff2bca6a45ab575783db8930d"
+      },
+      {
+        "file": "krl-dyorzha",
+        "sha256": "531fd8927272a9f36adc2bf2225a8161e0ee97189d71975cf6991b7a17a976d0"
+      },
+      {
+        "file": "krl-kestenga",
+        "sha256": "a6ec39b3d4d8fbaee4b272af1324b09d46668cb823eb55f99d698e664781795f"
+      },
+      {
+        "file": "krl-knyazhaya",
+        "sha256": "33397e95fed4d11d2a64c698e6af7f67e3acd34bea0c32aa192fc739ecccd4f4"
+      },
+      {
+        "file": "krl-kontokki",
+        "sha256": "4ea777f2093598aa84c5747256b9aa923560a2cc924f827e2085822a8b8cc7e6"
+      },
+      {
+        "file": "krl-myandyselga",
+        "sha256": "2e169470e9c6231bfad7e31a48ea4b68ee6099a799edc9a265bc29077f9d2a16"
+      },
+      {
+        "file": "krl-new-written-karelian",
+        "sha256": "ab2cf3f7b86a2f9b771341515577201cac98f5d35494386d00745afd9db10deb"
+      },
+      {
+        "file": "krl-new-written-tver",
+        "sha256": "d2e91886af5f9078214b2130124a541ea0f22ccea22dcd79bf735a6e80583aaa"
+      },
+      {
+        "file": "krl-oulanga",
+        "sha256": "58756f0c233fec6ea25b3db1eee793a3d0588579720748ae8136ed078ed6c225"
+      },
+      {
+        "file": "krl-padany",
+        "sha256": "9f59a52319f3f952f5d90d16b09547f27388f650738ac3859f6996f74af7ddd7"
+      },
+      {
+        "file": "krl-panozero",
+        "sha256": "63b24448b24d378a6e80ccdfe84280fa5ac6d011fe772b7a00feaede11147ca9"
+      },
+      {
+        "file": "krl-poduzhemye",
+        "sha256": "bfd065b7373a73f756892d81eb8c71cc2e451a4ba47fcd85fd2b4f2fe15ab1a8"
+      },
+      {
+        "file": "krl-porosozero",
+        "sha256": "c09d7b62d4ded9a3f72578baf68fd8e3d399768e337b357fb7c7a141182a0887"
+      },
+      {
+        "file": "krl-reboly",
+        "sha256": "37040e98424b78f53e29272c41f47eebcdb0a38bbe9b15d554e89ea75e05251a"
+      },
+      {
+        "file": "krl-rugozero",
+        "sha256": "8c743cb2334560e5ca7a0f274715cf6f4acfb1cb24a9bd6da43be0df701e93ce"
+      },
+      {
+        "file": "krl-tikhtozero",
+        "sha256": "ef79c20974acc43178d68197412001f693c40c84025140998cdae0292fb09c2d"
+      },
+      {
+        "file": "krl-tikhvin",
+        "sha256": "65a694137337a5ab1dfacc61f67dc06f38064fbc8a19f0fee200ec3c3afa32cd"
+      },
+      {
+        "file": "krl-tolmachi",
+        "sha256": "e464a7a4139dba6be6bdaf5d3d9fc2172161e8da3c5494fb9b2cf95329d30559"
+      },
+      {
+        "file": "krl-tunguda",
+        "sha256": "46a67d9cbabcb3afbc571e9d9bf15bfa751492cbf9704b074325859aacd89541"
+      },
+      {
+        "file": "krl-uhta",
+        "sha256": "fbc735023782dd698fee325a5b2ab07e61c842fc92463e99e68f22578145496e"
+      },
+      {
+        "file": "krl-valdai",
+        "sha256": "3bb70167cd69ce5ad8832f873a61309499361dd1c2c37d2582b3cc4964b23185"
+      },
+      {
+        "file": "krl-vesyegonsk",
+        "sha256": "45c43b2da4504b764a2d74bf8bb46f1e503f107da66d1e1aa29251947cc5af77"
+      },
+      {
+        "file": "krl-voknavolok",
+        "sha256": "f59a65de85c5eef38ab9a61faf33b2bb52550ced42d2c597a68dd33d9fafc869"
+      },
+      {
+        "file": "krl-vychetaibola",
+        "sha256": "6c87d56cadc32acbf27d6bc7ad7d4c51f23ee904fed4733145f0129bc337c845"
+      },
+      {
+        "file": "krl-yushkozero",
+        "sha256": "1f71fcce3d3a9d1cd8049072dcc7be0d9b23a5e6f69314fa3cf35198ab301919"
+      }
+    ],
+    "source_rows": 396409,
+    "accepted_rows": 178804,
+    "unsupported_rows": 217605,
+    "malformed_rows": 0,
+    "ignored_rows": 48,
+    "non_latin_rows": 23,
+    "latin_rows": 178781,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 23,
+    "pack": "language-packs/krl",
+    "archive": "release-assets/blitzer-krl-v1.zip",
+    "duplicate_pairs_removed": 28031,
+    "unique_lemmas": 9729,
+    "unique_forms": 150758,
+    "self_forms_added": 8
+  },
+  {
+    "code": "lat",
+    "name": "Latin",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lat",
+        "sha256": "7aed5a2fd17c29474e85e315d42654d1794a3d3efc956b387714ca601a608a2b"
+      }
+    ],
+    "source_rows": 976489,
+    "accepted_rows": 971208,
+    "unsupported_rows": 5281,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 6,
+    "latin_rows": 971202,
+    "malformed_examples": [],
+    "scripts": [
+      "GREEK"
+    ],
+    "excluded_non_latin_rows": 6,
+    "pack": "language-packs/lat",
+    "archive": "release-assets/blitzer-lat-v1.zip",
+    "duplicate_pairs_removed": 468621,
+    "unique_lemmas": 46545,
+    "unique_forms": 502590,
+    "self_forms_added": 9
+  },
+  {
+    "code": "lav",
+    "name": "Latvian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lav",
+        "sha256": "87e2fa40a690c1f6ea4f020065a4c30518eccc6e270daf91df33a730d6ae9e41"
+      }
+    ],
+    "source_rows": 136998,
+    "accepted_rows": 129447,
+    "unsupported_rows": 7551,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 129447,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/lav",
+    "archive": "release-assets/blitzer-lav-v1.zip",
+    "duplicate_pairs_removed": 50272,
+    "unique_lemmas": 7238,
+    "unique_forms": 80227,
+    "self_forms_added": 1052
+  },
+  {
+    "code": "lin",
+    "name": "Lingala",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lin",
+        "sha256": "d22fa11f561505b531d55bb2def0480ef5fbbb2a7e0bb9c16e8dd7664fadecbc"
+      }
+    ],
+    "source_rows": 228,
+    "accepted_rows": 228,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 228,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/lin",
+    "archive": "release-assets/blitzer-lin-v1.zip",
+    "duplicate_pairs_removed": 55,
+    "unique_lemmas": 57,
+    "unique_forms": 230,
+    "self_forms_added": 57
+  },
+  {
+    "code": "lit",
+    "name": "Lithuanian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lit",
+        "sha256": "e90f7d7e4f544017d097f7ef201c6558b2d910c8b1b57b12ce3d3b0a36a1a630"
+      }
+    ],
+    "source_rows": 34130,
+    "accepted_rows": 33262,
+    "unsupported_rows": 868,
+    "malformed_rows": 0,
+    "ignored_rows": 1462,
+    "non_latin_rows": 0,
+    "latin_rows": 33262,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/lit",
+    "archive": "release-assets/blitzer-lit-v1.zip",
+    "duplicate_pairs_removed": 5170,
+    "unique_lemmas": 1391,
+    "unique_forms": 28998,
+    "self_forms_added": 906
+  },
+  {
+    "code": "liv",
+    "name": "Livonian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "liv",
+        "sha256": "74b31f54ca79c73d9023fa4a0e30998329c53adbf845781088030ac27fd5b03a"
+      }
+    ],
+    "source_rows": 3987,
+    "accepted_rows": 3448,
+    "unsupported_rows": 539,
+    "malformed_rows": 0,
+    "ignored_rows": 208,
+    "non_latin_rows": 0,
+    "latin_rows": 3448,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/liv",
+    "archive": "release-assets/blitzer-liv-v1.zip",
+    "duplicate_pairs_removed": 590,
+    "unique_lemmas": 201,
+    "unique_forms": 2858,
+    "self_forms_added": 0
+  },
+  {
+    "code": "lld",
+    "name": "Ladin",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lld",
+        "sha256": "aad2545136fcc3cd105e71560ad632f8717de647ac0021316e4cb9f767608728"
+      }
+    ],
+    "source_rows": 7656,
+    "accepted_rows": 7656,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 182,
+    "non_latin_rows": 0,
+    "latin_rows": 7656,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/lld",
+    "archive": "release-assets/blitzer-lld-v1.zip",
+    "duplicate_pairs_removed": 2803,
+    "unique_lemmas": 180,
+    "unique_forms": 4854,
+    "self_forms_added": 1
+  },
+  {
+    "code": "lud",
+    "name": "Ludian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lud-central-ludian",
+        "sha256": "394d849ec25dcee86ebf86707607cc0b100ea9ad31b6f5089b1458be25de8c8c"
+      },
+      {
+        "file": "lud-mikhailovskoye",
+        "sha256": "8e2596781f4f3d32274fb57863adb868a32e7aa20683d9e0e25d7d035e9634d6"
+      },
+      {
+        "file": "lud-new-written-ludian",
+        "sha256": "286c4cbffc6eb5251a1684f3ebbaefc04e1c9fb181fb67fb255cfb9c4f53cb92"
+      },
+      {
+        "file": "lud-northern-ludian",
+        "sha256": "d3101140e98f5755c9c45c979c4dd893e25a9a0354683e072fdb8999f605fa64"
+      },
+      {
+        "file": "lud-southern-ludian",
+        "sha256": "7d92379225623055ef5fa97920f5680bd3853179faa51c92c0e79e105477929b"
+      }
+    ],
+    "source_rows": 11881,
+    "accepted_rows": 11507,
+    "unsupported_rows": 374,
+    "malformed_rows": 0,
+    "ignored_rows": 5,
+    "non_latin_rows": 2,
+    "latin_rows": 11505,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 2,
+    "pack": "language-packs/lud",
+    "archive": "release-assets/blitzer-lud-v1.zip",
+    "duplicate_pairs_removed": 4550,
+    "unique_lemmas": 5662,
+    "unique_forms": 6968,
+    "self_forms_added": 13
+  },
+  {
+    "code": "lug",
+    "name": "Luganda",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "lug",
+        "sha256": "9d9c9d8c397cbb67882bccc0680b4507ee3948db04ca5a10f70c19f842e7f9eb"
+      }
+    ],
+    "source_rows": 4895,
+    "accepted_rows": 4785,
+    "unsupported_rows": 110,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 4785,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/lug",
+    "archive": "release-assets/blitzer-lug-v1.zip",
+    "duplicate_pairs_removed": 39,
+    "unique_lemmas": 87,
+    "unique_forms": 4746,
+    "self_forms_added": 0
+  },
+  {
+    "code": "mag",
+    "name": "Magahi",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: DEVANAGARI"
+    ],
+    "sources": [
+      {
+        "file": "mag",
+        "sha256": "e4bff24bfe73369a915267cd3ba98cb818ff96aac3b8fa7d98b16028bb09a346"
+      }
+    ],
+    "source_rows": 1358,
+    "accepted_rows": 1355,
+    "unsupported_rows": 3,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1358,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/mag",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 938,
+    "unique_forms": 1456,
+    "self_forms_added": 101
+  },
+  {
+    "code": "mao",
+    "name": "Māori",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "mao",
+        "sha256": "c1e6ddf3e10130d1a40615c3b27660ea6a3206427460fcfa69ddeb899c221965"
+      }
+    ],
+    "source_rows": 214,
+    "accepted_rows": 214,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 214,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/mao",
+    "archive": "release-assets/blitzer-mao-v1.zip",
+    "duplicate_pairs_removed": 6,
+    "unique_lemmas": 104,
+    "unique_forms": 208,
+    "self_forms_added": 0
+  },
+  {
+    "code": "mkd",
+    "name": "Macedonian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "mkd",
+        "sha256": "b36b174601c6b22bc55c29084b8c3df2a7ca16007d0fdfe5feacc360b6c26166"
+      }
+    ],
+    "source_rows": 168057,
+    "accepted_rows": 155036,
+    "unsupported_rows": 13021,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 168057,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/mkd",
+    "duplicate_pairs_removed": 18687,
+    "unique_lemmas": 9776,
+    "unique_forms": 136390,
+    "self_forms_added": 41
+  },
+  {
+    "code": "mlg",
+    "name": "Malagasy",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "mlg",
+        "sha256": "7eb74d5fc8793367c05ab12a6092501f8151eea37fed50988a4534db75c4781c"
+      }
+    ],
+    "source_rows": 644,
+    "accepted_rows": 644,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 644,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/mlg",
+    "archive": "release-assets/blitzer-mlg-v1.zip",
+    "duplicate_pairs_removed": 8,
+    "unique_lemmas": 159,
+    "unique_forms": 636,
+    "self_forms_added": 0
+  },
+  {
+    "code": "mlt",
+    "name": "Maltese",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "mlt",
+        "sha256": "1d46d8f620cdf65c1d67893f819f3839f3bf466f24c289b10be98d2f788db388"
+      }
+    ],
+    "source_rows": 3584,
+    "accepted_rows": 3406,
+    "unsupported_rows": 178,
+    "malformed_rows": 0,
+    "ignored_rows": 116,
+    "non_latin_rows": 0,
+    "latin_rows": 3406,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/mlt",
+    "archive": "release-assets/blitzer-mlt-v1.zip",
+    "duplicate_pairs_removed": 1977,
+    "unique_lemmas": 107,
+    "unique_forms": 1430,
+    "self_forms_added": 1
+  },
+  {
+    "code": "mon",
+    "name": "Mongolian",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "mwf",
+    "name": "Murrinhpatha",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "mwf",
+        "sha256": "1cad73d55585f696500f2fc61600d9a4c962099b21ee6ca49447fedd2dae2b2a"
+      }
+    ],
+    "source_rows": 1110,
+    "accepted_rows": 1110,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 37,
+    "non_latin_rows": 0,
+    "latin_rows": 1110,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/mwf",
+    "archive": "release-assets/blitzer-mwf-v1.zip",
+    "duplicate_pairs_removed": 411,
+    "unique_lemmas": 29,
+    "unique_forms": 720,
+    "self_forms_added": 21
+  },
+  {
+    "code": "nap",
+    "name": "Neapolitan",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nap",
+        "sha256": "d4e435389ccd4a7f6bafac36177611747cd3fe73fe51d4babb9a7ee27cecb7c8"
+      }
+    ],
+    "source_rows": 1808,
+    "accepted_rows": 1808,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 42,
+    "non_latin_rows": 0,
+    "latin_rows": 1808,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nap",
+    "archive": "release-assets/blitzer-nap-v1.zip",
+    "duplicate_pairs_removed": 311,
+    "unique_lemmas": 40,
+    "unique_forms": 1497,
+    "self_forms_added": 0
+  },
+  {
+    "code": "nav",
+    "name": "Navajo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nav",
+        "sha256": "3d0493e97430295757826bd72170e8ad241d9f116977387795b65e8ab93b0920"
+      }
+    ],
+    "source_rows": 11884,
+    "accepted_rows": 11864,
+    "unsupported_rows": 20,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 11864,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nav",
+    "archive": "release-assets/blitzer-nav-v1.zip",
+    "duplicate_pairs_removed": 516,
+    "unique_lemmas": 627,
+    "unique_forms": 11378,
+    "self_forms_added": 30
+  },
+  {
+    "code": "nds",
+    "name": "Low German",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nds",
+        "sha256": "c5a87be1d8cd2ac2c47c60901e840f16c94706031091d05732bdd595cbbb43f1"
+      }
+    ],
+    "source_rows": 9794,
+    "accepted_rows": 5762,
+    "unsupported_rows": 4032,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 5762,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nds",
+    "archive": "release-assets/blitzer-nds-v1.zip",
+    "duplicate_pairs_removed": 3219,
+    "unique_lemmas": 325,
+    "unique_forms": 2543,
+    "self_forms_added": 0
+  },
+  {
+    "code": "nld",
+    "name": "Dutch",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nld",
+        "sha256": "86f3504cc426c9beffe8566406294f7f71505d46a2bba8773bdcf2e9c5a3d750"
+      }
+    ],
+    "source_rows": 55467,
+    "accepted_rows": 55348,
+    "unsupported_rows": 119,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 55348,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nld",
+    "archive": "release-assets/blitzer-nld-v1.zip",
+    "duplicate_pairs_removed": 28933,
+    "unique_lemmas": 4978,
+    "unique_forms": 26418,
+    "self_forms_added": 3
+  },
+  {
+    "code": "nno",
+    "name": "Norwegian Nynorsk",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nno",
+        "sha256": "0a1176969d4c7d9b6e833116145d688a261dd76a780b99b5745b6d14d81e6b29"
+      }
+    ],
+    "source_rows": 15319,
+    "accepted_rows": 15276,
+    "unsupported_rows": 43,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 15276,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nno",
+    "archive": "release-assets/blitzer-nno-v1.zip",
+    "duplicate_pairs_removed": 353,
+    "unique_lemmas": 4675,
+    "unique_forms": 18197,
+    "self_forms_added": 3274
+  },
+  {
+    "code": "nob",
+    "name": "Norwegian Bokmål",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nob",
+        "sha256": "e9e7b9cb1e1303f9c722a2a2d9abd25db153a74b5435814e97b1823a80100d2c"
+      }
+    ],
+    "source_rows": 77871,
+    "accepted_rows": 77645,
+    "unsupported_rows": 226,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 77645,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nob",
+    "archive": "release-assets/blitzer-nob-v1.zip",
+    "duplicate_pairs_removed": 4845,
+    "unique_lemmas": 17928,
+    "unique_forms": 75282,
+    "self_forms_added": 2482
+  },
+  {
+    "code": "non",
+    "name": "Old Norse",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "non",
+        "sha256": "ee30b23fd999ad7c3a03ae481ad0ed58fa58dcc86078108bc7e12869e606011d"
+      }
+    ],
+    "source_rows": 98185,
+    "accepted_rows": 98176,
+    "unsupported_rows": 9,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 98176,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/non",
+    "archive": "release-assets/blitzer-non-v1.zip",
+    "duplicate_pairs_removed": 48581,
+    "unique_lemmas": 2666,
+    "unique_forms": 49605,
+    "self_forms_added": 10
+  },
+  {
+    "code": "nya",
+    "name": "Chewa",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nya",
+        "sha256": "6a2dcc0a67fc6fde71b5b84864a6b6614c7129dcf9c55d33b7c07cd5cef2bd40"
+      }
+    ],
+    "source_rows": 4370,
+    "accepted_rows": 4370,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 4370,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/nya",
+    "archive": "release-assets/blitzer-nya-v1.zip",
+    "duplicate_pairs_removed": 1419,
+    "unique_lemmas": 227,
+    "unique_forms": 3178,
+    "self_forms_added": 227
+  },
+  {
+    "code": "oci",
+    "name": "OCI",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "oci",
+        "sha256": "130250118bd875bb1f29dd45fc7f74be1faaca1c0b112dc57065d996b6782609"
+      }
+    ],
+    "source_rows": 8316,
+    "accepted_rows": 8316,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 215,
+    "non_latin_rows": 0,
+    "latin_rows": 8316,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/oci",
+    "archive": "release-assets/blitzer-oci-v1.zip",
+    "duplicate_pairs_removed": 707,
+    "unique_lemmas": 174,
+    "unique_forms": 7610,
+    "self_forms_added": 1
+  },
+  {
+    "code": "olo",
+    "name": "Livvi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "olo-kondushi",
+        "sha256": "228faaa3ab4a04e1ecfc5aa454dac94e60da4921dfe7934b1bb470821d585ba8"
+      },
+      {
+        "file": "olo-kotkozero",
+        "sha256": "fe7419a3bb42d1dfa99fb3d161913f6b1d3eb1979586c870d0cae02c2a640360"
+      },
+      {
+        "file": "olo-nekkula",
+        "sha256": "10f5aafe8e3097abb6f14ee5045626c7de4c81f2e1fe7005c460964befb9658c"
+      },
+      {
+        "file": "olo-new-written-livvic",
+        "sha256": "b77b4598eed861d3d2c1abbcbdf0ef9207679e0065e65a524b6a9938215708b3"
+      },
+      {
+        "file": "olo-rypushkalitsa",
+        "sha256": "68d34f9f2a7955f35a973b55e9bd4ecb81181a816fb5a931d98953038e82fb7b"
+      },
+      {
+        "file": "olo-syamozero",
+        "sha256": "ee3b3d09aadd214349d8566cf8ea184d7ca8944b44e82aa5492731b706f7bc1b"
+      },
+      {
+        "file": "olo-tulmozero",
+        "sha256": "88c1f1f4ae6589f62f97f0dd1a7887af4eb38d0f33bedb7120d8e3d2563c640d"
+      },
+      {
+        "file": "olo-vedlozero",
+        "sha256": "24192788fb3e3d61c4ac69b5a45843357089a0b674769a344a9d49c889c09a81"
+      },
+      {
+        "file": "olo-vidlitsa",
+        "sha256": "2fbf43ef2ba4200ecd382c5110f31dbff07c34856e776540fe1763e9e0fef556"
+      }
+    ],
+    "source_rows": 1172134,
+    "accepted_rows": 834827,
+    "unsupported_rows": 337307,
+    "malformed_rows": 0,
+    "ignored_rows": 9,
+    "non_latin_rows": 92,
+    "latin_rows": 834736,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 91,
+    "pack": "language-packs/olo",
+    "archive": "release-assets/blitzer-olo-v1.zip",
+    "duplicate_pairs_removed": 153353,
+    "unique_lemmas": 24241,
+    "unique_forms": 681416,
+    "self_forms_added": 33
+  },
+  {
+    "code": "ood",
+    "name": "O'odham",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ood",
+        "sha256": "c0445773a6723acee298b881732011f47fa07751b66ab1f9d2b5e7858eeeb674"
+      }
+    ],
+    "source_rows": 1628,
+    "accepted_rows": 958,
+    "unsupported_rows": 670,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 958,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ood",
+    "archive": "release-assets/blitzer-ood-v1.zip",
+    "duplicate_pairs_removed": 281,
+    "unique_lemmas": 230,
+    "unique_forms": 677,
+    "self_forms_added": 0
+  },
+  {
+    "code": "orm",
+    "name": "Oromo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "orm",
+        "sha256": "4337f38ecb988b9e87ceae9176a73079a51df355644a9d21409526f875956605"
+      }
+    ],
+    "source_rows": 2046,
+    "accepted_rows": 688,
+    "unsupported_rows": 1358,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 688,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/orm",
+    "archive": "release-assets/blitzer-orm-v1.zip",
+    "duplicate_pairs_removed": 92,
+    "unique_lemmas": 85,
+    "unique_forms": 664,
+    "self_forms_added": 68
+  },
+  {
+    "code": "oss",
+    "name": "Ossetian",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "osx",
+    "name": "Old Saxon",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "osx",
+        "sha256": "6482032485c6b099ca9e79b91db240b4eaa32b739127ead41a2875265849e86a"
+      }
+    ],
+    "source_rows": 22287,
+    "accepted_rows": 22283,
+    "unsupported_rows": 4,
+    "malformed_rows": 0,
+    "ignored_rows": 865,
+    "non_latin_rows": 0,
+    "latin_rows": 22283,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/osx",
+    "archive": "release-assets/blitzer-osx-v1.zip",
+    "duplicate_pairs_removed": 9982,
+    "unique_lemmas": 863,
+    "unique_forms": 12553,
+    "self_forms_added": 252
+  },
+  {
+    "code": "ote",
+    "name": "Mezquital Otomi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ote",
+        "sha256": "64ef4fd77ac48f8536c9925dd131e88b59d2c9a6bf0a2dd76dd94a6c1b87fa1b"
+      }
+    ],
+    "source_rows": 33162,
+    "accepted_rows": 572,
+    "unsupported_rows": 32590,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 572,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/ote",
+    "archive": "release-assets/blitzer-ote-v1.zip",
+    "duplicate_pairs_removed": 20,
+    "unique_lemmas": 551,
+    "unique_forms": 612,
+    "self_forms_added": 60
+  },
+  {
+    "code": "otm",
+    "name": "Sierra (Eastern Highland) Otomi",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "otm",
+        "sha256": "b808c7437d35eb6ec17ff1f728fd5962c660b5459ce3c72102cfa25567d8bd5c"
+      }
+    ],
+    "source_rows": 31380,
+    "accepted_rows": 0,
+    "unsupported_rows": 31380,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "pbs",
+    "name": "Central Pame",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "pbs.csv",
+        "sha256": "45978f355db352a4b1f550c165061e0172feb3024535befee2761d6902bbd076"
+      }
+    ],
+    "source_rows": 12528,
+    "accepted_rows": 0,
+    "unsupported_rows": 12528,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "pei",
+    "name": "Chichimec",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "pei",
+        "sha256": "fee59ee8b14c7d0d379549a0bbec56a1d9facc19a7a3376a07de5747bc6ca512"
+      }
+    ],
+    "source_rows": 15120,
+    "accepted_rows": 0,
+    "unsupported_rows": 15120,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "pib",
+    "name": "Yine",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "pib",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "source_rows": 0,
+    "accepted_rows": 0,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "pnb",
+    "name": "Western Punjabi",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "pol",
+    "name": "-- pol.xz",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "pol",
+        "sha256": "97c7f9394d0acbf2bf1471bd8268703cd4e312e2fbcf35cc76775610ec637360"
+      }
+    ],
+    "source_rows": 201024,
+    "accepted_rows": 187749,
+    "unsupported_rows": 13275,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 187749,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/pol",
+    "archive": "release-assets/blitzer-pol-v1.zip",
+    "duplicate_pairs_removed": 65482,
+    "unique_lemmas": 9986,
+    "unique_forms": 122290,
+    "self_forms_added": 23,
+    "uses_expanded_original": true,
+    "expanded_pack_counts": {
+      "lemmas_added": 892,
+      "pairs_added": 25743,
+      "lemmas": 311349,
+      "forms": 3961277
+    }
+  },
+  {
+    "code": "por",
+    "name": "Portuguese",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "por",
+        "sha256": "af71c94afbb857b3875817d8edb8ea4a1211d902326b74de4d86de85ea348944"
+      }
+    ],
+    "source_rows": 303996,
+    "accepted_rows": 303388,
+    "unsupported_rows": 608,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 303388,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/por",
+    "archive": "release-assets/blitzer-por-v1.zip",
+    "duplicate_pairs_removed": 92320,
+    "unique_lemmas": 3993,
+    "unique_forms": 211068,
+    "self_forms_added": 0
+  },
+  {
+    "code": "pqm",
+    "name": "Passamaquoddy-Maliseet",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "pus",
+    "name": "Pashto",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "pus",
+        "sha256": "564c5e0ad18482b3200bbdf71832119155ef2033e379b7273ae82955baa045bf"
+      }
+    ],
+    "source_rows": 6945,
+    "accepted_rows": 5253,
+    "unsupported_rows": 1692,
+    "malformed_rows": 0,
+    "ignored_rows": 400,
+    "non_latin_rows": 6945,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/pus",
+    "duplicate_pairs_removed": 2228,
+    "unique_lemmas": 381,
+    "unique_forms": 3064,
+    "self_forms_added": 39
+  },
+  {
+    "code": "que",
+    "name": "Quechua",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "que",
+        "sha256": "240711578c129aea4f3e33d98f2cc6da2303eea7b83ce3c3d05521dbbc6ba3f2"
+      }
+    ],
+    "source_rows": 180004,
+    "accepted_rows": 179451,
+    "unsupported_rows": 553,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 179451,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/que",
+    "archive": "release-assets/blitzer-que-v1.zip",
+    "duplicate_pairs_removed": 29196,
+    "unique_lemmas": 1003,
+    "unique_forms": 150259,
+    "self_forms_added": 4
+  },
+  {
+    "code": "ron",
+    "name": "Romanian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ron",
+        "sha256": "0c007e572cacf37b0e538f024cea9e630cc17669c4faa7a5054655530871fd22"
+      }
+    ],
+    "source_rows": 80266,
+    "accepted_rows": 59783,
+    "unsupported_rows": 20483,
+    "malformed_rows": 0,
+    "ignored_rows": 4407,
+    "non_latin_rows": 65,
+    "latin_rows": 59731,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 52,
+    "pack": "language-packs/ron",
+    "archive": "release-assets/blitzer-ron-v1.zip",
+    "duplicate_pairs_removed": 12050,
+    "unique_lemmas": 4374,
+    "unique_forms": 48862,
+    "self_forms_added": 1181
+  },
+  {
+    "code": "rus",
+    "name": "Russian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "rus",
+        "sha256": "6c13f849fc12844b23f46e70a02a45a2f537e60c62c8ffd8798bdff3991dc880"
+      }
+    ],
+    "source_rows": 473481,
+    "accepted_rows": 433772,
+    "unsupported_rows": 39709,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 473481,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/rus",
+    "duplicate_pairs_removed": 114893,
+    "unique_lemmas": 26626,
+    "unique_forms": 318895,
+    "self_forms_added": 16
+  },
+  {
+    "code": "sah",
+    "name": "Sakha",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "sah",
+        "sha256": "4d5e8c4328d697d0dc4d59e2afe471ff764e22cddcf0f4fcf9805918cf87ab21"
+      }
+    ],
+    "source_rows": 590765,
+    "accepted_rows": 577373,
+    "unsupported_rows": 13392,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 590765,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/sah",
+    "duplicate_pairs_removed": 48732,
+    "unique_lemmas": 5622,
+    "unique_forms": 528644,
+    "self_forms_added": 3
+  },
+  {
+    "code": "san",
+    "name": "Non-UniMorph labels used:",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: DEVANAGARI"
+    ],
+    "sources": [
+      {
+        "file": "san",
+        "sha256": "2ee128970334d8a2ba391f1e50b986d3c9a09f3ff2f1b77effbedccf76ea769e"
+      }
+    ],
+    "source_rows": 33847,
+    "accepted_rows": 33847,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 920,
+    "non_latin_rows": 33847,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/san",
+    "duplicate_pairs_removed": 16296,
+    "unique_lemmas": 917,
+    "unique_forms": 17692,
+    "self_forms_added": 141
+  },
+  {
+    "code": "sdh",
+    "name": "Southern Kurdish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sdh",
+        "sha256": "c0d89ec8d84c96dbef8392d93a3d4c081604cdb971b0570696384f05ac815524"
+      }
+    ],
+    "source_rows": 187,
+    "accepted_rows": 187,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 2,
+    "non_latin_rows": 0,
+    "latin_rows": 187,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 22,
+    "unique_lemmas": 1,
+    "unique_forms": 165,
+    "self_forms_added": 0,
+    "pack": "language-packs/sdh",
+    "archive": "release-assets/blitzer-sdh-v1.zip"
+  },
+  {
+    "code": "see",
+    "name": "Seneca",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "see",
+        "sha256": "a364b3e4fe9db61f9b55040afbfe6a6c34d27596bbf8f55369eca704bdecc4c8"
+      }
+    ],
+    "source_rows": 5460,
+    "accepted_rows": 891,
+    "unsupported_rows": 4569,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 891,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/see",
+    "archive": "release-assets/blitzer-see-v1.zip",
+    "duplicate_pairs_removed": 46,
+    "unique_lemmas": 36,
+    "unique_forms": 880,
+    "self_forms_added": 35
+  },
+  {
+    "code": "sga",
+    "name": "Old Irish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sga",
+        "sha256": "2234deeed0f585fe41d11295aa637e90c425ccaf27f89931a554265bc13d67e6"
+      }
+    ],
+    "source_rows": 1089,
+    "accepted_rows": 1081,
+    "unsupported_rows": 8,
+    "malformed_rows": 0,
+    "ignored_rows": 51,
+    "non_latin_rows": 0,
+    "latin_rows": 1081,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/sga",
+    "archive": "release-assets/blitzer-sga-v1.zip",
+    "duplicate_pairs_removed": 166,
+    "unique_lemmas": 49,
+    "unique_forms": 931,
+    "self_forms_added": 16
+  },
+  {
+    "code": "shp",
+    "name": "Shipibo-Konibo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "shp",
+        "sha256": "6f1c60bc643b22d881595ed17aa489b84a9df414745d078958100705c71e6762"
+      }
+    ],
+    "source_rows": 14588,
+    "accepted_rows": 14518,
+    "unsupported_rows": 70,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 14518,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/shp",
+    "archive": "release-assets/blitzer-shp-v1.zip",
+    "duplicate_pairs_removed": 6528,
+    "unique_lemmas": 2013,
+    "unique_forms": 7990,
+    "self_forms_added": 0
+  },
+  {
+    "code": "sjo",
+    "name": "Xibe",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: MONGOLIAN"
+    ],
+    "sources": [
+      {
+        "file": "sjo",
+        "sha256": "9d85520a153d0b159747634dab75388e9e784e32c019aa771fe9bc3e6cbcc49a"
+      }
+    ],
+    "source_rows": 3054,
+    "accepted_rows": 3054,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 3054,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "MONGOLIAN"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/sjo",
+    "duplicate_pairs_removed": 303,
+    "unique_lemmas": 1892,
+    "unique_forms": 3197,
+    "self_forms_added": 446
+  },
+  {
+    "code": "slk",
+    "name": "Data",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "slk.xz",
+        "sha256": "ea2fd0a766e844b04a2ba87bf21fcb3e2bb0bbffde4f4d8226a440ea3f98ce70"
+      }
+    ],
+    "source_rows": 28428612,
+    "accepted_rows": 21292927,
+    "unsupported_rows": 7135685,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 21292927,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/slk",
+    "archive": "release-assets/blitzer-slk-v1.zip",
+    "duplicate_pairs_removed": 15257623,
+    "unique_lemmas": 365948,
+    "unique_forms": 6035455,
+    "self_forms_added": 151
+  },
+  {
+    "code": "slp",
+    "name": "Lamaholot",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "slp",
+        "sha256": "f08d5be57c9cc090e0bc02cc23a7b2afd44fff21ffa6b20c6d3862bf90772716"
+      }
+    ],
+    "source_rows": 373,
+    "accepted_rows": 85,
+    "unsupported_rows": 288,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 85,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/slp",
+    "archive": "release-assets/blitzer-slp-v1.zip",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 85,
+    "unique_forms": 169,
+    "self_forms_added": 84
+  },
+  {
+    "code": "slv",
+    "name": "SLV",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "slv",
+        "sha256": "18dd079cae1a1efba3e7133b64af1b7624b5a0006f214847f1f289b841db84a2"
+      }
+    ],
+    "source_rows": 60110,
+    "accepted_rows": 59517,
+    "unsupported_rows": 593,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 59517,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/slv",
+    "archive": "release-assets/blitzer-slv-v1.zip",
+    "duplicate_pairs_removed": 36781,
+    "unique_lemmas": 2532,
+    "unique_forms": 25212,
+    "self_forms_added": 2476,
+    "uses_expanded_original": true,
+    "expanded_pack_counts": {
+      "lemmas_added": 331,
+      "pairs_added": 22725,
+      "lemmas": 135287,
+      "forms": 1395504
+    }
+  },
+  {
+    "code": "sme",
+    "name": "Northern Sami",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sme",
+        "sha256": "e1f59ff6621557a89f91d8401a7397450e12a193414c30fa1912d688adff4096"
+      }
+    ],
+    "source_rows": 62677,
+    "accepted_rows": 62676,
+    "unsupported_rows": 1,
+    "malformed_rows": 0,
+    "ignored_rows": 2110,
+    "non_latin_rows": 0,
+    "latin_rows": 62676,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/sme",
+    "archive": "release-assets/blitzer-sme-v1.zip",
+    "duplicate_pairs_removed": 7672,
+    "unique_lemmas": 2103,
+    "unique_forms": 55026,
+    "self_forms_added": 22
+  },
+  {
+    "code": "sna",
+    "name": "Shona",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sna",
+        "sha256": "262beac50ef168b9535ce55cf0dd23ae125253f3b411977716086bb381acf683"
+      }
+    ],
+    "source_rows": 3030,
+    "accepted_rows": 3030,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 3030,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/sna",
+    "archive": "release-assets/blitzer-sna-v1.zip",
+    "duplicate_pairs_removed": 476,
+    "unique_lemmas": 86,
+    "unique_forms": 2640,
+    "self_forms_added": 86
+  },
+  {
+    "code": "sot",
+    "name": "Sotho",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sot",
+        "sha256": "016bf4e23be113a0d52581736cfae87358f06f30a5e8a10fcdc171023ac8c784"
+      }
+    ],
+    "source_rows": 494,
+    "accepted_rows": 494,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 494,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/sot",
+    "archive": "release-assets/blitzer-sot-v1.zip",
+    "duplicate_pairs_removed": 104,
+    "unique_lemmas": 26,
+    "unique_forms": 416,
+    "self_forms_added": 26
+  },
+  {
+    "code": "spa",
+    "name": "Spanish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "spa",
+        "sha256": "7a165d4b44eb078d23964f3eee3813f5140c5df0ffab0143c806c562e67f8771"
+      }
+    ],
+    "source_rows": 1196224,
+    "accepted_rows": 1162506,
+    "unsupported_rows": 33718,
+    "malformed_rows": 0,
+    "ignored_rows": 21,
+    "non_latin_rows": 6,
+    "latin_rows": 1162506,
+    "malformed_examples": [],
+    "scripts": [
+      "FEMININE",
+      "MASCULINE"
+    ],
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 301222,
+    "unique_lemmas": 65033,
+    "unique_forms": 871280,
+    "self_forms_added": 9996,
+    "pack": "language-packs/spa",
+    "archive": "release-assets/blitzer-spa-v1.zip"
+  },
+  {
+    "code": "sqi",
+    "name": "Albanian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sqi",
+        "sha256": "f0e00a1cfb2b07a1b057987edcd8eeb3ba4c57ad8e6bbb978f091292b0cfdb84"
+      }
+    ],
+    "source_rows": 33483,
+    "accepted_rows": 14732,
+    "unsupported_rows": 18751,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 14732,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/sqi",
+    "archive": "release-assets/blitzer-sqi-v1.zip",
+    "duplicate_pairs_removed": 4470,
+    "unique_lemmas": 587,
+    "unique_forms": 10264,
+    "self_forms_added": 2
+  },
+  {
+    "code": "swc",
+    "name": "Swahili",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "swc",
+        "sha256": "fed7a61f279f5f1db3216cf33aa72cea9cb16fdf175d884508c187e03ef4a924"
+      },
+      {
+        "file": "swc.sm",
+        "sha256": "58ffd2f4d68d443ce89554c1a5827514e68348e7743a0716700f26a47b892f24"
+      }
+    ],
+    "source_rows": 15041,
+    "accepted_rows": 15041,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 108,
+    "non_latin_rows": 0,
+    "latin_rows": 15041,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/swc",
+    "archive": "release-assets/blitzer-swc-v1.zip",
+    "duplicate_pairs_removed": 4068,
+    "unique_lemmas": 183,
+    "unique_forms": 11121,
+    "self_forms_added": 148
+  },
+  {
+    "code": "swe",
+    "name": "Swedish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "swe",
+        "sha256": "a1ef4efe25c561a1ccce761e37cbc257d3ab278a11dbcd1de9ae9ce8f118d3af"
+      }
+    ],
+    "source_rows": 131697,
+    "accepted_rows": 126867,
+    "unsupported_rows": 4830,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 126867,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/swe",
+    "archive": "release-assets/blitzer-swe-v1.zip",
+    "duplicate_pairs_removed": 29117,
+    "unique_lemmas": 12327,
+    "unique_forms": 97761,
+    "self_forms_added": 11
+  },
+  {
+    "code": "syc",
+    "name": "Caveats",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: SYRIAC"
+    ],
+    "sources": [
+      {
+        "file": "syc",
+        "sha256": "f8ab11544e820b0bc951808c8fd27a5680dc7c10c90e07ec7782bdee9d20d4ad"
+      }
+    ],
+    "source_rows": 31972,
+    "accepted_rows": 31871,
+    "unsupported_rows": 101,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 31972,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "SYRIAC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/syc",
+    "duplicate_pairs_removed": 7218,
+    "unique_lemmas": 3257,
+    "unique_forms": 27699,
+    "self_forms_added": 3046
+  },
+  {
+    "code": "tat",
+    "name": "TAT",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "tat",
+        "sha256": "291dff3a570fc4f30ff16146ef74550df4ff6afd45f8e5b2193f0bfd6319372d"
+      }
+    ],
+    "source_rows": 7832,
+    "accepted_rows": 7691,
+    "unsupported_rows": 141,
+    "malformed_rows": 0,
+    "ignored_rows": 1318,
+    "non_latin_rows": 0,
+    "latin_rows": 7691,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/tat",
+    "archive": "release-assets/blitzer-tat-v1.zip",
+    "duplicate_pairs_removed": 198,
+    "unique_lemmas": 1259,
+    "unique_forms": 7493,
+    "self_forms_added": 0
+  },
+  {
+    "code": "tel",
+    "name": "TEL",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: TELUGU"
+    ],
+    "sources": [
+      {
+        "file": "tel",
+        "sha256": "369009d424e9d9ab81d85d20c71e36a8ebfb1323cc2b29b8bff2238f84cec78d"
+      }
+    ],
+    "source_rows": 1548,
+    "accepted_rows": 1548,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 151,
+    "non_latin_rows": 1548,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "TELUGU"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/tel",
+    "duplicate_pairs_removed": 499,
+    "unique_lemmas": 127,
+    "unique_forms": 1165,
+    "self_forms_added": 116
+  },
+  {
+    "code": "tgk",
+    "name": "TGK",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC, CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "tgk",
+        "sha256": "bad86ca5f790b6ef40fc34a366d661bbde5dcffa3471ba6aacf0a50e0fc10663"
+      }
+    ],
+    "source_rows": 77,
+    "accepted_rows": 77,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 77,
+    "non_latin_rows": 77,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC",
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/tgk",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 75,
+    "unique_forms": 78,
+    "self_forms_added": 1
+  },
+  {
+    "code": "tgl",
+    "name": "Tagalog",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "tgl",
+        "sha256": "84bcc773fde9430d9c8f9d10c72cd4ebca6410eac0eb8408accf0fd6b49e840b"
+      }
+    ],
+    "source_rows": 2912,
+    "accepted_rows": 2304,
+    "unsupported_rows": 608,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2304,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/tgl",
+    "archive": "release-assets/blitzer-tgl-v1.zip",
+    "duplicate_pairs_removed": 257,
+    "unique_lemmas": 289,
+    "unique_forms": 2047,
+    "self_forms_added": 0
+  },
+  {
+    "code": "tuk",
+    "name": "TUK",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "tuk",
+        "sha256": "a55fd886ed0f5522035e0f1d776d00a0393f51a42e0560dc53f6e6bbb54df773"
+      }
+    ],
+    "source_rows": 810,
+    "accepted_rows": 810,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 70,
+    "non_latin_rows": 0,
+    "latin_rows": 810,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/tuk",
+    "archive": "release-assets/blitzer-tuk-v1.zip",
+    "duplicate_pairs_removed": 6,
+    "unique_lemmas": 68,
+    "unique_forms": 804,
+    "self_forms_added": 0
+  },
+  {
+    "code": "tur",
+    "name": "Turkish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "tur",
+        "sha256": "4ae44f4b039c344f7078d8073b968b0d67133d1e9d7e653ce8aba5ed24387957"
+      }
+    ],
+    "source_rows": 570420,
+    "accepted_rows": 248925,
+    "unsupported_rows": 321495,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 248925,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/tur",
+    "archive": "release-assets/blitzer-tur-v1.zip",
+    "duplicate_pairs_removed": 24818,
+    "unique_lemmas": 3015,
+    "unique_forms": 224107,
+    "self_forms_added": 0
+  },
+  {
+    "code": "tyv",
+    "name": "Tuvan",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "tyv",
+        "sha256": "a0b072f28455212f4c2f5728414331ddd84148ca0af65355311832e9d0fb4923"
+      }
+    ],
+    "source_rows": 586180,
+    "accepted_rows": 494280,
+    "unsupported_rows": 91900,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 586180,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/tyv",
+    "duplicate_pairs_removed": 292,
+    "unique_lemmas": 5032,
+    "unique_forms": 493992,
+    "self_forms_added": 4
+  },
+  {
+    "code": "uig",
+    "name": "Uyghur",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "uig",
+        "sha256": "9beffd61140fff8e38e62576fe21da71bca1d3338f8fe654d18f9a70c007a3c0"
+      }
+    ],
+    "source_rows": 8178,
+    "accepted_rows": 7743,
+    "unsupported_rows": 435,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 7743,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/uig",
+    "archive": "release-assets/blitzer-uig-v1.zip",
+    "duplicate_pairs_removed": 1429,
+    "unique_lemmas": 85,
+    "unique_forms": 6399,
+    "self_forms_added": 85
+  },
+  {
+    "code": "ukr",
+    "name": "• ukr.xz",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: CYRILLIC"
+    ],
+    "sources": [
+      {
+        "file": "ukr",
+        "sha256": "c0ad5ba0348b829b2363a215f712b84c4d302535ebb97557d93082e4f32eab42"
+      }
+    ],
+    "source_rows": 20904,
+    "accepted_rows": 20556,
+    "unsupported_rows": 348,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 20904,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/ukr",
+    "duplicate_pairs_removed": 6312,
+    "unique_lemmas": 1493,
+    "unique_forms": 14245,
+    "self_forms_added": 1
+  },
+  {
+    "code": "urd",
+    "name": "URD",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARABIC"
+    ],
+    "sources": [
+      {
+        "file": "urd",
+        "sha256": "3a3129d858c7c02d0ec5c8971f5b60842813dbe2513efaf7effd22842dcff4a3"
+      }
+    ],
+    "source_rows": 12572,
+    "accepted_rows": 1264,
+    "unsupported_rows": 11308,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 12572,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARABIC"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/urd",
+    "duplicate_pairs_removed": 374,
+    "unique_lemmas": 164,
+    "unique_forms": 895,
+    "self_forms_added": 5
+  },
+  {
+    "code": "uzb",
+    "name": "Uzbek",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "uzb",
+        "sha256": "bd31a9361cbf0a7016d1925793a4dfcc6775d36b7a7218d4c60d9e979cdd65dd"
+      },
+      {
+        "file": "uzb_verbs",
+        "sha256": "6ba66de9d7d44d6450480331337af8b700f6bf81fc53d467727304e7bfde8d9a"
+      }
+    ],
+    "source_rows": 37291,
+    "accepted_rows": 9842,
+    "unsupported_rows": 27449,
+    "malformed_rows": 0,
+    "ignored_rows": 17,
+    "non_latin_rows": 0,
+    "latin_rows": 9842,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/uzb",
+    "archive": "release-assets/blitzer-uzb-v1.zip",
+    "duplicate_pairs_removed": 284,
+    "unique_lemmas": 295,
+    "unique_forms": 9838,
+    "self_forms_added": 280
+  },
+  {
+    "code": "vec",
+    "name": "VEC",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "vec",
+        "sha256": "2e7bb1e9203b90e2cd8803058a06556bfec35726fb58c28c16f33afdc7f505d5"
+      }
+    ],
+    "source_rows": 18227,
+    "accepted_rows": 18224,
+    "unsupported_rows": 3,
+    "malformed_rows": 0,
+    "ignored_rows": 446,
+    "non_latin_rows": 0,
+    "latin_rows": 18224,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/vec",
+    "archive": "release-assets/blitzer-vec-v1.zip",
+    "duplicate_pairs_removed": 9539,
+    "unique_lemmas": 368,
+    "unique_forms": 8688,
+    "self_forms_added": 3
+  },
+  {
+    "code": "vep",
+    "name": "Veps",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "vep-central-eastern-veps",
+        "sha256": "8cfa1a1042dbe1750d2ab8f1dd73b320eb3ca8221c715f8523b1d29bf931372b"
+      },
+      {
+        "file": "vep-central-western-veps",
+        "sha256": "5e73d39c3e810d09f8a7f98fa0bb70177ef454e66bf2650785adadadfdf7fc13"
+      },
+      {
+        "file": "vep-new-written-veps",
+        "sha256": "327b5220468fb8c82889e202744a40a34cc34a4a20302efbed1202c8ba4a941a"
+      },
+      {
+        "file": "vep-northern-veps",
+        "sha256": "9b0c3131a5f8b129691e5463dfad12b8ab34b6b45fcfe2b9e557b86100ac43ef"
+      },
+      {
+        "file": "vep-southern-veps",
+        "sha256": "a1b71cbb74336c49d84ee7c1e53df74057d4104693122184a88d9146ac4780bb"
+      }
+    ],
+    "source_rows": 762119,
+    "accepted_rows": 544726,
+    "unsupported_rows": 217393,
+    "malformed_rows": 0,
+    "ignored_rows": 5,
+    "non_latin_rows": 6,
+    "latin_rows": 544720,
+    "malformed_examples": [],
+    "scripts": [
+      "CYRILLIC"
+    ],
+    "excluded_non_latin_rows": 6,
+    "pack": "language-packs/vep",
+    "archive": "release-assets/blitzer-vep-v1.zip",
+    "duplicate_pairs_removed": 67445,
+    "unique_lemmas": 15491,
+    "unique_forms": 477299,
+    "self_forms_added": 24
+  },
+  {
+    "code": "vot",
+    "name": "VOT",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "vot",
+        "sha256": "d4e462f3479dc8ef65816f07c35456330f590fe7043e942964ca9cec927df154"
+      }
+    ],
+    "source_rows": 1430,
+    "accepted_rows": 1430,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 57,
+    "non_latin_rows": 0,
+    "latin_rows": 1430,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/vot",
+    "archive": "release-assets/blitzer-vot-v1.zip",
+    "duplicate_pairs_removed": 37,
+    "unique_lemmas": 55,
+    "unique_forms": 1393,
+    "self_forms_added": 0
+  },
+  {
+    "code": "vro",
+    "name": "Võro",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "vro",
+        "sha256": "39714c07a887a57722cb9c55788375652d32f70b82bd6d305435aa23bd13b22c"
+      }
+    ],
+    "source_rows": 512,
+    "accepted_rows": 343,
+    "unsupported_rows": 169,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 343,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/vro",
+    "archive": "release-assets/blitzer-vro-v1.zip",
+    "duplicate_pairs_removed": 46,
+    "unique_lemmas": 52,
+    "unique_forms": 297,
+    "self_forms_added": 0
+  },
+  {
+    "code": "wmt",
+    "name": "Walmajarri",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "wmt",
+        "sha256": "551e2ad68d18a75751777c995fffc247846faafaa03c556b7ad2993f53bdab51"
+      }
+    ],
+    "source_rows": 7503,
+    "accepted_rows": 7360,
+    "unsupported_rows": 143,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 7360,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/wmt",
+    "archive": "release-assets/blitzer-wmt-v1.zip",
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 923,
+    "unique_forms": 7373,
+    "self_forms_added": 13
+  },
+  {
+    "code": "xcl",
+    "name": "Classical Armenian",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: ARMENIAN"
+    ],
+    "sources": [
+      {
+        "file": "xcl",
+        "sha256": "f1d408bad34bb2c57fba41665b3ce671631cd55e9eb1e849a0067047aebcc0e3"
+      }
+    ],
+    "source_rows": 97181,
+    "accepted_rows": 90688,
+    "unsupported_rows": 6493,
+    "malformed_rows": 0,
+    "ignored_rows": 4547,
+    "non_latin_rows": 97181,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "ARMENIAN"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/xcl",
+    "duplicate_pairs_removed": 31574,
+    "unique_lemmas": 4299,
+    "unique_forms": 59118,
+    "self_forms_added": 4
+  },
+  {
+    "code": "xno",
+    "name": "Norman",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "xno",
+        "sha256": "fddab7633e082cbb380711a61da6f426b6c43a3f441f90d7e42ff26b15187eb9"
+      }
+    ],
+    "source_rows": 280,
+    "accepted_rows": 265,
+    "unsupported_rows": 15,
+    "malformed_rows": 0,
+    "ignored_rows": 7,
+    "non_latin_rows": 0,
+    "latin_rows": 265,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/xno",
+    "archive": "release-assets/blitzer-xno-v1.zip",
+    "duplicate_pairs_removed": 79,
+    "unique_lemmas": 5,
+    "unique_forms": 186,
+    "self_forms_added": 0
+  },
+  {
+    "code": "xty",
+    "name": "Yoloxóchitl Mixtec",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "xty",
+        "sha256": "eac4975962feb5feecb0a98c664d89ffb8fd043b588eef3e8e020a210bb0a76b"
+      }
+    ],
+    "source_rows": 3057,
+    "accepted_rows": 0,
+    "unsupported_rows": 3057,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": []
+  },
+  {
+    "code": "yid",
+    "name": "YID",
+    "status": "deferred",
+    "reasons": [
+      "Non-Latin letters: HEBREW"
+    ],
+    "sources": [
+      {
+        "file": "yid",
+        "sha256": "fab02220c852018707a760e98e07b7111f37f31781edf09f2fef1d39474337c8"
+      }
+    ],
+    "source_rows": 7986,
+    "accepted_rows": 7923,
+    "unsupported_rows": 63,
+    "malformed_rows": 0,
+    "ignored_rows": 892,
+    "non_latin_rows": 7986,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "scripts": [
+      "HEBREW"
+    ],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/dev/yid",
+    "duplicate_pairs_removed": 4448,
+    "unique_lemmas": 796,
+    "unique_forms": 3554,
+    "self_forms_added": 79
+  },
+  {
+    "code": "zpv",
+    "name": "Chichicapan Zapotec",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "zpv",
+        "sha256": "d0f5c049137c56e4babc1ccbf9f1c54306aa72e5650b4ce1f19e8250a47a9606"
+      }
+    ],
+    "source_rows": 1164,
+    "accepted_rows": 630,
+    "unsupported_rows": 534,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 630,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/zpv",
+    "archive": "release-assets/blitzer-zpv-v1.zip",
+    "duplicate_pairs_removed": 15,
+    "unique_lemmas": 203,
+    "unique_forms": 818,
+    "self_forms_added": 203
+  },
+  {
+    "code": "zul",
+    "name": "Zulu",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "zul",
+        "sha256": "3762e371326fc74a1a7c513a38fd86eef00b1c14ca48148e119910c4b1e18450"
+      },
+      {
+        "file": "zul.sm",
+        "sha256": "5fce1a2285274235ec36af6eae3fd3a418332d042458ff1752ab2ca8c6d2ed08"
+      }
+    ],
+    "source_rows": 49619,
+    "accepted_rows": 49609,
+    "unsupported_rows": 10,
+    "malformed_rows": 0,
+    "ignored_rows": 580,
+    "non_latin_rows": 0,
+    "latin_rows": 49609,
+    "malformed_examples": [],
+    "scripts": [],
+    "excluded_non_latin_rows": 0,
+    "pack": "language-packs/zul",
+    "archive": "release-assets/blitzer-zul-v1.zip",
+    "duplicate_pairs_removed": 16589,
+    "unique_lemmas": 618,
+    "unique_forms": 33205,
+    "self_forms_added": 185
+  },
+  {
+    "code": "zxx",
+    "name": "ZXX",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  }
+]

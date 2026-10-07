@@ -24,8 +24,9 @@ importing the package. Packs need no PyPI project or executable Python code.
 
 * The registry contract
 
-The registry in =blitzer/downloads.py= currently points all three languages
-to the public repository =samiddhi/blitzer-language-plugins=.
+The registry in =blitzer/downloads.py= points supported languages to the
+public repository =samiddhi/blitzer-py=. It combines the original entries
+below with the ready languages in =blitzer/language-registry.json=.
 
 | Code | Language  | Required release asset filename |
 |------+-----------+---------------------------------|
@@ -89,14 +90,14 @@ because its WAL-mode database could not be opened from the read-only source
 folder in this development workspace. Original source files were unchanged.
 
 Keep the original dictionary attribution and data-license requirements.
-The source preparation notes are in =examples/slv-source=,
-=examples/pol-source= and =examples/pli-source=. The Polish source's existing
+The source preparation notes are in =maintenance/examples/slv-source=,
+=maintenance/examples/pol-source= and =maintenance/examples/pli-source=. The Polish source's existing
 README identifies PoliMorf but does not establish the exact source license;
 confirm that upstream license and add its notice before public distribution.
 
 * Publish on GitHub
 
-1. Use the existing public =samiddhi/blitzer-language-plugins= repository.
+1. Use the public =samiddhi/blitzer-py= application repository for both source code and releases.
    Archive files belong in release assets; they need not be committed to Git.
 2. Create a release with a new tag, for example =packs-v0.1.0=.
 3. Attach the three =blitzer-CODE-v1.zip= files from =release-assets/=.
@@ -112,7 +113,7 @@ gh release create packs-v0.1.0 \
   release-assets/blitzer-slv-v1.zip \
   release-assets/blitzer-pol-v1.zip \
   release-assets/blitzer-pli-v1.zip \
-  --repo samiddhi/blitzer-language-plugins \
+  --repo samiddhi/blitzer-py \
   --title 'Blitzer language packs 0.1.0' \
   --notes 'Version-one data packs for Slovenian, Polish and Pali.'
 #+end_src
@@ -127,7 +128,7 @@ this implementation task.
 
 For example, to publish only a newer Polish pack:
 
-1. Update =examples/pol-source/config.toml= metadata.version, for example to
+1. Update =maintenance/examples/pol-source/config.toml= metadata.version, for example to
    =0.2.0=, and prepare the new source data.
 2. Build into a fresh pack directory so failed builds cannot disturb the
    existing pack. Use =build-plugin= with the new data or TSV source.
@@ -140,11 +141,11 @@ For example, to publish only a newer Polish pack:
 Example packaging and publication:
 
 #+begin_src sh
-blitzer package-plugin pol --no-config --plugins-dir ./new-packs \
+blitzer dev package-plugin pol --no-config --plugins-dir ./new-packs \
   --output-dir ./release-assets
 
 gh release create pol-v0.2.0 release-assets/blitzer-pol-v1.zip \
-  --repo samiddhi/blitzer-language-plugins \
+  --repo samiddhi/blitzer-py \
   --title 'Polish language pack 0.2.0' \
   --notes 'Describe the source update and any intentional omissions.'
 #+end_src
@@ -152,6 +153,69 @@ gh release create pol-v0.2.0 release-assets/blitzer-pol-v1.zip \
 Repackaging replaces an existing local archive atomically. Publication uses
 a new GitHub tag rather than changing old releases. The =package-plugin=
 command validates the built pack before creating its ZIP and checksum.
+
+* Publish the UniMorph batch
+
+The standalone =maintenance.unimorph= tool writes separate =ready/= and =deferred/=
+directories. Inspect =maintenance/reports/unimorph.md= and the attribution inside
+each pack. Do not upload deferred archives. Ready means technically usable
+with the current tokenizer; check source licenses before redistribution.
+
+After reviewing the batch, copy its additional-code catalog into the
+application, test it, and include it in your next application release:
+
+Increase the application version in =pyproject.toml= before building a new
+application release. Its version is independent of the pack version.
+
+#+begin_src sh
+cp maintenance/reports/language-registry.json blitzer/language-registry.json
+.venv/bin/python -m pytest -q
+.venv/bin/python -m build --outdir maintenance/dist
+git add blitzer pyproject.toml tests README.org PLUGIN-RELEASES.org .gitignore
+git commit -m 'Add UniMorph batch conversion and language catalog'
+git push
+#+end_src
+
+The packaged catalog enables =blitzer install-plugin eng= and the other
+ready codes in the next application version. Existing Slovenian, Polish
+and Pali entries take precedence; generated packs do not overwrite their
+published dictionaries. Adding codes requires an application catalog
+update; later versions of those same packs need no link changes.
+
+The usable packs are consolidated in =language-packs/=, with all release
+archives in =release-assets/=. Updated Slovenian and Polish dictionaries
+have been preserved; deferred packs and their reasons live under
+=language-packs/dev/=. The inventory is in =maintenance/reports/unimorph.md=.
+
+Push the application changes first so the new release tag points at the
+updated code and bundled language catalog:
+
+#+begin_src sh
+git add -A
+git commit -m 'Organize developer tools and add expanded language packs'
+git push
+
+gh release create packs-v0.2.0 release-assets/*.zip \
+  --repo samiddhi/blitzer-py --target main --latest=false \
+  --title 'Blitzer language packs 0.2.0' \
+  --notes 'Expanded Slovenian and Polish dictionaries plus Latin-script UniMorph packs.'
+#+end_src
+
+This publishes a new stable release, so the installer resolves updated
+Slovenian and Polish and all additional supported languages automatically.
+It includes the unchanged Pali pack. Review upstream attribution before
+publication. No deferred archives are in =release-assets/=.
+
+The Slovenian and Polish assets are the expanded original dictionaries,
+rather than the smaller UniMorph-only versions.
+Their metadata versions are =0.2.0=. Slovenian gained 22,725 form/lemma
+pairs and 331 lemmas; Polish gained 25,743 pairs and 892 lemmas. The
+expansion retains all original pairs, frequencies, attribution and source
+histories. Pali is unchanged.
+
+A later batch uses a fresh output directory, a new =--pack-version=
+and a new release tag. Asset filenames
+stay unchanged. No release or remote repository is changed by conversion.
 
 * Installation behavior and practical limits
 

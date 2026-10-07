@@ -69,7 +69,27 @@ def invoke(service, *args, **kwargs):
 def test_help_and_input_rules():
     """Check help, piped input and explicit text selection."""
     runner = make_runner()
-    assert runner.invoke(cli, ["--help"]).exit_code == 0
+    result = runner.invoke(cli, ["--help"])
+    assert result.exit_code == 0
+    assert set(cli.commands) == {
+        "blitz",
+        "cleanup-known",
+        "dev",
+        "history",
+        "install-plugin",
+        "list-languages",
+        "remove-plugin",
+    }
+    assert "build-unimorph" not in result.output
+    assert "  dev " not in result.output
+    result = runner.invoke(cli, ["dev", "--help"])
+    assert result.exit_code == 0
+    assert set(cli.commands["dev"].commands) == {
+        "build-plugin",
+        "check-plugin",
+        "expand-plugin",
+        "package-plugin",
+    }
     result = runner.invoke(
         cli,
         ["blitz", "--no-config", "-l", "base", "--freq"],
@@ -272,7 +292,8 @@ def test_management_commands(service, source, tmp_path):
     )
     assert result.exit_code == 0, result.output
     result = runner.invoke(
-        cli, ["check-plugin", "slv", "--no-config", "--plugins-dir", root]
+        cli,
+        ["dev", "check-plugin", "slv", "--no-config", "--plugins-dir", root],
     )
     assert result.exit_code == 0, result.output
     result = runner.invoke(

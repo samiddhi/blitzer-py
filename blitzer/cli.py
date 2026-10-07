@@ -11,6 +11,7 @@ In scope
 - Reading explicit text, UTF-8 files or piped standard input.
 - Interactive confirmations and the decision to save or preview data.
 - Local/registered installation, explicit updates and pack packaging.
+- Grouping reusable pack development commands under blitzer dev.
 - Text, TSV, JSON and report output, including escaped word
   highlighting.
 - Sending vocabulary to stdout and diagnostics to stderr.
@@ -263,6 +264,11 @@ def cli():
     """Extract vocabulary using local data-only language packs."""
 
 
+@cli.group("dev", hidden=True)
+def dev():
+    """Build, inspect and package dictionaries for development."""
+
+
 @cli.command()
 @click.option(
     "--language", "-l", required=True, help="Three-letter pack code, or base."
@@ -438,7 +444,7 @@ def blitz(
     "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
 )
 def list_languages(config, no_config, plugins_dir):
-    """List pack-shaped directories; check-plugin validates contents."""
+    """List installed languages available for text processing."""
     with _errors():
         click.echo(
             "\n".join(
@@ -447,7 +453,7 @@ def list_languages(config, no_config, plugins_dir):
         )
 
 
-@cli.command("check-plugin")
+@dev.command("check-plugin")
 @click.argument("code")
 @click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
 @click.option("--no-config", is_flag=True)
@@ -464,7 +470,7 @@ def check_plugin(code, config, no_config, plugins_dir):
             raise click.ClickException(f"Pack {code} failed validation")
 
 
-@cli.command("build-plugin")
+@dev.command("build-plugin")
 @click.argument(
     "source_dir", type=click.Path(exists=True, file_okay=False, path_type=Path)
 )
@@ -516,6 +522,27 @@ def build_plugin(
         )
 
 
+@dev.command("expand-plugin")
+@click.argument("code")
+@click.argument(
+    "additional", type=click.Path(exists=True, file_okay=False, path_type=Path)
+)
+@click.option("--pack-version", default="0.2.0", show_default=True)
+@click.option("--config", type=click.Path(dir_okay=False, path_type=Path))
+@click.option("--no-config", is_flag=True)
+@click.option(
+    "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
+)
+def expand_plugin(
+    code, additional, pack_version, config, no_config, plugins_dir
+):
+    """Expand a pack while preserving all existing dictionary pairs."""
+    with _errors():
+        service = _service(config, no_config, plugins_dir)
+        stats = service.expand_plugin(code, additional, version=pack_version)
+        click.echo(json.dumps(stats, indent=2))
+
+
 @cli.command("install-plugin")
 @click.argument("source", metavar="CODE_OR_DIRECTORY")
 @click.option(
@@ -545,7 +572,7 @@ def install_plugin(source, replace, config, no_config, plugins_dir):
         )
 
 
-@cli.command("package-plugin")
+@dev.command("package-plugin")
 @click.argument("code")
 @click.option(
     "--output-dir",
@@ -574,7 +601,7 @@ def package_plugin(code, output_dir, config, no_config, plugins_dir):
     "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
 )
 def remove_plugin(code, yes, config, no_config, plugins_dir):
-    """Remove one pack while holding the mutation lock."""
+    """Remove an installed language pack."""
     with _errors():
         service = _service(config, no_config, plugins_dir)
         # Validate before constructing a path or asking to remove it.
@@ -625,7 +652,7 @@ def cleanup_known(code, path, apply, config, no_config, plugins_dir):
     "--plugins-dir", type=click.Path(file_okay=False, path_type=Path)
 )
 def history(code, term, limit, config, no_config, plugins_dir):
-    """Read saved original contexts in deterministic order."""
+    """Show saved sentences containing encountered words."""
     with _errors():
         click.echo(
             json.dumps(
