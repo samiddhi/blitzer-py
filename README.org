@@ -395,3 +395,9 @@ style checks use =pycodestyle= and =pydocstyle=:
 .venv/bin/python -m pydocstyle blitzer tests
 .venv/bin/python -m pytest -q
 #+end_src
+
+* License
+
+The project is licensed under Creative Commons Attribution-ShareAlike
+3.0 Unported (CC BY-SA 3.0). See =LICENSE= for the full terms. Third-party
+dictionaries retain their own licenses and attribution notices.

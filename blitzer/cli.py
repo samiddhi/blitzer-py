@@ -50,7 +50,7 @@ from blitzer.downloads import REGISTRY
 CONTEXT_SETTINGS = {"help_option_names": ["-h", "--help"]}
 
 try:
-    VERSION = version("blitzer-py")
+    VERSION = version("bltz")
 except PackageNotFoundError:
     VERSION = "0.1.0"
 
