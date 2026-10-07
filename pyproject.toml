@@ -1,6 +1,6 @@
 [project]
 name = "bltzr"
-version = "0.2.4"
+version = "0.2.5"
 description = "Vocabulary extraction for language learners"
 authors = [{name = "Samiddhi"}]
 license = {text = "CC-BY-SA-3.0"}
