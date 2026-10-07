@@ -1,7 +1,135 @@
 #+TITLE: bltzr
 #+OPTIONS: toc:nil num:nil
 
-* Install
+* Blitzer
+
+A tool for vocabulary extraction intended for language learners.
+
+** Supported Languages
+Currently only Latin script languages have been implemented. Several others can be made very quickly, with all requisite materials prepared in the repository, lacking only custom functionality for demarcating word barriers AKA knowing where one word ends and another begins. The vast majority of these have not been tested and some may well need custom word demarcation functionality. Pull requests are welcome!
+
+- Afrikaans (afr)
+- Akan (aka)
+- Albanian (sqi)
+- Ashaninka (cni)
+- Asturian (ast)
+- Aymara (aym)
+- Azerbaijani (aze)
+- Basic (base)
+- Basque (eus)
+- Breton (bre)
+- Catalan (cat)
+- Cebuano (ceb)
+- Chewa (nya)
+- Chichicapan Zapotec (zpv)
+- Cornish (cor)
+- Cree (cre)
+- Crimean Tatar (crh)
+- Czech (ces)
+- Dakota (dak)
+- Danish (dan)
+- Data (slk)
+- Dutch (nld)
+- Eibela (ail)
+- English (eng)
+- Estonian (est)
+- Faroese (fao)
+- French (fra)
+- Friulian (fur)
+- Gã (gaa)
+- Galician (gal)
+- German (deu)
+- Greenlandic (kal)
+- Haida (hai)
+- Hiligaynon (hil)
+- Hungarian (hun)
+- Icelandic (isl)
+- Indonesian (ind)
+- Ingrian (izh)
+- Irish (gle)
+- Italian (ita)
+- Karelian (krl)
+- Kashubian (csb)
+- Khaling (klr)
+- Kholosi (hsi)
+- Kodi (kod)
+- Kongo (kon)
+- Kunwinjku (gup)
+- Ladin (lld)
+- Lamaholot (slp)
+- Latin (lat)
+- Latvian (lav)
+- Lingala (lin)
+- Lithuanian (lit)
+- Livonian (liv)
+- Livvi (olo)
+- Low German (nds)
+- Lower Sorbian (dsb)
+- Ludian (lud)
+- Luganda (lug)
+- Malagasy (mlg)
+- Maltese (mlt)
+- Manx (glv)
+- Māori (mao)
+- Mapudungun (arn)
+- Mezquital Otomi (ote)
+- Middle French (frm)
+- Middle High German (gmh)
+- Middle Low German (gml)
+- Murrinhpatha (mwf)
+- Navajo (nav)
+- Neapolitan (nap)
+- Norman (xno)
+- North Frisian (frr)
+- Northern Kurdish (kmr)
+- Northern Sami (sme)
+- Norwegian Bokmål (nob)
+- Norwegian Nynorsk (nno)
+- O'odham (ood)
+- Occitan (oci)
+- Old English (ang)
+- Old French (fro)
+- Old High German (goh)
+- Old Irish (sga)
+- Old Norse (non)
+- Old Saxon (osx)
+- Oromo (orm)
+- Pali (pli)
+- Polish (pol)
+- Portuguese (por)
+- Quechua (que)
+- Romanian (ron)
+- Scots Gaelic (gla)
+- Seneca (see)
+- Shipibo-Konibo (shp)
+- Shona (sna)
+- Slovenian (slv)
+- Sotho (sot)
+- Southern Kurdish (sdh)
+- Spanish (spa)
+- Swahili (swc)
+- Swedish (swe)
+- Swiss German (gsw)
+- Tagalog (tgl)
+- Tatar (tat)
+- Turkish (tur)
+- Turkmen (tuk)
+- Upper Sorbian (hsb)
+- Uyghur (uig)
+- Uzbek (uzb)
+- Venetian (vec)
+- Veps (vep)
+- Võro (vro)
+- Votic (vot)
+- Walmajarri (wmt)
+- Welsh (cym)
+- Western Frisian (fry)
+- Yanesha (ame)
+- Zarma (dje)
+- Zenzontepec Chatino (czn)
+- Zulu (zul)
+
+** Install
 
 Requires Python 3.11 or newer.
 
@@ -10,7 +138,7 @@ pip install bltzr
 bltzr --help
 #+end_src
 
-* Extract vocabulary
+** Extract vocabulary
 
 #+begin_src sh
 bltzr blitz -l eng -t "The dogs are running." --lemmatize
@@ -22,7 +150,7 @@ cat chapter.txt | bltzr blitz -l eng --format tsv > vocabulary.tsv
 or pipe text into the command. Words are shown as written by default;
 =--lemmatize= shows dictionary forms, such as =dogs → dog=.
 
-* Language packs
+** Language packs
 
 Basic (=base=) and English (=eng=) work immediately, without a download.
 Basic extracts words without a dictionary and cannot lemmatize them.
@@ -41,7 +169,7 @@ You can also install a local pack with =bltzr install-plugin ./my-pack/slv=.
 To use this checkout's packs directly, add
 =--plugins-dir /path/to/blitzer-py/language-packs= to the command.
 
-* Create your config
+** Create your config
 
 Blitzer automatically reads =~/.config/bltzr/bltzr.toml=. No environment
 variable or command-line option is needed. Create the file, then open it
@@ -85,7 +213,7 @@ hides example sentences even when =context = true=.
 
 See [[file:config.example.toml][config.example.toml]] for the full set of settings.
 
-* Keep a list of words you know
+** Keep a list of words you know
 
 Create the =eng-known.txt= file beside your config, with one word per line:
 
@@ -113,7 +241,7 @@ Cleanup saves a =.bak= copy. =--test-known= previews automatic additions;
 =--update-known= writes them. Automatic updating is off by default:
 encountering a word does not mean you have learned it.
 
-* Useful options
+** Useful options
 
 | Option                   | Effect                                                  |
 |--------------------------+---------------------------------------------------------|
@@ -129,7 +257,7 @@ encountering a word does not mean you have learned it.
 Sorting also accepts =alphabetical=, =global-frequency= (requires a pack
 with frequency data), and =custom= with =--custom-order PATH=.
 
-* Save and review example sentences
+** Save and review example sentences
 
 #+begin_src sh
 bltzr blitz -l eng -t "He helps me." --lemmatize --save-context
@@ -143,7 +271,7 @@ without it. Saved history is separate from your known-word list.
 In config, =save_context= accepts ="flag-only"= (save when requested),
 ="always"=, ="prompt"=, or ="never"=. Use =--no-save-context= to skip saving.
 
-* Help and development
+** Help and development
 
 #+begin_src sh
 bltzr blitz --help
@@ -156,6 +284,6 @@ environment. Run tests with =.venv/bin/python -m pytest -q=.
 See [[file:maintenance/RELEASING.md][release setup]] for one-command GitHub/PyPI publication and
 [[file:language-packs/README.md][language-pack publishing]] for manual releases.
 
-* License
+** License
 
 [[file:LICENSE][CC BY-SA 3.0]]. Dictionary packs retain their own licenses and attribution.
