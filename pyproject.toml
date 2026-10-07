@@ -1,9 +1,9 @@
 [project]
-name = "bltz"
-version = "0.2.0"
+name = "bltzr"
+version = "0.2.2"
 description = "Vocabulary extraction for language learners"
 authors = [{name = "Samiddhi"}]
-license = {text = "CC-BY-SA-3.0"}
+license = "CC-BY-SA-3.0"
 readme = {file = "README.org", content-type = "text/plain"}
 requires-python = ">=3.11"
 dependencies = [
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-bltz = "blitzer.cli:cli"
+bltzr = "blitzer.cli:cli"
 
 [build-system]
 requires = ["setuptools>=61", "wheel"]
