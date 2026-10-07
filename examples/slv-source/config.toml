@@ -1,0 +1,11 @@
+format_version = 1
+
+[metadata]
+language_name = "Slovenian"
+language_code = "slv"
+version = "0.1.0"
+author = "Samiddhi"
+
+[normalization]
+lowercase = true
+substitutions = []

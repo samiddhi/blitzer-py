@@ -1,0 +1,367 @@
+#+TITLE: Blitzer Python
+#+OPTIONS: toc:2 num:nil
+
+A local vocabulary workhorse for language learners. Python 3.11+, Click,
+SQLite and data-only language packs. Five modules keep the responsibilities
+visible: =cli.py= handles commands and presentation, =config.py= handles
+settings, =core.py= supplies =BlitzerService= and local data operations,
+=processing.py= contains the pure text algorithms and vocabulary records,
+and =downloads.py= owns the registry and verified release downloads.
+
+* Install and start
+
+From the project root:
+
+#+begin_src sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/blitzer --help
+.venv/bin/python -m pytest -q
+#+end_src
+
+For entirely offline development when Click, platformdirs and pytest are
+already installed in the system Python, create the environment with
+=--system-site-packages= and install with =--no-build-isolation --no-deps=.
+The isolated environment also ensures you run this application's =blitzer=.
+
+No config file, data directory, database or network request is created by
+help, imports or ordinary configuration loading. There are no Python entry-point plugins or dependencies on another
+Blitzer application. Explicit registered installation is the only operation
+that contacts GitHub; ordinary text processing stays offline.
+
+Plugin-free processing works immediately:
+
+#+begin_src sh
+.venv/bin/blitzer blitz --no-config -l base -t 'Cats cats dogs!' --freq
+#+end_src
+
+Expected output is =cats<TAB>2= followed by =dogs<TAB>1=.
+
+The completed local Slovenian pack, when present at =language-packs/slv=,
+is selected by the example config:
+
+#+begin_src sh
+.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Je je.' --lemmatize --freq
+.venv/bin/blitzer blitz --config config.example.toml -l slv --file chapter.txt --context --format tsv
+printf '%s\n' 'Je je.' | .venv/bin/blitzer blitz --config config.example.toml -l slv --lemmatize --format json
+#+end_src
+
+=Je je.= yields =biti=, =jesti= and =on=, each counted twice. These are
+candidate counts, not contextually disambiguated meanings. Ambiguous
+candidates can make total counts exceed the number of source words.
+
+* Processing and filtering
+
+The source text stays intact. Tokenization records source offsets;
+lookup keys use NFC composition, optional lowercase and ordered literal
+substitutions. Words contain Unicode letters/combining marks and internal
+straight or curly apostrophes. Hyphens, digits and underscores separate
+words. This does not promise dictionary segmentation of unspaced languages.
+
+By default, display forms and filter exact known forms. Display and
+filtering are independent:
+
+| Desired behavior | Options |
+|------------------+---------|
+| Display forms; filter known forms | default |
+| Display lemmas; filter known forms | =--lemmatize= |
+| Display forms; filter known lemmas | =--filter-by lemmas= |
+| Display lemmas; filter known lemmas | =--lemmatize --filter-by lemmas= |
+| Omit unmatched database words | =--exclude-unknown= |
+
+=--known-file PATH= selects a primary known list. An absent primary list
+starts empty and is created only by explicit updating. Other exclusion
+files must exist. Repeat =--exclude PATH= for additional lists, and
+=--exclude-forms PATH= for lists that always exclude exact forms only.
+One word per UTF-8 line; blank lines and full-line =#= comments are ignored.
+
+With lemma filtering, an ordinary entry matching a literal form also
+excludes that form. A known lemma removes that candidate. An ambiguous
+form survives in form display if any candidate survives. Do not expand
+known inflected forms into all possible lemmas: entering =sem= does not
+implicitly declare =smo= known. =--no-exclusions= bypasses both categories;
+it conflicts with explicit exclusion options.
+
+For the critical context case, a known list containing =sem= and input
+=Sem. Smo!= produces a =biti= lemma entry with only =Smo!= as its example.
+In =SEM smo!=, the first =SEM= may appear as surrounding sentence text,
+but only =smo= can supply the highlighted occurrence or frequency count.
+Filtered occurrences never contribute contexts or counts.
+
+Unknown words stay by default. =--exclude-unknown= also works with form
+display. =base= has no dictionary, so lemmatization, lemma filtering,
+unknown filtering, matched-known updating and global sorting error clearly.
+
+* Sorting, sentences and highlighting
+
+=--sort= accepts:
+
+- =textual-frequency=: descending surviving counts, alphabetical ties.
+- =alphabetical=: deterministic Unicode spelling order, not locale collation.
+- =appearance=: first surviving source occurrence, alphabetical ties.
+- =global-frequency=: descending corpus frequency from the pack; absent
+  terms follow measured terms. Errors if the pack has no frequency data.
+- =custom=: rank by a one-word-per-line =--custom-order PATH= file;
+  unlisted words follow in alphabetical order.
+
+The real Slovenian source supplies no corpus frequency data. The tiny
+=examples/demo-source= includes explicitly synthetic frequencies to
+exercise the feature. Do not use those numbers as a real corpus ranking.
+
+Context defaults to the first two distinct surviving sentence texts.
+=--context-limit= permits 1–20. Default sentence delimiters are a newline
+or sentence punctuation followed by whitespace/end. Abbreviations remain
+a limitation. Override =sentence_pattern= per language in config, or
+=--sentence-pattern= with a regex matching consuming delimiters:
+
+#+begin_src sh
+.venv/bin/blitzer blitz --no-config -l base -t 'First;Second;Third' --context --sentence-pattern ';'
+#+end_src
+
+Punctuation delimiters remain in the example. Zero-length boundaries
+are rejected, including when detected while scanning actual input.
+Choose =--bold off|html|markdown|org=. HTML escapes original content
+before adding =<b>=. Markdown/Org escape literal emphasis characters.
+JSON returns plain original contexts and highlight offsets, without markup.
+Offsets are Python string indexes, not UTF-8 byte offsets.
+
+* Known-list cleanup and updating
+
+#+begin_src sh
+.venv/bin/blitzer cleanup-known base known.txt --no-config
+.venv/bin/blitzer cleanup-known base known.txt --no-config --apply
+#+end_src
+
+The first command reports duplicate normalized terms. =--apply= writes a
+normalized, deduplicated list and preserves the previous file as
+=known.txt.bak=. It retains comments at the top and first-appearance term
+order. The latest backup replaces the previous backup. A preview does
+not rewrite the list. Writes use a completed temporary file and replace
+it, with an exclusive operation lock.
+
+Automatic known-list updating is strongly discouraged: seeing a word
+in text does not mean you have learned it. It is disabled by default.
+Prefer a manual review. The safe test mode is:
+
+#+begin_src sh
+.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Sem smo xyzzy' --test-known
+#+end_src
+
+Proposed additions appear on stderr; vocabulary remains on stdout.
+Test mode writes neither the known list nor context history, even if
+those options or defaults would otherwise write. Only surviving
+DB-matched occurrences qualify. Unknown =xyzzy= is never auto-added.
+
+Explicit =--update-known=, or a deliberately enabled =auto_update_known=,
+adds matched survivors with a warning. Form filtering adds forms; lemma
+filtering adds surviving lemma spellings. The selected primary known
+file is required. =--no-update-known= overrides an enabled config value.
+A previous list is backed up before an actual change. A failed write
+leaves no partial list. Auto-updating and history saving are separate
+operations, not one cross-file transaction.
+
+* Context history
+
+Save previously encountered, surviving contexts with =--save-context=.
+The configured policies are =always=, =prompt=, =flag-only= (default),
+and =never=. Explicit save/decline flags override the policy. Prompt mode
+requires an explicit decision in a stdin pipeline so no input is stolen
+by a confirmation prompt. History collection does not require displaying
+=--context=; it records plain original text and highlight offsets.
+Repeated identical contexts for a term are deduplicated.
+
+#+begin_src sh
+.venv/bin/blitzer blitz --config config.example.toml -l slv -t 'Smo doma.' --save-context
+.venv/bin/blitzer history slv --config config.example.toml
+.venv/bin/blitzer history slv biti --config config.example.toml --limit 20
+#+end_src
+
+History uses a separate SQLite file. Dictionary lookups stay read-only.
+The history export is JSON suitable for later Anki preparation. This
+application does not send data to an LLM or connect to Anki automatically.
+
+* Configuration
+
+Copy/edit =config.example.toml= or pass it directly. Select a config with
+=--config PATH=, then =BLITZER_CONFIG=, then the platform config directory
+plus =blitzer.toml=. A missing optional default uses built-in values;
+missing selected or malformed config errors. =--no-config= bypasses config
+files, including the environment override. It conflicts with =--config=.
+
+Paths from config are relative to that file. =~= and =$NAME=/=${NAME}=
+are expanded; referenced unset variables error. CLI paths use the current
+directory. Explicit absolute =XDG_CONFIG_HOME= and =XDG_DATA_HOME= are
+honored on every platform; otherwise platformdirs provides the roots.
+
+Precedence: explicit flag, =[languages.CODE]=, =[defaults]=, built-in.
+All defaults can be overridden by language. Config fields are validated;
+unknown names and wrong types error. Negative switches override true
+config defaults. Output settings are format/freq/context/bold/prompt/src.
+The prompt string itself is =languages.CODE.prompt_text=.
+
+Repeated CLI exclusion files replace the configured list for that category;
+the API can use an empty tuple for an explicit empty list. A configured
+primary known file joins ordinary exclusions unless that category was
+replaced; an explicit =--known-file= always selects the primary file.
+
+* Installing a language by code or local path
+
+#+begin_src sh
+.venv/bin/blitzer install-plugin slv
+.venv/bin/blitzer install-plugin pol
+.venv/bin/blitzer install-plugin pli
+.venv/bin/blitzer install-plugin slv --replace
+
+# Offline development installation:
+.venv/bin/blitzer install-plugin ./my-pack/slv
+.venv/bin/blitzer install-plugin ./my-pack/slv --replace
+#+end_src
+
+Registered codes resolve to the newest stable GitHub release containing
+=blitzer-CODE-v1.zip= in =samiddhi/blitzer-language-plugins=. Each language
+can be released independently. Fixed filenames and release discovery avoid
+editing versioned download links. These assets must first be published by
+the maintainer; the old raw-database releases are not compatible archives.
+
+Downloads verify GitHub's SHA-256 digest and advertised size, then validate
+archive paths, pack metadata, schema and data before installation. Existing
+packs require explicit =--replace=. Replacement preserves known lists and
+history and restores the previous pack if publication fails. An existing
+local folder takes precedence over a bare code and never uses the network.
+
+To prepare archives from built packs:
+
+#+begin_src sh
+.venv/bin/blitzer package-plugin slv --no-config --plugins-dir language-packs
+.venv/bin/blitzer package-plugin pol --no-config --plugins-dir language-packs
+.venv/bin/blitzer package-plugin pli --no-config --plugins-dir language-packs
+#+end_src
+
+Read =PLUGIN-RELEASES.org= for the ready local archives, first publication,
+independent updates and exact GitHub release commands. Uploading a new stable
+release asset with the same filename requires no registry/application update.
+
+* Data-only language packs
+
+#+begin_src sh
+.venv/bin/blitzer build-plugin examples/demo-source --no-config --plugins-dir language-packs-demo
+.venv/bin/blitzer check-plugin slv --no-config --plugins-dir language-packs-demo
+.venv/bin/blitzer install-plugin language-packs-demo/slv --no-config --plugins-dir scratch/installed
+.venv/bin/blitzer list-languages --no-config --plugins-dir scratch/installed
+.venv/bin/blitzer remove-plugin slv --no-config --plugins-dir scratch/installed --yes
+#+end_src
+
+Build input: =config.toml=, =forms.tsv= with exact =form<TAB>lemma= header,
+optional =frequencies.tsv= with =term<TAB>frequency=, and optional source
+=README.md=. Each row is one mapping; ambiguity uses several rows.
+Frequency values must be finite and nonnegative and use displayed terms.
+
+A compatible SQLite join can replace the TSV via =--database PATH=.
+The source is opened read-only. Build uses one transaction, normalized
+form keys, unique lemma spellings and form/lemma pairs, self-forms and
+lookup indexes. It stages the whole pack and validates before publication.
+Existing destinations are refused. The runtime needs only =config.toml=
+and =lemmas.db=; build metadata records actual inputs and counts.
+
+The completed local source has 3,348,190 forms, but 1,967,459 refer to
+missing lemma IDs. Therefore the real local build required an explicit
+=--skip-orphans=; without it, import fails. It also required explicit
+=--skip-unsupported= for 2,969 unsupported single-word mappings. No source
+files were changed. The output has 134,956 distinct lemmas and 1,372,779
+form mappings, with 4,990 duplicate pairs removed and 7 self-forms added.
+These counts describe this exact source, not every SLOLEKS release.
+Orphaned source forms will be treated as unknown by this pack.
+
+Repeat the local real build into a fresh root:
+
+#+begin_src sh
+.venv/bin/blitzer build-plugin examples/slv-source --database ../blitzer-language-plugins/blitzer-language-slv/lemmas.db --skip-orphans --skip-unsupported --no-config --plugins-dir scratch/rebuilt
+#+end_src
+
+Full checking verifies versioned config, metadata code, read-only opening,
+schema, counts, index, relations, normalized single-word data, duplicates,
+self-forms, integrity and a real lookup. Ordinary processing performs
+lightweight version/column checks. Listing only tests structure, not data.
+Local installation makes a self-contained copy and rejects symlinks. Removal
+validates exactly one code and refuses symlinked pack directories.
+
+Mutating pack operations use =.mutation.lock= containing the process ID.
+If an interrupted process leaves a lock, verify it is no longer running
+before removing that lock. No operation automatically steals a lock.
+Known-list locks use =PATH.lock=.
+
+* Output and API
+
+=text=: no header, one term per line; optional tab-separated count/context.
+=tsv=: the same fields with a header and proper TSV quoting.
+=json=: term/count records and optional plain context data.
+=report=: optional PROMPT and original SOURCE sections before vocabulary.
+Prompt/source sections require report format so structured output stays
+parseable. Missing explicitly requested prompts error.
+
+Empty results exit successfully: text writes nothing, TSV its header,
+JSON an empty array, and report its requested sections. Usage mistakes
+exit 2; runtime failures and failed pack validation exit 1. Diagnostics
+go to stderr. Processing finishes before vocabulary output is written.
+
+#+begin_src python
+from pathlib import Path
+from blitzer.core import BlitzerService
+
+service = BlitzerService(use_config=False, plugins_dir=Path("language-packs"))
+entries = service.blitz("Sem. Smo!", "slv", lemmatize=True, context=True,
+                        filter_by="forms", exclusions=(Path("known.txt"),))
+for entry in entries:
+    print(entry.term, entry.count, entry.contexts)
+# Persistent changes are explicit API calls:
+# service.update_known("slv", entries, path=Path("known.txt"), dry_run=True)
+# service.save_contexts("slv", entries)
+#+end_src
+
+The core API never prints or imports Click. install_plugin accepts either
+a registered code string or a local Path and supports explicit replace.
+Constructor/config loading
+writes nothing. Processing has per-call resources and cache, with no
+cross-call execution state. See the readable method signatures for pack
+building/checking/installing/removing, cleanup, known preview and history.
+
+* Reading and changing the code
+
+Every Python file begins with a purpose, an explicit =In scope= list,
+an =Out of scope= list and a =Start here= guide. Read those headers first
+when deciding where a change belongs. The test files use the same format
+to explain which behavior each file checks.
+
+Keep control flow flat: use guard clauses, avoid nested function definitions,
+and extract a named operation when a loop or resource block starts hiding
+another operation. Application functions currently have at most two levels
+of explicit control-flow blocks. A regression check enforces that limit and
+requires a docstring for every function.
+
+=BlitzerService.blitz= reads configuration, exclusion lists and lookup data,
+then calls =collect_vocabulary= and =sort_vocabulary= in =processing.py=.
+These functions receive their data explicitly and perform no I/O. =filter_occurrence=
+decides which candidates survive; =context_for_token= selects the original
+sentence; =add_occurrence= returns a fresh entry without changing its input.
+=normalize_mapping=, =parse_frequency= and =parse_terms= can likewise be tested
+directly without files or databases.
+
+The pure functions and vocabulary records remain importable from =core.py=
+for existing Python callers. Their implementations live in =processing.py=.
+
+=build_plugin= coordinates staging, database import, validation, provenance
+and publication. =_build_database= owns the staging transaction; its import
+helpers validate rows before insertion. Locks, connections and temporary
+directories remain explicit at the I/O boundaries. Local accumulation is
+allowed, but processing functions must not mutate caller-owned inputs.
+
+Function docstrings follow PEP 257; layout follows PEP 8, including a
+79-character code limit and 72-character documentation limit. Optional
+style checks use =pycodestyle= and =pydocstyle=:
+
+#+begin_src sh
+.venv/bin/python -m pip install pycodestyle pydocstyle
+.venv/bin/python -m pycodestyle --max-line-length=79 --max-doc-length=72 blitzer tests
+.venv/bin/python -m pydocstyle blitzer tests
+.venv/bin/python -m pytest -q
+#+end_src

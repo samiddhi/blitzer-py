@@ -1,0 +1,16 @@
+format_version = 1
+
+[metadata]
+language_name = "Pali"
+language_code = "pli"
+version = "0.1.0"
+author = "Samiddhi"
+
+[normalization]
+lowercase = true
+substitutions = [
+    {from = "ṁ", to = "ṃ"},
+    {from = "'", to = ""},
+    {from = "’", to = ""},
+    {from = "”", to = ""},
+]

@@ -1,0 +1,33 @@
+# Paths are relative to this file. No configuration is written implicitly.
+[locations]
+plugins_dir = "./language-packs"
+history_file = "./scratch/contexts.db"
+
+[defaults]
+lemmatize = false
+filter_by = "forms" # Independent from display; use lemmas to filter by known lemmas.
+exclude_unknown = false
+freq = false
+context = false
+format = "text"
+sort = "textual-frequency" # alphabetical, appearance, global-frequency, custom
+bold = "html" # off, html, markdown, org
+context_limit = 2
+sentence_pattern = '(?:[.!?]+(?=\s|$)|\n+)'
+save_context = "flag-only" # never, always, prompt, flag-only
+# Discouraged. Encountering a word does not mean you know it.
+auto_update_known = false
+prompt = false
+src = false
+# custom_order = "./scratch/order.txt"
+
+[languages.slv]
+# This list may start absent; --update-known creates it only when requested.
+known_file = "./scratch/slv-known.txt"
+exclusions = []
+forms_only = []
+prompt_text = "Prepare vocabulary study cards from these words and original contexts."
+# sentence_pattern and all defaults can be overridden per language.
+
+[languages.base]
+prompt_text = "Prepare vocabulary study cards from these words."
