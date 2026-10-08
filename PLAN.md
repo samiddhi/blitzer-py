@@ -8,7 +8,7 @@ able to follow a command into one service method and then into a few
 ordinary functions. The priority is understandable, correct behavior.
 
 The project is implemented. This file retains the original design sequence;
-README.org documents the delivered commands and configuration. The additions
+README.md documents the delivered commands and configuration. The additions
 below incorporate the later requested vision and supersede conflicting parts
 of the initial plan (especially the default exclusion policy).
 
@@ -35,7 +35,7 @@ Implemented additions:
 - `downloads.py` contains the GitHub registry, bounded SHA-256-verified
   downloads and archive validation. Registered install codes support slv,
   pol and pli alongside offline local paths and explicit replacement.
-  `package-plugin` emits fixed-name release archives; PLUGIN-RELEASES.org
+  `package-plugin` emits fixed-name release archives; PLUGIN-RELEASES.md
   documents independent stable releases without version-link updates.
 - Every Python source and test file has a purpose, separate in/out-of-scope
   lists, and a short navigation guide in its header docstring.
@@ -144,7 +144,7 @@ blitzer-py/
     └── downloads.py
 ```
 
-During implementation, add `README.org` and `config.example.toml` at
+During implementation, add `README.md` and `config.example.toml` at
 the root, matching Anchor, the full application `LICENSE`, and a small
 `tests/` directory with
 `test_config.py`, `test_core.py`, `test_cli.py`, `test_functions.py`,

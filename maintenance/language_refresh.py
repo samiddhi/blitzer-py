@@ -172,31 +172,39 @@ def name_sort_key(item):
 
 
 def update_readme(root):
-    """Regenerate the complete supported list by name rather than pack code."""
+    """Regenerate the supported language table sorted by display name."""
     languages = [("Basic", "base")]
     languages.extend(
         (CATALOG[path.parent.name]["name"], path.parent.name)
         for path in root.glob("*/config.toml")
         if path.parent.name in CATALOG and (path.parent / "lemmas.db").exists()
     )
-    listing = '\n'.join(f"- {name} ({code})" for name, code in sorted(languages, key=name_sort_key))
-    path = ROOT / "README.org"
+    languages.sort(key=name_sort_key)
+    name_width = max(len("Language"), *(len(name) for name, _ in languages))
+    code_width = max(len("Code"), *(len(code) for _, code in languages))
+    listing = '\n'.join([
+        f"| {'Language':<{name_width}} | {'Code':<{code_width}} |",
+        f"|{'-' * (name_width + 2)}|{'-' * (code_width + 2)}|",
+        *(f"| {name:<{name_width}} | {code:<{code_width}} |" for name, code in languages),
+    ])
+    path = ROOT / "README.md"
     text = path.read_text(encoding="utf-8")
-    start = text.index("** Supported Languages")
-    end = text.index("** Install", start)
+    start = text.index("## Supported Languages")
+    end = text.index("## Install", start)
     intro = (
-        "** Supported Languages\n\n"
-        "The ready packs below support the orthographies documented in each pack.\n"
-        "Word boundaries use Unicode letters plus reviewed language-specific rules;\n"
-        "support is not limited to Latin script. Multiword paradigm entries are\n"
-        "omitted, and dictionary coverage varies. Development packs are excluded\n"
-        "from this list and from releases. The list describes this checkout's\n"
-        "next release; newly promoted packs become downloadable after publication.\n\n"
-        "If your target language is not on this list, see\n"
-        "[[file:language-packs/UNSUPPORTED-LANGUAGES.md][languages without a release-ready pack]]\n"
-        "for an explanation of what is needed to implement it. If your language is\n"
-        "not listed in that document either, open a pull request, ideally with a\n"
-        "source of inflectional data for that language.\n\n"
+        "## Supported Languages\n\n"
+        "Word boundaries use Unicode letters plus AI-reviewed language-specific\n"
+        "rules. These may not be perfect. Multiword paradigm entries are\n"
+        "omitted, and dictionary coverage varies. Development packs are\n"
+        "excluded from this list and from releases. The list describes this\n"
+        "checkout's next release; newly promoted packs become downloadable\n"
+        "after publication.\n\n"
+        "If your target language is not on this list, see "
+        "[languages without a release-ready pack](language-packs/UNSUPPORTED-LANGUAGES.md)\n"
+        "for an explanation of what is needed to implement\n"
+        "it. If your language is not listed in that document either, open a\n"
+        "pull request, ideally with a source of inflectional data for that\n"
+        "language.\n\n"
     )
     path.write_text(text[:start] + intro + listing + "\n\n" + text[end:], encoding="utf-8")
 

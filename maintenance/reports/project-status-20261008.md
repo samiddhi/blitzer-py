@@ -14,7 +14,7 @@ as finished language support. No commit, tag, push or publication was made.
 | Dev directories, including special-code notice | 68 | 22 |
 | Ready packs using explicit format-2 profiles | 0 | 31 |
 
-The main [README](../../README.org) contains all **165 ready languages plus
+The main [README](../../README.md) contains all **165 ready languages plus
 Basic**, sorted alphabetically by display name, with codes in parentheses.
 It was checked against installed CLI names and both download registries.
 The CLI itself retains its existing code ordering; the README uses name

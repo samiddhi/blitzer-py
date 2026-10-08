@@ -1,20 +1,19 @@
-#+TITLE: Publishing and installing Blitzer language packs
-#+OPTIONS: toc:2 num:nil
+# Publishing and installing Blitzer language packs
 
-* What users do
+## What users do
 
-#+begin_src sh
+```sh
 blitzer install-plugin slv
 blitzer install-plugin pol
 blitzer install-plugin pli
 
-# Update an installed pack to its newest stable release:
+## Update an installed pack to its newest stable release:
 blitzer install-plugin slv --replace
 
-# Install an unpublished development pack, entirely offline:
+## Install an unpublished development pack, entirely offline:
 blitzer install-plugin ./my-pack/slv
 blitzer install-plugin ./my-pack/slv --replace
-#+end_src
+```
 
 Explicit paths remain the development/testing option. An existing local
 folder takes precedence over a bare code of the same name. In the Python
@@ -22,21 +21,21 @@ API, Path objects always mean local paths; registered downloads use strings.
 No download occurs while processing vocabulary, reading configuration or
 importing the package. Packs need no PyPI project or executable Python code.
 
-* The registry contract
+## The registry contract
 
-The registry in =blitzer/downloads.py= points supported languages to the
-public repository =samiddhi/blitzer-py=. It combines the original entries
-below with the ready languages in =blitzer/language-registry.json=.
+The registry in `blitzer/downloads.py` points supported languages to the
+public repository `samiddhi/blitzer-py`. It combines the original entries
+below with the ready languages in `blitzer/language-registry.json`.
 
 | Code | Language  | Required release asset filename |
-|------+-----------+---------------------------------|
-| slv  | Slovenian | blitzer-slv-v1.zip               |
-| pol  | Polish    | blitzer-pol-v1.zip               |
-| pli  | Pali      | blitzer-pli-v1.zip               |
+|------|-----------|---------------------------------|
+| slv  | Slovenian | blitzer-slv-v1.zip              |
+| pol  | Polish    | blitzer-pol-v1.zip              |
+| pli  | Pali      | blitzer-pli-v1.zip              |
 
-The =v1= in the filename means pack FORMAT version one, not dictionary
+The `v1` in the filename means pack FORMAT version one, not dictionary
 release version one. Keep these filenames unchanged across data releases.
-The dictionary version lives in =config.toml= metadata and the release tag.
+The dictionary version lives in `config.toml` metadata and the release tag.
 
 For each install, Blitzer queries the repository's published GitHub releases
 in newest-first order and takes the first stable release containing the
@@ -57,58 +56,58 @@ release with a checksum looked up from a different release. Public downloads
 require neither a GitHub login nor an API token, although GitHub rate limits
 still apply. Missing digests require a newly uploaded asset.
 
-* Prepare the first release
+## Prepare the first release
 
-Three converted packs have been built in =language-packs/= and packaged as:
+Three converted packs have been built in `language-packs/` and packaged as:
 
-#+begin_example
+``` example
 release-assets/blitzer-slv-v1.zip
 release-assets/blitzer-pol-v1.zip
 release-assets/blitzer-pli-v1.zip
-#+end_example
+```
 
-Adjacent =.zip.sha256= files contain their local checksums. The installer
+Adjacent `.zip.sha256` files contain their local checksums. The installer
 uses GitHub's API digest, so uploading these sidecars is optional.
 
-These archives contain a language directory with =config.toml= and the
-indexed =lemmas.db=, plus available provenance, attribution and license
+These archives contain a language directory with `config.toml` and the
+indexed `lemmas.db`, plus available provenance, attribution and license
 files. They contain no executable plugin code, user known lists or history.
 The ZIP file and its contents are distinct from GitHub's automatic source
 code ZIP/TAR downloads, which are not the installable data assets.
 
 Current conversion counts:
 
-| Code | Lemmas  | Form mappings | Unsupported source rows | Orphan rows |
-|------+---------+---------------+-------------------------+-------------|
-| slv  | 134956  | 1372779       | 2969                    | 1967459     |
-| pol  | 310457  | 3935534       | 6605                    | 0           |
-| pli  | 68883   | 463206        | 899                     | 0           |
+| Code | Lemmas | Form mappings | Unsupported source rows | Orphan rows |
+|------|--------|---------------|-------------------------|-------------|
+| slv  | 134956 | 1372779       | 2969                    | 1967459     |
+| pol  | 310457 | 3935534       | 6605                    | 0           |
+| pli  | 68883  | 463206        | 899                     | 0           |
 
-Skipped rows are explicitly recorded in each pack's =build-info.json=.
+Skipped rows are explicitly recorded in each pack's `build-info.json`.
 The Pali build used a byte-for-byte scratch copy of the closed source
 because its WAL-mode database could not be opened from the read-only source
 folder in this development workspace. Original source files were unchanged.
 
 Keep the original dictionary attribution and data-license requirements.
-The source preparation notes are in =maintenance/examples/slv-source=,
-=maintenance/examples/pol-source= and =maintenance/examples/pli-source=. The Polish source's existing
+The source preparation notes are in `maintenance/examples/slv-source`,
+`maintenance/examples/pol-source` and `maintenance/examples/pli-source`. The Polish source's existing
 README identifies PoliMorf but does not establish the exact source license;
 confirm that upstream license and add its notice before public distribution.
 
-* Publish on GitHub
+## Publish on GitHub
 
-1. Use the public =samiddhi/blitzer-py= application repository for both source code and releases.
-   Archive files belong in release assets; they need not be committed to Git.
-2. Create a release with a new tag, for example =packs-v0.1.0=.
-3. Attach the three =blitzer-CODE-v1.zip= files from =release-assets/=.
-4. Publish the release as a regular stable release, not a draft or prerelease.
-5. Users can now install any of the three codes with the commands above.
+1.  Use the public `samiddhi/blitzer-py` application repository for both source code and releases.
+    Archive files belong in release assets; they need not be committed to Git.
+2.  Create a release with a new tag, for example `packs-v0.1.0`.
+3.  Attach the three `blitzer-CODE-v1.zip` files from `release-assets/`.
+4.  Publish the release as a regular stable release, not a draft or prerelease.
+5.  Users can now install any of the three codes with the commands above.
 
 The GitHub website's Releases interface is sufficient. If you use GitHub
 CLI and are already authenticated, this command publishes the prepared
 assets (run it yourself when the metadata and data attribution are ready):
 
-#+begin_src sh
+```sh
 gh release create packs-v0.1.0 \
   release-assets/blitzer-slv-v1.zip \
   release-assets/blitzer-pol-v1.zip \
@@ -116,7 +115,7 @@ gh release create packs-v0.1.0 \
   --repo samiddhi/blitzer-py \
   --title 'Blitzer language packs 0.1.0' \
   --notes 'Version-one data packs for Slovenian, Polish and Pali.'
-#+end_src
+```
 
 Creating Git commits or pushing a tag alone does not attach data assets or
 publish a GitHub release. A CI workflow may automate those steps, but it
@@ -124,23 +123,23 @@ must still build/package the data and attach the fixed filenames to a
 published stable release. No CI workflow or release has been published by
 this implementation task.
 
-* Publish later versions without changing links
+## Publish later versions without changing links
 
 For example, to publish only a newer Polish pack:
 
-1. Update =maintenance/examples/pol-source/config.toml= metadata.version, for example to
-   =0.2.0=, and prepare the new source data.
-2. Build into a fresh pack directory so failed builds cannot disturb the
-   existing pack. Use =build-plugin= with the new data or TSV source.
-3. Run =package-plugin= against that directory. The filename remains
-   =blitzer-pol-v1.zip=.
-4. Create a new stable release such as =pol-v0.2.0= and attach that archive.
-5. Users run =blitzer install-plugin pol --replace=. Slovenian and Pali
-   continue to resolve to their own most recent matching stable releases.
+1.  Update `maintenance/examples/pol-source/config.toml` metadata.version, for example to
+    `0.2.0`, and prepare the new source data.
+2.  Build into a fresh pack directory so failed builds cannot disturb the
+    existing pack. Use `build-plugin` with the new data or TSV source.
+3.  Run `package-plugin` against that directory. The filename remains
+    `blitzer-pol-v1.zip`.
+4.  Create a new stable release such as `pol-v0.2.0` and attach that archive.
+5.  Users run `blitzer install-plugin pol --replace`. Slovenian and Pali
+    continue to resolve to their own most recent matching stable releases.
 
 Example packaging and publication:
 
-#+begin_src sh
+```sh
 blitzer dev package-plugin pol --no-config --plugins-dir ./new-packs \
   --output-dir ./release-assets
 
@@ -148,49 +147,49 @@ gh release create pol-v0.2.0 release-assets/blitzer-pol-v1.zip \
   --repo samiddhi/blitzer-py \
   --title 'Polish language pack 0.2.0' \
   --notes 'Describe the source update and any intentional omissions.'
-#+end_src
+```
 
 Repackaging replaces an existing local archive atomically. Publication uses
-a new GitHub tag rather than changing old releases. The =package-plugin=
+a new GitHub tag rather than changing old releases. The `package-plugin`
 command validates the built pack before creating its ZIP and checksum.
 
-* Publish the UniMorph batch
+## Publish the UniMorph batch
 
-The standalone =maintenance.unimorph= tool writes separate =ready/= and =deferred/=
-directories. Inspect =maintenance/reports/unimorph.md= and the attribution inside
+The standalone `maintenance.unimorph` tool writes separate `ready/` and `deferred/`
+directories. Inspect `maintenance/reports/unimorph.md` and the attribution inside
 each pack. Do not upload deferred archives. Ready means technically usable
 with the current tokenizer; check source licenses before redistribution.
 
 After reviewing the batch, copy its additional-code catalog into the
 application, test it, and include it in your next application release:
 
-Increase the application version in =pyproject.toml= before building a new
+Increase the application version in `pyproject.toml` before building a new
 application release. Its version is independent of the pack version.
 
-#+begin_src sh
+```sh
 cp maintenance/reports/language-registry.json blitzer/language-registry.json
 .venv/bin/python -m pytest -q
 .venv/bin/python -m build --outdir maintenance/dist
-git add blitzer pyproject.toml tests README.org PLUGIN-RELEASES.org .gitignore
+git add blitzer pyproject.toml tests README.md PLUGIN-RELEASES.md .gitignore
 git commit -m 'Add UniMorph batch conversion and language catalog'
 git push
-#+end_src
+```
 
-The packaged catalog enables =blitzer install-plugin eng= and the other
+The packaged catalog enables `blitzer install-plugin eng` and the other
 ready codes in the next application version. Existing Slovenian, Polish
 and Pali entries take precedence; generated packs do not overwrite their
 published dictionaries. Adding codes requires an application catalog
 update; later versions of those same packs need no link changes.
 
-The usable packs are consolidated in =language-packs/=, with all release
-archives in =release-assets/=. Updated Slovenian and Polish dictionaries
+The usable packs are consolidated in `language-packs/`, with all release
+archives in `release-assets/`. Updated Slovenian and Polish dictionaries
 have been preserved; deferred packs and their reasons live under
-=language-packs/dev/=. The inventory is in =maintenance/reports/unimorph.md=.
+`language-packs/dev/`. The inventory is in `maintenance/reports/unimorph.md`.
 
 Push the application changes first so the new release tag points at the
 updated code and bundled language catalog:
 
-#+begin_src sh
+```sh
 git add -A
 git commit -m 'Organize developer tools and add expanded language packs'
 git push
@@ -199,25 +198,25 @@ gh release create packs-v0.2.0 release-assets/*.zip \
   --repo samiddhi/blitzer-py --target main --latest=false \
   --title 'Blitzer language packs 0.2.0' \
   --notes 'Expanded Slovenian and Polish dictionaries plus Latin-script UniMorph packs.'
-#+end_src
+```
 
 This publishes a new stable release, so the installer resolves updated
 Slovenian and Polish and all additional supported languages automatically.
 It includes the unchanged Pali pack. Review upstream attribution before
-publication. No deferred archives are in =release-assets/=.
+publication. No deferred archives are in `release-assets/`.
 
 The Slovenian and Polish assets are the expanded original dictionaries,
 rather than the smaller UniMorph-only versions.
-Their metadata versions are =0.2.0=. Slovenian gained 22,725 form/lemma
+Their metadata versions are `0.2.0`. Slovenian gained 22,725 form/lemma
 pairs and 331 lemmas; Polish gained 25,743 pairs and 892 lemmas. The
 expansion retains all original pairs, frequencies, attribution and source
 histories. Pali is unchanged.
 
-A later batch uses a fresh output directory, a new =--pack-version=
+A later batch uses a fresh output directory, a new `--pack-version`
 and a new release tag. Asset filenames
 stay unchanged. No release or remote repository is changed by conversion.
 
-* Installation behavior and practical limits
+## Installation behavior and practical limits
 
 Downloads are bounded to 512 MiB; expanded pack files to 2 GiB. ZIP paths,
 required files, duplicate entries, encryption and special/link entries are
@@ -225,8 +224,8 @@ checked before extraction. Only supported pack files are extracted.
 
 The full config, SQLite schema, data and indexes are validated before
 publication into the user's selected language directory. Updates require
-=--replace=; the old pack is restored if staging publication fails. If a
-previous interrupted replacement leaves =.CODE.previous= beside the pack,
+`--replace`; the old pack is restored if staging publication fails. If a
+previous interrupted replacement leaves `.CODE.previous` beside the pack,
 inspect that recovery copy before retrying. The installer does not overwrite
 it automatically. Known lists and context history are outside pack updates.
 
@@ -237,4 +236,4 @@ environment because its GitHub DNS access was unavailable. Simulated GitHub
 responses cover the complete download/install flow for all three languages.
 
 GitHub API reference:
-https://docs.github.com/en/rest/releases/releases
+<https://docs.github.com/en/rest/releases/releases>

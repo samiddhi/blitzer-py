@@ -116,4 +116,4 @@ pairs removed and the final number of stored form/lemma pairs.
 Only publish ZIPs in `ready/assets/`. Review upstream licenses first:
 passing technical checks does not establish redistribution permission.
 The existing Slovenian, Polish and Pali registry entries retain their
-original sources. See `PLUGIN-RELEASES.org` for registry and release steps.
+original sources. See `PLUGIN-RELEASES.md` for registry and release steps.

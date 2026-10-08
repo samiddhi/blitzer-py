@@ -1,0 +1,358 @@
+# Blitzer
+
+A tool for vocabulary extraction intended for language learners.
+
+## Supported Languages
+
+Word boundaries use Unicode letters plus AI-reviewed language-specific
+rules. These may not be perfect. Multiword paradigm entries are
+omitted, and dictionary coverage varies. Development packs are
+excluded from this list and from releases. The list describes this
+checkout's next release; newly promoted packs become downloadable
+after publication.
+
+If your target language is not on this list, see [languages without a release-ready pack](language-packs/UNSUPPORTED-LANGUAGES.md)
+for an explanation of what is needed to implement
+it. If your language is not listed in that document either, open a
+pull request, ideally with a source of inflectional data for that
+language.
+
+| Language                    | Code |
+|-----------------------------|------|
+| Adyghe                      | ady  |
+| Afrikaans                   | afr  |
+| Akan                        | aka  |
+| Albanian                    | sqi  |
+| Amharic                     | amh  |
+| Ancient Greek               | grc  |
+| Anglo-Norman                | xno  |
+| Armenian                    | hye  |
+| Ashaninka                   | cni  |
+| Assamese                    | asm  |
+| Asturian                    | ast  |
+| Aymara                      | aym  |
+| Azerbaijani                 | aze  |
+| Bashkir                     | bak  |
+| Basic                       | base |
+| Basque                      | eus  |
+| Belarusian                  | bel  |
+| Bengali                     | ben  |
+| Braj                        | bra  |
+| Breton                      | bre  |
+| Bulgarian                   | bul  |
+| Catalan                     | cat  |
+| Cebuano                     | ceb  |
+| Central Kurdish             | ckb  |
+| Central Pame                | pbs  |
+| Chewa                       | nya  |
+| Chichicapan Zapotec         | zpv  |
+| Classical Armenian          | xcl  |
+| Classical Syriac            | syc  |
+| Congo Swahili               | swc  |
+| Cornish                     | cor  |
+| Cree                        | cre  |
+| Crimean Tatar               | crh  |
+| Czech                       | ces  |
+| Dakota                      | dak  |
+| Danish                      | dan  |
+| Dutch                       | nld  |
+| Eastern Highland Chatino    | cly  |
+| Egyptian Arabic             | arz  |
+| Eibela                      | ail  |
+| English                     | eng  |
+| Estonian                    | est  |
+| Faroese                     | fao  |
+| French                      | fra  |
+| Friulian                    | fur  |
+| Gã                          | gaa  |
+| Galician                    | gal  |
+| Georgian                    | kat  |
+| German                      | deu  |
+| Gothic                      | got  |
+| Greenlandic                 | kal  |
+| Gujarati                    | guj  |
+| Gulf Arabic                 | afb  |
+| Haida                       | hai  |
+| Hebrew                      | heb  |
+| Hiligaynon                  | hil  |
+| Hindi                       | hin  |
+| Hungarian                   | hun  |
+| Icelandic                   | isl  |
+| Indonesian                  | ind  |
+| Ingrian                     | izh  |
+| Irish                       | gle  |
+| Italian                     | ita  |
+| Kabardian                   | kbd  |
+| Kannada                     | kan  |
+| Karelian                    | krl  |
+| Kashubian                   | csb  |
+| Kazakh                      | kaz  |
+| Ket                         | ket  |
+| Khakas                      | kjh  |
+| Khaling                     | klr  |
+| Khalkha Mongolian           | khk  |
+| Kholosi                     | hsi  |
+| Kodi                        | kod  |
+| Kongo                       | kon  |
+| Kunwinjku                   | gup  |
+| Ladin                       | lld  |
+| Lamaholot                   | slp  |
+| Latin                       | lat  |
+| Latvian                     | lav  |
+| Lingala                     | lin  |
+| Lithuanian                  | lit  |
+| Livonian                    | liv  |
+| Livvi-Karelian              | olo  |
+| Low German                  | nds  |
+| Lower Sorbian               | dsb  |
+| Ludian                      | lud  |
+| Luganda                     | lug  |
+| Macedonian                  | mkd  |
+| Magahi                      | mag  |
+| Malagasy                    | mlg  |
+| Maltese                     | mlt  |
+| Manx                        | glv  |
+| Māori                       | mao  |
+| Mapudungun                  | arn  |
+| Mezquital Otomi             | ote  |
+| Middle French               | frm  |
+| Middle High German          | gmh  |
+| Middle Low German           | gml  |
+| Modern Greek                | ell  |
+| Modern Standard Arabic      | ara  |
+| Murrinhpatha                | mwf  |
+| Navajo                      | nav  |
+| Neapolitan                  | nap  |
+| North Frisian               | frr  |
+| Northern Kurdish (Kurmanji) | kmr  |
+| Northern Sami               | sme  |
+| Norwegian Bokmål            | nob  |
+| Norwegian Nynorsk           | nno  |
+| O'odham                     | ood  |
+| Occitan                     | oci  |
+| Old Church Slavic           | chu  |
+| Old English                 | ang  |
+| Old French                  | fro  |
+| Old High German             | goh  |
+| Old Irish                   | sga  |
+| Old Norse                   | non  |
+| Old Saxon                   | osx  |
+| Oromo                       | orm  |
+| Pali                        | pli  |
+| Pashto                      | pus  |
+| Persian                     | fas  |
+| Polish                      | pol  |
+| Portuguese                  | por  |
+| Quechua                     | que  |
+| Romanian                    | ron  |
+| Russian                     | rus  |
+| Sakha                       | sah  |
+| San Pedro Amuzgos Amuzgo    | azg  |
+| Scottish Gaelic             | gla  |
+| Seneca                      | see  |
+| Serbo-Croatian              | hbs  |
+| Shipibo-Konibo              | shp  |
+| Shona                       | sna  |
+| Slovak                      | slk  |
+| Slovenian                   | slv  |
+| Southern Kurdish            | sdh  |
+| Southern Sotho (Sesotho)    | sot  |
+| Spanish                     | spa  |
+| Swedish                     | swe  |
+| Swiss German                | gsw  |
+| Tagalog                     | tgl  |
+| Tatar                       | tat  |
+| Telugu                      | tel  |
+| Turkish                     | tur  |
+| Turkmen                     | tuk  |
+| Tuvan                       | tyv  |
+| Ukrainian                   | ukr  |
+| Upper Sorbian               | hsb  |
+| Uyghur                      | uig  |
+| Uzbek                       | uzb  |
+| Venetian                    | vec  |
+| Veps                        | vep  |
+| Võro                        | vro  |
+| Votic                       | vot  |
+| Walmajarri                  | wmt  |
+| Welsh                       | cym  |
+| Western Frisian             | fry  |
+| Xibe                        | sjo  |
+| Yaitepec Chatino            | ctp  |
+| Yanesha                     | ame  |
+| Yiddish                     | yid  |
+| Yoloxóchitl Mixtec          | xty  |
+| Zarma                       | dje  |
+| Zenzontepec Chatino         | czn  |
+| Zulu                        | zul  |
+
+## Install
+
+Requires Python 3.11 or newer.
+
+```sh
+pip install bltzr
+bltzr --help
+```
+
+## Extract vocabulary
+
+```sh
+bltzr blitz -l eng -t "The dogs are running." --lemmatize
+bltzr blitz -l eng --file chapter.txt --freq --context
+cat chapter.txt | bltzr blitz -l eng --format tsv > vocabulary.tsv
+```
+
+`-l` chooses the language. Use `-t` for text, `--file` for a UTF-8 file,
+or pipe text into the command. Words are shown as written by default;
+`--lemmatize` shows dictionary forms, such as `dogs → dog`.
+
+## Language packs
+
+Basic (`base`) and English (`eng`) work immediately, without a download.
+Basic extracts words without a dictionary and cannot lemmatize them.
+Other languages need a pack:
+
+```sh
+bltzr list-languages
+bltzr install-plugin slv
+bltzr blitz -l slv -t "Nisem tako prepričan."
+```
+
+To update an installed pack, use `bltzr install-plugin slv --replace`.
+Processing works offline once the pack is installed.
+
+The next release supports both pack configuration formats 1 and 2. Format 2
+adds reviewed rules for tone marks, joiners and word-internal punctuation;
+update the application before installing a format-2 pack. Dictionaries vary
+in coverage, and support for a script does not imply coverage of every
+orthography or dialect. See [project status and remaining development work](maintenance/reports/project-status-20261008.md).
+
+Japanese remains a development pack. The optional analyzer can be tested
+from this checkout with `.venv/bin/python -m pip install -e '.[dev,japanese]'`
+and `--plugins-dir ./language-packs/dev`. Its dictionary must already be
+installed; processing never downloads models automatically. Sanskrit,
+Tibetan and Urdu still require additional lexical-segmentation work.
+
+You can also install a local pack with `bltzr install-plugin ./my-pack/slv`.
+To use this checkout's packs directly, add
+`--plugins-dir /path/to/blitzer-py/language-packs` to the command.
+
+## Create your config
+
+Blitzer automatically reads `~/.config/bltzr/bltzr.toml`. No environment
+variable or command-line option is needed. Create the file, then open it
+in your editor:
+
+```sh
+mkdir -p ~/.config/bltzr
+touch ~/.config/bltzr/bltzr.toml
+```
+
+Here is an arbitrary default:
+
+```toml
+[defaults]
+freq = true
+context = true
+sort = "alphabetical"
+bold = "markdown"
+save_context = "flag-only"
+
+[languages.eng]
+known_file = "./eng-known.txt"
+filter_by = "forms"
+```
+
+`[defaults]` applies to every language. `[languages.eng]` overrides
+settings for English; use the language code visible with `bltzr list-languages` if you are not sure which to use.
+
+Save your settings and run normally:
+
+```sh
+bltzr blitz -l eng -t "He, she, it, swims!"
+```
+
+Use `-C PATH` to load another config, or `-n` to ignore configuration.
+An existing config under `$XDG_CONFIG_HOME/bltzr/` takes priority if that
+environment variable is set. `BLITZER_CONFIG` can explicitly select a
+different file, but you do not need it for the default location.
+Command-line options override your config; for example, `--no-context`
+hides example sentences even when `context = true`.
+
+See [config.example.toml](config.example.toml) for the full set of settings.
+
+## Keep a list of words you know
+
+Create the `eng-known.txt` file beside your config, with one word per line:
+
+```text
+run
+runs
+```
+
+With `filter_by = "forms"` knowing `ran` excludes that form while `run`
+still appears. With `filter_by = "lemmas"` adding `run` excludes forms
+of that lemma like `ran` and `runs`. Filtering and `--lemmatize` are separate choices.
+Example sentences are selected from occurrences that survived filtering.
+
+Without a config, pass the list with `--known-file PATH`. A missing known
+list is treated as empty; ordinary processing does not create or update it.
+
+Check for duplicates, then apply the cleanup if wanted:
+
+```sh
+bltzr cleanup-known eng ~/.config/bltzr/eng-known.txt
+bltzr cleanup-known eng ~/.config/bltzr/eng-known.txt --apply
+```
+
+Cleanup saves a `.bak` copy. `--test-known` previews automatic additions;
+`--update-known` writes them. Automatic updating is off by default:
+encountering a word does not mean you have learned it.
+
+## Useful options
+
+| Option | Effect |
+|----|----|
+| `--freq` | Include each word's count in your text |
+| `--context` | Include example sentences |
+| `--context-limit 3` | Include up to three examples per word |
+| `--bold off` | Turn off highlighting; also accepts html, markdown, org |
+| `--sort appearance` | Keep the order words first appeared |
+| `--sort textual-frequency` | Show the most frequent words first |
+| `--exclude-unknown` | Hide words missing from the dictionary |
+| `--format json` | Export JSON; also accepts text, tsv, report |
+
+Sorting also accepts `alphabetical`, `global-frequency` (requires a pack
+with frequency data), and `custom` with `--custom-order PATH`.
+
+## Save and review example sentences
+
+```sh
+bltzr blitz -l eng -t "He helps me." --lemmatize --save-context
+bltzr history eng
+bltzr history eng help
+```
+
+History uses the displayed word: `help` with `--lemmatize`, or `helps`
+without it. Saved history is separate from your known-word list.
+
+In config, `save_context` accepts `"flag-only"` (save when requested),
+`"always"`, `"prompt"`, or `"never"`. Use `--no-save-context` to skip saving.
+
+## Help and development
+
+```sh
+bltzr blitz --help
+bltzr dev --help
+```
+
+For a source checkout, install with
+`.venv/bin/python -m pip install -e '.[dev]'` after creating a virtual
+environment. Run tests with `.venv/bin/python -m pytest -q`.
+See [release setup](maintenance/RELEASING.md) for one-command GitHub/PyPI publication and
+[language-pack publishing](language-packs/README.md) for manual releases.
+
+## License
+
+[CC BY-SA 3.0](LICENSE). Dictionary packs retain their own licenses and attribution.

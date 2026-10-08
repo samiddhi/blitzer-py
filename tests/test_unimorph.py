@@ -257,7 +257,7 @@ def test_local_refresh_promotes_with_backup_and_updates_name_order(tmp_path, mon
     original = (development / "lemmas.db").read_bytes()
     (checkout / "blitzer").mkdir()
     (checkout / "maintenance/reports").mkdir(parents=True)
-    (checkout / "README.org").write_text("** Supported Languages\nold\n** Install\n")
+    (checkout / "README.md").write_text("## Supported Languages\nold\n## Install\n")
     monkeypatch.setattr(language_refresh, "ROOT", checkout)
     work = tmp_path / "work"
     result = language_refresh.refresh(packs, source, work)
@@ -266,8 +266,14 @@ def test_local_refresh_promotes_with_backup_and_updates_name_order(tmp_path, mon
     assert (work / "backups/dev/rus/lemmas.db").read_bytes() == original
     registry = json.loads((checkout / "blitzer/language-registry.json").read_text())
     assert registry == {"rus": {"name": "Russian"}}
-    readme = (checkout / "README.org").read_text()
-    assert readme.index("Basic (base)") < readme.index("Russian (rus)")
+    readme = (checkout / "README.md").read_text()
+    rows = [tuple(cell.strip() for cell in line.strip("|").split("|"))
+            for line in readme.splitlines() if line.startswith("|")]
+    assert rows[0] == ("Language", "Code")
+    assert all(set(cell) == {"-"} for cell in rows[1])
+    assert rows[2:] == [("Basic", "base"), ("Russian", "rus")]
+    assert "## Install\n" in readme
+    assert not list(checkout.glob("*.org"))
     assert all(c.status == "pass" for c in BlitzerService(
         use_config=False, plugins_dir=packs).check_plugin("rus"))
 
