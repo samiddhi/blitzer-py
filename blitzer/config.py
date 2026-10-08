@@ -36,6 +36,8 @@ from pathlib import Path
 
 from platformdirs import user_config_dir, user_data_dir
 
+from blitzer.tokenization import validate_profile
+
 APP = "bltzr"
 CONFIG_ENV_VAR = "BLITZER_CONFIG"
 CONFIG_FILE_NAME = "bltzr.toml"
@@ -109,7 +111,7 @@ def _default_config() -> dict:
             "format": "text",
             "sort": "textual-frequency",
             "bold": "html",
-            "sentence_pattern": r"(?:[.!?]+(?=\s|$)|\n+)",
+            "sentence_pattern": r"(?:[.!?؟።]+(?=\s|$)|[。！？।॥།༎]+|\n+)",
             "context_limit": 2,
             "save_context": "flag-only",
             "auto_update_known": False,
@@ -325,13 +327,13 @@ def load_plugin_config(plugin_dir: Path) -> dict:
     """Read and validate a versioned data-only pack config."""
     path = plugin_dir / "config.toml"
     data = _read_toml(path)
-    _table(data, str(path), {"format_version", "metadata", "normalization"})
+    _table(data, str(path), {"format_version", "metadata", "normalization", "tokenization"})
     if (
         type(data.get("format_version")) is not int
-        or data["format_version"] != 1
+        or data["format_version"] not in (1, 2)
     ):
         raise ValueError(
-            f"{path}: expected format_version = 1; "
+            f"{path}: expected format_version = 1 or 2; "
             "this pack belongs to an older format. Install a current pack "
             f"with bltzr install-plugin {plugin_dir.name} --replace, "
             "or select your "
@@ -346,6 +348,15 @@ def load_plugin_config(plugin_dir: Path) -> dict:
         if not isinstance(metadata.get(key), str) or not metadata[key].strip():
             raise ValueError(f"{path}: metadata.{key} must be nonempty text")
     validate_code(metadata["language_code"], allow_base=False)
+    if data["format_version"] == 1 and "tokenization" in data:
+        raise ValueError(f"{path}: tokenization settings require format_version = 2")
+    tokenization = _table(
+        data.get("tokenization", {"profile": "default"}),
+        "tokenization", {"profile"},
+    )
+    profile = validate_profile(tokenization.get("profile"))
+    if data["format_version"] == 2 and "tokenization" not in data:
+        raise ValueError(f"{path}: format 2 requires a tokenization profile")
     normal = _table(
         data.get("normalization"),
         "normalization",
@@ -373,4 +384,7 @@ def load_plugin_config(plugin_dir: Path) -> dict:
                 f"{path}: substitutions cannot introduce "
                 "whitespace or control characters"
             )
+    # Internal resolved settings travel with normalization through builder,
+    # known-list and frequency validation. They are never written as TOML.
+    normal["_profile"] = profile
     return data

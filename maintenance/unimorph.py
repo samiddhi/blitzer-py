@@ -44,6 +44,8 @@ from blitzer.config import validate_code
 from blitzer.core import BlitzerService
 from blitzer.downloads import MAX_DOWNLOAD_BYTES, MAX_UNPACKED_BYTES
 from blitzer.processing import _word, normalize
+from blitzer.tokenization import lexical_tokens
+from blitzer.languages import CATALOG, display_name, language_entry
 
 SEGMENTATION_CODES = {
     "bod",
@@ -57,6 +59,8 @@ SEGMENTATION_CODES = {
     "wuu",
     "yue",
     "zho",
+    "san",
+    "urd",
 }
 NORMALIZATION = {"lowercase": True, "substitutions": []}
 
@@ -122,17 +126,13 @@ def script_names(text: str) -> set[str]:
 def deferred_reasons(
     code: str, scripts: set[str], foreign_ratio: float = 1.0
 ) -> list[str]:
-    """Explain why a dataset must stay out of the next release.
-
-    Defer when at least one percent of source pairs contain non-Latin
-    letters. Below that threshold, omit those pairs from a Latin pack.
-    This heuristic needs human review for mixed orthographies.
-    """
+    """Use reviewed capabilities, not script alone, to classify packs."""
     reasons = []
-    if scripts and foreign_ratio >= 0.01:
-        reasons.append("Non-Latin letters: " + ", ".join(sorted(scripts)))
-    if code in SEGMENTATION_CODES:
-        reasons.append("Language requires a dedicated word segmenter")
+    entry = language_entry(code)
+    if code in CATALOG and entry["status"] != "ready":
+        reasons.append(entry.get("reason", "Language capability needs review"))
+    elif code not in CATALOG and scripts:
+        reasons.append("Unreviewed non-Latin orthography: " + ", ".join(sorted(scripts)))
     return reasons
 
 
@@ -166,20 +166,8 @@ def checksum(path: Path) -> str:
 
 
 def language_name(directory: Path) -> str:
-    """Read an upstream name, falling back to its language code."""
-    path = directory / "README.md"
-    if not path.is_file():
-        return directory.name.upper()
-    for line in path.read_text(encoding="utf-8-sig").splitlines():
-        if line.startswith(("!", "[", "|", "```", "-", ">")):
-            continue
-        name = re.sub(r"\s*\([^)]*\)\s*$", "", line.lstrip("# ")).strip()
-        if not name or name.lower() == directory.name or len(name) > 70:
-            continue
-        if name.startswith(("Source", "License", "Contains", "http", "<")):
-            continue
-        return name
-    return directory.name.upper()
+    """Use reviewed identities; never turn a README heading into a name."""
+    return display_name(directory.name, directory.name.upper())
 
 
 def write_json(path: Path, value) -> None:
@@ -192,7 +180,7 @@ def write_json(path: Path, value) -> None:
     temporary.replace(path)
 
 
-def record_row(row, writers, stats, scripts, location) -> None:
+def record_row(row, writers, stats, scripts, location, profile="default") -> None:
     """Classify one row and write only supported form/lemma mappings."""
     try:
         pair = parse_row(row)
@@ -209,8 +197,13 @@ def record_row(row, writers, stats, scripts, location) -> None:
     observed = script_names(lemma + form)
     scripts.update(observed)
     stats["non_latin_rows"] += bool(observed)
-    if not _word(normalize(form, NORMALIZATION)) or not _word(lemma):
+    if not _word(normalize(form, NORMALIZATION), profile) or not _word(lemma, profile):
         stats["unsupported_rows"] += 1
+        reason = rejection_reason(lemma, form, profile)
+        stats["rejection_counts"][reason] = stats["rejection_counts"].get(reason, 0) + 1
+        examples = stats["rejection_examples"].setdefault(reason, [])
+        if len(examples) < 3:
+            examples.append({"location": location, "lemma": lemma, "form": form})
         return
     writers[0].writerow((form, lemma))
     stats["accepted_rows"] += 1
@@ -219,7 +212,24 @@ def record_row(row, writers, stats, scripts, location) -> None:
         stats["latin_rows"] += 1
 
 
-def convert_tables(paths, destination: Path) -> tuple[dict, set[str]]:
+def rejection_reason(lemma, form, profile="default"):
+    """Assign a diagnostic primary reason without rewriting lexical data."""
+    text = lemma + form
+    if any(char.isspace() for char in text):
+        return "multiword"
+    uncovered = []
+    for value in (lemma, form):
+        covered = {index for token in lexical_tokens(value, profile)
+                   for index in range(token.start, token.end)}
+        uncovered.extend(char for index, char in enumerate(value) if index not in covered)
+    if any(unicodedata.category(char).startswith("N") for char in uncovered):
+        return "numeric-notation"
+    if any(unicodedata.category(char) == "Cf" for char in uncovered):
+        return "format-control"
+    return "punctuation-or-symbol"
+
+
+def convert_tables(paths, destination: Path, profile="default") -> tuple[dict, set[str]]:
     """Stream selected tables into TSV files and count omissions."""
     stats = dict.fromkeys(
         (
@@ -234,6 +244,8 @@ def convert_tables(paths, destination: Path) -> tuple[dict, set[str]]:
         0,
     )
     stats["malformed_examples"] = []
+    stats["rejection_counts"] = {}
+    stats["rejection_examples"] = {}
     scripts = set()
     latin = destination.with_name("latin.tsv")
     with (
@@ -247,14 +259,14 @@ def convert_tables(paths, destination: Path) -> tuple[dict, set[str]]:
         writers[0].writerow(("form", "lemma"))
         writers[1].writerow(("form", "lemma"))
         for path in paths:
-            convert_table(path, writers, stats, scripts)
+            convert_table(path, writers, stats, scripts, profile)
     return stats, scripts
 
 
-def convert_table(path, writers, stats, scripts) -> None:
+def convert_table(path, writers, stats, scripts, profile="default") -> None:
     """Process one source table without retaining its rows in memory."""
     for number, row in table_rows(path):
-        record_row(row, writers, stats, scripts, f"{path.name}:{number}")
+        record_row(row, writers, stats, scripts, f"{path.name}:{number}", profile)
 
 
 def prepare_source(directory, stage, version, paths) -> None:
@@ -269,9 +281,16 @@ def prepare_source(directory, stage, version, paths) -> None:
         f"{key} = {json.dumps(value, ensure_ascii=False)}"
         for key, value in metadata.items()
     )
+    entry = language_entry(directory.name)
+    profile = entry["profile"]
+    tokenization = (
+        "\n\n[tokenization]\nprofile = " + json.dumps(profile)
+        if profile != "default" else ""
+    )
     (stage / "config.toml").write_text(
-        "format_version = 1\n\n[metadata]\n"
+        f"format_version = {2 if profile != 'default' else 1}\n\n[metadata]\n"
         + fields
+        + tokenization
         + "\n\n[normalization]\nlowercase = true\nsubstitutions = []\n",
         encoding="utf-8",
     )
@@ -290,7 +309,7 @@ def prepare_source(directory, stage, version, paths) -> None:
         "Unsupported multiword/symbol entries are counted and omitted. "
         "Lemma spellings are also added as lookup forms. Dialect tables "
         "share one language code; ambiguous matches are retained.\n\n"
-        "Isolated non-Latin entries are excluded from ready packs. "
+        f"Tokenization profile: {profile}. Scope: {entry.get('scope', 'Reviewed local input')}. "
         "See build-info.json for checksums and conversion counts. "
         "Review the upstream terms before redistribution; conversion "
         "does not change the data license.\n\n"
@@ -340,6 +359,11 @@ def convert_language(directory: Path, output: Path, version: str) -> dict:
         "reasons": [],
         "sources": [{"file": p.name, "sha256": checksum(p)} for p in paths],
     }
+    entry = language_entry(directory.name)
+    if entry["status"] == "excluded":
+        record["status"] = "excluded"
+        record["reasons"] = [entry["reason"]]
+        return record
     if not paths:
         record["reasons"] = ["No recognized inflection table in checkout"]
         return record
@@ -351,10 +375,17 @@ def convert_language(directory: Path, output: Path, version: str) -> dict:
 
 def build_language(directory, paths, stage, output, version, record) -> dict:
     """Convert, classify and validate one language pack."""
-    stats, scripts = convert_tables(paths, stage / "forms.tsv")
+    entry = language_entry(directory.name)
+    profile = entry["profile"]
+    stats, scripts = convert_tables(paths, stage / "forms.tsv", profile)
     foreign_ratio = stats["non_latin_rows"] / max(stats["source_rows"], 1)
     reasons = deferred_reasons(directory.name, scripts, foreign_ratio)
-    record.update(stats, scripts=sorted(scripts), reasons=reasons)
+    record.update(stats, scripts=sorted(scripts), reasons=reasons,
+                  tokenization_profile=profile, scope=entry.get("scope", "Unreviewed input"))
+    if not stats["source_rows"] and not stats["malformed_rows"]:
+        record["status"] = "missing-data"
+        record["reasons"] = ["Recognized source tables contain no mappings"]
+        return record
     if not stats["accepted_rows"]:
         record["status"] = "deferred"
         record["reasons"].append("No mappings fit the current word tokenizer")
@@ -363,11 +394,6 @@ def build_language(directory, paths, stage, output, version, record) -> dict:
         reasons.append("Malformed input rows require inspection")
     record["status"] = "deferred" if reasons else "ready"
     record["excluded_non_latin_rows"] = 0
-    if not reasons:
-        (stage / "latin.tsv").replace(stage / "forms.tsv")
-        record["excluded_non_latin_rows"] = (
-            stats["accepted_rows"] - stats["latin_rows"]
-        )
     area = output / record["status"]
     prepare_source(directory, stage, version, paths)
     service = BlitzerService(use_config=False, plugins_dir=area / "packs")
@@ -454,7 +480,7 @@ def write_summary(output, records) -> None:
         "# UniMorph conversion report",
         "",
         "Only ready/assets belongs in the next release. Deferred data",
-        "needs script, segmentation or source-format work. A ready",
+        "needs capability, segmentation or source-format review. A ready",
         "pack passes technical checks; review upstream licensing and",
         "language-specific behavior before publication.",
         "",

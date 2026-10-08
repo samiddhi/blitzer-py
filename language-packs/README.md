@@ -4,6 +4,59 @@
 - Unfinished packs belong in `dev/` and are excluded from releases.
 - Pack databases and generated ZIPs are excluded from Git.
 
+See the [word-boundary and display-name assessment](../maintenance/reports/language-boundaries-plan.md)
+for dev-pack implementation queues, existing-pack limitations and proposed fixes.
+The [current project status](../maintenance/reports/project-status-20261008.md)
+records implemented profiles, promoted packs, remaining blockers and release commands.
+
+## Reviewed boundaries and names
+
+The application includes `blitzer/language-catalog.json`, a reviewed identity
+and capability catalog covering ready and development languages. The separate
+download registry includes only ready packs. Pack names are no longer inferred
+from arbitrary upstream README headings.
+
+Format 1 packs retain the original Unicode letter-run behavior. Format 2
+packs explicitly select an application-owned profile:
+
+```toml
+format_version = 2
+
+[metadata]
+language_name = "Zenzontepec Chatino"
+language_code = "czn"
+version = "0.2.0"
+author = "UniMorph contributors"
+
+[tokenization]
+profile = "tone-hyphen"
+
+[normalization]
+lowercase = true
+substitutions = []
+```
+
+Profiles preserve source offsets and are used consistently for dictionary,
+frequency and known-list validation. Nondefault profiles require the new
+application release; update `bltzr` before installing these packs. Archive
+filenames retain `-v1.zip` because their ZIP layout and database schema have
+not changed; the configuration inside declares format 2.
+
+To preview or reproduce the reviewed local refresh with full upstream data:
+
+```sh
+.venv/bin/python -m maintenance.language_refresh
+.venv/bin/python -m maintenance.language_refresh --apply
+```
+
+The second command rebuilds profiles, validates and promotes eligible packs,
+repairs metadata and regenerates the registries and the README's language list
+in alphabetical order by name. It preserves prior packs in a fresh ignored
+`maintenance/work/language-refresh-*` directory. It does not publish. The
+upstream checkout must be available at `maintenance/unimorph-data`, or supplied
+with `--source PATH`; use `--packs PATH` and `--work PATH` for alternate local
+directories. Publication still uses `make release` below.
+
 ## Publish a release
 
 Complete the [one-time GitHub/PyPI setup](../maintenance/RELEASING.md),

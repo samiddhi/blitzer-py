@@ -38,15 +38,7 @@ from bisect import bisect_right
 from dataclasses import dataclass, field, replace
 
 from blitzer.config import SORTS, validate_pattern
-
-
-@dataclass(frozen=True)
-class Token:
-    """Store a word and its offsets in the original input text."""
-
-    text: str
-    start: int
-    end: int
+from blitzer.tokenization import Token, tokenize, word
 
 
 @dataclass(frozen=True)
@@ -70,37 +62,6 @@ class VocabularyEntry:
     known_terms: set[str] = field(default_factory=set)
 
 
-def tokenize(text: str):
-    """Yield words with offsets into the unchanged original text.
-
-    Accept Unicode letters, subsequent combining marks and internal
-    apostrophes. Digits, hyphens and underscores separate words.
-    """
-    start = None
-    for index, char in enumerate(text):
-        category = unicodedata.category(char)[0]
-        starts_word = category == "L"
-        continues_word = start is not None and category == "M"
-        if starts_word or continues_word:
-            start = index if start is None else start
-            continue
-        if start is not None and _internal_apostrophe(text, index):
-            continue
-        if start is None:
-            continue
-        yield Token(text[start:index], start, index)
-        start = None
-    if start is not None:
-        yield Token(text[start:], start, len(text))
-
-
-def _internal_apostrophe(text, index) -> bool:
-    """Return whether an apostrophe is followed by a Unicode letter."""
-    if text[index] not in "'’" or index + 1 >= len(text):
-        return False
-    return unicodedata.category(text[index + 1])[0] == "L"
-
-
 def normalize(text: str, settings: dict) -> str:
     """Return normalized text using the supplied rules.
 
@@ -116,10 +77,9 @@ def normalize(text: str, settings: dict) -> str:
     return unicodedata.normalize("NFC", text)
 
 
-def _word(value: str) -> bool:
+def _word(value: str, profile="default") -> bool:
     """Check whether a string is exactly one supported word."""
-    tokens = list(tokenize(value))
-    return len(tokens) == 1 and tokens[0].text == value
+    return word(value, profile)
 
 
 def _sentences(text: str, pattern: str) -> list[tuple[int, int]]:
@@ -178,7 +138,7 @@ def parse_terms(text: str, normal: dict, label="known list"):
 
 def _known_term(value, normal, label, number) -> str:
     """Validate and normalize one known term with a source location."""
-    if not _word(value):
+    if not _word(value, normal.get("_profile", "default")):
         raise ValueError(
             f"{label}:{number}: expected one word per line, got {value!r}"
         )
@@ -335,7 +295,7 @@ def add_occurrence(entry, snippet, matched_keys, limit) -> VocabularyEntry:
 
 
 def collect_vocabulary(
-    text, normal, known, exact, candidates, options
+    text, normal, known, exact, candidates, options, *, tokens=None
 ) -> list[VocabularyEntry]:
     """Build vocabulary from supplied text and lookup data.
 
@@ -350,7 +310,9 @@ def collect_vocabulary(
     )
     starts = [left for left, _ in spans]
     entries = {}
-    for token in tokenize(text):
+    if tokens is None:
+        tokens = tokenize(text, normal.get("_profile", "default"))
+    for token in tokens:
         key = normalize(token.text, normal)
         flagged = filter_occurrence(
             key,
@@ -427,7 +389,8 @@ def normalize_mapping(form, lemma, normal, *, skip_unsupported=False):
         raise ValueError("blank or non-text form/lemma")
     key = normalize(form, normal)
     normalized_lemma = unicodedata.normalize("NFC", lemma)
-    unsupported = not _word(key) or not _word(normalized_lemma)
+    profile = normal.get("_profile", "default")
+    unsupported = not _word(key, profile) or not _word(normalized_lemma, profile)
     if unsupported and skip_unsupported:
         return None
     if unsupported:
@@ -441,13 +404,13 @@ def normalize_mapping(form, lemma, normal, *, skip_unsupported=False):
     return key, normalized_lemma
 
 
-def parse_frequency(term: str, value: str) -> tuple[str, float]:
+def parse_frequency(term: str, value: str, profile="default") -> tuple[str, float]:
     """Return an NFC word and finite nonnegative corpus frequency.
 
     Raise ValueError for malformed words or invalid numbers. This
     function reads no files and changes no caller-owned data.
     """
-    if not _word(term):
+    if not _word(term, profile):
         raise ValueError("invalid frequency row")
     frequency = float(value)
     if not math.isfinite(frequency) or frequency < 0:

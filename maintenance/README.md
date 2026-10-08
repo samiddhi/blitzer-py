@@ -1,6 +1,11 @@
 This directory contains repository maintenance tools. They are excluded
 from the installed application and its wheel/source distributions.
 
+See the [current project status](reports/project-status-20261008.md) for
+the word-boundary implementation, full pack inventory, remaining development
+work and exact release commands. `maintenance.language_refresh` previews or
+applies the reviewed local pack refresh; it never publishes.
+
 ## Publish a new release
 
 Complete the [one-time GitHub/PyPI setup](RELEASING.md) first. After that,
@@ -71,21 +76,26 @@ and `--language fra` to build only selected languages.
 
 - `REPORT.md` gives the full language inventory and deferral reasons.
 - `report.json` records counts, source checksums and output paths.
-- `ready/packs/` contains validated Latin-script packs.
+- `ready/packs/` contains validated packs with reviewed input capabilities.
 - `ready/assets/` contains their release ZIPs and checksum files.
-- `deferred/` holds packs requiring script, segmentation or input work.
+- `deferred/` holds packs requiring segmentation, orthography or input work.
 - `registry.json` lists technically ready additional download codes.
 
-The converter detects non-Latin letters in lemma/form pairs. If at least
-1% of source pairs contain them, the language is deferred. For isolated
-foreign terms below that threshold, the converter excludes those pairs
-from the Latin pack and records the count. Explicit segmentation exclusions
-also apply to languages such as Chinese, Japanese and Thai, including
-romanized datasets. This is a conservative automated first pass; review
-mixed orthographies before publication.
+The converter uses the reviewed `blitzer/language-catalog.json` capability
+catalog rather than a Latin-only gate. Known spaced orthographies can be
+released in any supported Unicode script. Unreviewed non-Latin codes,
+unresolved source conventions and unsupported lexical segmenters remain
+deferred. Japanese has an optional Sudachi adapter but its pack remains in
+dev pending dictionary-coverage review. Sanskrit, Tibetan and Urdu remain
+deferred; generic letter runs do not provide their lexical segmentation.
+The `zxx` special code is excluded, and empty source tables are reported as
+missing data. Scripts are still recorded for provenance; foreign-script
+lexical rows are preserved when a reviewed profile accepts them.
 
-Multiword, digit-bearing and symbol entries cannot fit the current
-tokenizer. They are omitted and counted. Empty paradigm slots are ignored;
+Multiword and unsupported symbol entries are omitted and counted. Reviewed
+tone profiles accept numeric tone notation without stripping it, and scoped
+profiles preserve internal punctuation or joiners. Rejections are counted by
+cause with bounded source examples. Empty paradigm slots are ignored;
 other malformed rows defer a dataset for inspection. Empty repositories
 are reported as `missing-data`; they cannot supply a pack. Deferred
 datasets with no supported rows have a report entry without a database.

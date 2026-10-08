@@ -152,7 +152,7 @@ def merge_packs(
     )
     append_attribution(stage, additional)
     info = stats | {
-        "format_version": 1,
+        "format_version": primary["format_version"],
         "base_sha256": pack_hash(base / "lemmas.db"),
         "additional_sha256": pack_hash(additional / "lemmas.db"),
         "base_build": read_build_info(base),

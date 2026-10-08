@@ -31,6 +31,7 @@ import pytest
 from click.testing import CliRunner
 
 from blitzer.core import BlitzerService
+from blitzer.config import load_plugin_config
 from blitzer.downloads import load_language_registry
 from maintenance.unimorph import (
     main,
@@ -76,15 +77,15 @@ def test_batch_classification(tmp_path):
     statuses = {row["code"]: row["status"] for row in records}
     assert statuses == {
         "eng": "ready",
-        "rus": "deferred",
+        "rus": "ready",
         "tha": "deferred",
         "epo": "missing-data",
     }
     assert before == {p: p.read_bytes() for p in before}
     assert {p.name for p in (output / "ready/assets").glob("*.zip")} == {
-        "blitzer-eng-v1.zip"
+        "blitzer-eng-v1.zip", "blitzer-rus-v1.zip"
     }
-    assert (output / "deferred/assets/blitzer-rus-v1.zip").exists()
+    assert (output / "ready/assets/blitzer-rus-v1.zip").exists()
     service = BlitzerService(
         use_config=False, plugins_dir=output / "ready/packs"
     )
@@ -104,7 +105,7 @@ def test_batch_classification(tmp_path):
     assert "Original attribution" in (pack / "README.md").read_text()
     assert "Original license" in (pack / "LICENSE").read_text()
     catalog = load_language_registry(output / "registry.json")
-    assert set(catalog) == {"eng"}
+    assert set(catalog) == {"eng", "rus"}
 
 
 def test_source_selection_and_compressed_data(tmp_path):
@@ -164,6 +165,9 @@ def test_pure_classification():
     assert script_names("LatinЖ") == {"CYRILLIC"}
     assert deferred_reasons("tha", set())
     assert not deferred_reasons("eng", set())
+    assert not deferred_reasons("rus", {"CYRILLIC"})
+    assert deferred_reasons("urd", {"ARABIC"})
+    assert deferred_reasons("san", {"DEVANAGARI"})
     assert parse_row(["# ignore"]) is None
     assert parse_row(["word", "words", "N", "extra"]) == ("word", "words")
     with pytest.raises(ValueError):
@@ -193,18 +197,18 @@ def test_batch_cli(tmp_path):
     assert "REPORT.md" in result.output
 
 
-def test_isolated_foreign_spellings_are_omitted(tmp_path):
-    """Keep a Latin pack and count isolated foreign-script rows."""
+def test_reviewed_profiles_preserve_foreign_spellings(tmp_path):
+    """Do not discard lexical data merely because its script differs."""
     source = tmp_path / "source"
     make_language(source, "eng", "word\twords\tN\n" * 101 + "βeta\tβetas\tN\n")
     output = tmp_path / "output"
     records = build_all(source, output)
     assert records[0]["status"] == "ready"
-    assert records[0]["excluded_non_latin_rows"] == 1
+    assert records[0]["excluded_non_latin_rows"] == 0
     with sqlite3.connect(output / "ready/packs/eng/lemmas.db") as conn:
-        assert conn.execute("SELECT lemma FROM lemmas").fetchall() == [
-            ("word",)
-        ]
+        assert set(conn.execute("SELECT lemma FROM lemmas").fetchall()) == {
+            ("word",), ("βeta",)
+        }
 
 
 def test_oversized_pack_is_deferred(tmp_path, monkeypatch):
@@ -219,3 +223,65 @@ def test_oversized_pack_is_deferred(tmp_path, monkeypatch):
     assert (output / records[0]["archive"]).exists()
     assert not registry_catalog(records)
     assert release_size_reasons(3 * 1024**3, 1024**3)
+
+def test_converter_tone_and_empty_data_classification(tmp_path):
+    """Conversion recovers lexical tones and distinguishes empty sources."""
+    source = tmp_path / "upstream"
+    for code, rows in {"azg": "m⁵mà¹\ttoan⁵³\tV\n", "pib": ""}.items():
+        path = source / code
+        path.mkdir(parents=True)
+        (path / code).write_text(rows)
+        (path / "README.md").write_text("# Data\n")
+    records = build_all(source, tmp_path / "converted")
+    assert [(r["code"], r["status"]) for r in records] == [
+        ("azg", "ready"), ("pib", "missing-data")
+    ]
+    config = load_plugin_config(tmp_path / "converted/ready/packs/azg")
+    assert config["metadata"]["language_name"] == "San Pedro Amuzgos Amuzgo"
+    assert config["normalization"]["_profile"] == "tone"
+
+
+def test_local_refresh_promotes_with_backup_and_updates_name_order(tmp_path, monkeypatch):
+    """A local refresh must retain its input and regenerate consistent catalogs."""
+    import shutil
+    from maintenance import language_refresh
+
+    source = tmp_path / "source"
+    make_language(source, "rus", "быть\tесть\tV\n")
+    records = build_all(source, tmp_path / "conversion")
+    checkout = tmp_path / "checkout"
+    packs = checkout / "language-packs"
+    development = packs / "dev/rus"
+    development.parent.mkdir(parents=True)
+    shutil.copytree(tmp_path / "conversion" / records[0]["pack"], development)
+    original = (development / "lemmas.db").read_bytes()
+    (checkout / "blitzer").mkdir()
+    (checkout / "maintenance/reports").mkdir(parents=True)
+    (checkout / "README.org").write_text("** Supported Languages\nold\n** Install\n")
+    monkeypatch.setattr(language_refresh, "ROOT", checkout)
+    work = tmp_path / "work"
+    result = language_refresh.refresh(packs, source, work)
+    assert result["promoted"] == ["rus"]
+    assert not development.exists()
+    assert (work / "backups/dev/rus/lemmas.db").read_bytes() == original
+    registry = json.loads((checkout / "blitzer/language-registry.json").read_text())
+    assert registry == {"rus": {"name": "Russian"}}
+    readme = (checkout / "README.org").read_text()
+    assert readme.index("Basic (base)") < readme.index("Russian (rus)")
+    assert all(c.status == "pass" for c in BlitzerService(
+        use_config=False, plugins_dir=packs).check_plugin("rus"))
+
+
+def test_local_refresh_validation_failure_preserves_destination(service, tmp_path):
+    """A malformed staging pack must never displace a valid installed pack."""
+    from maintenance.language_refresh import publish_local_pack
+
+    destination = service.plugins_dir / "slv"
+    original = (destination / "lemmas.db").read_bytes()
+    staged = tmp_path / "invalid"
+    staged.mkdir()
+    backup = tmp_path / "backup"
+    with pytest.raises(ValueError, match="Invalid pack"):
+        publish_local_pack(staged, destination, backup)
+    assert (destination / "lemmas.db").read_bytes() == original
+    assert not backup.exists()

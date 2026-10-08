@@ -1,0 +1,1203 @@
+{
+  "ady": {
+    "name": "Adyghe",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "afb": {
+    "name": "Gulf Arabic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "afr": {
+    "name": "Afrikaans",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ail": {
+    "name": "Eibela",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "aka": {
+    "name": "Akan",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ame": {
+    "name": "Yanesha",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "amh": {
+    "name": "Amharic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ang": {
+    "name": "Old English",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "ara": {
+    "name": "Modern Standard Arabic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "arn": {
+    "name": "Mapudungun",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "arz": {
+    "name": "Egyptian Arabic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "asm": {
+    "name": "Assamese",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ast": {
+    "name": "Asturian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "aym": {
+    "name": "Aymara",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "aze": {
+    "name": "Azerbaijani",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "azg": {
+    "name": "San Pedro Amuzgos Amuzgo",
+    "profile": "tone",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "bak": {
+    "name": "Bashkir",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "bel": {
+    "name": "Belarusian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ben": {
+    "name": "Bengali",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "bod": {
+    "name": "Tibetan",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires an evaluated lexical segmenter for ordinary text.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "bra": {
+    "name": "Braj",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "bre": {
+    "name": "Breton",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "bul": {
+    "name": "Bulgarian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "cat": {
+    "name": "Catalan",
+    "profile": "middle-dot",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ceb": {
+    "name": "Cebuano",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ces": {
+    "name": "Czech",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "chu": {
+    "name": "Old Church Slavic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "ckb": {
+    "name": "Central Kurdish",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ckt": {
+    "name": "Chukchi",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "cly": {
+    "name": "Eastern Highland Chatino",
+    "profile": "tone",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "cmn": {
+    "name": "Mandarin Chinese",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "cni": {
+    "name": "Ashaninka",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "cor": {
+    "name": "Cornish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "cpa": {
+    "name": "Tlatepuzco Chinantec",
+    "profile": "tone",
+    "status": "review",
+    "reason": "Source morpheme notation needs orthography review.",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "cre": {
+    "name": "Cree",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "crh": {
+    "name": "Crimean Tatar",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "csb": {
+    "name": "Kashubian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ctp": {
+    "name": "Yaitepec Chatino",
+    "profile": "tone",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "cym": {
+    "name": "Welsh",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "czn": {
+    "name": "Zenzontepec Chatino",
+    "profile": "tone-hyphen",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted."
+  },
+  "dak": {
+    "name": "Dakota",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "dan": {
+    "name": "Danish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "deu": {
+    "name": "German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "dje": {
+    "name": "Zarma",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "dsb": {
+    "name": "Lower Sorbian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "dzo": {
+    "name": "Dzongkha",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "ell": {
+    "name": "Modern Greek",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "eng": {
+    "name": "English",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "epo": {
+    "name": "Esperanto",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "est": {
+    "name": "Estonian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "eus": {
+    "name": "Basque",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "evn": {
+    "name": "Evenki",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "fao": {
+    "name": "Faroese",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "fas": {
+    "name": "Persian",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "fra": {
+    "name": "French",
+    "profile": "elision-french",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "frm": {
+    "name": "Middle French",
+    "profile": "elision-french",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "fro": {
+    "name": "Old French",
+    "profile": "elision-french",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "frr": {
+    "name": "North Frisian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "fry": {
+    "name": "Western Frisian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "fur": {
+    "name": "Friulian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gaa": {
+    "name": "Gã",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gal": {
+    "name": "Galician",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gla": {
+    "name": "Scottish Gaelic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gle": {
+    "name": "Irish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "glv": {
+    "name": "Manx",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gmh": {
+    "name": "Middle High German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "gml": {
+    "name": "Middle Low German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "goh": {
+    "name": "Old High German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "got": {
+    "name": "Gothic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "grc": {
+    "name": "Ancient Greek",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "grn": {
+    "name": "Guarani",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gsw": {
+    "name": "Swiss German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "guj": {
+    "name": "Gujarati",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "gup": {
+    "name": "Kunwinjku",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hai": {
+    "name": "Haida",
+    "profile": "internal-dot",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hbs": {
+    "name": "Serbo-Croatian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "heb": {
+    "name": "Hebrew",
+    "profile": "hebrew",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hil": {
+    "name": "Hiligaynon",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hin": {
+    "name": "Hindi",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hsb": {
+    "name": "Upper Sorbian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hsi": {
+    "name": "Kholosi",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hun": {
+    "name": "Hungarian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "hye": {
+    "name": "Armenian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ind": {
+    "name": "Indonesian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "isl": {
+    "name": "Icelandic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ita": {
+    "name": "Italian",
+    "profile": "elision-italian",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "itl": {
+    "name": "Itelmen",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "izh": {
+    "name": "Ingrian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "jpn": {
+    "name": "Japanese",
+    "profile": "sudachi",
+    "status": "deferred",
+    "reason": "Sudachi adapter available; UniMorph alignment and coverage require review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kal": {
+    "name": "Greenlandic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kan": {
+    "name": "Kannada",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kat": {
+    "name": "Georgian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kaz": {
+    "name": "Kazakh",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kbd": {
+    "name": "Kabardian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kca": {
+    "name": "Khanty",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ket": {
+    "name": "Ket",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "khk": {
+    "name": "Khalkha Mongolian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "khm": {
+    "name": "Khmer",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "kir": {
+    "name": "Kyrgyz",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kjh": {
+    "name": "Khakas",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "klr": {
+    "name": "Khaling",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kmr": {
+    "name": "Northern Kurdish (Kurmanji)",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kod": {
+    "name": "Kodi",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kon": {
+    "name": "Kongo",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "kor": {
+    "name": "Korean",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Whitespace-delimited eojeol; particle analysis is not implemented."
+  },
+  "krl": {
+    "name": "Karelian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lao": {
+    "name": "Lao",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "lat": {
+    "name": "Latin",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "lav": {
+    "name": "Latvian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lin": {
+    "name": "Lingala",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lit": {
+    "name": "Lithuanian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "liv": {
+    "name": "Livonian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lld": {
+    "name": "Ladin",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lud": {
+    "name": "Ludian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "lug": {
+    "name": "Luganda",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mag": {
+    "name": "Magahi",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mao": {
+    "name": "Māori",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mkd": {
+    "name": "Macedonian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mlg": {
+    "name": "Malagasy",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mlt": {
+    "name": "Maltese",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mon": {
+    "name": "Mongolian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mwf": {
+    "name": "Murrinhpatha",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "mya": {
+    "name": "Myanmar (Burmese)",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "nap": {
+    "name": "Neapolitan",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "nav": {
+    "name": "Navajo",
+    "profile": "final-glottal",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "nds": {
+    "name": "Low German",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "nld": {
+    "name": "Dutch",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "nno": {
+    "name": "Norwegian Nynorsk",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "nob": {
+    "name": "Norwegian Bokmål",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "non": {
+    "name": "Old Norse",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "nya": {
+    "name": "Chewa",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "oci": {
+    "name": "Occitan",
+    "profile": "middle-dot",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "olo": {
+    "name": "Livvi-Karelian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ood": {
+    "name": "O'odham",
+    "profile": "colon-glottal",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "orm": {
+    "name": "Oromo",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "oss": {
+    "name": "Ossetian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "osx": {
+    "name": "Old Saxon",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "ote": {
+    "name": "Mezquital Otomi",
+    "profile": "tone-hyphen",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted."
+  },
+  "otm": {
+    "name": "Sierra (Eastern Highland) Otomi",
+    "profile": "tone",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "pbs": {
+    "name": "Central Pame",
+    "profile": "tone-ascii",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "pei": {
+    "name": "Chichimec",
+    "profile": "tone",
+    "status": "review",
+    "reason": "Source morpheme notation needs orthography review.",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  "pib": {
+    "name": "Yine",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "pli": {
+    "name": "Pali",
+    "profile": "pali",
+    "status": "ready",
+    "scope": "Space-delimited Roman text; sandhi decomposition is not implemented."
+  },
+  "pnb": {
+    "name": "Western Punjabi",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "pol": {
+    "name": "Polish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "por": {
+    "name": "Portuguese",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "pqm": {
+    "name": "Passamaquoddy-Maliseet",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "pus": {
+    "name": "Pashto",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "que": {
+    "name": "Quechua",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ron": {
+    "name": "Romanian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "rus": {
+    "name": "Russian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sah": {
+    "name": "Sakha",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "san": {
+    "name": "Sanskrit",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires an evaluated lexical segmenter for ordinary text.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sdh": {
+    "name": "Southern Kurdish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "see": {
+    "name": "Seneca",
+    "profile": "final-glottal",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sga": {
+    "name": "Old Irish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "shp": {
+    "name": "Shipibo-Konibo",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sjo": {
+    "name": "Xibe",
+    "profile": "mongolian",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "slk": {
+    "name": "Slovak",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "slp": {
+    "name": "Lamaholot",
+    "profile": "default",
+    "status": "review",
+    "reason": "Source morpheme notation needs orthography review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "slv": {
+    "name": "Slovenian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sme": {
+    "name": "Northern Sami",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sna": {
+    "name": "Shona",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sot": {
+    "name": "Southern Sotho (Sesotho)",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "spa": {
+    "name": "Spanish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "sqi": {
+    "name": "Albanian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "swc": {
+    "name": "Congo Swahili",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "swe": {
+    "name": "Swedish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "syc": {
+    "name": "Classical Syriac",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tat": {
+    "name": "Tatar",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tel": {
+    "name": "Telugu",
+    "profile": "joiners",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tgk": {
+    "name": "Tajik",
+    "profile": "default",
+    "status": "review",
+    "reason": "Mixed transcription, malformed data or dictionary alignment needs review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tgl": {
+    "name": "Tagalog",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tha": {
+    "name": "Thai",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "tuk": {
+    "name": "Turkmen",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tur": {
+    "name": "Turkish",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "tyv": {
+    "name": "Tuvan",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "uig": {
+    "name": "Uyghur",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "ukr": {
+    "name": "Ukrainian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "urd": {
+    "name": "Urdu",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires an evaluated lexical segmenter for ordinary text.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "uzb": {
+    "name": "Uzbek",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "vec": {
+    "name": "Venetian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "vep": {
+    "name": "Veps",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "vot": {
+    "name": "Votic",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "vro": {
+    "name": "Võro",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "wmt": {
+    "name": "Walmajarri",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "wuu": {
+    "name": "Wu Chinese",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "xcl": {
+    "name": "Classical Armenian",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "xno": {
+    "name": "Anglo-Norman",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported."
+  },
+  "xty": {
+    "name": "Yoloxóchitl Mixtec",
+    "profile": "tone-hyphen",
+    "status": "ready",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted."
+  },
+  "yid": {
+    "name": "Yiddish",
+    "profile": "hebrew",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "yue": {
+    "name": "Cantonese",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "zho": {
+    "name": "Chinese",
+    "profile": "unavailable",
+    "status": "deferred",
+    "reason": "Requires a dedicated word segmenter.",
+    "scope": "Ordinary text requires lexical segmentation."
+  },
+  "zpv": {
+    "name": "Chichicapan Zapotec",
+    "profile": "default",
+    "status": "review",
+    "reason": "Source morpheme notation needs orthography review.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "zul": {
+    "name": "Zulu",
+    "profile": "default",
+    "status": "ready",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  "zxx": {
+    "name": "No linguistic content",
+    "profile": "default",
+    "status": "excluded",
+    "reason": "No linguistic content is an ISO special code, not a language.",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  }
+}

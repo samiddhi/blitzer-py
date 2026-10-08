@@ -1,5 +1,11 @@
 # One-command releases
 
+The [2026-10-08 project status report](reports/project-status-20261008.md)
+records the prepared language refresh, remaining development cases and
+commands for releasing this checkout. Format-2 packs require the accompanying
+new application; the release helper rebuilds assets from the current local
+packs. No extra pack refresh is needed before publication.
+
 After the one-time setup below, run `make release` from the project root.
 The helper increments only the application's patch version, commits all
 non-ignored changes, pushes `master` and its tag, uploads changed language

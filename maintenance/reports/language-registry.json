@@ -1,4 +1,10 @@
 {
+  "ady": {
+    "name": "Adyghe"
+  },
+  "afb": {
+    "name": "Gulf Arabic"
+  },
   "afr": {
     "name": "Afrikaans"
   },
@@ -11,11 +17,23 @@
   "ame": {
     "name": "Yanesha"
   },
+  "amh": {
+    "name": "Amharic"
+  },
   "ang": {
     "name": "Old English"
   },
+  "ara": {
+    "name": "Modern Standard Arabic"
+  },
   "arn": {
     "name": "Mapudungun"
+  },
+  "arz": {
+    "name": "Egyptian Arabic"
+  },
+  "asm": {
+    "name": "Assamese"
   },
   "ast": {
     "name": "Asturian"
@@ -26,8 +44,26 @@
   "aze": {
     "name": "Azerbaijani"
   },
+  "azg": {
+    "name": "San Pedro Amuzgos Amuzgo"
+  },
+  "bak": {
+    "name": "Bashkir"
+  },
+  "bel": {
+    "name": "Belarusian"
+  },
+  "ben": {
+    "name": "Bengali"
+  },
+  "bra": {
+    "name": "Braj"
+  },
   "bre": {
     "name": "Breton"
+  },
+  "bul": {
+    "name": "Bulgarian"
   },
   "cat": {
     "name": "Catalan"
@@ -36,7 +72,16 @@
     "name": "Cebuano"
   },
   "ces": {
-    "name": "• ces.xz"
+    "name": "Czech"
+  },
+  "chu": {
+    "name": "Old Church Slavic"
+  },
+  "ckb": {
+    "name": "Central Kurdish"
+  },
+  "cly": {
+    "name": "Eastern Highland Chatino"
   },
   "cni": {
     "name": "Ashaninka"
@@ -53,8 +98,11 @@
   "csb": {
     "name": "Kashubian"
   },
+  "ctp": {
+    "name": "Yaitepec Chatino"
+  },
   "cym": {
-    "name": "CYM"
+    "name": "Welsh"
   },
   "czn": {
     "name": "Zenzontepec Chatino"
@@ -74,6 +122,9 @@
   "dsb": {
     "name": "Lower Sorbian"
   },
+  "ell": {
+    "name": "Modern Greek"
+  },
   "eng": {
     "name": "English"
   },
@@ -85,6 +136,9 @@
   },
   "fao": {
     "name": "Faroese"
+  },
+  "fas": {
+    "name": "Persian"
   },
   "fra": {
     "name": "French"
@@ -99,7 +153,7 @@
     "name": "North Frisian"
   },
   "fry": {
-    "name": "FRY"
+    "name": "Western Frisian"
   },
   "fur": {
     "name": "Friulian"
@@ -111,7 +165,7 @@
     "name": "Galician"
   },
   "gla": {
-    "name": "GLA"
+    "name": "Scottish Gaelic"
   },
   "gle": {
     "name": "Irish"
@@ -128,8 +182,17 @@
   "goh": {
     "name": "Old High German"
   },
+  "got": {
+    "name": "Gothic"
+  },
+  "grc": {
+    "name": "Ancient Greek"
+  },
   "gsw": {
     "name": "Swiss German"
+  },
+  "guj": {
+    "name": "Gujarati"
   },
   "gup": {
     "name": "Kunwinjku"
@@ -137,8 +200,17 @@
   "hai": {
     "name": "Haida"
   },
+  "hbs": {
+    "name": "Serbo-Croatian"
+  },
+  "heb": {
+    "name": "Hebrew"
+  },
   "hil": {
     "name": "Hiligaynon"
+  },
+  "hin": {
+    "name": "Hindi"
   },
   "hsb": {
     "name": "Upper Sorbian"
@@ -148,6 +220,9 @@
   },
   "hun": {
     "name": "Hungarian"
+  },
+  "hye": {
+    "name": "Armenian"
   },
   "ind": {
     "name": "Indonesian"
@@ -164,11 +239,32 @@
   "kal": {
     "name": "Greenlandic"
   },
+  "kan": {
+    "name": "Kannada"
+  },
+  "kat": {
+    "name": "Georgian"
+  },
+  "kaz": {
+    "name": "Kazakh"
+  },
+  "kbd": {
+    "name": "Kabardian"
+  },
+  "ket": {
+    "name": "Ket"
+  },
+  "khk": {
+    "name": "Khalkha Mongolian"
+  },
+  "kjh": {
+    "name": "Khakas"
+  },
   "klr": {
     "name": "Khaling"
   },
   "kmr": {
-    "name": "KMR"
+    "name": "Northern Kurdish (Kurmanji)"
   },
   "kod": {
     "name": "Kodi"
@@ -203,8 +299,14 @@
   "lug": {
     "name": "Luganda"
   },
+  "mag": {
+    "name": "Magahi"
+  },
   "mao": {
     "name": "Māori"
+  },
+  "mkd": {
+    "name": "Macedonian"
   },
   "mlg": {
     "name": "Malagasy"
@@ -240,10 +342,10 @@
     "name": "Chewa"
   },
   "oci": {
-    "name": "OCI"
+    "name": "Occitan"
   },
   "olo": {
-    "name": "Livvi"
+    "name": "Livvi-Karelian"
   },
   "ood": {
     "name": "O'odham"
@@ -257,14 +359,32 @@
   "ote": {
     "name": "Mezquital Otomi"
   },
+  "pbs": {
+    "name": "Central Pame"
+  },
+  "pli": {
+    "name": "Pali"
+  },
+  "pol": {
+    "name": "Polish"
+  },
   "por": {
     "name": "Portuguese"
+  },
+  "pus": {
+    "name": "Pashto"
   },
   "que": {
     "name": "Quechua"
   },
   "ron": {
     "name": "Romanian"
+  },
+  "rus": {
+    "name": "Russian"
+  },
+  "sah": {
+    "name": "Sakha"
   },
   "sdh": {
     "name": "Southern Kurdish"
@@ -278,11 +398,17 @@
   "shp": {
     "name": "Shipibo-Konibo"
   },
+  "sjo": {
+    "name": "Xibe"
+  },
   "slk": {
-    "name": "Data"
+    "name": "Slovak"
   },
   "slp": {
     "name": "Lamaholot"
+  },
+  "slv": {
+    "name": "Slovenian"
   },
   "sme": {
     "name": "Northern Sami"
@@ -291,7 +417,7 @@
     "name": "Shona"
   },
   "sot": {
-    "name": "Sotho"
+    "name": "Southern Sotho (Sesotho)"
   },
   "spa": {
     "name": "Spanish"
@@ -300,37 +426,49 @@
     "name": "Albanian"
   },
   "swc": {
-    "name": "Swahili"
+    "name": "Congo Swahili"
   },
   "swe": {
     "name": "Swedish"
   },
+  "syc": {
+    "name": "Classical Syriac"
+  },
   "tat": {
-    "name": "TAT"
+    "name": "Tatar"
+  },
+  "tel": {
+    "name": "Telugu"
   },
   "tgl": {
     "name": "Tagalog"
   },
   "tuk": {
-    "name": "TUK"
+    "name": "Turkmen"
   },
   "tur": {
     "name": "Turkish"
   },
+  "tyv": {
+    "name": "Tuvan"
+  },
   "uig": {
     "name": "Uyghur"
+  },
+  "ukr": {
+    "name": "Ukrainian"
   },
   "uzb": {
     "name": "Uzbek"
   },
   "vec": {
-    "name": "VEC"
+    "name": "Venetian"
   },
   "vep": {
     "name": "Veps"
   },
   "vot": {
-    "name": "VOT"
+    "name": "Votic"
   },
   "vro": {
     "name": "Võro"
@@ -338,8 +476,17 @@
   "wmt": {
     "name": "Walmajarri"
   },
+  "xcl": {
+    "name": "Classical Armenian"
+  },
   "xno": {
-    "name": "Norman"
+    "name": "Anglo-Norman"
+  },
+  "xty": {
+    "name": "Yoloxóchitl Mixtec"
+  },
+  "yid": {
+    "name": "Yiddish"
   },
   "zpv": {
     "name": "Chichicapan Zapotec"

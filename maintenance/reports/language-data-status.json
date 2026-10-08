@@ -1,0 +1,92 @@
+[
+  {
+    "code": "epo",
+    "name": "Esperanto",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "grn",
+    "name": "Guarani",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "mon",
+    "name": "Mongolian",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "oss",
+    "name": "Ossetian",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "pib",
+    "name": "Yine",
+    "status": "missing-data",
+    "reasons": [
+      "Recognized source tables contain no mappings"
+    ],
+    "sources": [
+      {
+        "file": "pib",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "source_rows": 0,
+    "accepted_rows": 0,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [],
+    "tokenization_profile": "default",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  {
+    "code": "pnb",
+    "name": "Western Punjabi",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "pqm",
+    "name": "Passamaquoddy-Maliseet",
+    "status": "missing-data",
+    "reasons": [
+      "No recognized inflection table in checkout"
+    ],
+    "sources": []
+  },
+  {
+    "code": "zxx",
+    "name": "No linguistic content",
+    "status": "excluded",
+    "reasons": [
+      "No linguistic content is an ISO special code, not a language."
+    ],
+    "sources": []
+  }
+]

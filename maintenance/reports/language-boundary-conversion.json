@@ -1,0 +1,2225 @@
+[
+  {
+    "code": "asm",
+    "name": "Assamese",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "asm",
+        "sha256": "043bc127d1ea3d370872c602a06b0710df8dfc1d455bcbd2bde07f9dd257d164"
+      }
+    ],
+    "source_rows": 94147,
+    "accepted_rows": 75981,
+    "unsupported_rows": 18166,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 94147,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 17048,
+      "punctuation-or-symbol": 956,
+      "format-control": 162
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "asm:321",
+          "lemma": "সুগৰী পহু",
+          "form": "সুগৰী পহু"
+        },
+        {
+          "location": "asm:322",
+          "lemma": "সুগৰী পহু",
+          "form": "সুগৰী পহুটো"
+        },
+        {
+          "location": "asm:323",
+          "lemma": "সুগৰী পহু",
+          "form": "সুগৰী পহুজনী"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "asm:1258",
+          "lemma": "অমিতা",
+          "form": "-অক"
+        },
+        {
+          "location": "asm:2496",
+          "lemma": "কাঠ-পেঞ্চিল",
+          "form": "কাঠ-পেঞ্চিল"
+        },
+        {
+          "location": "asm:2497",
+          "lemma": "কাঠ-পেঞ্চিল",
+          "form": "কাঠ-পেঞ্চিলডাল"
+        }
+      ],
+      "format-control": [
+        {
+          "location": "asm:53798",
+          "lemma": "তিওৱা",
+          "form": "তিয়াওঁতে⁠-⁠তিয়াওঁতে"
+        },
+        {
+          "location": "asm:53799",
+          "lemma": "তিওৱা",
+          "form": "নিতিয়াওঁতে⁠-⁠নিতিয়াওঁতে"
+        },
+        {
+          "location": "asm:53806",
+          "lemma": "তিওৱা",
+          "form": "তিয়াই⁠-⁠তিয়াই"
+        }
+      ]
+    },
+    "scripts": [
+      "BENGALI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 7265,
+    "unique_lemmas": 1446,
+    "unique_forms": 68726,
+    "self_forms_added": 10,
+    "pack": "ready/packs/asm",
+    "archive": "ready/assets/blitzer-asm-v1.zip"
+  },
+  {
+    "code": "azg",
+    "name": "San Pedro Amuzgos Amuzgo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "azg",
+        "sha256": "a24f810f9e446a4e1eddadcf4974ea161160d2874ab1aa66d3af5156f47c228e"
+      }
+    ],
+    "source_rows": 12204,
+    "accepted_rows": 9487,
+    "unsupported_rows": 2717,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 31,
+    "latin_rows": 9462,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 10,
+      "numeric-notation": 7,
+      "multiword": 2700
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "azg:197",
+          "lemma": "n⁵na³ki³ntyha³",
+          "form": "ki³nàʔ¹kì|ntyhâ³¹"
+        },
+        {
+          "location": "azg:2929",
+          "lemma": "n⁵ndí⁵ki³hndyu³",
+          "form": "kwí⁵ki³hndyu⁵³."
+        },
+        {
+          "location": "azg:3412",
+          "lemma": "n⁵ndi³ki³tyéʔ⁵",
+          "form": "to³bi³ki³ty´éʔ⁵há⁵á⁵"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "azg:568",
+          "lemma": "n⁵ndaʔ³⁴",
+          "form": "to³nda³⁴á.⁵"
+        },
+        {
+          "location": "azg:578",
+          "lemma": "n⁵ndaʔ³⁴tzʔon⁵³",
+          "form": "hndâʔ³¹tzʔon.⁵³"
+        },
+        {
+          "location": "azg:641",
+          "lemma": "n⁵ndɛ¹",
+          "form": "to³ndê.³¹"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "azg:793",
+          "lemma": "n⁵ndɛ¹² n⁵ntzʔa³⁵",
+          "form": "hndɛ¹²sʔa⁵³"
+        },
+        {
+          "location": "azg:794",
+          "lemma": "n⁵ndɛ¹² n⁵ntzʔa³⁵",
+          "form": "hndɛ¹²saʔ⁵³"
+        },
+        {
+          "location": "azg:795",
+          "lemma": "n⁵ndɛ¹² n⁵ntzʔa³⁵",
+          "form": "hndɛ¹²sʔa³⁵"
+        }
+      ]
+    },
+    "scripts": [
+      "GREEK"
+    ],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 166,
+    "unique_lemmas": 258,
+    "unique_forms": 9426,
+    "self_forms_added": 105,
+    "pack": "ready/packs/azg",
+    "archive": "ready/assets/blitzer-azg-v1.zip"
+  },
+  {
+    "code": "ben",
+    "name": "Bengali",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ben",
+        "sha256": "b0f1e2d005bce183dfcc2a570de1ce3d4d9a17feafa6c222b3f72b3e6ff894b2"
+      }
+    ],
+    "source_rows": 4443,
+    "accepted_rows": 3293,
+    "unsupported_rows": 1150,
+    "malformed_rows": 0,
+    "ignored_rows": 138,
+    "non_latin_rows": 4443,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 1150
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "ben:14",
+          "lemma": "অনুবাদ করা",
+          "form": "অনুবাদ করলো"
+        },
+        {
+          "location": "ben:15",
+          "lemma": "অনুবাদ করা",
+          "form": "অনুবাদ করেছি"
+        },
+        {
+          "location": "ben:16",
+          "lemma": "অনুবাদ করা",
+          "form": "অনুবাদ করছিলো"
+        }
+      ]
+    },
+    "scripts": [
+      "BENGALI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 438,
+    "unique_lemmas": 111,
+    "unique_forms": 2855,
+    "self_forms_added": 0,
+    "pack": "ready/packs/ben",
+    "archive": "ready/assets/blitzer-ben-v1.zip"
+  },
+  {
+    "code": "bod",
+    "name": "Tibetan",
+    "status": "deferred",
+    "reasons": [
+      "Requires an evaluated lexical segmenter for ordinary text.",
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "bod",
+        "sha256": "e99fb22cd41b575065255bf312dfdb0d0c4625a223ec10ee1a46d29a32e882f2"
+      }
+    ],
+    "source_rows": 5067,
+    "accepted_rows": 0,
+    "unsupported_rows": 5067,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 5067,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 5067
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "bod:1",
+          "lemma": "ཀུམ།",
+          "form": "ཀུམ།"
+        },
+        {
+          "location": "bod:2",
+          "lemma": "ཀུམ།",
+          "form": "ཀུམ།"
+        },
+        {
+          "location": "bod:3",
+          "lemma": "ཀུམ།",
+          "form": "ཀུམ།"
+        }
+      ]
+    },
+    "scripts": [
+      "TIBETAN"
+    ],
+    "tokenization_profile": "unavailable",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted."
+  },
+  {
+    "code": "bra",
+    "name": "Braj",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "bra",
+        "sha256": "d111e1cc3be7da430e1acc555e68a77f1696eabbde2a353c07958b52cf883a1b"
+      }
+    ],
+    "source_rows": 1821,
+    "accepted_rows": 1814,
+    "unsupported_rows": 7,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1821,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 7
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "bra:91",
+          "lemma": "आनंद",
+          "form": "आनंद-दायक"
+        },
+        {
+          "location": "bra:583",
+          "lemma": "डॉ.",
+          "form": "डॉ."
+        },
+        {
+          "location": "bra:673",
+          "lemma": "दु:ख",
+          "form": "दु:ख"
+        }
+      ]
+    },
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 32,
+    "unique_lemmas": 1241,
+    "unique_forms": 2028,
+    "self_forms_added": 246,
+    "pack": "ready/packs/bra",
+    "archive": "ready/assets/blitzer-bra-v1.zip"
+  },
+  {
+    "code": "cat",
+    "name": "Catalan",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cat",
+        "sha256": "22d8ec53f9f6bb40ad97619c01961ca60c0c046804173a9f395c6bf54194ca15"
+      }
+    ],
+    "source_rows": 81576,
+    "accepted_rows": 79126,
+    "unsupported_rows": 2450,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 79126,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 2324,
+      "multiword": 126
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "cat:1586",
+          "lemma": "acostumar-se",
+          "form": "acostumada"
+        },
+        {
+          "location": "cat:1587",
+          "lemma": "acostumar-se",
+          "form": "acostumades"
+        },
+        {
+          "location": "cat:1588",
+          "lemma": "acostumar-se",
+          "form": "acostumant"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "cat:8419",
+          "lemma": "asseure's",
+          "form": "ens asseguem"
+        },
+        {
+          "location": "cat:8420",
+          "lemma": "asseure's",
+          "form": "ens asseguérem"
+        },
+        {
+          "location": "cat:8421",
+          "lemma": "asseure's",
+          "form": "ens asseguéssim"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "middle-dot",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 16423,
+    "unique_lemmas": 1502,
+    "unique_forms": 62709,
+    "self_forms_added": 6,
+    "pack": "ready/packs/cat",
+    "archive": "ready/assets/blitzer-cat-v1.zip"
+  },
+  {
+    "code": "ckb",
+    "name": "Central Kurdish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ckb-context-complete.tsv",
+        "sha256": "3272b7c46321a071ddfbb888fde9f97bfe81f694560b6d3340e256d27fd85021"
+      }
+    ],
+    "source_rows": 1001,
+    "accepted_rows": 997,
+    "unsupported_rows": 4,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1000,
+    "latin_rows": 1,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 4
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "ckb-context-complete.tsv:177",
+          "lemma": "لە+ئەو",
+          "form": "لەو"
+        },
+        {
+          "location": "ckb-context-complete.tsv:178",
+          "lemma": "لە+ئەم",
+          "form": "لەم"
+        },
+        {
+          "location": "ckb-context-complete.tsv:179",
+          "lemma": "لە+ئەو",
+          "form": "لەوەش"
+        }
+      ]
+    },
+    "scripts": [
+      "ARABIC"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 806,
+    "unique_forms": 1431,
+    "self_forms_added": 434,
+    "pack": "ready/packs/ckb",
+    "archive": "ready/assets/blitzer-ckb-v1.zip"
+  },
+  {
+    "code": "cly",
+    "name": "Eastern Highland Chatino",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "cly",
+        "sha256": "788a59683a1ac0c735eb6ab00021c916a6bade4b54cd7991d22e3594e8fe552c"
+      }
+    ],
+    "source_rows": 4716,
+    "accepted_rows": 2835,
+    "unsupported_rows": 1881,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2835,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 1876,
+      "punctuation-or-symbol": 4,
+      "numeric-notation": 1
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "cly:1",
+          "lemma": "sqan¹",
+          "form": "nsqan¹ wa⁴²"
+        },
+        {
+          "location": "cly:3",
+          "lemma": "ntykonq⁴²",
+          "form": "ntykonq¹⁴⁰ wa⁴²"
+        },
+        {
+          "location": "cly:6",
+          "lemma": "ntsiq³",
+          "form": "ntsiq¹⁴ renq²⁴"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "cly:894",
+          "lemma": "lqa³",
+          "form": "nt/lyqa¹⁴"
+        },
+        {
+          "location": "cly:928",
+          "lemma": "lqa³",
+          "form": "nt/lyxqan⁴⁰"
+        },
+        {
+          "location": "cly:2177",
+          "lemma": "lqa³",
+          "form": "nt/lyqan¹⁴"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "cly:3757",
+          "lemma": "xti²⁰",
+          "form": "xten⁴/²⁰"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 593,
+    "unique_lemmas": 185,
+    "unique_forms": 2246,
+    "self_forms_added": 4,
+    "pack": "ready/packs/cly",
+    "archive": "ready/assets/blitzer-cly-v1.zip"
+  },
+  {
+    "code": "cpa",
+    "name": "Tlatepuzco Chinantec",
+    "status": "deferred",
+    "reasons": [
+      "Source morpheme notation needs orthography review."
+    ],
+    "sources": [
+      {
+        "file": "cpa",
+        "sha256": "14ea7578991ba5f607fb4ed84aaa5907ab8970a298ee898787f9f12fbc86f633"
+      }
+    ],
+    "source_rows": 7893,
+    "accepted_rows": 4214,
+    "unsupported_rows": 3679,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 4214,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 3425,
+      "numeric-notation": 8,
+      "multiword": 246
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "cpa:2",
+          "lemma": "ɁḗɁ²",
+          "form": "mi³-ɁḗɁ²"
+        },
+        {
+          "location": "cpa:5",
+          "lemma": "Ɂlǿg²",
+          "form": "mi³-Ɂlǿg²"
+        },
+        {
+          "location": "cpa:8",
+          "lemma": "Ɂlǿg²",
+          "form": "mi³-Ɂlǿg²"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "cpa:441",
+          "lemma": "ha²+lei¹",
+          "form": "ha³+lig2¹"
+        },
+        {
+          "location": "cpa:541",
+          "lemma": "ti²+líɁ¹",
+          "form": "ti²+lei2¹"
+        },
+        {
+          "location": "cpa:542",
+          "lemma": "ti²+líɁ¹",
+          "form": "mi³-ti²+lei2¹"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "cpa:706",
+          "lemma": "ɁiuɁ³ (ɁéɁ¹)",
+          "form": "ɁiuɁ³"
+        },
+        {
+          "location": "cpa:707",
+          "lemma": "ɁiuɁ³ (ɁéɁ¹)",
+          "form": "mi³-ɁiuɁ³"
+        },
+        {
+          "location": "cpa:708",
+          "lemma": "ɁiuɁ³ (ɁéɁ¹)",
+          "form": "ɁiuɁ³"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 2238,
+    "unique_lemmas": 555,
+    "unique_forms": 1980,
+    "self_forms_added": 4,
+    "pack": "deferred/packs/cpa",
+    "archive": "deferred/assets/blitzer-cpa-v1.zip"
+  },
+  {
+    "code": "ctp",
+    "name": "Yaitepec Chatino",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ctp",
+        "sha256": "44c971c0a58890b22dd787e01f6801ff39dbef7e466330ae3d85006a7578ac8f"
+      }
+    ],
+    "source_rows": 3796,
+    "accepted_rows": 3585,
+    "unsupported_rows": 211,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1019,
+    "latin_rows": 2619,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 105,
+      "multiword": 51,
+      "numeric-notation": 55
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "ctp:16",
+          "lemma": "tyʔo",
+          "form": "tyʔo/lyo²¹"
+        },
+        {
+          "location": "ctp:17",
+          "lemma": "tyʔo",
+          "form": "tyʔo/lyo³ᐟ"
+        },
+        {
+          "location": "ctp:18",
+          "lemma": "tyʔo",
+          "form": "tyʔo/lyo¹"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "ctp:773",
+          "lemma": "tkwi",
+          "form": "nwtkwi, nkkwi²¹"
+        },
+        {
+          "location": "ctp:774",
+          "lemma": "tkwi",
+          "form": "nwtkwi, nkkwi³ᐟ"
+        },
+        {
+          "location": "ctp:775",
+          "lemma": "tkwi",
+          "form": "nwtkwi, nkkwi¹"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "ctp:1224",
+          "lemma": "xkwan",
+          "form": "xkwan:⁴³"
+        },
+        {
+          "location": "ctp:1225",
+          "lemma": "xkwan",
+          "form": "xkwan:¹"
+        },
+        {
+          "location": "ctp:1226",
+          "lemma": "xkwan",
+          "form": "xkwan:¹²"
+        }
+      ]
+    },
+    "scripts": [
+      "CANADIAN"
+    ],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 1233,
+    "unique_lemmas": 217,
+    "unique_forms": 2569,
+    "self_forms_added": 217,
+    "pack": "ready/packs/ctp",
+    "archive": "ready/assets/blitzer-ctp-v1.zip"
+  },
+  {
+    "code": "czn",
+    "name": "Zenzontepec Chatino",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "czn",
+        "sha256": "97320a5eae3a7e431e7818e1b7de3184133b205b2ba575d0113aebc9e194900f"
+      }
+    ],
+    "source_rows": 1567,
+    "accepted_rows": 1538,
+    "unsupported_rows": 29,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1538,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 8,
+      "punctuation-or-symbol": 21
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "czn:451",
+          "lemma": "i-sukwa¹",
+          "form": "ta la nt-i-sukwa¹"
+        },
+        {
+          "location": "czn:647",
+          "lemma": "y-uteʔ",
+          "form": "tala n-ch-uteʔ"
+        },
+        {
+          "location": "czn:831",
+          "lemma": "ene",
+          "form": "tala nt-ene"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "czn:746",
+          "lemma": "y-a²la",
+          "form": "ch–a²la"
+        },
+        {
+          "location": "czn:814",
+          "lemma": "y-ukwą",
+          "form": "ch–ukwą"
+        },
+        {
+          "location": "czn:824",
+          "lemma": "ii",
+          "form": "nch-a¹=ti²ʔ"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 20,
+    "unique_lemmas": 386,
+    "unique_forms": 1895,
+    "self_forms_added": 377,
+    "pack": "ready/packs/czn",
+    "archive": "ready/assets/blitzer-czn-v1.zip"
+  },
+  {
+    "code": "fas",
+    "name": "Persian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fas",
+        "sha256": "58e271562c184ed0bc38d85bf91e0d5427c32e4b5a55f2bf42bbdeb0843ca232"
+      }
+    ],
+    "source_rows": 37128,
+    "accepted_rows": 5589,
+    "unsupported_rows": 31539,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 37128,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 31539
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "fas:2",
+          "lemma": "آبتنی کردن",
+          "form": "آبتنی بکن"
+        },
+        {
+          "location": "fas:3",
+          "lemma": "آبتنی کردن",
+          "form": "آبتنی بکن"
+        },
+        {
+          "location": "fas:4",
+          "lemma": "آبتنی کردن",
+          "form": "آبتنی بکنی"
+        }
+      ]
+    },
+    "scripts": [
+      "ARABIC"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 1888,
+    "unique_lemmas": 69,
+    "unique_forms": 3701,
+    "self_forms_added": 0,
+    "pack": "ready/packs/fas",
+    "archive": "ready/assets/blitzer-fas-v1.zip"
+  },
+  {
+    "code": "fra",
+    "name": "French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fra.um4",
+        "sha256": "4365f2f4660b9f933c6b76ee81c1445e8a02b67ee2526a84575e7f8e656ac9ce"
+      }
+    ],
+    "source_rows": 448447,
+    "accepted_rows": 446058,
+    "unsupported_rows": 2389,
+    "malformed_rows": 0,
+    "ignored_rows": 55,
+    "non_latin_rows": 0,
+    "latin_rows": 446058,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 1168,
+      "numeric-notation": 22,
+      "multiword": 1199
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "fra.um4:3886",
+          "lemma": "V.T.T.",
+          "form": "V.T.T."
+        },
+        {
+          "location": "fra.um4:3887",
+          "lemma": "V.T.T.",
+          "form": "V.T.T."
+        },
+        {
+          "location": "fra.um4:4300",
+          "lemma": "Ltee.",
+          "form": "Ltee."
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "fra.um4:12758",
+          "lemma": "100e",
+          "form": "100e"
+        },
+        {
+          "location": "fra.um4:12759",
+          "lemma": "100e",
+          "form": "100e"
+        },
+        {
+          "location": "fra.um4:35954",
+          "lemma": "M.16",
+          "form": "M.16"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "fra.um4:30348",
+          "lemma": "chum",
+          "form": "chum de fille"
+        },
+        {
+          "location": "fra.um4:102199",
+          "lemma": "dévêtir",
+          "form": "se dévêtir"
+        },
+        {
+          "location": "fra.um4:109617",
+          "lemma": "s'y prendre",
+          "form": "s'y prendre"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "elision-french",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 94140,
+    "unique_lemmas": 57596,
+    "unique_forms": 362263,
+    "self_forms_added": 10345,
+    "pack": "ready/packs/fra",
+    "archive": "ready/assets/blitzer-fra-v1.zip"
+  },
+  {
+    "code": "frm",
+    "name": "Middle French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "frm",
+        "sha256": "45af05cce1284b1c07fac6a4179adf075e56691c5f0885323c33ba3eba800927"
+      }
+    ],
+    "source_rows": 36970,
+    "accepted_rows": 36260,
+    "unsupported_rows": 710,
+    "malformed_rows": 0,
+    "ignored_rows": 835,
+    "non_latin_rows": 0,
+    "latin_rows": 36260,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 710
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "frm:8",
+          "lemma": "acoustrer",
+          "form": "en acoustrant"
+        },
+        {
+          "location": "frm:71",
+          "lemma": "acoustumer",
+          "form": "en acoustumant"
+        },
+        {
+          "location": "frm:134",
+          "lemma": "fiancer",
+          "form": "en fiançant"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "elision-french",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 8946,
+    "unique_lemmas": 603,
+    "unique_forms": 27314,
+    "self_forms_added": 0,
+    "pack": "ready/packs/frm",
+    "archive": "ready/assets/blitzer-frm-v1.zip"
+  },
+  {
+    "code": "fro",
+    "name": "Old French",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "fro",
+        "sha256": "18dcf34c57321db9c8646435bf34ca3f69d4142a22e90a8387d71a7a0d3083f3"
+      }
+    ],
+    "source_rows": 123374,
+    "accepted_rows": 121636,
+    "unsupported_rows": 1738,
+    "malformed_rows": 0,
+    "ignored_rows": 2005,
+    "non_latin_rows": 0,
+    "latin_rows": 121636,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 1695,
+      "punctuation-or-symbol": 43
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "fro:8",
+          "lemma": "acopler",
+          "form": "en acoplant"
+        },
+        {
+          "location": "fro:83",
+          "lemma": "fenir",
+          "form": "en fenissant"
+        },
+        {
+          "location": "fro:150",
+          "lemma": "acorder",
+          "form": "en acordant"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "fro:5438",
+          "lemma": "adormir",
+          "form": "adormez-vos"
+        },
+        {
+          "location": "fro:5455",
+          "lemma": "adormir",
+          "form": "adorm-toi"
+        },
+        {
+          "location": "fro:5484",
+          "lemma": "adormir",
+          "form": "adormons-nos"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "elision-french",
+    "scope": "Edited text with word boundaries; continuous manuscript text is not supported.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 16349,
+    "unique_lemmas": 1700,
+    "unique_forms": 105302,
+    "self_forms_added": 15,
+    "pack": "ready/packs/fro",
+    "archive": "ready/assets/blitzer-fro-v1.zip"
+  },
+  {
+    "code": "guj",
+    "name": "Gujarati",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "guj",
+        "sha256": "fb6437c6544b823c00c85d78e3ba614bec80d1ee8a8982770ff24181f6a503a3"
+      },
+      {
+        "file": "guj_ddu",
+        "sha256": "c485227398b4fd1259df407504bf65f246b23817d195a30e318719c8a43a290d"
+      }
+    ],
+    "source_rows": 24027,
+    "accepted_rows": 16135,
+    "unsupported_rows": 7892,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 24027,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 7600,
+      "punctuation-or-symbol": 292
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "guj:222",
+          "lemma": "વિલાયતી જીરું",
+          "form": "વિલાયતી જીરું"
+        },
+        {
+          "location": "guj:223",
+          "lemma": "વિલાયતી જીરું",
+          "form": "વિલાયતી જીરાં"
+        },
+        {
+          "location": "guj:224",
+          "lemma": "વિલાયતી જીરું",
+          "form": "વિલાયતી જીરાંઓ"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "guj:2781",
+          "lemma": "વાપરવું",
+          "form": "વાપરીએ!"
+        },
+        {
+          "location": "guj:2783",
+          "lemma": "વાપરવું",
+          "form": "વાપર!"
+        },
+        {
+          "location": "guj:2786",
+          "lemma": "વાપરવું",
+          "form": "વાપરો!"
+        }
+      ]
+    },
+    "scripts": [
+      "GUJARATI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 2832,
+    "unique_lemmas": 6774,
+    "unique_forms": 15092,
+    "self_forms_added": 1789,
+    "pack": "ready/packs/guj",
+    "archive": "ready/assets/blitzer-guj-v1.zip"
+  },
+  {
+    "code": "hai",
+    "name": "Haida",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hai",
+        "sha256": "fda51f0839412e42f5450b686967dcb35f48a75d9f1e2059741b3bffd18b58ed"
+      }
+    ],
+    "source_rows": 7040,
+    "accepted_rows": 5600,
+    "unsupported_rows": 1440,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 5600,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 1440
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "hai:24",
+          "lemma": "gatáa",
+          "form": "gatáa.ang ñasa'áa"
+        },
+        {
+          "location": "hai:25",
+          "lemma": "gatáa",
+          "form": "gatáa.ang ñasa'áang"
+        },
+        {
+          "location": "hai:26",
+          "lemma": "gatáa",
+          "form": "gatáa.ang ñasaasdláa"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "internal-dot",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 218,
+    "unique_lemmas": 36,
+    "unique_forms": 5385,
+    "self_forms_added": 3,
+    "pack": "ready/packs/hai",
+    "archive": "ready/assets/blitzer-hai-v1.zip"
+  },
+  {
+    "code": "heb",
+    "name": "Hebrew",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "heb",
+        "sha256": "d671647f0a4fb55c97d27ebe9ebe3321c956d8560afb0f08ef95174beb97174d"
+      },
+      {
+        "file": "heb_voc",
+        "sha256": "063e0e3624812d815bacc7b29f0fa6d299c3ee4dd509001c9702b345e813d1bd"
+      }
+    ],
+    "source_rows": 66355,
+    "accepted_rows": 66353,
+    "unsupported_rows": 2,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 66355,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 2
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "heb:7118",
+          "lemma": "יכול",
+          "form": "להיות יכול"
+        },
+        {
+          "location": "heb_voc:7118",
+          "lemma": "יָכֹל",
+          "form": "לִהְיוֹת יָכוֹל"
+        }
+      ]
+    },
+    "scripts": [
+      "HEBREW"
+    ],
+    "tokenization_profile": "hebrew",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 7681,
+    "unique_lemmas": 2358,
+    "unique_forms": 58673,
+    "self_forms_added": 1,
+    "pack": "ready/packs/heb",
+    "archive": "ready/assets/blitzer-heb-v1.zip"
+  },
+  {
+    "code": "hin",
+    "name": "Hindi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "hin",
+        "sha256": "3c9228053925a69fa5c20c5bafc880268c294afd8d267504258ee405597fb18a"
+      }
+    ],
+    "source_rows": 54438,
+    "accepted_rows": 2249,
+    "unsupported_rows": 52189,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 54438,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 52189
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "hin:2",
+          "lemma": "अध्ययन करना",
+          "form": "अध्ययन कर"
+        },
+        {
+          "location": "hin:3",
+          "lemma": "अध्ययन करना",
+          "form": "अध्ययन करता"
+        },
+        {
+          "location": "hin:4",
+          "lemma": "अध्ययन करना",
+          "form": "अध्ययन करता था"
+        }
+      ]
+    },
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 346,
+    "unique_lemmas": 173,
+    "unique_forms": 1903,
+    "self_forms_added": 0,
+    "pack": "ready/packs/hin",
+    "archive": "ready/assets/blitzer-hin-v1.zip"
+  },
+  {
+    "code": "ita",
+    "name": "Italian",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ita",
+        "sha256": "6347bb15b3d2c3dafcbe4adc0e7beaa97a8bc61bcccc345079afb154c03f1321"
+      }
+    ],
+    "source_rows": 509574,
+    "accepted_rows": 412331,
+    "unsupported_rows": 97243,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 0,
+    "latin_rows": 412331,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 97229,
+      "punctuation-or-symbol": 14
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "ita:162",
+          "lemma": "abbacinarsi",
+          "form": "ci abbacinammo"
+        },
+        {
+          "location": "ita:163",
+          "lemma": "abbacinarsi",
+          "form": "ci abbacinassimo"
+        },
+        {
+          "location": "ita:164",
+          "lemma": "abbacinarsi",
+          "form": "ci abbacinavamo"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "ita:17565",
+          "lemma": "addire",
+          "form": "addi'"
+        },
+        {
+          "location": "ita:117187",
+          "lemma": "contundere",
+          "form": "contunde-rebbero"
+        },
+        {
+          "location": "ita:117188",
+          "lemma": "contundere",
+          "form": "contunde-rebbe"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "elision-italian",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 84807,
+    "unique_lemmas": 10009,
+    "unique_forms": 327538,
+    "self_forms_added": 14,
+    "pack": "ready/packs/ita",
+    "archive": "ready/assets/blitzer-ita-v1.zip"
+  },
+  {
+    "code": "jpn",
+    "name": "Japanese",
+    "status": "deferred",
+    "reasons": [
+      "Sudachi adapter available; UniMorph alignment and coverage require review."
+    ],
+    "sources": [
+      {
+        "file": "jpn",
+        "sha256": "6ba4589cd43846c8afab5bdf5f4c498e03e32849f95c3e5c9840be2975d4b888"
+      }
+    ],
+    "source_rows": 12687,
+    "accepted_rows": 12687,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 12687,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [
+      "CJK",
+      "HIRAGANA"
+    ],
+    "tokenization_profile": "sudachi",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 1095,
+    "unique_lemmas": 107,
+    "unique_forms": 11592,
+    "self_forms_added": 0,
+    "pack": "deferred/packs/jpn",
+    "archive": "deferred/assets/blitzer-jpn-v1.zip"
+  },
+  {
+    "code": "kan",
+    "name": "Kannada",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "kan",
+        "sha256": "9ed7830f7f49f7afd2d9843b52a0ba87f2cbdc7360cbffab4b6ab5bbab56987b"
+      }
+    ],
+    "source_rows": 6402,
+    "accepted_rows": 6402,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 168,
+    "non_latin_rows": 6402,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [
+      "KANNADA"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 2334,
+    "unique_lemmas": 159,
+    "unique_forms": 4167,
+    "self_forms_added": 99,
+    "pack": "ready/packs/kan",
+    "archive": "ready/assets/blitzer-kan-v1.zip"
+  },
+  {
+    "code": "mag",
+    "name": "Magahi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "mag",
+        "sha256": "e4bff24bfe73369a915267cd3ba98cb818ff96aac3b8fa7d98b16028bb09a346"
+      }
+    ],
+    "source_rows": 1358,
+    "accepted_rows": 1355,
+    "unsupported_rows": 3,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 1358,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "format-control": 3
+    },
+    "rejection_examples": {
+      "format-control": [
+        {
+          "location": "mag:298",
+          "lemma": "﻿गुलाम",
+          "form": "﻿गुलाम"
+        },
+        {
+          "location": "mag:595",
+          "lemma": "﻿दाम",
+          "form": "﻿दाम"
+        },
+        {
+          "location": "mag:781",
+          "lemma": "﻿पेड़",
+          "form": "﻿पेड़"
+        }
+      ]
+    },
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 0,
+    "unique_lemmas": 938,
+    "unique_forms": 1456,
+    "self_forms_added": 101,
+    "pack": "ready/packs/mag",
+    "archive": "ready/assets/blitzer-mag-v1.zip"
+  },
+  {
+    "code": "nav",
+    "name": "Navajo",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "nav",
+        "sha256": "3d0493e97430295757826bd72170e8ad241d9f116977387795b65e8ab93b0920"
+      }
+    ],
+    "source_rows": 11884,
+    "accepted_rows": 11864,
+    "unsupported_rows": 20,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 11864,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 20
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "nav:1061",
+          "lemma": "átʼé",
+          "form": "ádaatʼée doo"
+        },
+        {
+          "location": "nav:1062",
+          "lemma": "átʼé",
+          "form": "ádaatʼéé nítʼééʼ"
+        },
+        {
+          "location": "nav:1064",
+          "lemma": "átʼé",
+          "form": "ádajítʼée doo"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "final-glottal",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 516,
+    "unique_lemmas": 627,
+    "unique_forms": 11378,
+    "self_forms_added": 30,
+    "pack": "ready/packs/nav",
+    "archive": "ready/assets/blitzer-nav-v1.zip"
+  },
+  {
+    "code": "oci",
+    "name": "Occitan",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "oci",
+        "sha256": "130250118bd875bb1f29dd45fc7f74be1faaca1c0b112dc57065d996b6782609"
+      }
+    ],
+    "source_rows": 8316,
+    "accepted_rows": 8316,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 215,
+    "non_latin_rows": 0,
+    "latin_rows": 8316,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [],
+    "tokenization_profile": "middle-dot",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 707,
+    "unique_lemmas": 174,
+    "unique_forms": 7610,
+    "self_forms_added": 1,
+    "pack": "ready/packs/oci",
+    "archive": "ready/assets/blitzer-oci-v1.zip"
+  },
+  {
+    "code": "ood",
+    "name": "O'odham",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ood",
+        "sha256": "c0445773a6723acee298b881732011f47fa07751b66ab1f9d2b5e7858eeeb674"
+      }
+    ],
+    "source_rows": 1628,
+    "accepted_rows": 1326,
+    "unsupported_rows": 302,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1326,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 298,
+      "multiword": 4
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "ood:135",
+          "lemma": "ki:",
+          "form": "ki:"
+        },
+        {
+          "location": "ood:136",
+          "lemma": "ki:",
+          "form": "ki:"
+        },
+        {
+          "location": "ood:137",
+          "lemma": "ki:",
+          "form": "ki:k"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "ood:287",
+          "lemma": "Tohono ʼOʼodham",
+          "form": "Tohono ʼOʼodham"
+        },
+        {
+          "location": "ood:288",
+          "lemma": "Tohono ʼOʼodham",
+          "form": "Tohono ʼOʼodham"
+        },
+        {
+          "location": "ood:331",
+          "lemma": "ʼAkimel ʼOʼodham",
+          "form": "ʼAkimel ʼOʼodham"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "colon-glottal",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 369,
+    "unique_lemmas": 320,
+    "unique_forms": 957,
+    "self_forms_added": 0,
+    "pack": "ready/packs/ood",
+    "archive": "ready/assets/blitzer-ood-v1.zip"
+  },
+  {
+    "code": "ote",
+    "name": "Mezquital Otomi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ote",
+        "sha256": "64ef4fd77ac48f8536c9925dd131e88b59d2c9a6bf0a2dd76dd94a6c1b87fa1b"
+      }
+    ],
+    "source_rows": 33162,
+    "accepted_rows": 2072,
+    "unsupported_rows": 31090,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2072,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 31085,
+      "punctuation-or-symbol": 4,
+      "numeric-notation": 1
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "ote:1",
+          "lemma": "bä²tsi",
+          "form": "dí bätsi"
+        },
+        {
+          "location": "ote:2",
+          "lemma": "bä²tsi",
+          "form": "gí bätsi"
+        },
+        {
+          "location": "ote:4",
+          "lemma": "bä²tsi",
+          "form": "ndí bätsi"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "ote:3117",
+          "lemma": "ho²k’-bọts’e",
+          "form": "hok’bọts’e"
+        },
+        {
+          "location": "ote:13485",
+          "lemma": "pẹ²t-’yẹ",
+          "form": "pẹt’yẹ"
+        },
+        {
+          "location": "ote:20451",
+          "lemma": "ʔñụ²t’-uẹndaui",
+          "form": "ʔñụt’uẹndaui"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "ote:3981",
+          "lemma": "ja¹-²mäsu",
+          "form": "jamäsu"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 48,
+    "unique_lemmas": 2021,
+    "unique_forms": 3554,
+    "self_forms_added": 1530,
+    "pack": "ready/packs/ote",
+    "archive": "ready/assets/blitzer-ote-v1.zip"
+  },
+  {
+    "code": "otm",
+    "name": "Sierra (Eastern Highland) Otomi",
+    "status": "deferred",
+    "reasons": [
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "otm",
+        "sha256": "b808c7437d35eb6ec17ff1f728fd5962c660b5459ce3c72102cfa25567d8bd5c"
+      }
+    ],
+    "source_rows": 31380,
+    "accepted_rows": 0,
+    "unsupported_rows": 31380,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 31380
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "otm:1",
+          "lemma": "bẹ¹nt’i",
+          "form": "dí-n bẹnt’i"
+        },
+        {
+          "location": "otm:2",
+          "lemma": "bẹ¹nt’i",
+          "form": "gí-n bẹnt’i"
+        },
+        {
+          "location": "otm:3",
+          "lemma": "bẹ¹nt’i",
+          "form": "i-n bẹnt’i"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  {
+    "code": "pbs",
+    "name": "Central Pame",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "pbs.csv",
+        "sha256": "45978f355db352a4b1f550c165061e0172feb3024535befee2761d6902bbd076"
+      }
+    ],
+    "source_rows": 12528,
+    "accepted_rows": 12528,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 12528,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [],
+    "tokenization_profile": "tone-ascii",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 2822,
+    "unique_lemmas": 216,
+    "unique_forms": 9708,
+    "self_forms_added": 2,
+    "pack": "ready/packs/pbs",
+    "archive": "ready/assets/blitzer-pbs-v1.zip"
+  },
+  {
+    "code": "pei",
+    "name": "Chichimec",
+    "status": "deferred",
+    "reasons": [
+      "Source morpheme notation needs orthography review.",
+      "No mappings fit the current word tokenizer"
+    ],
+    "sources": [
+      {
+        "file": "pei",
+        "sha256": "fee59ee8b14c7d0d379549a0bbec56a1d9facc19a7a3376a07de5747bc6ca512"
+      }
+    ],
+    "source_rows": 15120,
+    "accepted_rows": 0,
+    "unsupported_rows": 15120,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 13440,
+      "multiword": 1680
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "pei:1",
+          "lemma": "–nu",
+          "form": "e¹nu²"
+        },
+        {
+          "location": "pei:2",
+          "lemma": "–nu",
+          "form": "ki¹nu²"
+        },
+        {
+          "location": "pei:3",
+          "lemma": "–nu",
+          "form": "ki¹nu²s"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "pei:81",
+          "lemma": "–nu",
+          "form": "siᵈ¹n ga¹nu²"
+        },
+        {
+          "location": "pei:82",
+          "lemma": "–nu",
+          "form": "siᵈ¹n ki¹nu²"
+        },
+        {
+          "location": "pei:83",
+          "lemma": "–nu",
+          "form": "siᵈ¹n ki¹nu²s"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone",
+    "scope": "Tone-bearing source transcription; multiword paradigm rows are omitted."
+  },
+  {
+    "code": "san",
+    "name": "Sanskrit",
+    "status": "deferred",
+    "reasons": [
+      "Requires an evaluated lexical segmenter for ordinary text."
+    ],
+    "sources": [
+      {
+        "file": "san",
+        "sha256": "2ee128970334d8a2ba391f1e50b986d3c9a09f3ff2f1b77effbedccf76ea769e"
+      }
+    ],
+    "source_rows": 33847,
+    "accepted_rows": 33847,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 920,
+    "non_latin_rows": 33847,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [
+      "DEVANAGARI"
+    ],
+    "tokenization_profile": "unavailable",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 16296,
+    "unique_lemmas": 917,
+    "unique_forms": 17692,
+    "self_forms_added": 141,
+    "pack": "deferred/packs/san",
+    "archive": "deferred/assets/blitzer-san-v1.zip"
+  },
+  {
+    "code": "see",
+    "name": "Seneca",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "see",
+        "sha256": "a364b3e4fe9db61f9b55040afbfe6a6c34d27596bbf8f55369eca704bdecc4c8"
+      }
+    ],
+    "source_rows": 5460,
+    "accepted_rows": 1665,
+    "unsupported_rows": 3795,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1665,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 3795
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "see:74",
+          "lemma": "gëhjis",
+          "form": "hënötgëhji:sta'"
+        },
+        {
+          "location": "see:77",
+          "lemma": "gëhjis",
+          "form": "wënötgëhji:sta'"
+        },
+        {
+          "location": "see:118",
+          "lemma": "gayë",
+          "form": "ëwögëga:yëh"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "final-glottal",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 67,
+    "unique_lemmas": 57,
+    "unique_forms": 1654,
+    "self_forms_added": 56,
+    "pack": "ready/packs/see",
+    "archive": "ready/assets/blitzer-see-v1.zip"
+  },
+  {
+    "code": "sjo",
+    "name": "Xibe",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "sjo",
+        "sha256": "9d85520a153d0b159747634dab75388e9e784e32c019aa771fe9bc3e6cbcc49a"
+      }
+    ],
+    "source_rows": 3054,
+    "accepted_rows": 3054,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 3054,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [
+      "MONGOLIAN"
+    ],
+    "tokenization_profile": "mongolian",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 303,
+    "unique_lemmas": 1892,
+    "unique_forms": 3197,
+    "self_forms_added": 446,
+    "pack": "ready/packs/sjo",
+    "archive": "ready/assets/blitzer-sjo-v1.zip"
+  },
+  {
+    "code": "tel",
+    "name": "Telugu",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "tel",
+        "sha256": "369009d424e9d9ab81d85d20c71e36a8ebfb1323cc2b29b8bff2238f84cec78d"
+      }
+    ],
+    "source_rows": 1548,
+    "accepted_rows": 1548,
+    "unsupported_rows": 0,
+    "malformed_rows": 0,
+    "ignored_rows": 151,
+    "non_latin_rows": 1548,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {},
+    "rejection_examples": {},
+    "scripts": [
+      "TELUGU"
+    ],
+    "tokenization_profile": "joiners",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 499,
+    "unique_lemmas": 127,
+    "unique_forms": 1165,
+    "self_forms_added": 116,
+    "pack": "ready/packs/tel",
+    "archive": "ready/assets/blitzer-tel-v1.zip"
+  },
+  {
+    "code": "urd",
+    "name": "Urdu",
+    "status": "deferred",
+    "reasons": [
+      "Requires an evaluated lexical segmenter for ordinary text."
+    ],
+    "sources": [
+      {
+        "file": "urd",
+        "sha256": "3a3129d858c7c02d0ec5c8971f5b60842813dbe2513efaf7effd22842dcff4a3"
+      }
+    ],
+    "source_rows": 12572,
+    "accepted_rows": 1264,
+    "unsupported_rows": 11308,
+    "malformed_rows": 0,
+    "ignored_rows": 1,
+    "non_latin_rows": 12572,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 11308
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "urd:6",
+          "lemma": "اترنا",
+          "form": "اترا تھا"
+        },
+        {
+          "location": "urd:7",
+          "lemma": "اترنا",
+          "form": "اترا تھا"
+        },
+        {
+          "location": "urd:8",
+          "lemma": "اترنا",
+          "form": "اترا تھا"
+        }
+      ]
+    },
+    "scripts": [
+      "ARABIC"
+    ],
+    "tokenization_profile": "unavailable",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 374,
+    "unique_lemmas": 164,
+    "unique_forms": 895,
+    "self_forms_added": 5,
+    "pack": "deferred/packs/urd",
+    "archive": "deferred/assets/blitzer-urd-v1.zip"
+  },
+  {
+    "code": "xty",
+    "name": "Yoloxóchitl Mixtec",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "xty",
+        "sha256": "eac4975962feb5feecb0a98c664d89ffb8fd043b588eef3e8e020a210bb0a76b"
+      }
+    ],
+    "source_rows": 3057,
+    "accepted_rows": 2975,
+    "unsupported_rows": 82,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2975,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 64,
+      "punctuation-or-symbol": 17,
+      "numeric-notation": 1
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "xty:51",
+          "lemma": "chuʔ¹⁴ma¹",
+          "form": "kwa¹⁴ chuʔ¹⁴ma¹"
+        },
+        {
+          "location": "xty:56",
+          "lemma": "chu¹⁴tu²",
+          "form": "kwa¹⁴ chu¹⁴tu²"
+        },
+        {
+          "location": "xty:311",
+          "lemma": "ki¹⁴tu³",
+          "form": "kwa¹⁴ ki¹⁴tu³"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "xty:221",
+          "lemma": "kaʔ³nu³",
+          "form": "----"
+        },
+        {
+          "location": "xty:224",
+          "lemma": "kaʔ³nu³",
+          "form": "––"
+        },
+        {
+          "location": "xty:413",
+          "lemma": "ku³chi⁴",
+          "form": "ku¹³-(chu³)chi⁴"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "xty:1679",
+          "lemma": "ku³-si¹i⁴",
+          "form": "ni¹-ku-³si¹i⁴"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 213,
+    "unique_lemmas": 584,
+    "unique_forms": 2762,
+    "self_forms_added": 0,
+    "pack": "ready/packs/xty",
+    "archive": "ready/assets/blitzer-xty-v1.zip"
+  },
+  {
+    "code": "yid",
+    "name": "Yiddish",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "yid",
+        "sha256": "fab02220c852018707a760e98e07b7111f37f31781edf09f2fef1d39474337c8"
+      }
+    ],
+    "source_rows": 7986,
+    "accepted_rows": 7932,
+    "unsupported_rows": 54,
+    "malformed_rows": 0,
+    "ignored_rows": 892,
+    "non_latin_rows": 7986,
+    "latin_rows": 0,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "punctuation-or-symbol": 45,
+      "multiword": 9
+    },
+    "rejection_examples": {
+      "punctuation-or-symbol": [
+        {
+          "location": "yid:2779",
+          "lemma": "הייס־געליבט",
+          "form": "הייס־געליבטע"
+        },
+        {
+          "location": "yid:2780",
+          "lemma": "הייס־געליבט",
+          "form": "הייס־געליבטע"
+        },
+        {
+          "location": "yid:2781",
+          "lemma": "הייס־געליבט",
+          "form": "הייס־געליבטן"
+        }
+      ],
+      "multiword": [
+        {
+          "location": "yid:4178",
+          "lemma": "טשעפּן זיך",
+          "form": "טשעפּן זיך"
+        },
+        {
+          "location": "yid:4179",
+          "lemma": "טשעפּן זיך",
+          "form": "טשעפּע"
+        },
+        {
+          "location": "yid:4180",
+          "lemma": "טשעפּן זיך",
+          "form": "טשעפּן זיך"
+        }
+      ]
+    },
+    "scripts": [
+      "HEBREW"
+    ],
+    "tokenization_profile": "hebrew",
+    "scope": "Space-delimited orthographic words; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 4453,
+    "unique_lemmas": 797,
+    "unique_forms": 3558,
+    "self_forms_added": 79,
+    "pack": "ready/packs/yid",
+    "archive": "ready/assets/blitzer-yid-v1.zip"
+  }
+]

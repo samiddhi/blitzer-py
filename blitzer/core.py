@@ -51,6 +51,8 @@ import shutil
 import sqlite3
 import tempfile
 import unicodedata
+from blitzer.languages import display_name, language_entry
+from blitzer.tokenization import elision_parts
 import zipfile
 from contextlib import closing, contextmanager
 from dataclasses import dataclass, replace
@@ -342,7 +344,7 @@ def _check_database(conn, normal, report) -> None:
             "known lookup", bool(matches), f"{len(matches)} candidates"
         )
     )
-    report.extend(_check_frequencies(conn))
+    report.extend(_check_frequencies(conn, normal.get("_profile", "default")))
 
 
 def _check_result(name, passed, detail) -> CheckResult:
@@ -372,9 +374,10 @@ def _has_duplicates(conn) -> bool:
     return bool(pair or lemma)
 
 
-def _valid_pack_word(value, normal=None) -> bool:
+def _valid_pack_word(value, normal=None, profile="default") -> bool:
     """Check a word and its canonical representation."""
-    if not isinstance(value, str) or not _word(value):
+    profile = normal.get("_profile", profile) if normal is not None else profile
+    if not isinstance(value, str) or not _word(value, profile):
         return False
     canonical = (
         normalize(value, normal)
@@ -400,7 +403,7 @@ def _check_text(conn, normal) -> CheckResult:
         (
             repr(value)
             for (value,) in conn.execute("SELECT lemma FROM lemmas")
-            if not _valid_pack_word(value)
+            if not _valid_pack_word(value, profile=normal.get("_profile", "default"))
         ),
         None,
     )
@@ -440,7 +443,7 @@ def _has_self_form(conn, lemma_id, lemma, normal) -> bool:
     return bool(row)
 
 
-def _check_frequencies(conn) -> list[CheckResult]:
+def _check_frequencies(conn, profile="default") -> list[CheckResult]:
     """Validate frequency data when the table exists."""
     table = conn.execute(
         "SELECT 1 FROM sqlite_master WHERE type='table' AND name='frequencies'"
@@ -449,7 +452,7 @@ def _check_frequencies(conn) -> list[CheckResult]:
         return []
     bad = any(
         not isinstance(term, str)
-        or not _word(term)
+        or not _word(term, profile)
         or not _valid_frequency(value)
         for term, value in conn.execute(
             "SELECT term,frequency FROM frequencies"
@@ -672,7 +675,7 @@ def _build_database(
         stats["source_rows"] += orphan_count
         stats["self_forms_added"] = _insert_self_forms(conn, lemma_ids, normal)
         if frequencies.exists():
-            _import_frequencies(conn, frequencies)
+            _import_frequencies(conn, frequencies, normal.get("_profile", "default"))
         stats["lemmas"] = conn.execute(
             "SELECT COUNT(*) FROM lemmas"
         ).fetchone()[0]
@@ -737,7 +740,7 @@ def _insert_self_forms(conn, lemma_ids, normal) -> int:
     added = 0
     for lemma, lemma_id in lemma_ids.items():
         key = normalize(lemma, normal)
-        if not _word(key) or normalize(key, normal) != key:
+        if not _word(key, normal.get("_profile", "default")) or normalize(key, normal) != key:
             raise ValueError(f"Invalid normalized self form for {lemma!r}")
         added += _insert_form(conn, key, lemma_id)
     return added
@@ -746,7 +749,7 @@ def _insert_self_forms(conn, lemma_ids, normal) -> int:
 def _write_build_info(stage, source, input_path, stats) -> None:
     """Write provenance for a validated staging pack."""
     info = stats | {
-        "format_version": 1,
+        "format_version": load_plugin_config(source)["format_version"],
         "source_sha256": _hash_file(input_path),
         "source": str(input_path),
         "config_sha256": _hash_file(source / "config.toml"),
@@ -812,7 +815,7 @@ class BlitzerService:
         """Return the display name from installed pack metadata."""
         if code == "base":
             return "Basic"
-        return self._pack(code)[1]["metadata"]["language_name"]
+        return display_name(code, self._pack(code)[1]["metadata"]["language_name"])
 
     def _normalization(self, code: str) -> dict:
         """Return normalization rules for the chosen language."""
@@ -868,6 +871,17 @@ class BlitzerService:
             forms_only,
         )
         normal = self._normalization(language_code)
+        profile = normal.get("_profile", "default")
+        # Legacy data for unspaced languages must not silently tokenize prose
+        # as one run. Format 2 explicitly declares even a limited local mode.
+        if language_code != "base":
+            pack_config = self._pack(language_code)[1]
+            if (pack_config["format_version"] == 1
+                    and language_entry(language_code)["profile"] in {"unavailable", "sudachi"}):
+                raise ValueError(
+                    f"{language_code} requires lexical segmentation; rebuild "
+                    "with a format-2 pack declaring its tokenization profile"
+                )
         known, exact = _load_exclusions(
             settings,
             normal,
@@ -882,10 +896,21 @@ class BlitzerService:
             or options["exclude_unknown"]
             or (options["filter_by"] == "lemmas" and bool(known))
         )
-        keys = {normalize(token.text, normal) for token in tokenize(text)}
-        keys = {
+        tokens = list(tokenize(text, profile))
+        full_keys = {normalize(token.text, normal) for token in tokens}
+        alternatives = {
+            normalize(token.lookup, normal)
+            for token in tokens if token.lookup is not None
+        }
+        alternatives.update(
+            normalize(part.text, normal)
+            for token in tokens if len(elision_parts(token, profile)) > 1
+            for part in elision_parts(token, profile)
+        )
+        needs_lookup = needs_lookup or profile.startswith("elision-")
+        keys = alternatives | {
             key
-            for key in keys
+            for key in full_keys
             if key and key not in known and key not in exact
         }
         candidates, frequencies = _load_vocabulary_data(
@@ -897,6 +922,19 @@ class BlitzerService:
             needs_lookup,
             options["sort"] == "global-frequency",
         )
+        resolved_tokens = []
+        for token in tokens:
+            key = normalize(token.text, normal)
+            if not candidates.get(key) and token.lookup is not None:
+                candidates[key] = candidates.get(normalize(token.lookup, normal), [])
+            parts = elision_parts(token, profile)
+            if (not candidates.get(key) and len(parts) > 1
+                    and key not in known and key not in exact
+                    and (candidates.get(normalize(parts[-1].text, normal))
+                         or normalize(parts[-1].text, normal) in known | exact)):
+                resolved_tokens.extend(parts)
+            else:
+                resolved_tokens.append(token)
         entries = collect_vocabulary(
             text,
             normal,
@@ -904,6 +942,7 @@ class BlitzerService:
             exact,
             candidates,
             options,
+            tokens=resolved_tokens,
         )
         entries = [
             replace(entry, global_frequency=frequencies.get(entry.term))
@@ -1303,17 +1342,17 @@ def _validated_tsv_rows(reader, path: Path):
         yield reader.line_num, row[0], row[1]
 
 
-def _import_frequencies(conn: sqlite3.Connection, path: Path) -> None:
+def _import_frequencies(conn: sqlite3.Connection, path: Path, profile="default") -> None:
     """Insert validated frequencies into the transaction."""
     for number, term, value in _tsv_rows(path, ("term", "frequency")):
-        parsed = _parse_frequency_row(number, term, value, path)
+        parsed = _parse_frequency_row(number, term, value, path, profile)
         conn.execute("INSERT INTO frequencies VALUES(?,?)", parsed)
 
 
-def _parse_frequency_row(number, term, value, path):
+def _parse_frequency_row(number, term, value, path, profile="default"):
     """Add source location to errors from pure frequency validation."""
     try:
-        return parse_frequency(term, value)
+        return parse_frequency(term, value, profile)
     except ValueError as error:
         raise ValueError(f"{path}:{number}: {error}") from error
 

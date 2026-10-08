@@ -1,6 +1,6 @@
 [project]
 name = "bltzr"
-version = "0.2.5"
+version = "0.2.6"
 description = "Vocabulary extraction for language learners"
 authors = [{name = "Samiddhi"}]
 license = {text = "CC-BY-SA-3.0"}
@@ -21,12 +21,13 @@ build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "bump-my-version>=1", "build>=1.2", "twine>=6"]
+japanese = ["SudachiPy==0.6.11", "SudachiDict-core==20250515"]
 
 [tool.setuptools.packages.find]
 include = ["blitzer*"]
 
 [tool.setuptools.package-data]
-blitzer = ["language-registry.json", "language-packs/eng/*"]
+blitzer = ["language-registry.json", "language-catalog.json", "language-packs/eng/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

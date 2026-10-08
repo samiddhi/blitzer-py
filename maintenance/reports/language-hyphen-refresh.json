@@ -1,0 +1,228 @@
+[
+  {
+    "code": "czn",
+    "name": "Zenzontepec Chatino",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "czn",
+        "sha256": "97320a5eae3a7e431e7818e1b7de3184133b205b2ba575d0113aebc9e194900f"
+      }
+    ],
+    "source_rows": 1567,
+    "accepted_rows": 1538,
+    "unsupported_rows": 29,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 1538,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 8,
+      "punctuation-or-symbol": 21
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "czn:451",
+          "lemma": "i-sukwa¹",
+          "form": "ta la nt-i-sukwa¹"
+        },
+        {
+          "location": "czn:647",
+          "lemma": "y-uteʔ",
+          "form": "tala n-ch-uteʔ"
+        },
+        {
+          "location": "czn:831",
+          "lemma": "ene",
+          "form": "tala nt-ene"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "czn:746",
+          "lemma": "y-a²la",
+          "form": "ch–a²la"
+        },
+        {
+          "location": "czn:814",
+          "lemma": "y-ukwą",
+          "form": "ch–ukwą"
+        },
+        {
+          "location": "czn:824",
+          "lemma": "ii",
+          "form": "nch-a¹=ti²ʔ"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 20,
+    "unique_lemmas": 386,
+    "unique_forms": 1895,
+    "self_forms_added": 377,
+    "pack": "ready/packs/czn",
+    "archive": "ready/assets/blitzer-czn-v1.zip"
+  },
+  {
+    "code": "ote",
+    "name": "Mezquital Otomi",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "ote",
+        "sha256": "64ef4fd77ac48f8536c9925dd131e88b59d2c9a6bf0a2dd76dd94a6c1b87fa1b"
+      }
+    ],
+    "source_rows": 33162,
+    "accepted_rows": 2072,
+    "unsupported_rows": 31090,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2072,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 31085,
+      "punctuation-or-symbol": 4,
+      "numeric-notation": 1
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "ote:1",
+          "lemma": "bä²tsi",
+          "form": "dí bätsi"
+        },
+        {
+          "location": "ote:2",
+          "lemma": "bä²tsi",
+          "form": "gí bätsi"
+        },
+        {
+          "location": "ote:4",
+          "lemma": "bä²tsi",
+          "form": "ndí bätsi"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "ote:3117",
+          "lemma": "ho²k’-bọts’e",
+          "form": "hok’bọts’e"
+        },
+        {
+          "location": "ote:13485",
+          "lemma": "pẹ²t-’yẹ",
+          "form": "pẹt’yẹ"
+        },
+        {
+          "location": "ote:20451",
+          "lemma": "ʔñụ²t’-uẹndaui",
+          "form": "ʔñụt’uẹndaui"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "ote:3981",
+          "lemma": "ja¹-²mäsu",
+          "form": "jamäsu"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 48,
+    "unique_lemmas": 2021,
+    "unique_forms": 3554,
+    "self_forms_added": 1530,
+    "pack": "ready/packs/ote",
+    "archive": "ready/assets/blitzer-ote-v1.zip"
+  },
+  {
+    "code": "xty",
+    "name": "Yoloxóchitl Mixtec",
+    "status": "ready",
+    "reasons": [],
+    "sources": [
+      {
+        "file": "xty",
+        "sha256": "eac4975962feb5feecb0a98c664d89ffb8fd043b588eef3e8e020a210bb0a76b"
+      }
+    ],
+    "source_rows": 3057,
+    "accepted_rows": 2975,
+    "unsupported_rows": 82,
+    "malformed_rows": 0,
+    "ignored_rows": 0,
+    "non_latin_rows": 0,
+    "latin_rows": 2975,
+    "malformed_examples": [],
+    "rejection_counts": {
+      "multiword": 64,
+      "punctuation-or-symbol": 17,
+      "numeric-notation": 1
+    },
+    "rejection_examples": {
+      "multiword": [
+        {
+          "location": "xty:51",
+          "lemma": "chuʔ¹⁴ma¹",
+          "form": "kwa¹⁴ chuʔ¹⁴ma¹"
+        },
+        {
+          "location": "xty:56",
+          "lemma": "chu¹⁴tu²",
+          "form": "kwa¹⁴ chu¹⁴tu²"
+        },
+        {
+          "location": "xty:311",
+          "lemma": "ki¹⁴tu³",
+          "form": "kwa¹⁴ ki¹⁴tu³"
+        }
+      ],
+      "punctuation-or-symbol": [
+        {
+          "location": "xty:221",
+          "lemma": "kaʔ³nu³",
+          "form": "----"
+        },
+        {
+          "location": "xty:224",
+          "lemma": "kaʔ³nu³",
+          "form": "––"
+        },
+        {
+          "location": "xty:413",
+          "lemma": "ku³chi⁴",
+          "form": "ku¹³-(chu³)chi⁴"
+        }
+      ],
+      "numeric-notation": [
+        {
+          "location": "xty:1679",
+          "lemma": "ku³-si¹i⁴",
+          "form": "ni¹-ku-³si¹i⁴"
+        }
+      ]
+    },
+    "scripts": [],
+    "tokenization_profile": "tone-hyphen",
+    "scope": "Tone-bearing source transcription with internal morpheme hyphens preserved; multiword paradigm rows are omitted.",
+    "excluded_non_latin_rows": 0,
+    "duplicate_pairs_removed": 213,
+    "unique_lemmas": 584,
+    "unique_forms": 2762,
+    "self_forms_added": 0,
+    "pack": "ready/packs/xty",
+    "archive": "ready/assets/blitzer-xty-v1.zip"
+  }
+]
