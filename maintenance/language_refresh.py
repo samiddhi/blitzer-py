@@ -192,6 +192,11 @@ def update_readme(root):
         "omitted, and dictionary coverage varies. Development packs are excluded\n"
         "from this list and from releases. The list describes this checkout's\n"
         "next release; newly promoted packs become downloadable after publication.\n\n"
+        "If your target language is not on this list, see\n"
+        "[[file:language-packs/UNSUPPORTED-LANGUAGES.md][languages without a release-ready pack]]\n"
+        "for an explanation of what is needed to implement it. If your language is\n"
+        "not listed in that document either, open a pull request, ideally with a\n"
+        "source of inflectional data for that language.\n\n"
     )
     path.write_text(text[:start] + intro + listing + "\n\n" + text[end:], encoding="utf-8")
 

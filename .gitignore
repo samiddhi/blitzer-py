@@ -10,6 +10,7 @@ dist/
 
 /language-packs/*
 !/language-packs/README.md
+!/language-packs/UNSUPPORTED-LANGUAGES.md
 language-packs-demo/
 scratch/
 release-assets/

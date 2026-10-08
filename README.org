@@ -14,6 +14,12 @@ omitted, and dictionary coverage varies. Development packs are excluded
 from this list and from releases. The list describes this checkout's
 next release; newly promoted packs become downloadable after publication.
 
+If your target language is not on this list, see
+[[file:language-packs/UNSUPPORTED-LANGUAGES.md][languages without a release-ready pack]]
+for an explanation of what is needed to implement it. If your language is
+not listed in that document either, open a pull request, ideally with a
+source of inflectional data for that language.
+
 - Adyghe (ady)
 - Afrikaans (afr)
 - Akan (aka)
