@@ -138,7 +138,10 @@ def parse_terms(text: str, normal: dict, label="known list"):
 
 def _known_term(value, normal, label, number) -> str:
     """Validate and normalize one known term with a source location."""
-    if not _word(value, normal.get("_profile", "default")):
+    profile = normal.get("_profile", "default")
+    if not _word(value, profile) and not all(
+        _word(part, profile) for part in re.split("[-‐‑]", value)
+    ):
         raise ValueError(
             f"{label}:{number}: expected one word per line, got {value!r}"
         )
@@ -199,8 +202,8 @@ def validate_processing(
     )
     if code == "base" and needs_dictionary:
         raise ValueError(
-            "base has no dictionary: choose forms, no lemmatization "
-            "and no database filtering/sorting"
+            "base has no dictionary: use exact words and words as written, "
+            "without word-family skipping, dictionary sorting or automatic updates"
         )
 
 
@@ -214,6 +217,7 @@ def filter_occurrence(
     lemmatize,
     filter_by,
     exclude_unknown,
+    known_update_mode=None,
 ) -> list[tuple[str, set[str]]]:
     """Return displayed terms for a surviving occurrence.
 
@@ -237,7 +241,8 @@ def filter_occurrence(
     return [
         (
             term,
-            _matched_keys(term, key, surviving, normal, lemmatize, filter_by),
+            _matched_keys(term, key, surviving, normal, lemmatize,
+                          known_update_mode or filter_by),
         )
         for term in terms
     ]
@@ -323,6 +328,7 @@ def collect_vocabulary(
             lemmatize=options["lemmatize"],
             filter_by=options["filter_by"],
             exclude_unknown=options["exclude_unknown"],
+            known_update_mode=options.get("known_update_mode"),
         )
         snippet = context_for_token(text, token, spans, starts)
         for term, matched_keys in flagged:

@@ -160,6 +160,15 @@ def test_filter_truth_table(
     )
 
 
+def test_exclusion_file_accepts_hyphenated_entries(service, tmp_path):
+    """An unrelated compound must not prevent ordinary exclusions loading."""
+    known = tmp_path / "exclusions.txt"
+    known.write_text("sally-anne\nsem\n", encoding="utf-8")
+    assert terms(service.blitz("sem smo", "slv", exclusions=(known,))) == [
+        ("smo", 1)
+    ]
+
+
 def test_known_forms_never_supply_highlights(service, tmp_path):
     """Check known forms never contribute highlighted examples."""
     known = tmp_path / "known.txt"

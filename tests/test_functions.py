@@ -68,6 +68,27 @@ def unexpected_io(*args, **kwargs):
     raise AssertionError("Pure processing must not perform I/O")
 
 
+@pytest.mark.parametrize("hyphen", ["-", "‐", "‑"])
+@pytest.mark.parametrize("profile", ["default", "middle-dot", "tone"])
+def test_known_list_accepts_hyphenated_words(hyphen, profile):
+    """Hyphenated entries keep normalization and duplicate detection."""
+    normal = dict(BASE_NORMALIZATION, _profile=profile)
+    term = f"sally{hyphen}anne"
+    assert parse_terms(f"# Names\n{term.upper()}\n{term}\n", normal) == (
+        [term], [term], ["# Names"]
+    )
+
+
+@pytest.mark.parametrize("value", [
+    "-sally", "sally-", "sally--anne", "sally- anne", "sally anne",
+    "sally-123", "sally/anne",
+])
+def test_known_list_rejects_malformed_compounds(value):
+    """Allow internal hyphens while retaining located validation errors."""
+    with pytest.raises(ValueError, match="exclusions.txt:2: expected one word"):
+        parse_terms(f"# Names\n{value}\n", BASE_NORMALIZATION, "exclusions.txt")
+
+
 def test_options_preserve_defaults_and_ignore_none():
     """Check option resolution leaves defaults unchanged."""
     original = deepcopy(OPTIONS)

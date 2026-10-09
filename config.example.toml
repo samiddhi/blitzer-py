@@ -1,33 +1,89 @@
 # Paths are relative to this file. No configuration is written implicitly.
 [locations]
+# Directory containing installed language packs (one subdirectory per code).
 plugins_dir = "./language-packs"
+# SQLite database for saved example sentences, read by bltzr history.
 history_file = "./scratch/contexts.db"
 
+# Defaults apply to every language; [languages.CODE] may override them.
 [defaults]
+# Show basic words (lexeme/lemma): "are" becomes "be", and "cats" becomes "cat".
+# false shows words as written (word form). Display never changes either skip list.
 lemmatize = false
-filter_by = "forms" # Independent from display; use lemmas to filter by known lemmas.
+# Hide input words without a dictionary match.
 exclude_unknown = false
+# Include surviving occurrence counts in text, TSV and report output.
 freq = false
+# Include example sentences in the output (independent of saving history).
 context = false
+# Output format: text, tsv (with header), json, or report (with sections).
 format = "text"
+# Order displayed words; global-frequency needs pack frequency data.
 sort = "textual-frequency" # alphabetical, appearance, global-frequency, custom
+# Highlight the matched input word in example sentences; JSON uses offsets.
 bold = "html" # off, html, markdown, org
+# Maximum examples retained for each displayed word (1 to 20).
 context_limit = 2
+# Python regex matching sentence endings; must consume at least one character.
 sentence_pattern = '(?:[.!?]+(?=\s|$)|\n+)'
+# Save examples to history: flag-only requires --save-context; always saves;
+# prompt asks interactively; never skips unless --save-context overrides it.
 save_context = "flag-only" # never, always, prompt, flag-only
-# Discouraged. Encountering a word does not mean you know it.
+# Automatically add dictionary-matched survivors to the explicitly chosen list
+# (update_list below). Discouraged: reading a word does not mean you know it.
+# --test-known previews additions without changing either list or history.
 auto_update_known = false
+# Include this language's prompt_text in report output. Requires format="report".
+# This only exports text; bltzr does not contact an AI service or make API calls.
 prompt = false
+# Include the original input in report output. Requires format="report".
 src = false
+# Ranking file (one word per line, highest priority first) for sort="custom".
 # custom_order = "./scratch/order.txt"
 
+# Settings below apply only to Slovenian; use the language's three-letter code.
 [languages.slv]
-# This list may start absent; --update-known creates it only when requested.
-known_file = "./scratch/slv-known.txt"
-exclusions = []
-forms_only = []
+# These settings name FILES containing one word per line, not words in TOML.
+# Use either list or both. Leave out a setting if you do not need that list.
+# Blank lines and whole-line # comments are allowed. Hyphenated words such as
+# sally-anne are allowed; spaces inside an entry are not. Capital letters are
+# compared using the language's normalization rules, usually ignoring case.
+# Paths are relative to this config and may use ~ or environment variables.
+# Missing files act as empty lists; extraction does not create or update them.
+# The English examples below also apply to the selected language.
+
+# Skip only these EXACT WORDS (word form).
+# For "to be", listing "be" and "am" skips only those two words.
+# "is", "are", "was", "were", "being", and "been" can still be counted.
+# Listing "cat" leaves "cats" counted. For Slovenian, listing "sem" and "biti"
+# leaves "sva" counted. This works even when lemmatize=true shows basic words.
+skip_exact_words_file = "./scratch/slv-exact-words.txt"
+
+# Skip these WORD FAMILIES (lexeme/lemma): a word and its other grammatical forms.
+# For "to be", write "be" (without "to") in the file to skip "be", "am", "is",
+# "are", "was", "were", "being", and "been". Listing "cat" skips "cat" and "cats".
+# Write basic words here, not inflected spellings: "be", not "am".
+# Families depend on dictionary coverage; related words such as "catlike" are
+# not in the "cat" family. For Slovenian, listing "biti" skips "sem", "sva", etc.
+# Bundled English currently lacks some "to be" links; to skip all eight words
+# with that dictionary, list their spellings in the exact-word file instead.
+# Leave this setting commented out if you only want to skip exact words.
+# skip_word_families_file = "./scratch/slv-word-families.txt"
+
+# Before previewing (--test-known) or writing (--update-known) additions,
+# explicitly choose which file receives them. Requires the corresponding file
+# setting above. Exact-word updates add encountered spellings (word form);
+# word-family updates add basic words (lexeme/lemma), regardless of display.
+# update_list = "exact-words" # or "word-families"
+
+# Optional instructions printed in a report's PROMPT section when prompt=true
+# or --prompt is given. Copy the report into another tool to use them; no API
+# calls are made. Omit this setting if you do not export reports with prompts.
 prompt_text = "Prepare vocabulary study cards from these words and original contexts."
 # sentence_pattern and all defaults can be overridden per language.
 
 [languages.base]
+# Base mode has no dictionary: it can skip exact words (word form), but cannot
+# recognize word families (lexeme/lemma), show basic words, or exclude_unknown.
+# This preamble is for exported reports only.
 prompt_text = "Prepare vocabulary study cards from these words."

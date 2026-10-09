@@ -1,0 +1,561 @@
+.TH BLTZR 1 "October 9, 2026" "bltzr" "User Commands"
+.SH NAME
+bltzr \- extract vocabulary for language study
+.SH SYNOPSIS
+.B bltzr
+.RB [ \-h | \-\-help ]
+.RB [ \-V | \-\-version ]
+.br
+.B bltzr blitz \-l
+.I CODE
+.RI [ OPTIONS ]
+.br
+.B bltzr list-languages
+.RI [ OPTIONS ]
+.br
+.B bltzr install-plugin
+.I CODE_OR_DIRECTORY
+.RI [ OPTIONS ]
+.br
+.B bltzr remove-plugin
+.I CODE
+.RI [ OPTIONS ]
+.br
+.B bltzr cleanup-known
+.I CODE PATH
+.RI [ OPTIONS ]
+.br
+.B bltzr history
+.I CODE
+.RI [ TERM ]
+.RI [ OPTIONS ]
+.br
+.B bltzr dev
+.I COMMAND
+.RI [ ARGUMENTS ]
+.RI [ OPTIONS ]
+.SH DESCRIPTION
+bltzr extracts unique vocabulary from UTF-8 text, optionally displays
+basic words (lexeme/lemma), skips selected words, counts surviving occurrences,
+and selects example sentences. Language packs provide dictionary data,
+normalization rules and language-specific word boundaries.
+.PP
+Basic mode (code
+.BR base )
+and bundled English
+.RB ( eng )
+are available without downloading a pack. Other languages require an
+installed pack. Processing works offline; installing a registered pack
+downloads data from GitHub. Report prompts are exported text, not API calls.
+.PP
+Vocabulary goes to standard output; diagnostics and update summaries go
+to standard error. An ambiguous input form can produce several lemma
+candidates. bltzr does not choose candidates based on sentence meaning.
+Dictionary coverage and word-boundary support vary by language.
+.SH COMMANDS
+.TP
+.B blitz
+Extract vocabulary. Requires
+.BR \-l / \-\-language .
+Read text from
+.BR \-t / \-\-text ,
+a UTF-8 file selected with
+.BR \-i / \-\-file ,
+or piped standard input. Text and file options cannot be combined.
+Explicit text or a file takes precedence over piped input.
+Empty or whitespace-only input is an error.
+.TP
+.B list-languages
+List installed languages, including base and bundled English.
+This is not a catalog of every downloadable language.
+.TP
+.BI "install-plugin " CODE_OR_DIRECTORY
+Install a registered language code or a local pack directory.
+Use
+.BR \-R / \-\-replace
+to update an existing pack. Known lists and history are preserved.
+.TP
+.BI "remove-plugin " CODE
+Remove a user-installed pack after confirmation.
+.BR \-y / \-\-yes
+skips the confirmation. Bundled English remains available as a fallback.
+.TP
+.BI "cleanup-known " "CODE PATH"
+Preview normalization and duplicate removal for the specified word-list
+file. Print a JSON summary. With
+.BR \-a / \-\-apply ,
+rewrite the file, preserving comments and first-seen term order,
+and save the previous contents as
+.IR PATH.bak .
+.TP
+.BI "history " "CODE " "[TERM]"
+Print saved example sentences as JSON. An optional term matches the exact
+stored display term: for example, help when lemmas were displayed, or
+helps when forms were displayed. Use
+.BR \-m / \-\-limit
+to set the maximum number of rows (default 100, minimum 1).
+Missing history returns an empty list.
+.TP
+.B dev
+Pack development commands; see PACK DEVELOPMENT below.
+.SH COMMON COMMAND OPTIONS
+These options follow the selected command, not the program name.
+They apply to blitz, list-languages, install-plugin, remove-plugin,
+cleanup-known, history and the pack development commands.
+.TP
+.BI "\-C, \-\-config " PATH
+Read this TOML configuration file instead of automatic discovery.
+An explicitly selected missing file is an error.
+.TP
+.B \-n, \-\-no-config
+Use built-in defaults without reading a configuration file.
+Cannot be combined with \-\-config.
+.TP
+.BI "\-P, \-\-plugins-dir " DIRECTORY
+Override the configured language-pack directory.
+.TP
+.B \-h, \-\-help
+Show help for the selected command. At the program level,
+.BR \-V / \-\-version
+prints the application version.
+.SH BLITZ OPTIONS
+.TP
+.BI "\-l, \-\-language " CODE
+Required. Use a three-letter lowercase language-pack code, or base.
+.TP
+.BI "\-t, \-\-text " TEXT
+Process explicit text. Quote it to keep spaces together.
+.TP
+.BI "\-i, \-\-file " PATH
+Read a UTF-8 input file.
+.TP
+.B \-L, \-\-lemmatize / \-\-no-lemmatize
+Show basic words (lexeme/lemma) instead of words as written (word form):
+are becomes be, and cats becomes cat. Unknown words remain visible unless
+excluded. Display never changes what either skip list removes.
+The built-in default is \-\-no-lemmatize.
+.TP
+.B \-x, \-\-exclude-unknown / \-\-include-unknown
+Hide or include words without dictionary matches. Default: include.
+Base mode does not support excluding unknown words.
+.TP
+.BI "\-\-skip-exact-words-file " PATH
+Skip only the words listed in this file (word form).
+For to be, listing be and am skips only those two words; is, are, was,
+were, being and been can still be counted. Listing cat leaves cats counted.
+Replaces only the configured exact-word file, leaving the family file active.
+.TP
+.BI "\-\-skip-word-families-file " PATH
+Skip listed word families (lexeme/lemma), using the dictionary.
+For to be, list be, without "to", to skip be, am, is, are, was, were,
+being and been. Listing cat skips cat and cats.
+Replaces only the configured family file, leaving the exact-word file active.
+.TP
+.B \-N, \-\-show-all-words
+Apply neither skip list for this run. Cannot be combined with explicit
+skip-file options. This affects skipping, not a requested list update;
+use \-\-no-update-known to disable additions.
+.TP
+.BI "\-\-update-list " exact-words|word-families
+Explicitly choose which file receives additions when \-\-update-known or
+\-\-test-known is used. Requires the corresponding skip-file setting or
+option. Exact-word updates add encountered spellings (word form);
+word-family updates add dictionary basic words (lexeme/lemma).
+The choice is independent of display.
+.TP
+.B \-f, \-\-freq / \-\-no-freq
+Include surviving occurrence counts in text, TSV and report output.
+Default: off. JSON always includes counts.
+.TP
+.B \-c, \-\-context / \-\-no-context
+Include example sentences in output. Default: off.
+Only surviving occurrences supply examples; the matched input form is
+highlighted even when the displayed entry is a lemma.
+.TP
+.BI "\-m, \-\-context-limit " NUMBER
+Retain up to this many examples per displayed entry, from 1 to 20.
+Default: 2. Repeated identical sentences do not fill additional slots.
+.TP
+.BI "\-d, \-\-sentence-pattern " REGEX
+Python regular expression matching sentence-ending delimiters.
+It must consume text rather than match empty boundaries.
+The built-in pattern recognizes several scripts' sentence punctuation
+and newlines. Original sentence text and source offsets are preserved.
+.TP
+.BI "\-b, \-\-bold " off|html|markdown|org
+Highlight matched words in examples. Default: html.
+The off setting keeps original text; JSON always uses plain text and offsets.
+.TP
+.BI "\-S, \-\-sort " ORDER
+Sort by textual-frequency (default), alphabetical, appearance,
+global-frequency, or custom. See SORTING.
+.TP
+.BI "\-O, \-\-custom-order " PATH
+Ranking file for custom sorting: one normalized term per line,
+highest priority first. Unlisted terms follow alphabetically.
+.TP
+.BI "\-o, \-\-format " text|tsv|json|report
+Choose output format. Default: text. See OUTPUT FORMATS.
+.TP
+.B \-p, \-\-prompt / \-\-no-prompt
+Include the configured language's prompt_text in a report's PROMPT
+section. Requires report format and nonempty prompt_text.
+Default: off. The report can be copied into another tool; bltzr does
+not send it anywhere or invoke an AI service.
+.TP
+.B \-s, \-\-src / \-\-no-src
+Include original input in a report's SOURCE section.
+Requires report format. Default: off.
+.TP
+.B \-H, \-\-save-context / \-\-no-save-context
+Explicitly save or decline saving surviving examples to history,
+overriding the configured save_context policy.
+Saving collects examples even when \-\-context output is off.
+.TP
+.B \-u, \-\-update-known / \-\-no-update-known
+Enable or disable additions to the explicitly chosen skip list.
+Default: off. Choose \-\-update-list exact-words or word-families, or set
+update_list in the language configuration. Only dictionary-matched surviving
+words propose additions; only the chosen list is written. Missing files
+are created when there are additions. Existing files are backed up as PATH.bak
+when rewritten. Reading a word does not mean you know it.
+.TP
+.B \-T, \-\-test-known
+Preview proposed additions to the explicitly chosen skip list on standard
+error. Write neither list nor history, even if saving or updating
+was otherwise enabled. Vocabulary still goes to standard output.
+.SH CHOOSE WHICH WORDS TO SKIP
+There are two optional files. Each has one job. Use either or both.
+Skipped occurrences contribute nothing to vocabulary counts or examples.
+.SS Skip these exact words (word form)
+Use skip_exact_words_file when you know some spellings but still want to
+study others. For the verb to be, you might know be and am, but still want
+to study is, are, was, were, being and been.
+.PP
+Put these words in the file:
+.PP
+.nf
+be
+am
+cat
+.fi
+.PP
+Only be, am and cat are skipped. The basic word be has no special meaning
+in this list: it does not skip any other form. Cats can still be counted.
+For Slovenian, listing sem and biti here leaves sva counted.
+.SS Skip these words and their other forms: word families (lexeme/lemma)
+Use skip_word_families_file when you want to skip a word and all its
+other grammatical forms recognized by the dictionary. For to be, put be
+in the file, without "to". Put cat in the file to skip both cat and cats:
+.PP
+.nf
+be
+cat
+.fi
+.PP
+The be family skips be, am, is, are, was, were, being and been.
+The cat family skips cat and cats, but not a related word such as catlike.
+Write basic words here: be rather than am, and cat rather than cats.
+The program does not guess a whole family from an inflected entry.
+.SS Comparison
+.nf
+List             Entry    Skipped              Still counted
+Exact words      be, am   be, am               is, are, was, were,
+                                              being, been
+Word families    be       be, am, is, are,     other words
+                          was, were, being,
+                          been
+Exact words      cat      cat                  cats
+Word families    cat      cat, cats            other words
+.fi
+.SS Display does not change either list
+\-L/\-\-lemmatize shows basic words (lexeme/lemma); without it, output
+shows words as written (word form). If be and am are in the exact-word
+file, are still contributes a count even when \-L displays it as be.
+The word-family file skips are if it contains be, regardless of display.
+.SS Files and dictionary coverage
+Each setting names one file, not a word or an array of files. Omit settings
+you do not need. Both files are UTF-8 with one word per line. Blank lines
+and whole-line # comments are allowed. Surrounding whitespace is trimmed;
+internal whitespace is rejected. Hyphenated words are accepted, including
+ordinary and Unicode hyphens. Entries use the language pack's normalization,
+usually ignoring capital letters. Acceptance of hyphenated entries does not
+change the tokenizer's word boundaries in input text.
+.PP
+Missing files are treated as empty lists. Ordinary extraction never creates
+or updates them. Basic mode supports exact words; families need a dictionary.
+Dictionary coverage determines which other forms are recognized.
+.PP
+The bundled English dictionary currently lacks some links in the to be
+family. The examples describe the grammatical relationship; a pack must
+contain the links to skip that family automatically. With current bundled
+data, put all eight spellings in the exact-word file to skip them all.
+Skip-list settings do not repair missing dictionary data.
+.PP
+A spelling can belong to several families. Saw can mean a tool or a past
+form of see. Listing see removes its candidate, but the saw tool candidate
+can remain. The program does not choose the meaning from the sentence.
+.SS Command-line replacement
+Each new file option replaces only its corresponding configured file.
+The other list stays active. Selecting new file options uses the new lists
+instead of configured legacy files for that run. \-\-show-all-words applies
+neither list; it cannot be combined with explicit skip-file options.
+.SS Updating the files
+Updates stay off by default. Choose the destination with
+\-\-update-list exact-words or word-families. \-\-test-known previews
+additions without writing either list or history; \-\-update-known writes
+to the chosen list only. The selection does not follow \-L.
+.SH SORTING
+.TP
+.B textual-frequency
+Descending surviving occurrence count, then spelling.
+.TP
+.B alphabetical
+Displayed term spelling.
+.TP
+.B appearance
+First surviving source position, then spelling.
+.TP
+.B global-frequency
+Descending pack frequency, then spelling; terms without a frequency
+follow those with a frequency. Requires pack frequency data and is
+unavailable in base mode.
+.TP
+.B custom
+Order from custom_order or \-\-custom-order. Unlisted terms follow
+alphabetically. The file uses the known-list format and normalization.
+.SH OUTPUT FORMATS
+.TP
+.B text
+One entry per line. Optional count and context columns are tab-separated.
+Fields containing tabs or newlines are quoted using CSV conventions.
+.TP
+.B tsv
+The same rows with a header: term, optional count, optional context.
+Multiple examples share the context cell, joined by <br> for HTML
+highlighting or " | " for other styles.
+.TP
+.B json
+A JSON array of objects containing term and count, optional
+global_frequency, and, when requested, contexts. Each context has text,
+highlight_start and highlight_end; offsets refer to the original sentence
+and the end is exclusive. Markup is not embedded.
+.TP
+.B report
+Optional PROMPT and SOURCE sections followed by VOCABULARY.
+Vocabulary uses the text format. Suitable for copying into a study tool
+or an external assistant; no request is sent by bltzr.
+.SH CONFIGURATION
+Settings are UTF-8 TOML. Precedence, from highest to lowest, is explicit
+command-line options, [languages.CODE], [defaults], and built-in defaults.
+Unknown fields and invalid values are errors.
+.PP
+Configuration-file selection is: \-\-config PATH, then BLITZER_CONFIG,
+then automatic discovery. With XDG_CONFIG_HOME set, an existing
+$XDG_CONFIG_HOME/bltzr/bltzr.toml takes precedence over
+~/.config/bltzr/bltzr.toml. Otherwise the home path is tried before
+the native platform config directory. No discovered file means built-in
+defaults. Configuration files are not created automatically.
+.PP
+Configured paths are relative to the configuration file and support
+~ and environment-variable expansion. Unset variables in paths are errors.
+Command-line paths are relative to the current working directory.
+.SS Locations
+[locations] accepts plugins_dir (pack directory) and history_file
+(SQLite sentence history). Built-in locations are languages/ and
+contexts.db below the platform application data directory, or below
+$XDG_DATA_HOME/bltzr when set.
+.SS Defaults and language overrides
+[defaults] accepts lemmatize, exclude_unknown, freq, context,
+format, sort, bold, context_limit, sentence_pattern, save_context,
+auto_update_known, prompt, src and custom_order.
+Defaults and choices are described under BLITZ OPTIONS.
+The configuration equivalent of \-\-update-known is auto_update_known.
+.PP
+save_context accepts flag-only (default: save only when requested),
+always, prompt (interactive confirmation), or never.
+Explicit \-\-save-context or \-\-no-save-context overrides any policy.
+With prompt policy, pipelines must explicitly select one of these flags
+so that standard input remains vocabulary input.
+.PP
+[languages.CODE] can override all defaults and additionally accepts
+skip_exact_words_file, skip_word_families_file, update_list and prompt_text.
+The two skip files have fixed meanings; no filter mode is needed. To enable
+configured automatic additions, explicitly set update_list to exact-words
+or word-families and select the corresponding file.
+prompt_text is optional instructions for a report's PROMPT section;
+it is only used when prompt=true or \-\-prompt is selected.
+It does not change extraction or contact an external service.
+.SS Example
+.nf
+[locations]
+plugins_dir = "./language-packs"
+history_file = "./contexts.db"
+
+[defaults]
+lemmatize = true
+context = true
+save_context = "flag-only"
+
+[languages.slv]
+skip_exact_words_file = "./slv-exact-words.txt"
+skip_word_families_file = "./slv-word-families.txt"
+# update_list = "exact-words"
+prompt_text = "Prepare vocabulary study cards."
+.fi
+.SH MIGRATING OLDER SETTINGS
+Existing configurations and scripts retain their original behavior.
+Legacy options are hidden from normal CLI help but remain accepted.
+Do not mix old file settings or a language-level filter_by with new file
+settings in the same language section. Explicit old CLI filtering options
+cannot be combined with new skip-file selections.
+.PP
+Old known_file and exclusions files with filter_by="forms" belong in the
+exact-word list (word form). With filter_by="lemmas", they belong in the
+word-family list (lexeme/lemma): review entries and put basic words there;
+move inflected entries intended for exact skipping into the exact-word file.
+Old forms_only files belong in the exact-word list. If several old files
+belong to the same new list, combine their contents into one file.
+.PP
+Remove old file keys and language-level filter_by when selecting the new
+settings. A legacy filter_by in [defaults] does not change the new lists.
+No configuration or word files are migrated automatically.
+.SS Legacy options
+\-F/\-\-filter-by forms|lemmas selects the old known-file matching mode.
+\-k/\-\-known-file PATH selects a primary known list for reading and updating.
+\-e/\-\-exclude PATH is repeatable and replaces configured exclusions,
+suppressing the configured known_file for reading unless explicitly supplied.
+\-E/\-\-exclude-forms PATH is repeatable and replaces configured forms_only.
+\-\-no-exclusions is an alias for \-\-show-all-words.
+.PP
+In the old interface, exact listed input forms always remove occurrences;
+lemmas mode additionally removes listed dictionary candidates. Old additional
+files must exist; a missing primary known_file is empty. Old updates use
+known_file as the destination, with additions determined by filter_by.
+Legacy settings never change the fixed meanings of the new files.
+.SH HISTORY
+Saving stores the language, displayed term, original sentence, highlight
+offsets and first-seen timestamp. Repeated identical language/term/context
+records are deduplicated. Only surviving vocabulary contributes records.
+History is separate from both skip lists and never makes words known or
+removes them from vocabulary.
+.SH PACK DEVELOPMENT
+The dev group is available through bltzr dev --help, even though it is
+hidden from the top-level command list. These commands accept the common
+configuration and pack-directory options.
+.TP
+.BI "dev build-plugin " SOURCE_DIR
+Build and validate a pack from config.toml and forms.tsv (form and lemma
+columns), with optional frequencies.tsv and attribution files.
+\-D/\-\-database PATH imports a compatible SQLite database instead.
+\-A/\-\-skip-orphans explicitly skips forms with missing lemma IDs in
+SQLite input; it cannot be used with TSV input.
+\-U/\-\-skip-unsupported explicitly skips unsupported multiword or symbol
+entries. Skips are counted in build-info.json. The destination must be absent.
+.TP
+.BI "dev check-plugin " CODE
+Report validation checks for an installed pack. Failed checks cause a
+nonzero exit status.
+.TP
+.BI "dev expand-plugin " "CODE ADDITIONAL_DIRECTORY"
+Merge additional dictionary pairs into an installed pack, preserving
+existing pairs, frequencies, settings and attribution.
+\-v/\-\-pack-version VERSION sets the merged version (default 0.2.0).
+.TP
+.BI "dev package-plugin " CODE
+Create a validated pack archive. \-o/\-\-output-dir DIRECTORY selects the
+destination (default release-assets).
+.SH ENVIRONMENT
+.TP
+.B BLITZER_CONFIG
+Explicit configuration file, overridden by \-\-config and ignored by
+\-\-no-config.
+.TP
+.B XDG_CONFIG_HOME
+Absolute configuration root used for automatic file discovery.
+.TP
+.B XDG_DATA_HOME
+Absolute data root for default pack and history locations.
+Otherwise native platform directories are used.
+.SH FILES
+.TP
+.I ~/.config/bltzr/bltzr.toml
+Home configuration file, searched automatically.
+.TP
+.I $XDG_CONFIG_HOME/bltzr/bltzr.toml
+Preferred discovered configuration when XDG_CONFIG_HOME is set.
+.TP
+.I config.example.toml
+Commented configuration example in the source distribution.
+.TP
+.I PATH.bak
+Previous word-list contents when an existing file is rewritten by
+cleanup-known --apply or a known-word update.
+.SH EXAMPLES
+Show basic words (lexeme/lemma), but skip only the listed exact words
+(word form):
+.PP
+.nf
+bltzr blitz -l eng -L --skip-exact-words-file exact.txt \\
+  -t "I am here. They are here."
+.fi
+.PP
+Skip the entire to be family by writing be in families.txt:
+.PP
+.nf
+bltzr blitz -l eng --skip-word-families-file families.txt \\
+  -t "I am here. They were here."
+.fi
+.PP
+Use both lists and export surviving counts and examples:
+.PP
+.nf
+bltzr blitz -l eng --skip-exact-words-file exact.txt \\
+  --skip-word-families-file families.txt \\
+  -i chapter.txt -f -c -o tsv > words.tsv
+.fi
+.PP
+Process piped input without reading configuration:
+.PP
+.nf
+cat chapter.txt | bltzr blitz -n -l base -o json
+.fi
+.PP
+Preview additions, then explicitly add encountered spellings to the exact list:
+.PP
+.nf
+bltzr blitz -l eng --skip-exact-words-file exact.txt \\
+  -i chapter.txt --update-list exact-words -T
+bltzr blitz -l eng --skip-exact-words-file exact.txt \\
+  -i chapter.txt --update-list exact-words -u
+.fi
+.PP
+Save examples and inspect history:
+.PP
+.nf
+bltzr blitz -l eng -L -t "He helps me." -H
+bltzr history eng help --limit 20
+.fi
+.PP
+Export configured instructions and source text for use elsewhere:
+.PP
+.nf
+bltzr blitz -l slv -i chapter.txt -o report -p -s -c
+.fi
+.PP
+Install or update a registered language pack:
+.PP
+.nf
+bltzr install-plugin slv
+bltzr install-plugin slv --replace
+.fi
+.SH EXIT STATUS
+0 indicates success, including an empty vocabulary result.
+1 indicates an application or data error, or an aborted operation.
+2 indicates invalid command-line usage.
+.SH SEE ALSO
+.BR man (1),
+.BR python (1)
+.PP
+README.md, config.example.toml, and language-packs/README.md in the source
+checkout. Use bltzr COMMAND --help for command-specific help.

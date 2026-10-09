@@ -521,6 +521,70 @@ def _load_term_set(paths, normal) -> set[str]:
     return result
 
 
+def _skip_file_settings(settings, exact_file, family_file):
+    """Select the two fixed-purpose files independently of display settings."""
+    if exact_file is None and family_file is None:
+        return {key: settings[key] for key in (
+            "skip_exact_words_file", "skip_word_families_file"
+        ) if key in settings}
+    return {
+        "skip_exact_words_file": exact_file or settings.get("skip_exact_words_file"),
+        "skip_word_families_file": family_file or settings.get("skip_word_families_file"),
+    }
+
+
+def _validate_skip_overrides(
+    filter_by, exclusions, forms_only, known_file, disabled, exact_file, family_file
+):
+    """Reject ambiguous legacy overrides and contradictory file selections."""
+    if any(value is not None for value in (filter_by, exclusions, forms_only, known_file)):
+        raise ValueError(
+            "Use the two skip-file options without legacy known/exclusion "
+            "options or --filter-by"
+        )
+    if disabled and (exact_file is not None or family_file is not None):
+        raise ValueError("--show-all-words cannot be combined with explicit skip files")
+
+
+def _load_skip_files(files, normal, disabled):
+    """Read exact words and dictionary word families from their own files."""
+    if disabled:
+        return set(), set()
+    exact = _optional_skip_terms(files.get("skip_exact_words_file"), normal)
+    families = _optional_skip_terms(files.get("skip_word_families_file"), normal)
+    return families, exact
+
+
+def _optional_skip_terms(path, normal):
+    """Treat an omitted or missing skip file as an empty list."""
+    if path is None:
+        return set()
+    return set(_read_terms(resolve_path(path), normal, missing_ok=True)[0])
+
+
+def _update_file_key(update_list):
+    """Map an explicit update choice to its fixed-purpose file setting."""
+    return {
+        "exact-words": "skip_exact_words_file",
+        "word-families": "skip_word_families_file",
+    }.get(update_list)
+
+
+def _skip_update_mode(files, update_list, track_known):
+    """Require an explicit destination before proposing automatic additions."""
+    if update_list is not None and update_list not in {"exact-words", "word-families"}:
+        raise ValueError("update_list must be exact-words or word-families")
+    if not track_known:
+        return None
+    key = _update_file_key(update_list)
+    if key is None or not files.get(key):
+        raise ValueError(
+            "Choose --update-list exact-words or word-families and specify "
+            "the corresponding skip file before previewing or adding words"
+        )
+    return "forms" if update_list == "exact-words" else "lemmas"
+
+
 def _load_vocabulary_data(root, code, keys, needs_lookup, needs_frequency):
     """Read lookup and frequency data for one call.
 
@@ -838,6 +902,9 @@ class BlitzerService:
         forms_only: tuple[Path, ...] | None = None,
         no_exclusions: bool = False,
         known_file: Path | None = None,
+        skip_exact_words_file: Path | None = None,
+        skip_word_families_file: Path | None = None,
+        update_list: str | None = None,
         sort: str | None = None,
         custom_order: Path | None = None,
         sentence_pattern: str | None = None,
@@ -861,6 +928,23 @@ class BlitzerService:
             sentence_pattern=sentence_pattern,
             context_limit=context_limit,
         )
+        skip_files = _skip_file_settings(
+            settings, skip_exact_words_file, skip_word_families_file
+        )
+        if update_list is not None and not skip_files:
+            raise ValueError(
+                "--update-list requires a skip_exact_words_file or skip_word_families_file"
+            )
+        if skip_files:
+            _validate_skip_overrides(
+                filter_by, exclusions, forms_only, known_file,
+                no_exclusions, skip_exact_words_file, skip_word_families_file
+            )
+            family_filter = skip_files.get("skip_word_families_file") and not no_exclusions
+            options["filter_by"] = "lemmas" if family_filter else "forms"
+            options["known_update_mode"] = _skip_update_mode(
+                skip_files, update_list or settings.get("update_list"), track_known
+            )
         validate_processing(
             text,
             language_code,
@@ -889,7 +973,7 @@ class BlitzerService:
             forms_only,
             known_file,
             no_exclusions,
-        )
+        ) if not skip_files else _load_skip_files(skip_files, normal, no_exclusions)
         needs_lookup = (
             track_known
             or options["lemmatize"]
@@ -1211,6 +1295,7 @@ class BlitzerService:
         *,
         path: Path | None = None,
         dry_run: bool = True,
+        list_kind: str | None = None,
     ) -> KnownListChange:
         """Preview or write matched terms to the known list.
 
@@ -1218,8 +1303,18 @@ class BlitzerService:
         use a lock and atomic replacement with a backup. Matching a word
         does not establish that the user has learned it.
         """
-        selected = path or self.settings(code).get("known_file")
+        settings = self.settings(code)
+        files = _skip_file_settings(settings, None, None)
+        selected = path or settings.get("known_file")
+        if files or list_kind is not None:
+            kind = list_kind or settings.get("update_list")
+            key = _update_file_key(kind)
+            if key is None:
+                raise ValueError("Choose update_list: exact-words or word-families")
+            selected = path or files.get(key)
         if selected is None:
+            if files or list_kind is not None:
+                raise ValueError("Specify the skip file selected by update_list")
             raise ValueError(
                 "Known updating needs --known-file "
                 "or languages.CODE.known_file"

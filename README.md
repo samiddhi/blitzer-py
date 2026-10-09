@@ -260,8 +260,8 @@ bold = "markdown"
 save_context = "flag-only"
 
 [languages.eng]
-known_file = "./eng-known.txt"
-filter_by = "forms"
+skip_exact_words_file = "./eng-exact-words.txt"
+skip_word_families_file = "./eng-word-families.txt"
 ```
 
 `[defaults]` applies to every language. `[languages.eng]` overrides
@@ -281,34 +281,177 @@ Command-line options override your config; for example, `--no-context`
 hides example sentences even when `context = true`.
 
 See [config.example.toml](config.example.toml) for the full set of settings.
+The complete command reference is in [bltzr(1)](docs/bltzr.1).
 
-## Keep a list of words you know
+## Choose which words to skip
 
-Create the `eng-known.txt` file beside your config, with one word per line:
+Keep two optional files. Each has one job, and you can use either or both.
+Skipped words do not appear in the vocabulary and do not contribute to counts
+or example sentences.
+
+### Skip these exact words (word form)
+
+Use this list when you know some spellings of a word but still want to study
+others. For the verb **to be**, you might know **be** and **am** but still
+want to study **is**, **are**, **was**, **were**, **being**, and **been**.
+
+Create `eng-exact-words.txt` beside your config:
 
 ```text
-run
-runs
+be
+am
+cat
 ```
 
-With `filter_by = "forms"` knowing `ran` excludes that form while `run`
-still appears. With `filter_by = "lemmas"` adding `run` excludes forms
-of that lemma like `ran` and `runs`. Filtering and `--lemmatize` are separate choices.
-Example sentences are selected from occurrences that survived filtering.
+Then select it:
 
-Without a config, pass the list with `--known-file PATH`. A missing known
-list is treated as empty; ordinary processing does not create or update it.
+```toml
+[languages.eng]
+# Skip only these exact words (word form).
+# "be" and "am" leave "is", "are", "was", "were", "being", and "been" counted.
+# "cat" leaves "cats" counted.
+skip_exact_words_file = "./eng-exact-words.txt"
+```
 
-Check for duplicates, then apply the cleanup if wanted:
+Even though **be** is the basic word, putting it in this file skips only
+**be**. It does not skip its other forms. Likewise, **cat** does not skip **cats**.
+For Slovenian, listing **sem** and **biti** here leaves **sva** counted.
+
+### Skip these words and their other forms: word families (lexeme/lemma)
+
+Use this list when you want to skip a whole word family. The program uses its
+dictionary to connect the different forms of a word. For **to be**, put
+**be** in the file, without “to”:
+
+```text
+be
+cat
+```
+
+```toml
+[languages.eng]
+# Skip these word families (lexeme/lemma), using the dictionary.
+# "be" skips "be", "am", "is", "are", "was", "were", "being", and "been".
+# "cat" skips both "cat" and "cats".
+skip_word_families_file = "./eng-word-families.txt"
+```
+
+A word family means the grammatical forms of the same word, such as **cat**
+and **cats**. It does not include related words such as **catlike**.
+Write the basic word in this file: **be**, rather than **am**; **cat**, rather
+than **cats**. The program does not guess a whole family from an inflected
+word you list.
+
+| What you put in a file | Which file | What gets skipped | What can still be counted |
+|---|---|---|---|
+| `be`, `am` | Exact words (word form) | be, am | is, are, was, were, being, been |
+| `be` | Word families (lexeme/lemma) | be, am, is, are, was, were, being, been | Other words |
+| `cat` | Exact words (word form) | cat | cats |
+| `cat` | Word families (lexeme/lemma) | cat, cats | Other words |
+
+### Use both lists and choose what to display
+
+```toml
+[languages.eng]
+skip_exact_words_file = "./eng-exact-words.txt"
+skip_word_families_file = "./eng-word-families.txt"
+```
+
+Each setting names **one file**, not a word or an array of files. Leave out
+settings you do not need. Paths are relative to the config file and can use
+`~` or environment variables. A missing file is treated as an empty list;
+ordinary extraction does not create it.
+
+Both files contain one word per line. Blank lines and whole-line `#` comments
+are allowed. Hyphenated words such as `sally-anne` are accepted; internal spaces
+are not. Words are compared using the language pack's normalization, usually
+ignoring capital letters. Accepting a hyphenated entry does not change how the
+language's tokenizer divides a hyphenated word in input text.
+
+Display is a separate choice. `--lemmatize` (`-L`) shows basic words
+(lexeme/lemma), such as **are → be** or **cats → cat**. Without it, the output
+shows words as written (word form). This never changes what either file skips.
+If **be** and **am** are in the exact-word file, **are** still contributes a
+count, even when `-L` displays it as **be**.
+
+Word-family matching depends on dictionary coverage. A spelling can belong
+to more than one family: English **saw** can mean the tool or a past form of
+**see**. Listing **see** removes that candidate; the **saw** tool candidate
+can remain. The program does not decide the meaning from the sentence.
+
+The bundled English dictionary currently lacks some links in the **to be**
+family. The examples above describe the grammatical relationship; a pack must
+contain those links to skip the whole family automatically. With the current
+bundled data, put all eight spellings in the exact-word file if you want to
+skip them all. Changing a skip list does not repair missing dictionary data.
+
+### Command-line options
 
 ```sh
-bltzr cleanup-known eng ~/.config/bltzr/eng-known.txt
-bltzr cleanup-known eng ~/.config/bltzr/eng-known.txt --apply
+bltzr blitz -l eng -L --skip-exact-words-file eng-exact-words.txt \
+  --skip-word-families-file eng-word-families.txt -t "I am here. They are here."
 ```
 
-Cleanup saves a `.bak` copy. `--test-known` previews automatic additions;
-`--update-known` writes them. Automatic updating is off by default:
-encountering a word does not mean you have learned it.
+Each file option replaces only the corresponding configured file for that run;
+it leaves the other list active. `--show-all-words` (`-N`) skips neither list
+and cannot be combined with explicit skip-file options. Basic (`base`) mode
+supports exact words; word families require a dictionary.
+
+### Updating and tidying the lists
+
+Reading a story does not mean you learned its words, so automatic additions
+are off by default. To preview additions, choose which list would receive them:
+
+```sh
+bltzr blitz -l eng -i chapter.txt --update-list exact-words --test-known
+bltzr blitz -l eng -i chapter.txt --update-list word-families --test-known
+```
+
+These commands use the corresponding file from your config. Previews change
+neither list nor history. Replace `--test-known` with `--update-known` to write
+additions. Exact-word updates add encountered spellings (word form); word-family
+updates add dictionary basic words (lexeme/lemma). The choice does not depend
+on `-L`. Only dictionary-matched surviving words propose additions, and only
+the selected list is written. Existing files receive a `.bak` backup on rewrite.
+
+For automatic updates configured with `auto_update_known = true`, explicitly
+set `update_list = "exact-words"` or `"word-families"` in the language section.
+`--show-all-words` affects skipping, not updating; use `--no-update-known` to
+disable additions.
+
+Check either list for duplicates, then apply cleanup if wanted:
+
+```sh
+bltzr cleanup-known eng ~/.config/bltzr/eng-exact-words.txt
+bltzr cleanup-known eng ~/.config/bltzr/eng-exact-words.txt --apply
+```
+
+Cleanup normalizes entries, preserves comments, and saves a `.bak` copy.
+
+### Moving from older settings
+
+Existing configurations and scripts using `known_file`, `exclusions`,
+`forms_only`, and `filter_by` continue to work with their original behavior.
+The old CLI file options are kept for compatibility but hidden from normal help.
+
+For migration:
+
+- Files formerly read through `known_file` or `exclusions` with
+  `filter_by = "forms"` belong in the exact-word list (word form).
+- With `filter_by = "lemmas"`, they belong in the word-family list
+  (lexeme/lemma). Review entries and use basic words in this file; move
+  inflected entries that you only want skipped exactly into the exact-word file.
+- Files formerly in `forms_only` belong in the exact-word list.
+- If several old files belong in one new list, combine their contents into
+  one file. Duplicate entries do not change the result.
+
+Remove the old file settings and language-level `filter_by` when selecting
+the new settings. Do not mix old and new file settings in one language section.
+The two new lists have fixed meanings; a legacy `filter_by` in `[defaults]`
+does not change them. Selecting new file options on the command line uses the
+new lists for that run instead of loading configured legacy files. Combining
+new file settings with explicit legacy filtering options is an error.
+Your configuration and word files are never migrated automatically.
 
 ## Useful options
 
@@ -321,6 +464,9 @@ encountering a word does not mean you have learned it.
 | `--sort appearance` | Keep the order words first appeared |
 | `--sort textual-frequency` | Show the most frequent words first |
 | `--exclude-unknown` | Hide words missing from the dictionary |
+| `--skip-exact-words-file PATH` | Skip only the listed words (word form) |
+| `--skip-word-families-file PATH` | Skip listed words and their other forms (lexeme/lemma) |
+| `--show-all-words` | Count words without applying either skip list |
 | `--format json` | Export JSON; also accepts text, tsv, report |
 
 Sorting also accepts `alphabetical`, `global-frequency` (requires a pack
@@ -345,7 +491,13 @@ In config, `save_context` accepts `"flag-only"` (save when requested),
 ```sh
 bltzr blitz --help
 bltzr dev --help
+man ./docs/bltzr.1
 ```
+
+The distribution installs the man page under `share/man/man1` in Python's
+installation prefix. If your environment includes that directory in its
+man search path, use `man bltzr`. Otherwise open the file directly, for
+example `man "$VIRTUAL_ENV/share/man/man1/bltzr.1"` for a virtual environment.
 
 For a source checkout, install with
 `.venv/bin/python -m pip install -e '.[dev]'` after creating a virtual

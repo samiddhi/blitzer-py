@@ -29,6 +29,9 @@ include = ["blitzer*"]
 [tool.setuptools.package-data]
 blitzer = ["language-registry.json", "language-catalog.json", "language-packs/eng/*"]
 
+[tool.setuptools.data-files]
+"share/man/man1" = ["docs/bltzr.1"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

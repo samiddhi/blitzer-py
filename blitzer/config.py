@@ -185,6 +185,7 @@ def _validate_options(options: dict, label: str) -> None:
         "sort": SORTS,
         "bold": MARKUPS,
         "save_context": SAVE_CONTEXT,
+        "update_list": ("exact-words", "word-families"),
     }
     for key, value in options.items():
         if key in bools and type(value) is not bool:
@@ -219,7 +220,9 @@ def _paths(settings: dict, base: Path, label: str) -> dict:
         ):
             raise ValueError(f"{label}.{key} must be a list of paths")
         result[key] = [resolve_path(x, base) for x in value]
-    for key in ("known_file", "custom_order"):
+    for key in (
+        "known_file", "custom_order", "skip_exact_words_file", "skip_word_families_file"
+    ):
         if key not in result:
             continue
         result[key] = _path_setting(result[key], base, f"{label}.{key}")
@@ -295,8 +298,18 @@ def _language_settings(code, values, allowed, base) -> dict:
     """Validate and resolve one language override."""
     validate_code(code)
     label = f"languages.{code}"
-    extra = {"exclusions", "forms_only", "known_file", "prompt_text"}
+    extra = {
+        "exclusions", "forms_only", "known_file", "prompt_text",
+        "skip_exact_words_file", "skip_word_families_file", "update_list",
+    }
     _table(values, label, allowed | extra)
+    modern = values.keys() & {"skip_exact_words_file", "skip_word_families_file"}
+    legacy = values.keys() & {"known_file", "exclusions", "forms_only", "filter_by"}
+    if modern and legacy:
+        raise ValueError(
+            f"{label}: use skip_exact_words_file and skip_word_families_file "
+            "instead of mixing them with known_file, exclusions, forms_only or filter_by"
+        )
     _validate_options(values, label)
     return _paths(values, base, label)
 

@@ -1,4 +1,5 @@
 include README.md PLAN.md PLUGIN-RELEASES.md config.example.toml
+include docs/bltzr.1
 recursive-include tests *.py
 prune maintenance
 exclude tests/test_unimorph.py

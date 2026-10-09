@@ -229,12 +229,14 @@ def _should_save_contexts(policy, explicit, test_known) -> bool:
     )
 
 
-def _handle_known_update(service, language, entries, path, update, test_known):
+def _handle_known_update(
+    service, language, entries, path, update, test_known, list_kind=None
+):
     """Update or preview known terms and report to stderr."""
     if not update and not test_known:
         return
     change = service.update_known(
-        language, entries, path=path, dry_run=test_known
+        language, entries, path=path, dry_run=test_known, list_kind=list_kind
     )
     action = "Would add" if test_known else "Added"
     click.echo(
@@ -256,6 +258,21 @@ def _handle_context_saving(service, language, entries, saving):
         return
     count = service.save_contexts(language, entries)
     click.echo(f"Saved {count} new contexts.", err=True)
+
+
+def _known_update_destination(
+    settings, legacy_path, exact_file, family_file, update_list
+):
+    """Select the explicitly named update list, independently of display."""
+    modern = exact_file is not None or family_file is not None or any(
+        key in settings for key in ("skip_exact_words_file", "skip_word_families_file")
+    )
+    if not modern:
+        return legacy_path, None
+    kind = update_list or settings.get("update_list")
+    if kind == "exact-words":
+        return exact_file or settings.get("skip_exact_words_file"), kind
+    return family_file or settings.get("skip_word_families_file"), kind
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -286,12 +303,13 @@ def dev():
     "--lemmatize/--no-lemmatize",
     "-L",
     default=None,
-    help="Display lemmas instead of forms.",
+    help="Show basic words (lexeme/lemma): 'are' becomes 'be'; does not change what is skipped.",
 )
 @click.option(
     "--filter-by",
     "-F",
     type=click.Choice(["forms", "lemmas"]),
+    hidden=True,
     help="What the known list excludes; independent of display.",
 )
 @click.option("--exclude-unknown/--include-unknown", "-x", default=None)
@@ -302,6 +320,7 @@ def dev():
     "-e",
     "exclusions",
     multiple=True,
+    hidden=True,
     type=click.Path(dir_okay=False, path_type=Path),
 )
 @click.option(
@@ -309,15 +328,24 @@ def dev():
     "-E",
     "forms_only",
     multiple=True,
+    hidden=True,
     type=click.Path(dir_okay=False, path_type=Path),
 )
-@click.option("--no-exclusions", "-N", is_flag=True)
+@click.option("--show-all-words", "--no-exclusions", "-N", "no_exclusions", is_flag=True,
+              help="Count words without applying either skip list; does not disable updates.")
 @click.option(
     "--known-file",
     "-k",
     type=click.Path(dir_okay=False, path_type=Path),
+    hidden=True,
     help="Primary known list; missing means initially empty.",
 )
+@click.option("--skip-exact-words-file", type=click.Path(dir_okay=False, path_type=Path),
+              help="Skip only listed words (word form): 'be' and 'am' leave 'is' and 'are' counted.")
+@click.option("--skip-word-families-file", type=click.Path(dir_okay=False, path_type=Path),
+              help="Skip listed word families (lexeme/lemma): 'be' skips 'am', 'is', 'are', 'was', etc.")
+@click.option("--update-list", type=click.Choice(["exact-words", "word-families"]),
+              help="Choose which skip file receives additions with --update-known or --test-known.")
 @click.option("--sort", "-S", type=click.Choice(SORTS))
 @click.option(
     "--custom-order",
@@ -332,8 +360,10 @@ def dev():
 @click.option("--context-limit", "-m", type=click.IntRange(1, 20))
 @click.option("--bold", "-b", type=click.Choice(MARKUPS))
 @click.option("--format", "-o", "output_format", type=click.Choice(FORMATS))
-@click.option("--prompt/--no-prompt", "-p", default=None)
-@click.option("--src/--no-src", "-s", default=None)
+@click.option("--prompt/--no-prompt", "-p", default=None,
+              help="Include configured instructions in a report for copying elsewhere; no API calls.")
+@click.option("--src/--no-src", "-s", default=None,
+              help="Include original input in report output.")
 @click.option(
     "--save-context/--no-save-context",
     "-H",
@@ -344,15 +374,15 @@ def dev():
     "--update-known/--no-update-known",
     "-u",
     default=None,
-    help="Discouraged: text occurrence does not mean learned vocabulary.",
+    help="Add matched words to the chosen --update-list; reading a word does not mean learning it.",
 )
 @click.option(
     "--test-known",
     "-T",
     is_flag=True,
     help=(
-        "Preview proposed known additions; "
-        "write neither known list nor history."
+        "Preview additions to the chosen --update-list; "
+        "write neither skip list nor history."
     ),
 )
 @click.option(
@@ -375,6 +405,9 @@ def blitz(
     forms_only,
     no_exclusions,
     known_file,
+    skip_exact_words_file,
+    skip_word_families_file,
+    update_list,
     sort,
     custom_order,
     sentence_pattern,
@@ -427,6 +460,9 @@ def blitz(
             forms_only=forms_only or None,
             no_exclusions=no_exclusions,
             known_file=known_file,
+            skip_exact_words_file=skip_exact_words_file,
+            skip_word_families_file=skip_word_families_file,
+            update_list=update_list,
             sort=sort,
             custom_order=custom_order,
             sentence_pattern=sentence_pattern,
@@ -442,8 +478,12 @@ def blitz(
             source=text if display["src"] else None,
             prompt=display["prompt_text"],
         )
+        update_path, list_kind = _known_update_destination(
+            settings, known_file, skip_exact_words_file,
+            skip_word_families_file, update_list
+        )
         _handle_known_update(
-            service, language, entries, known_file, update, test_known
+            service, language, entries, update_path, update, test_known, list_kind
         )
         _handle_context_saving(service, language, entries, saving)
         click.echo(output, nl=False)
