@@ -26,7 +26,6 @@ environment settings. conftest.py supplies isolation for all tests.
 """
 
 from pathlib import Path
-from unittest.mock import Mock
 
 import pytest
 
@@ -37,7 +36,6 @@ from blitzer.config import (
     validate_pattern,
 )
 
-from blitzer import config as config_module
 
 
 def test_defaults_read_nothing(tmp_path):
@@ -61,7 +59,7 @@ def test_selection_and_relative_paths(tmp_path, monkeypatch):
     assert get_config()["defaults"]["freq"] is True
     loaded = get_config(flag)
     assert loaded["defaults"]["freq"] is False
-    assert loaded["locations"]["plugins_dir"] == tmp_path / "packs"
+    assert loaded["locations"]["language_packs_dir"] == tmp_path / "packs"
     assert loaded["languages"]["slv"]["known_file"] == tmp_path / "known.txt"
     assert get_config(use_config=False)["defaults"]["freq"] is False
     with pytest.raises(ValueError):
@@ -108,8 +106,9 @@ def test_expansion_validation(tmp_path, monkeypatch):
     with pytest.raises(ValueError):
         resolve_path("$WORDS/known.txt")
     monkeypatch.setenv("XDG_DATA_HOME", "relative")
-    with pytest.raises(ValueError):
-        get_config(use_config=False)
+    assert get_config(use_config=False)["locations"]["language_packs_dir"] == (
+        Path.home() / ".local/share/bltzr/languages"
+    )
 
 
 @pytest.mark.parametrize("pattern", ["", "[", r"\b", "(?=a)"])
@@ -138,13 +137,14 @@ def test_old_prototype_paths_are_not_selected(tmp_path):
     (legacy / "blitzer.toml").write_text("[defaults]\nfreq = true\n")
     config = get_config()
     assert config["defaults"]["freq"] is False
-    assert config["locations"]["plugins_dir"] == (
+    assert config["locations"]["language_packs_dir"] == (
         tmp_path / "data" / "bltzr" / "languages"
     )
 
 
-def test_home_config_loads_automatically():
+def test_home_config_loads_automatically(monkeypatch):
     """Check home config and relative known-list paths."""
+    monkeypatch.delenv("XDG_CONFIG_HOME")
     directory = Path.home() / ".config" / "bltzr"
     directory.mkdir(parents=True)
     (directory / "bltzr.toml").write_text(
@@ -180,16 +180,40 @@ def test_xdg_config_overrides_home(tmp_path):
     assert get_config()["defaults"]["sort"] == "alphabetical"
 
 
-def test_home_config_precedes_native_location(tmp_path, monkeypatch):
-    """Check home lookup works on platforms with another native path."""
-    monkeypatch.delenv("XDG_CONFIG_HOME")
-    native = tmp_path / "native"
-    native.mkdir()
-    (native / "bltzr.toml").write_text('[defaults]\nsort="appearance"\n')
-    monkeypatch.setattr(
-        config_module, "_platform_dir", Mock(return_value=native)
-    )
+def test_xdg_config_has_no_native_or_home_fallback(tmp_path):
+    """An explicit XDG root is the user configuration directory."""
     home = Path.home() / ".config" / "bltzr"
     home.mkdir(parents=True)
     (home / "bltzr.toml").write_text('[defaults]\nsort="alphabetical"\n')
-    assert get_config()["defaults"]["sort"] == "alphabetical"
+    assert get_config()["defaults"]["sort"] == "textual-frequency"
+
+
+@pytest.mark.parametrize("value", [None, "", "relative"])
+def test_xdg_fallbacks_on_every_platform(monkeypatch, value):
+    for variable in ("XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_STATE_HOME"):
+        if value is None:
+            monkeypatch.delenv(variable)
+        else:
+            monkeypatch.setenv(variable, value)
+    from blitzer.config import config_path
+    home = Path.home()
+    assert config_path() == home / ".config/bltzr/bltzr.toml"
+    locations = get_config(use_config=False)["locations"]
+    assert locations == {
+        "language_packs_dir": home / ".local/share/bltzr/languages",
+        "history_file": home / ".local/state/bltzr/contexts.db",
+    }
+
+
+def test_xdg_state_and_modern_pack_override(tmp_path):
+    config = get_config(use_config=False, language_packs_dir=tmp_path / "custom")
+    assert config["locations"]["history_file"] == tmp_path / "state/bltzr/contexts.db"
+    assert config["locations"]["language_packs_dir"] == tmp_path / "custom"
+    path = tmp_path / "user.toml"
+    path.write_text('[locations]\nlanguage_packs_dir="packs"\n')
+    assert get_config(path)["locations"]["language_packs_dir"] == tmp_path / "packs"
+    with pytest.raises(ValueError, match="both directory spellings"):
+        get_config(language_packs_dir=tmp_path, plugins_dir=tmp_path)
+    path.write_text('[locations]\nlanguage_packs_dir="packs"\nplugins_dir="old"\n')
+    with pytest.raises(ValueError, match="both directory spellings"):
+        get_config(path)

@@ -43,7 +43,7 @@ from pathlib import Path
 
 import click
 
-from blitzer.config import FORMATS, MARKUPS, SORTS
+from blitzer.config import FORMATS, MARKUPS, SORTS, config_path
 from blitzer.core import BlitzerService, Context
 from blitzer.downloads import REGISTRY
 
@@ -64,10 +64,10 @@ def _errors():
         raise click.ClickException(str(error)) from error
 
 
-def _service(config, no_config, plugins_dir):
+def _service(config, no_config, language_packs_dir):
     """Create a service from CLI configuration selections."""
     return BlitzerService(
-        config, use_config=not no_config, plugins_dir=plugins_dir
+        config, use_config=not no_config, language_packs_dir=language_packs_dir
     )
 
 
@@ -390,7 +390,8 @@ def dev():
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
 def blitz(
     language,
@@ -421,13 +422,13 @@ def blitz(
     test_known,
     config,
     no_config,
-    plugins_dir,
+    language_packs_dir,
 ):
     """Extract filtered vocabulary from input text."""
     if text is not None and input_file is not None:
         raise click.UsageError("Use either --text or --file, not both")
     with _errors():
-        service = _service(config, no_config, plugins_dir)
+        service = _service(config, no_config, language_packs_dir)
         settings = service.settings(language)
         display = _presentation_options(
             settings,
@@ -495,18 +496,64 @@ def blitz(
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def list_languages(config, no_config, plugins_dir):
+def list_languages(config, no_config, language_packs_dir):
     """List installed languages available for text processing."""
     with _errors():
-        service = _service(config, no_config, plugins_dir)
+        service = _service(config, no_config, language_packs_dir)
         click.echo(
             "\n".join(
                 f"{service.language_name(code)} ({code})"
                 for code in service.list_languages()
             )
         )
+
+
+@cli.command("list-available-languages")
+def list_available_languages():
+    """List all downloadable languages and base mode, without network access."""
+    languages = {code: entry["name"] for code, entry in REGISTRY.items()}
+    languages.update(base="Basic", eng="English")
+    click.echo("\n".join(
+        f"{name} ({code})" for code, name in sorted(
+            languages.items(), key=lambda item: (item[1].casefold(), item[0])
+        )
+    ))
+
+
+def _create_user_config(path):
+    """Create a minimal editable config while preserving existing files."""
+    if not path.exists():
+        # Exclusive creation protects a config written concurrently.
+        with path.open("x", encoding="utf-8") as stream:
+            stream.write(
+                "# Relative paths are relative to this file.\n"
+                "# Omit locations to use XDG config/data/state directories.\n"
+                "[defaults]\n"
+                "lemmatize = false\n"
+                "freq = false\n"
+                "context = false\n"
+                "save_context = \"flag-only\"\n"
+                "\n# [languages.eng]\n"
+                '# skip_exact_words_file = "eng-exact-words.txt"\n'
+                '# skip_word_families_file = "eng-word-families.txt"\n'
+            )
+
+
+@cli.command("config")
+@click.option("--config", "-C", type=click.Path(dir_okay=False, path_type=Path))
+def edit_config(config):
+    """Open the user config in $VISUAL or $EDITOR, creating it if absent."""
+    with _errors():
+        path = config_path(config)
+        path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        _create_user_config(path)
+        click.edit(filename=str(path))
+
+
+cli.add_command(edit_config, "conf")
 
 
 @dev.command("check-plugin")
@@ -516,12 +563,13 @@ def list_languages(config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def check_plugin(code, config, no_config, plugins_dir):
+def check_plugin(code, config, no_config, language_packs_dir):
     """Report all validation checks for an installed pack."""
     with _errors():
-        report = _service(config, no_config, plugins_dir).check_plugin(code)
+        report = _service(config, no_config, language_packs_dir).check_plugin(code)
         for item in report:
             click.echo(f"[{item.status.upper()}] {item.name}: {item.detail}")
         if any(x.status == "fail" for x in report):
@@ -558,7 +606,8 @@ def check_plugin(code, config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
 def build_plugin(
     source_dir,
@@ -567,11 +616,11 @@ def build_plugin(
     skip_orphans,
     config,
     no_config,
-    plugins_dir,
+    language_packs_dir,
 ):
     """Build and validate a pack before publishing it."""
     with _errors():
-        path = _service(config, no_config, plugins_dir).build_plugin(
+        path = _service(config, no_config, language_packs_dir).build_plugin(
             source_dir,
             source_database=database,
             skip_unsupported=skip_unsupported,
@@ -596,14 +645,15 @@ def build_plugin(
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
 def expand_plugin(
-    code, additional, pack_version, config, no_config, plugins_dir
+    code, additional, pack_version, config, no_config, language_packs_dir
 ):
     """Expand a pack while preserving all existing dictionary pairs."""
     with _errors():
-        service = _service(config, no_config, plugins_dir)
+        service = _service(config, no_config, language_packs_dir)
         stats = service.expand_plugin(code, additional, version=pack_version)
         click.echo(json.dumps(stats, indent=2))
 
@@ -621,9 +671,10 @@ def expand_plugin(
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def install_plugin(source, replace, config, no_config, plugins_dir):
+def install_plugin(source, replace, config, no_config, language_packs_dir):
     """Install a registered language or a local directory."""
     with _errors():
         if source in REGISTRY and not Path(source).is_dir():
@@ -633,7 +684,7 @@ def install_plugin(source, replace, config, no_config, plugins_dir):
             )
         click.echo(
             str(
-                _service(config, no_config, plugins_dir).install_plugin(
+                _service(config, no_config, language_packs_dir).install_plugin(
                     source, replace=replace
                 )
             )
@@ -654,12 +705,13 @@ def install_plugin(source, replace, config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def package_plugin(code, output_dir, config, no_config, plugins_dir):
+def package_plugin(code, output_dir, config, no_config, language_packs_dir):
     """Prepare a validated pack archive for publication."""
     with _errors():
-        service = _service(config, no_config, plugins_dir)
+        service = _service(config, no_config, language_packs_dir)
         click.echo(str(service.package_plugin(code, output_dir)))
 
 
@@ -673,17 +725,18 @@ def package_plugin(code, output_dir, config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def remove_plugin(code, yes, config, no_config, plugins_dir):
+def remove_plugin(code, yes, config, no_config, language_packs_dir):
     """Remove an installed language pack."""
     with _errors():
-        service = _service(config, no_config, plugins_dir)
+        service = _service(config, no_config, language_packs_dir)
         # Validate before constructing a path or asking to remove it.
         service.settings(code)
         if not yes:
             click.confirm(
-                f"Remove pack {service.plugins_dir / code}?",
+                f"Remove pack {service.language_packs_dir / code}?",
                 abort=True,
                 err=True,
             )
@@ -707,12 +760,13 @@ def remove_plugin(code, yes, config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def cleanup_known(code, path, apply, config, no_config, plugins_dir):
+def cleanup_known(code, path, apply, config, no_config, language_packs_dir):
     """Preview or apply known-list deduplication."""
     with _errors():
-        result = _service(config, no_config, plugins_dir).cleanup_known(
+        result = _service(config, no_config, language_packs_dir).cleanup_known(
             code, path, apply=apply
         )
         click.echo(json.dumps(result, ensure_ascii=False, indent=2))
@@ -729,14 +783,15 @@ def cleanup_known(code, path, apply, config, no_config, plugins_dir):
 )
 @click.option("--no-config", "-n", is_flag=True)
 @click.option(
-    "--plugins-dir", "-P", type=click.Path(file_okay=False, path_type=Path)
+    "--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir",
+    type=click.Path(file_okay=False, path_type=Path)
 )
-def history(code, term, limit, config, no_config, plugins_dir):
+def history(code, term, limit, config, no_config, language_packs_dir):
     """Show saved sentences containing encountered words."""
     with _errors():
         click.echo(
             json.dumps(
-                _service(config, no_config, plugins_dir).history(
+                _service(config, no_config, language_packs_dir).history(
                     code, term, limit=limit
                 ),
                 ensure_ascii=False,

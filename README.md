@@ -215,6 +215,7 @@ Other languages need a pack:
 
 ```sh
 bltzr list-languages
+bltzr list-available-languages  # offline catalog, including packs not installed
 bltzr install-plugin slv
 bltzr blitz -l slv -t "Nisem tako prepričan."
 ```
@@ -230,23 +231,21 @@ orthography or dialect. See [project status and remaining development work](main
 
 Japanese remains a development pack. The optional analyzer can be tested
 from this checkout with `.venv/bin/python -m pip install -e '.[dev,japanese]'`
-and `--plugins-dir ./language-packs/dev`. Its dictionary must already be
+and `--language-packs-dir ./language-packs/dev`. Its dictionary must already be
 installed; processing never downloads models automatically. Sanskrit,
 Tibetan and Urdu still require additional lexical-segmentation work.
 
 You can also install a local pack with `bltzr install-plugin ./my-pack/slv`.
 To use this checkout's packs directly, add
-`--plugins-dir /path/to/blitzer-py/language-packs` to the command.
+`--language-packs-dir /path/to/blitzer-py/language-packs` to the command.
 
 ## Create your config
 
 Blitzer automatically reads `~/.config/bltzr/bltzr.toml`. No environment
-variable or command-line option is needed. Create the file, then open it
-in your editor:
+variable or command-line option is needed. Open it in your editor (the command creates it if absent):
 
 ```sh
-mkdir -p ~/.config/bltzr
-touch ~/.config/bltzr/bltzr.toml
+bltzr config  # or: bltzr conf; uses $VISUAL or $EDITOR
 ```
 
 Here is an arbitrary default:
@@ -265,7 +264,7 @@ skip_word_families_file = "./eng-word-families.txt"
 ```
 
 `[defaults]` applies to every language. `[languages.eng]` overrides
-settings for English; use the language code visible with `bltzr list-languages` if you are not sure which to use.
+settings for English; use the language code visible with `bltzr list-available-languages` if you are not sure which to use.
 
 Save your settings and run normally:
 
@@ -274,11 +273,30 @@ bltzr blitz -l eng -t "He, she, it, swims!"
 ```
 
 Use `-C PATH` to load another config, or `-n` to ignore configuration.
-An existing config under `$XDG_CONFIG_HOME/bltzr/` takes priority if that
-environment variable is set. `BLITZER_CONFIG` can explicitly select a
-different file, but you do not need it for the default location.
+The default file is `$XDG_CONFIG_HOME/bltzr/bltzr.toml`, falling back to
+`~/.config/bltzr/bltzr.toml` when the variable is unset or empty.
+`BLITZER_CONFIG` can explicitly select a different file, but you do not need it for the default location.
 Command-line options override your config; for example, `--no-context`
 hides example sentences even when `context = true`.
+
+Relative paths in TOML are relative to the config file's directory; paths
+passed on the command line are relative to the working directory. `~` and
+environment variables expand in configured paths.
+
+Leave `[locations].language_packs_dir` unset for normal installation:
+packs use `$XDG_DATA_HOME/bltzr/languages` (default
+`~/.local/share/bltzr/languages`). Saved sentence history uses
+`$XDG_STATE_HOME/bltzr/contexts.db` (default `~/.local/state/bltzr/contexts.db`).
+These XDG defaults apply on all platforms; relative XDG roots are ignored.
+The old `plugins_dir` config key and `--plugins-dir` flag remain aliases.
+A custom directory affects both installation and processing, so use it
+consistently. Existing files in the former platform data directory are not
+moved automatically; set explicit locations to keep using them.
+
+Both language-list commands sort alphabetically by displayed name and print
+`Name (code)`. `list-available-languages` reads the packaged download registry
+without accessing the network or your config. It includes base mode and bundled
+English; development-only languages without registered downloads are omitted.
 
 See [config.example.toml](config.example.toml) for the full set of settings.
 The complete command reference is in [bltzr(1)](docs/bltzr.1).

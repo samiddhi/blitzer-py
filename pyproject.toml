@@ -9,7 +9,6 @@ requires-python = ">=3.11"
 dependencies = [
     "certifi>=2024.2.2",
     "click>=8.1",
-    "platformdirs>=4.5.1",
 ]
 
 [project.scripts]

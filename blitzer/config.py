@@ -34,8 +34,6 @@ import re
 import tomllib
 from pathlib import Path
 
-from platformdirs import user_config_dir, user_data_dir
-
 from blitzer.tokenization import validate_profile
 
 APP = "bltzr"
@@ -71,34 +69,29 @@ def resolve_path(value: str | Path, base: Path | None = None) -> Path:
 
 
 def _platform_dir(kind: str) -> Path:
-    """Return the XDG or platform application directory.
-
-    Read the environment without creating directories. Reject relative
-    XDG roots so storage locations cannot depend on the working
-    directory.
-    """
-    variable = "XDG_CONFIG_HOME" if kind == "config" else "XDG_DATA_HOME"
+    """Return an XDG application directory, ignoring invalid relative roots."""
+    variable, fallback = {
+        "config": ("XDG_CONFIG_HOME", ".config"),
+        "data": ("XDG_DATA_HOME", ".local/share"),
+        "state": ("XDG_STATE_HOME", ".local/state"),
+    }[kind]
     value = os.environ.get(variable)
-    if not value:
-        return Path(
-            user_config_dir(APP) if kind == "config" else user_data_dir(APP)
-        )
-    root = Path(value)
+    root = Path(value) if value else Path.home() / fallback
     if not root.is_absolute():
-        raise ValueError(f"{variable} must be an absolute path")
+        root = Path.home() / fallback
     return root / APP
 
 
 def _default_config() -> dict:
-    """Return fresh defaults for the current platform.
+    """Return fresh defaults for the current XDG environment.
 
     Every call builds independent dictionaries and creates no resources.
     """
     data = _platform_dir("data")
     return {
         "locations": {
-            "plugins_dir": data / "languages",
-            "history_file": data / "contexts.db",
+            "language_packs_dir": data / "languages",
+            "history_file": _platform_dir("state") / "contexts.db",
         },
         "defaults": {
             "lemmatize": False,
@@ -238,23 +231,25 @@ def _path_setting(value, base, label) -> Path:
     return resolve_path(value, base)
 
 
+def config_path(override: Path | None = None) -> Path:
+    """Return the selected user config path, whether or not it exists."""
+    selected = override or os.environ.get(CONFIG_ENV_VAR)
+    return (
+        resolve_path(selected) if selected
+        else _platform_dir("config") / CONFIG_FILE_NAME
+    )
+
+
 def _select_config_path(override, use_config) -> Path | None:
-    """Select explicit, XDG, home or native configuration in order."""
+    """Select an explicit file or the XDG user configuration."""
     if not use_config and override is not None:
         raise ValueError("--config and --no-config cannot be combined")
     if not use_config:
         return None
-    selected = override or os.environ.get(CONFIG_ENV_VAR)
-    if selected:
-        return resolve_path(selected)
-    home = Path.home() / ".config" / APP / CONFIG_FILE_NAME
-    platform = _platform_dir("config") / CONFIG_FILE_NAME
-    candidates = (
-        (platform, home)
-        if os.environ.get("XDG_CONFIG_HOME")
-        else (home, platform)
-    )
-    return next((path for path in candidates if path.exists()), None)
+    path = config_path(override)
+    if override or os.environ.get(CONFIG_ENV_VAR) or path.exists():
+        return path
+    return None
 
 
 def _read_toml(path: Path) -> dict:
@@ -271,8 +266,13 @@ def _merge_config(raw, defaults, base) -> dict:
     """
     _table(raw, "config", {"locations", "defaults", "languages"})
     locations = _table(
-        raw.get("locations", {}), "locations", set(defaults["locations"])
+        raw.get("locations", {}), "locations", set(defaults["locations"]) | {"plugins_dir"}
     )
+    locations = dict(locations)
+    if "plugins_dir" in locations:
+        if "language_packs_dir" in locations:
+            raise ValueError("Use only language_packs_dir, not both directory spellings")
+        locations["language_packs_dir"] = locations.pop("plugins_dir")
     locations = defaults["locations"] | {
         key: _path_setting(value, base, f"locations.{key}")
         for key, value in locations.items()
@@ -318,21 +318,25 @@ def get_config(
     override_config_file: Path | None = None,
     *,
     use_config: bool = True,
+    language_packs_dir: Path | None = None,
     plugins_dir: Path | None = None,
 ) -> dict:
     """Return validated settings without creating resources.
 
     Selection uses an explicit file, then BLITZER_CONFIG, then the
-    XDG, home or native file. Missing default files use defaults; absent
-    explicit files raise an error. An explicit plugin directory
+    XDG user file. Missing default files use defaults; absent
+    explicit files raise an error. An explicit language-pack directory
     overrides the file.
     """
     path = _select_config_path(override_config_file, use_config)
     config = _default_config()
     if path is not None:
         config = _merge_config(_read_toml(path), config, path.parent)
-    if plugins_dir is not None:
-        config["locations"]["plugins_dir"] = resolve_path(plugins_dir)
+    if language_packs_dir is not None and plugins_dir is not None:
+        raise ValueError("Use only language_packs_dir, not both directory spellings")
+    directory = language_packs_dir if language_packs_dir is not None else plugins_dir
+    if directory is not None:
+        config["locations"]["language_packs_dir"] = resolve_path(directory)
     return config
 
 

@@ -67,7 +67,17 @@ Empty or whitespace-only input is an error.
 .TP
 .B list-languages
 List installed languages, including base and bundled English.
-This is not a catalog of every downloadable language.
+Output is Name (code), sorted alphabetically by name.
+.TP
+.B list-available-languages
+List every registered downloadable language, base mode and bundled English
+in the same format and order. Uses the packaged registry; works offline
+without reading user configuration or installed packs.
+.TP
+.B config, conf
+Open the selected user configuration in VISUAL or EDITOR (or the default
+terminal editor). Create a minimal config when absent; preserve existing files.
+Accepts \-C/\-\-config PATH and respects BLITZER_CONFIG.
 .TP
 .BI "install-plugin " CODE_OR_DIRECTORY
 Install a registered language code or a local pack directory.
@@ -111,8 +121,9 @@ An explicitly selected missing file is an error.
 Use built-in defaults without reading a configuration file.
 Cannot be combined with \-\-config.
 .TP
-.BI "\-P, \-\-plugins-dir " DIRECTORY
-Override the configured language-pack directory.
+.BI "\-P, \-\-language-packs-dir " DIRECTORY
+Override the configured language-pack directory. The old \-\-plugins-dir
+flag remains an alias.
 .TP
 .B \-h, \-\-help
 Show help for the selected command. At the program level,
@@ -351,20 +362,24 @@ command-line options, [languages.CODE], [defaults], and built-in defaults.
 Unknown fields and invalid values are errors.
 .PP
 Configuration-file selection is: \-\-config PATH, then BLITZER_CONFIG,
-then automatic discovery. With XDG_CONFIG_HOME set, an existing
-$XDG_CONFIG_HOME/bltzr/bltzr.toml takes precedence over
-~/.config/bltzr/bltzr.toml. Otherwise the home path is tried before
-the native platform config directory. No discovered file means built-in
-defaults. Configuration files are not created automatically.
+then $XDG_CONFIG_HOME/bltzr/bltzr.toml, using ~/.config/bltzr/bltzr.toml
+when XDG_CONFIG_HOME is unset or empty. These defaults apply on all platforms.
+Relative XDG roots are ignored. No discovered file means built-in defaults.
+Only the explicit config/conf command creates a configuration file.
 .PP
 Configured paths are relative to the configuration file and support
 ~ and environment-variable expansion. Unset variables in paths are errors.
 Command-line paths are relative to the current working directory.
 .SS Locations
-[locations] accepts plugins_dir (pack directory) and history_file
-(SQLite sentence history). Built-in locations are languages/ and
-contexts.db below the platform application data directory, or below
-$XDG_DATA_HOME/bltzr when set.
+[locations] accepts language_packs_dir (pack directory) and history_file
+(SQLite sentence history). The old plugins_dir key remains an alias;
+do not specify both names. The default pack directory is
+$XDG_DATA_HOME/bltzr/languages, or ~/.local/share/bltzr/languages.
+The default history file is $XDG_STATE_HOME/bltzr/contexts.db,
+or ~/.local/state/bltzr/contexts.db. Omit these settings to respect XDG roots.
+A pack directory override affects both installation and processing.
+Files from the former platform data directory are not moved automatically;
+explicit location settings can retain them.
 .SS Defaults and language overrides
 [defaults] accepts lemmatize, exclude_unknown, freq, context,
 format, sort, bold, context_limit, sentence_pattern, save_context,
@@ -472,18 +487,20 @@ Explicit configuration file, overridden by \-\-config and ignored by
 \-\-no-config.
 .TP
 .B XDG_CONFIG_HOME
-Absolute configuration root used for automatic file discovery.
+User configuration root; defaults to ~/.config.
 .TP
 .B XDG_DATA_HOME
-Absolute data root for default pack and history locations.
-Otherwise native platform directories are used.
+Language-pack data root; defaults to ~/.local/share.
+.TP
+.B XDG_STATE_HOME
+Sentence-history root; defaults to ~/.local/state.
 .SH FILES
 .TP
 .I ~/.config/bltzr/bltzr.toml
 Home configuration file, searched automatically.
 .TP
 .I $XDG_CONFIG_HOME/bltzr/bltzr.toml
-Preferred discovered configuration when XDG_CONFIG_HOME is set.
+Selected user configuration when XDG_CONFIG_HOME is set.
 .TP
 .I config.example.toml
 Commented configuration example in the source distribution.

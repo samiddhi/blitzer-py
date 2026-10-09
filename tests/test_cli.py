@@ -30,6 +30,8 @@ The remaining functions exercise user-facing command behavior.
 import csv
 import io
 import inspect
+import pytest
+
 import json
 
 from click.testing import CliRunner
@@ -78,6 +80,9 @@ def test_help_and_input_rules():
         "history",
         "install-plugin",
         "list-languages",
+        "list-available-languages",
+        "config",
+        "conf",
         "remove-plugin",
     }
     assert "build-unimorph" not in result.output
@@ -383,3 +388,70 @@ def test_language_listing_uses_metadata_names(service):
     assert result.stdout == (
         "Basic (base)\nEnglish (eng)\nSlovenian (slv)\n"
     )
+
+
+
+def test_available_languages_offline_and_sorted(monkeypatch, tmp_path):
+    """The bundled registry works without config, installed packs or HTTP."""
+    from blitzer.downloads import REGISTRY
+    import urllib.request
+    def reject_network(*args, **kwargs):
+        raise AssertionError("Network access during offline listing")
+    monkeypatch.setattr(urllib.request.OpenerDirector, "open", reject_network)
+    monkeypatch.setenv("BLITZER_CONFIG", str(tmp_path / "missing.toml"))
+    result = make_runner().invoke(cli, ["list-available-languages"])
+    assert result.exit_code == 0, result.output
+    lines = result.stdout.splitlines()
+    assert lines == sorted(lines, key=str.casefold)
+    assert set(lines) == {"Basic (base)", "English (eng)"} | {
+        f'{entry["name"]} ({code})' for code, entry in REGISTRY.items()
+    }
+    assert not list(tmp_path.iterdir())
+
+
+def test_installed_languages_sorted_by_pack_name(service, monkeypatch):
+    """Sort displayed pack names, including user metadata overrides."""
+    path = service.language_packs_dir / "slv/config.toml"
+    path.write_text(path.read_text().replace('language_name = "Slovenian"',
+                                             'language_name = "Aardvark"'))
+    assert service.list_languages() == ["slv", "base", "eng"]
+    result = make_runner().invoke(cli, [
+        "list-languages", "-n", "--language-packs-dir", str(service.language_packs_dir)
+    ])
+    assert result.exit_code == 0, result.output
+    assert result.stdout == "Aardvark (slv)\nBasic (base)\nEnglish (eng)\n"
+
+
+@pytest.mark.parametrize("command", ["config", "conf"])
+def test_config_editor_creates_then_preserves_config(command, monkeypatch):
+    from blitzer.config import config_path, get_config
+    path = config_path()
+    opened = []
+    monkeypatch.setattr("blitzer.cli.click.edit", lambda **kwargs: opened.append(kwargs))
+    runner = make_runner()
+    result = runner.invoke(cli, [command])
+    assert result.exit_code == 0, result.output
+    assert opened == [{"filename": str(path)}]
+    assert get_config()["defaults"]["lemmatize"] is False
+    path.write_text("# preserve comments\n[defaults]\nfreq=true\n")
+    result = runner.invoke(cli, [command])
+    assert result.exit_code == 0
+    assert path.read_text() == "# preserve comments\n[defaults]\nfreq=true\n"
+
+
+def test_config_editor_selection_and_failure(tmp_path, monkeypatch):
+    env = tmp_path / "env.toml"
+    explicit = tmp_path / "nested/explicit.toml"
+    monkeypatch.setenv("BLITZER_CONFIG", str(env))
+    opened = []
+    monkeypatch.setattr("blitzer.cli.click.edit", lambda **kwargs: opened.append(kwargs))
+    runner = make_runner()
+    assert runner.invoke(cli, ["conf"]).exit_code == 0
+    assert runner.invoke(cli, ["config", "-C", str(explicit)]).exit_code == 0
+    assert opened == [{"filename": str(env)}, {"filename": str(explicit)}]
+    def fail_editor(**kwargs):
+        raise OSError("Editor failed")
+    monkeypatch.setattr("blitzer.cli.click.edit", fail_editor)
+    result = runner.invoke(cli, ["config"])
+    assert result.exit_code == 1
+    assert "Editor failed" in result.stderr

@@ -833,6 +833,7 @@ class BlitzerService:
         config_path: Path | None = None,
         *,
         use_config: bool = True,
+        language_packs_dir: Path | None = None,
         plugins_dir: Path | None = None,
     ):
         """Load settings and retain the selected pack directory.
@@ -841,9 +842,15 @@ class BlitzerService:
         data.
         """
         self.config = get_config(
-            config_path, use_config=use_config, plugins_dir=plugins_dir
+            config_path, use_config=use_config, language_packs_dir=language_packs_dir,
+            plugins_dir=plugins_dir
         )
-        self.plugins_dir = self.config["locations"]["plugins_dir"]
+        self.language_packs_dir = self.config["locations"]["language_packs_dir"]
+
+    @property
+    def plugins_dir(self) -> Path:
+        """Compatibility alias for language_packs_dir."""
+        return self.language_packs_dir
 
     def settings(self, code: str) -> dict:
         """Return merged defaults and language overrides.
@@ -870,7 +877,7 @@ class BlitzerService:
 
     def _pack_directory(self, code: str) -> Path:
         """Prefer a user pack and otherwise use bundled English data."""
-        directory = self.plugins_dir / code
+        directory = self.language_packs_dir / code
         if code == "eng" and not directory.exists():
             return Path(__file__).with_name("language-packs") / code
         return directory
@@ -998,7 +1005,7 @@ class BlitzerService:
             if key and key not in known and key not in exact
         }
         candidates, frequencies = _load_vocabulary_data(
-            self.plugins_dir
+            self.language_packs_dir
             if language_code == "base"
             else self._pack_directory(language_code).parent,
             language_code,
@@ -1040,23 +1047,24 @@ class BlitzerService:
         return sort_vocabulary(entries, options["sort"], order, normal)
 
     def list_languages(self) -> list[str]:
-        """Return sorted user pack codes plus built-in base and English.
+        """Return user pack codes plus base and English, sorted by display name.
 
-        This checks required file presence only. Use check_plugin to
+        This checks required file presence and reads pack metadata. Use check_plugin to
         validate metadata, schema and data before relying on an
         installed pack.
         """
-        if not self.plugins_dir.exists():
+        if not self.language_packs_dir.exists():
             return ["base", "eng"]
         codes = []
-        for path in self.plugins_dir.iterdir():
+        for path in self.language_packs_dir.iterdir():
             if not re.fullmatch(r"[a-z]{3}", path.name) or not path.is_dir():
                 continue
             if (path / "config.toml").is_file() and (
                 path / "lemmas.db"
             ).is_file():
                 codes.append(path.name)
-        return sorted({"base", "eng", *codes})
+        return sorted({"base", "eng", *codes},
+                      key=lambda code: (self.language_name(code).casefold(), code))
 
     def check_plugin(self, code: str) -> list[CheckResult]:
         """Report all validation checks for an installed pack.
@@ -1086,7 +1094,7 @@ class BlitzerService:
         source = resolve_path(source_dir)
         config = load_plugin_config(source)
         code = config["metadata"]["language_code"]
-        destination = self.plugins_dir / code
+        destination = self.language_packs_dir / code
         input_path = (
             resolve_path(source_database)
             if source_database is not None
@@ -1094,10 +1102,10 @@ class BlitzerService:
         )
         _validate_build_source(input_path, source_database, skip_orphans)
         with (
-            _lock(self.plugins_dir / ".mutation.lock"),
+            _lock(self.language_packs_dir / ".mutation.lock"),
             tempfile.TemporaryDirectory(
                 prefix=".build-",
-                dir=self.plugins_dir,
+                dir=self.language_packs_dir,
             ) as temporary,
         ):
             _require_absent(destination)
@@ -1150,11 +1158,11 @@ class BlitzerService:
         from blitzer.merging import merge_packs
 
         validate_code(code, allow_base=False)
-        destination = self.plugins_dir / code
+        destination = self.language_packs_dir / code
         additional = resolve_path(additional)
         with (
-            _lock(self.plugins_dir / ".mutation.lock"),
-            tempfile.TemporaryDirectory(dir=self.plugins_dir) as temporary,
+            _lock(self.language_packs_dir / ".mutation.lock"),
+            tempfile.TemporaryDirectory(dir=self.language_packs_dir) as temporary,
         ):
             _require_valid(destination, code)
             _require_valid(additional, code)
@@ -1169,7 +1177,7 @@ class BlitzerService:
     def _install_download(self, code: str, replace: bool) -> Path:
         """Download staging before normal pack installation."""
         registry_entry(code)
-        _check_install_destination(self.plugins_dir / code, replace)
+        _check_install_destination(self.language_packs_dir / code, replace)
         with tempfile.TemporaryDirectory(
             prefix="blitzer-download-"
         ) as temporary:
@@ -1196,7 +1204,7 @@ class BlitzerService:
                 "Downloaded pack metadata does not match "
                 "the requested language"
             )
-        destination = self.plugins_dir / code
+        destination = self.language_packs_dir / code
         a, b = source.resolve(), destination.resolve()
         if a == b or a in b.parents or b in a.parents:
             raise ValueError(
@@ -1206,10 +1214,10 @@ class BlitzerService:
         _check_install_destination(destination, replace)
         _require_valid(source)
         with (
-            _lock(self.plugins_dir / ".mutation.lock"),
+            _lock(self.language_packs_dir / ".mutation.lock"),
             tempfile.TemporaryDirectory(
                 prefix=".install-",
-                dir=self.plugins_dir,
+                dir=self.language_packs_dir,
             ) as temporary,
         ):
             _check_install_destination(destination, replace)
@@ -1248,13 +1256,13 @@ class BlitzerService:
         language packs and user-maintained data are untouched.
         """
         validate_code(code, allow_base=False)
-        path = self.plugins_dir / code
+        path = self.language_packs_dir / code
         if code == "eng" and not path.exists():
             raise ValueError(
                 "English is bundled with bltzr; there is no user pack "
                 "to remove"
             )
-        with _lock(self.plugins_dir / ".mutation.lock"):
+        with _lock(self.language_packs_dir / ".mutation.lock"):
             if path.is_symlink():
                 raise ValueError(
                     f"Refusing to remove a symlinked pack: {path}"
