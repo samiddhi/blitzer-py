@@ -28,3 +28,15 @@ automatically.
 
 Keep report instructions (`prompt_text`): they are exported for copying into
 another tool and never sent to an API by bltzr.
+
+Direct pipeline checks are available through `bltzr check-excluded` and
+`BlitzerService.check_excluded`. Lemma/form/both modes select word-family,
+exact-word, or either list; inputs are already identified words or lemmas
+and are not lemmatized. The CLI accepts words, a file, or one word per stdin
+line, and can emit statuses, remaining words, excluded words, or JSON.
+Order, spelling and duplicates are preserved. Unset lists are empty;
+explicitly configured selected files must be readable and valid, unlike
+the optional missing-file behavior of `blitz`. Legacy lists follow the
+categories described in the README's migration section. See the
+[pipeline examples](../README.md#check-exclusions-from-another-pipeline)
+for the full interface.

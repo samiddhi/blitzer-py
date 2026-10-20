@@ -1,5 +1,9 @@
 # Relative paths (including ./) are relative to this config file, not the shell.
 # ~ expands to your home directory. Omit locations to respect XDG overrides.
+# Query configured lists: bltzr check-excluded -l eng dog dogs --match lemma
+# Filter one lemma per stdin line:
+# other-pipeline | bltzr check-excluded -l eng --match lemma --output remaining
+# Selected configured files must exist for check-excluded, even if input is empty.
 [locations]
 # Directory containing installed language packs.
 # Normally omit this: installation and processing share the standard location.

@@ -76,6 +76,7 @@ def test_help_and_input_rules():
     assert set(cli.commands) == {
         "blitz",
         "check-word",
+        "check-excluded",
         "cleanup-known",
         "dev",
         "history",

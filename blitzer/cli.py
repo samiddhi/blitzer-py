@@ -38,6 +38,7 @@ import re
 import sqlite3
 import sys
 from contextlib import contextmanager
+from dataclasses import asdict
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
@@ -186,6 +187,36 @@ def _read_input(text, input_file) -> str:
     return click.get_text_stream(
         "stdin", encoding="utf-8", errors="strict"
     ).read()
+
+
+def _read_word_inputs(words, input_file):
+    """Read list inputs and retain source line numbers for diagnostics."""
+    if words and input_file is not None:
+        raise click.UsageError("Positional words and --file cannot be combined")
+    if words:
+        return list(words), None, []
+    if input_file is not None:
+        text = input_file.read_text(encoding="utf-8")
+        label = str(input_file)
+    else:
+        if sys.stdin.isatty():
+            raise click.UsageError("Provide words, --file, or pipe one word per line to stdin")
+        text = click.open_file("-", encoding="utf-8", errors="strict").read()
+        label = "stdin"
+    entries = [(number, line.strip()) for number, line in enumerate(text.splitlines(), 1) if line.strip()]
+    return [word for _, word in entries], label, [number for number, _ in entries]
+
+
+def _check_exclusion_inputs(service, words, language, match, label, line_numbers):
+    """Check exclusions and map input validation errors to source lines."""
+    try:
+        return service.check_excluded(words, language, match=match)
+    except ValueError as error:
+        location = re.match(r"^input:(\d+):", str(error))
+        if label is not None and location:
+            number = line_numbers[int(location[1]) - 1]
+            raise ValueError(f"{label}:{number}:" + str(error)[location.end():]) from error
+        raise
 
 
 def _presentation_options(settings, **overrides) -> dict:
@@ -497,7 +528,49 @@ def capabilities():
         "schema_version": 1, "tool": "bltzr", "version": VERSION,
         "configuration_inspection": 1, "language_discovery": 1,
         "dictionary_membership": 1,
+        "exclusion_checks": 1,
     }, sort_keys=True))
+
+
+@cli.command("check-excluded")
+@click.argument("words", nargs=-1)
+@click.option("--language", "-l", required=True, help="Three-letter pack code, or base.")
+@click.option("--match", type=click.Choice(["lemma", "form", "both"]), default="both", show_default=True)
+@click.option("--output", type=click.Choice(["status", "remaining", "excluded"]), default="status", show_default=True)
+@click.option("--format", "output_format", type=click.Choice(["text", "json"]), default="text", show_default=True)
+@click.option("--file", "-i", "input_file", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.option("--config", "-C", type=click.Path(dir_okay=False, path_type=Path))
+@click.option("--no-config", "-n", is_flag=True)
+@click.option("--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir", type=click.Path(file_okay=False, path_type=Path))
+def check_excluded(words, language, match, output, output_format, input_file, config, no_config, language_packs_dir):
+    """Check WORDS against the user's configured exclusion lists.
+
+    Read positional words, a UTF-8 --file, or one word per stdin line.
+    Lemma checks the word-family list; form checks exact words; both
+    checks either. Inputs are already identified words or lemmas and
+    are not lemmatized. Configured selected files must be readable.
+
+    Text status emits WORD, a tab, and true if excluded (false otherwise).
+    Remaining/excluded outputs emit only the selected original words.
+    Order and duplicates are preserved. Completed checks exit 0.
+    """
+    with _errors():
+        words, label, line_numbers = _read_word_inputs(words, input_file)
+        service = _service(config, no_config, language_packs_dir)
+        results = _check_exclusion_inputs(service, words, language, match, label, line_numbers)
+        if output != "status":
+            results = [result for result in results if result.excluded == (output == "excluded")]
+        if output_format == "json":
+            click.echo(json.dumps({
+                "language": language, "match": match, "output": output,
+                "results": [asdict(result) for result in results],
+            }, ensure_ascii=False))
+            return
+        if results:
+            click.echo("\n".join(
+                f"{result.word}\t{str(result.excluded).lower()}" if output == "status" else result.word
+                for result in results
+            ))
 
 
 @cli.command("check-word")

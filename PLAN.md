@@ -14,6 +14,12 @@ of the initial plan (especially the default exclusion policy).
 
 Implemented additions:
 
+- Direct user-exclusion checks through `BlitzerService.check_excluded` and
+  `bltzr check-excluded`, with lemma/form/both list selection, positional,
+  file and stdin input, ordered filtering and JSON output. Selected
+  configured files must be readable; checks use normalization configuration
+  without database lookups, lemmatization or writes. README.md documents
+  the delivered interface, legacy category mapping and strict file policy.
 - Direct dictionary membership through `BlitzerService.contains` and
   `contains_many`, plus `bltzr check-word`, with lemma/form/both modes,
   ordered batch results, and text/JSON CLI output. Existing pack self-forms

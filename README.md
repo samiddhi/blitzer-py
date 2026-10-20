@@ -464,6 +464,71 @@ it leaves the other list active. `--show-all-words` (`-N`) skips neither list
 and cannot be combined with explicit skip-file options. Basic (`base`) mode
 supports exact words; word families require a dictionary.
 
+### Check exclusions from another pipeline
+
+Use `check-excluded` to query your configured lists or remove excluded
+words from another tool's output. For a pipeline that already emits lemmas:
+
+```sh
+other-pipeline | bltzr check-excluded -l slv --match lemma --output remaining
+bltzr check-excluded -l slv biti sem jesti --match lemma
+bltzr check-excluded -l slv --file lemmas.txt --output excluded
+bltzr check-excluded -l slv biti maček --format json
+```
+
+`--match lemma` checks the word-family list, `--match form` checks the
+exact-word list, and `--match both` (default) checks either list. Inputs
+are already identified words or lemmas: excluding `biti` removes input
+`biti` but leaves input `sem` in lemma mode. The command does not infer
+lemmas or require dictionary membership. Use `blitz` for prose processing
+and dictionary-based family filtering; `check-word` answers whether a word
+occurs in the dictionary independently of user exclusions.
+
+Supply positional words, a UTF-8 `--file` (`-i`), or one word per stdin
+line. File/stdin input trims surrounding whitespace and ignores blank
+lines; invalid entries report their source line. Positional words cannot
+be combined with `--file`. Explicit words or a file take precedence over
+unrelated stdin. Empty lists succeed. Original spelling, input order and
+duplicates are preserved after trimming line input.
+
+`--output status` (default) emits `word<TAB>true|false`, where `true`
+means excluded. `--output remaining` emits only words to keep;
+`--output excluded` emits only words removed. Filtered text is one word
+per line, with no header. No matches produce empty filtered text output.
+`--format json` emits `language`, `match`, `output`, and a `results` array,
+filtered by the same output selection. Each result has this shape:
+
+```json
+{"word": "BITI", "normalized": "biti", "excluded": true, "matched_lists": ["word-families"]}
+```
+
+The list names are `exact-words` and `word-families`; a word can match
+both. Matching uses the selected pack's normalization configuration, so
+the language pack configuration must be available. `base` uses its basic
+normalization. No database, morphological analyzer, download or write is
+involved. The usual `--config`, `--no-config`, and `--language-packs-dir`
+(also `--plugins-dir`) options apply. Display, sorting and automatic-update
+settings do not affect this check.
+
+An unset list is empty. Every explicitly configured list selected by
+`--match` must exist, be readable, and contain valid entries, even for an
+empty input. This is stricter than `blitz`, which permits missing optional
+skip files. Unselected lists are not read. Checks complete before any
+output is emitted. Exit status is 0 for completed checks, 1 for operational
+errors, and 2 for usage errors.
+
+Legacy configuration is supported: `forms_only` contributes exact words;
+`known_file` and `exclusions` contribute exact words when effective
+`filter_by` is `forms`, or word families when it is `lemmas`. These are
+direct list checks, not a simulation of all `blitz` filtering behavior.
+
+Python callers can use
+`BlitzerService.check_excluded(words, language_code, match="both")`.
+It accepts an iterable of individual words (not a bare string) and returns
+ordered, immutable `ExclusionResult` records with `word`, `normalized`,
+`excluded`, and `matched_lists` fields. API words must already be valid
+individual entries; file/stdin whitespace trimming belongs to the CLI.
+
 ### Updating and tidying the lists
 
 Reading a story does not mean you learned its words, so automatic additions
@@ -558,6 +623,7 @@ In config, `save_context` accepts `"flag-only"` (save when requested),
 ```sh
 bltzr blitz --help
 bltzr check-word --help
+bltzr check-excluded --help
 bltzr dev --help
 man ./docs/bltzr.1
 ```

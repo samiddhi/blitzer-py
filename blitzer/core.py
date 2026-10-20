@@ -10,6 +10,7 @@ In scope
 --------
 - BlitzerService methods for processing, packs, known lists and history.
 - Read-only single-word and batch dictionary membership checks.
+- Direct exclusion-list checks for pipeline words and lemmas.
 - Loading dictionary candidates, exclusions, ranks and corpus
   frequencies.
 - SQLite schema checks and full language-pack readiness reports.
@@ -81,6 +82,7 @@ from blitzer.processing import (
     Context,
     Token,
     VocabularyEntry,
+    _known_term,
     _word,
     add_occurrence,
     collect_vocabulary,
@@ -103,6 +105,7 @@ __all__ = [
     "BlitzerService",
     "CheckResult",
     "Context",
+    "ExclusionResult",
     "KnownListChange",
     "Token",
     "VocabularyEntry",
@@ -150,6 +153,16 @@ class CheckResult:
     name: str
     status: str
     detail: str
+
+
+@dataclass(frozen=True)
+class ExclusionResult:
+    """Describe one input's normalized membership in selected skip lists."""
+
+    word: str
+    normalized: str
+    excluded: bool
+    matched_lists: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -555,6 +568,47 @@ def _optional_skip_terms(path, normal):
     return set(_read_terms(resolve_path(path), normal, missing_ok=True)[0])
 
 
+def _exclusion_check_sources(settings, match):
+    """Select modern or legacy lists without reading unselected files."""
+    sources = {"exact-words": [], "word-families": []}
+    if any(key in settings for key in (
+        "skip_exact_words_file", "skip_word_families_file"
+    )):
+        sources = {
+            kind: [settings[key]] if settings.get(key) is not None else []
+            for kind, key in (
+                ("exact-words", "skip_exact_words_file"),
+                ("word-families", "skip_word_families_file"),
+            )
+        }
+    else:
+        sources["exact-words"].extend(settings.get("forms_only", []))
+        kind = "word-families" if settings["filter_by"] == "lemmas" else "exact-words"
+        sources[kind].extend(settings.get("exclusions", []))
+        if settings.get("known_file") is not None:
+            sources[kind].append(settings["known_file"])
+    selected = {
+        "lemma": ("word-families",),
+        "form": ("exact-words",),
+        "both": ("exact-words", "word-families"),
+    }[match]
+    return {kind: sources[kind] for kind in selected}
+
+
+def _load_exclusion_check_lists(sources, normal):
+    """Read each selected path once and union terms by list category."""
+    paths = {
+        kind: [resolve_path(path) for path in selected]
+        for kind, selected in sources.items()
+    }
+    unique = dict.fromkeys(path for selected in paths.values() for path in selected)
+    loaded = {path: set(_read_terms(path, normal)[0]) for path in unique}
+    return {
+        kind: set().union(*(loaded[path] for path in selected))
+        for kind, selected in paths.items()
+    }
+
+
 def _update_file_key(update_list):
     """Map an explicit update choice to its fixed-purpose file setting."""
     return {
@@ -888,6 +942,42 @@ class BlitzerService:
             if code == "base"
             else self._pack(code)[1]["normalization"]
         )
+
+    def check_excluded(
+        self,
+        words: Iterable[str],
+        language_code: str,
+        *,
+        match: Literal["lemma", "form", "both"] = "both",
+    ) -> list[ExclusionResult]:
+        """Check supplied words directly against the user's exclusion lists.
+
+        Lemma mode checks word families, form mode checks exact words,
+        and both checks either list. Inputs are not lemmatized or tested
+        for dictionary membership. Preserve spelling, order and duplicates.
+        Legacy files follow their configured filter_by category.
+
+        Read the language's normalization config and selected lists once.
+        Unset lists are empty; explicitly configured files must be readable,
+        even for an empty batch. Invalid words or configuration raise errors.
+        No databases, analyzers, downloads or writes are involved.
+        """
+        if match not in ("lemma", "form", "both"):
+            raise ValueError("match must be lemma, form, or both")
+        if isinstance(words, (str, bytes)) or not isinstance(words, Iterable):
+            raise ValueError("words must be an iterable of individual words")
+        settings = self.settings(language_code)
+        normal = self._normalization(language_code)
+        sources = _exclusion_check_sources(settings, match)
+        lists = _load_exclusion_check_lists(sources, normal)
+        results = []
+        for number, word in enumerate(words, 1):
+            if not isinstance(word, str):
+                raise ValueError(f"input:{number}: expected a word string")
+            key = _known_term(word, normal, "input", number)
+            matched = tuple(kind for kind, terms in lists.items() if key in terms)
+            results.append(ExclusionResult(word, key, bool(matched), matched))
+        return results
 
     def contains(
         self,

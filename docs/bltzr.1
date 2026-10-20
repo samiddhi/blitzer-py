@@ -1,4 +1,4 @@
-.TH BLTZR 1 "October 9, 2026" "bltzr" "User Commands"
+.TH BLTZR 1 "October 20, 2026" "bltzr" "User Commands"
 .SH NAME
 bltzr \- extract vocabulary for language study
 .SH SYNOPSIS
@@ -16,6 +16,11 @@ bltzr \- extract vocabulary for language study
 .B bltzr check-word \-l
 .I CODE
 .I WORD...
+.RI [ OPTIONS ]
+.br
+.B bltzr check-excluded \-l
+.I CODE
+.RI [ WORD... ]
 .RI [ OPTIONS ]
 .br
 .B bltzr install-plugin
@@ -58,6 +63,45 @@ to standard error. An ambiguous input form can produce several lemma
 candidates. bltzr does not choose candidates based on sentence meaning.
 Dictionary coverage and word-boundary support vary by language.
 .SH COMMANDS
+.TP
+.B check-excluded
+Check supplied words against the user's configured exclusion lists.
+Requires \-l/\-\-language. Use \-\-match lemma|form|both (default both):
+lemma selects word families, form selects exact words, both selects either.
+Inputs are already identified words or lemmas; no lemmatization or dictionary
+membership check occurs. Excluding biti removes input biti but leaves sem
+in lemma mode. This command checks direct list membership rather than
+simulating all vocabulary processing rules.
+.IP
+Supply positional words, a UTF-8 \-i/\-\-file PATH, or one word per stdin
+line. File/stdin input trims surrounding whitespace and ignores blank lines.
+Invalid entries report source line numbers. Positional words and a file
+cannot be combined; explicit words or a file override unrelated stdin.
+Empty lists succeed. Input spelling, order and duplicates are preserved
+after trimming line input.
+.IP
+Use \-\-output status|remaining|excluded (default status).
+Text status prints WORD, a tab and true if excluded, false otherwise.
+Remaining and excluded print only selected words, one per line, without a
+header; no selected words produce empty output. Use \-\-format text|json
+(default text). JSON contains language, match, output and an ordered results
+array selected by output. Each record contains word, normalized, excluded
+and matched_lists (exact-words and/or word-families).
+.IP
+Accepts \-C/\-\-config, \-n/\-\-no-config and
+\-P/\-\-language-packs-dir (also \-\-plugins-dir).
+Matching uses the selected language pack's normalization configuration;
+base uses basic normalization. No database, analyzer, download or write is
+involved. Display, sorting and automatic-update settings are ignored.
+Legacy forms_only files contribute exact words. Legacy known_file and
+exclusions contribute exact words with filter_by=forms or word families
+with filter_by=lemmas.
+.IP
+Unset lists are empty. Explicitly configured selected files must exist,
+be readable and contain valid entries, even for empty input. This is stricter
+than blitz's optional skip-file handling. Unselected lists are not read.
+All checks finish before output. Exit status is 0 for completed checks,
+1 for operational errors and 2 for usage errors.
 .TP
 .B check-word
 Check one or more individual words in a local dictionary. Requires
