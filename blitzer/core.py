@@ -9,6 +9,7 @@ explicit file and database access.
 In scope
 --------
 - BlitzerService methods for processing, packs, known lists and history.
+- Read-only single-word and batch dictionary membership checks.
 - Loading dictionary candidates, exclusions, ranks and corpus
   frequencies.
 - SQLite schema checks and full language-pack readiness reports.
@@ -51,13 +52,17 @@ import shutil
 import sqlite3
 import tempfile
 import unicodedata
+import uuid
 from blitzer.languages import display_name, language_entry
 from blitzer.tokenization import elision_parts
+from blitzer.locking import mutation_lock
 import zipfile
 from contextlib import closing, contextmanager
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
+from collections.abc import Iterable
+from typing import Literal
 
 from blitzer.config import (
     get_config,
@@ -198,21 +203,9 @@ def _schema_check(conn: sqlite3.Connection) -> None:
 
 @contextmanager
 def _lock(path: Path):
-    """Hold and reliably release an exclusive mutation lock."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        stream = path.open("x", encoding="utf-8")
-    except FileExistsError as error:
-        raise FileExistsError(
-            f"Operation locked by {path}; "
-            "check its PID before removing a stale lock"
-        ) from error
-    try:
-        with stream:
-            stream.write(str(os.getpid()) + "\n")
+    """Keep legacy PID markers while recovering abandoned owners under an OS guard."""
+    with mutation_lock(path):
         yield
-    finally:
-        path.unlink()
 
 
 def _atomic_text(path: Path, text: str, *, backup: bool = False) -> None:
@@ -896,6 +889,66 @@ class BlitzerService:
             else self._pack(code)[1]["normalization"]
         )
 
+    def contains(
+        self,
+        word: str,
+        language_code: str,
+        *,
+        match: Literal["lemma", "form", "both"] = "both",
+    ) -> bool:
+        """Check one dictionary word using the pack's normalization rules.
+
+        Lemma mode requires the input itself to match a headword. Form
+        mode includes lemma self-forms; both accepts either. Invalid
+        inputs and unavailable dictionaries raise errors, rather than
+        returning False. No known lists or processing settings apply.
+        """
+        return self.contains_many([word], language_code, match=match)[0]
+
+    def contains_many(
+        self,
+        words: Iterable[str],
+        language_code: str,
+        *,
+        match: Literal["lemma", "form", "both"] = "both",
+    ) -> list[bool]:
+        """Check words in order with one read-only database connection.
+
+        Preserve duplicates and reuse normalized lookups. An empty
+        iterable returns an empty list after validating the dictionary.
+        Each input must be one supported word; prose is not segmented.
+        Connections are closed on success and failure, with no writes,
+        downloads, analyzer calls, or terminal output.
+        """
+        if match not in ("lemma", "form", "both"):
+            raise ValueError("match must be lemma, form, or both")
+        if isinstance(words, (str, bytes)) or not isinstance(words, Iterable):
+            raise ValueError("words must be an iterable of individual words")
+        if language_code == "base":
+            raise ValueError("base has no dictionary")
+        directory, config = self._pack(language_code)
+        normal = config["normalization"]
+        profile = normal.get("_profile", "default")
+        keys = []
+        for word in words:
+            if not isinstance(word, str):
+                raise ValueError("Each dictionary input must be a string")
+            key = normalize(word, normal)
+            if not _word(word, profile) or not _word(key, profile):
+                raise ValueError(f"Expected one supported dictionary word: {word!r}")
+            keys.append(key)
+        with closing(_read_only(directory / "lemmas.db")) as conn:
+            _schema_check(conn)
+            candidates = _lookup_candidates(conn, dict.fromkeys(keys))
+        found = {
+            key: (
+                any(normalize(lemma, normal) == key for lemma in lemmas)
+                if match == "lemma" else bool(lemmas)
+            )
+            for key, lemmas in candidates.items()
+        }
+        return [found[key] for key in keys]
+
     def blitz(
         self,
         text: str,
@@ -1063,8 +1116,51 @@ class BlitzerService:
                 path / "lemmas.db"
             ).is_file():
                 codes.append(path.name)
-        return sorted({"base", "eng", *codes},
-                      key=lambda code: (self.language_name(code).casefold(), code))
+        return sorted({"base", "eng", *codes}, key=self._language_order)
+
+    def _language_order(self, code):
+        """Keep damaged metadata discoverable without blocking healthy languages."""
+        try:
+            name = self.language_name(code)
+        except (ValueError, OSError):
+            name = code
+        return name.casefold(), code
+
+    def inspect_configuration(self, code: str) -> dict:
+        """Return effective processing facts and authoritative dictionary dependencies.
+
+        This public machine contract performs read-only configuration/pack
+        inspection. It never installs a pack or writes a word/history file.
+        File hashes identify the exact dictionary/configuration bytes inspected.
+        """
+        validate_code(code)
+        settings = self.settings(code)
+        pack = {} if code == "base" else self._pack(code)[1]
+        directory = None if code == "base" else self._pack_directory(code)
+        paths = [] if directory is None else [directory / "config.toml", directory / "lemmas.db"]
+        values = {
+            "schema_version": 1, "language": code,
+            "settings": settings, "locations": self.config["locations"],
+            "normalization": BASE_NORMALIZATION if code == "base" else pack["normalization"],
+            "pack_directory": directory,
+            "files": {str(path): _hash_file(path) for path in paths},
+        }
+        return json.loads(json.dumps(values, default=str, ensure_ascii=False, allow_nan=False))
+
+    def discover_languages(self) -> list[dict]:
+        """Return healthy and damaged installed languages without hiding independent packs.
+
+        Metadata failures are facts in discovery; processing/check_plugin remain
+        strict and must validate a selected language before using its dictionary.
+        """
+        result = []
+        for code in self.list_languages():
+            try:
+                name = self.language_name(code)
+                result.append({"code": code, "name": name, "status": "available", "error": ""})
+            except (ValueError, OSError) as error:
+                result.append({"code": code, "name": code, "status": "needs-repair", "error": str(error)})
+        return result
 
     def check_plugin(self, code: str) -> list[CheckResult]:
         """Report all validation checks for an installed pack.
@@ -1146,6 +1242,81 @@ class BlitzerService:
             return self._install_download(str(source_dir), replace)
         return self._install_local(source, replace)
 
+    def repair_registered_plugin(self, code: str) -> dict:
+        """Replace one installed registered pack and retain its old bytes.
+
+        Download and validate outside the mutation lock. The old directory
+        moves to a uniquely named sibling only after the new pack passes
+        validation; ordinary install_plugin replacement keeps its existing
+        cleanup behavior. Return the backup name for later inspection.
+        """
+        validate_code(code, allow_base=False)
+        registry_entry(code)
+        destination = self.language_packs_dir / code
+        if destination.is_symlink() or not destination.is_dir():
+            raise FileNotFoundError("An installed language directory is required for repair")
+        with tempfile.TemporaryDirectory(prefix="blitzer-repair-download-") as temporary:
+            source = download_pack(code, Path(temporary))
+            _, backup = self._install_local(
+                source, True, expected_code=code, retain_previous=True
+            )
+        try:
+            _require_valid(backup, code)
+            backup_ready = True
+        except (ValueError, OSError):
+            backup_ready = False
+        return {"schema_version": 1, "language": code,
+                "backup": backup.name, "backup_ready": backup_ready}
+
+    def list_plugin_backups(self, code: str) -> dict:
+        """List retained copies for one language with read-only readiness facts.
+
+        Only the companion's exact backup names are returned; callers need
+        not know the pack directory layout. Invalid copies remain visible
+        for specialist recovery but cannot be restored by the safe API.
+        """
+        validate_code(code, allow_base=False)
+        directory = self.language_packs_dir
+        rows = []
+        if directory.is_dir():
+            rows = [
+                row for path in directory.iterdir()
+                if (row := _retained_backup_row(path, code)) is not None
+            ]
+        rows.sort(reverse=True)
+        return {"schema_version": 1, "language": code,
+                "backups": [{"name": name, "ready": ready} for _, name, ready in rows[:100]]}
+
+    def restore_plugin_backup(self, code: str, backup_name: str) -> dict:
+        """Restore a valid retained pack and preserve the current one in turn.
+
+        Only an exact backup basename created for this code is accepted.
+        Invalid old packs remain available for manual inspection but cannot
+        silently replace a working dictionary.
+        """
+        validate_code(code, allow_base=False)
+        if not isinstance(backup_name, str) or not re.fullmatch(
+            rf"\.{code}\.previous-[0-9a-f]{{32}}", backup_name
+        ):
+            raise ValueError("Choose a retained backup for this language")
+        backup = self.language_packs_dir / backup_name
+        destination = self.language_packs_dir / code
+        with _lock(self.language_packs_dir / ".mutation.lock"):
+            if backup.is_symlink() or not backup.is_dir():
+                raise FileNotFoundError("The selected language backup is unavailable")
+            if any(path.is_symlink() for path in backup.rglob("*")):
+                raise ValueError("The selected language backup cannot contain symlinks")
+            _require_valid(backup, code)
+            _check_install_destination(destination, True)
+            displaced = _publish_install(backup, destination, True, retain_previous=True)
+        try:
+            _require_valid(displaced, code)
+            backup_ready = True
+        except (ValueError, OSError):
+            backup_ready = False
+        return {"schema_version": 1, "language": code,
+                "backup": displaced.name, "backup_ready": backup_ready}
+
     def expand_plugin(
         self, code: str, additional: Path, *, version: str = "0.2.0"
     ) -> dict:
@@ -1185,8 +1356,9 @@ class BlitzerService:
             return self._install_local(source, replace, expected_code=code)
 
     def _install_local(
-        self, source: Path, replace: bool, expected_code=None
-    ) -> Path:
+        self, source: Path, replace: bool, expected_code=None,
+        retain_previous: bool = False,
+    ) -> Path | tuple[Path, Path]:
         """Validate and publish a local copy under the lock.
 
         Remote packs must match the requested code. Reject links,
@@ -1224,8 +1396,10 @@ class BlitzerService:
             stage = Path(temporary) / code
             shutil.copytree(source, stage)
             _require_valid(stage, code)
-            _publish_install(stage, destination, replace)
-        return destination
+            backup = _publish_install(
+                stage, destination, replace, retain_previous=retain_previous
+            )
+        return (destination, backup) if retain_previous else destination
 
     def package_plugin(self, code: str, output_dir: Path) -> Path:
         """Prepare a validated pack archive for publication.
@@ -1489,17 +1663,40 @@ def _check_install_destination(destination: Path, replace: bool) -> None:
         )
 
 
-def _publish_install(stage: Path, destination: Path, replace: bool) -> None:
-    """Publish staging, preserving the old pack if replacement fails.
+def _retained_backup_row(path: Path, code: str) -> tuple[float, str, bool] | None:
+    """Read one exact companion-owned backup name and its pack readiness."""
+    if (
+        not re.fullmatch(rf"\.{code}\.previous-[0-9a-f]{{32}}", path.name)
+        or path.is_symlink() or not path.is_dir()
+        or any(member.is_symlink() for member in path.rglob("*"))
+    ):
+        return None
+    try:
+        _require_valid(path, code)
+        return path.stat().st_ctime, path.name, True
+    except (ValueError, OSError):
+        return 0.0, path.name, False
 
-    Hold the caller's mutation lock. A backup stays outside temporary
-    staging so a failed rollback cannot cause automatic deletion of it.
+
+def _publish_install(
+    stage: Path, destination: Path, replace: bool, *, retain_previous: bool = False
+) -> Path | None:
+    """Publish staging under the caller's lock and optionally retain the old pack.
+
+    A backup stays outside temporary staging so a failed rollback cannot
+    cause automatic deletion of it. Explicit repair uses a unique name;
+    ordinary replacements retain their original cleanup behavior.
     """
     _check_install_destination(destination, replace)
     if not destination.exists():
+        if retain_previous:
+            raise FileNotFoundError("An installed language directory is required for repair")
         stage.rename(destination)
-        return
-    previous = destination.with_name(f".{destination.name}.previous")
+        return None
+    previous = destination.with_name(
+        f".{destination.name}.previous-{uuid.uuid4().hex}"
+        if retain_previous else f".{destination.name}.previous"
+    )
     _require_absent(previous)
     destination.rename(previous)
     try:
@@ -1507,7 +1704,9 @@ def _publish_install(stage: Path, destination: Path, replace: bool) -> None:
     except OSError:
         previous.rename(destination)
         raise
-    shutil.rmtree(previous)
+    if not retain_previous:
+        shutil.rmtree(previous)
+    return previous
 
 
 def _write_release_archive(directory: Path, target: Path, code: str) -> None:

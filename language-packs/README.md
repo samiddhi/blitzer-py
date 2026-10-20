@@ -4,6 +4,14 @@
 - Unfinished packs belong in `dev/` and are excluded from releases.
 - Pack databases and generated ZIPs are excluded from Git.
 
+Use `bltzr check-word -l slv sem biti --match both` to check membership
+directly, or add `-n -P ./language-packs` to read this checkout's packs.
+`--match lemma` requires a headword; `--match form` checks stored forms.
+Every valid pack includes each lemma's normalized self-form, so form
+checks also recognize headwords and normally agree with `--match both`.
+These checks use the existing schema and indexes; no pack rebuild or
+format migration is required.
+
 See the [word-boundary and display-name assessment](../maintenance/reports/language-boundaries-plan.md)
 for dev-pack implementation queues, existing-pack limitations and proposed fixes.
 The [current project status](../maintenance/reports/project-status-20261008.md)

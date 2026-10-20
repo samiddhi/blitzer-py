@@ -1,6 +1,9 @@
 This directory contains repository maintenance tools. They are excluded
 from the installed application and its wheel/source distributions.
 
+For this machine's external development checkout and the local `bltzr-dev`
+launcher, see [Development on Iddhibiddhi](EXTERNAL-DISK.md).
+
 See the [current project status](reports/project-status-20261008.md) for
 the word-boundary implementation, full pack inventory, remaining development
 work and exact release commands. `maintenance.language_refresh` previews or

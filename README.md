@@ -207,6 +207,55 @@ cat chapter.txt | bltzr blitz -l eng --format tsv > vocabulary.tsv
 or pipe text into the command. Words are shown as written by default;
 `--lemmatize` shows dictionary forms, such as `dogs → dog`.
 
+## Check dictionary membership
+
+Check individual words against a local language dictionary:
+
+```sh
+bltzr check-word -l eng dogs dog xyzzy
+bltzr check-word -l eng dogs dog --match lemma
+bltzr check-word -l eng dogs --match form --format json
+```
+
+`--match` accepts `lemma`, `form`, or `both` (the default). Lemma mode
+checks whether the supplied word is a headword: `dog` matches, while
+`dogs` does not. Form mode checks stored forms, including each lemma's
+own form, so both `dog` and `dogs` match. Because packs include lemma
+self-forms, `form` and `both` normally give the same result.
+
+Text output is one input word, a tab, and `true` or `false` per line.
+JSON includes `language`, `match`, and an ordered `results` list of
+`{"word": "dogs", "found": true}` records. Input order and duplicates are
+preserved. A completed check exits with status 0 even for missing words;
+operational errors use status 1 and CLI usage errors use status 2.
+
+Python callers can use the same read-only operations:
+
+```python
+from blitzer.core import BlitzerService
+
+service = BlitzerService()
+service.contains("dogs", "eng", match="form")  # True
+service.contains("dogs", "eng", match="lemma")  # False
+service.contains_many(["dog", "dogs", "xyzzy"], "eng")  # [True, True, False]
+```
+
+`contains_many` accepts an iterable of words and returns booleans in input
+order; an empty iterable returns `[]` after checking dictionary availability.
+Passing a bare string as the batch is an error. Each item must be one
+supported word; empty strings, whitespace, and prose raise `ValueError`.
+Matching applies the pack's Unicode normalization, lowercasing, and
+substitutions. It does not segment prose or apply known-word lists,
+skip files, vocabulary filters, frequency sorting, or history settings.
+
+English works offline from its bundled dictionary; an installed English
+pack overrides it. Other languages require an installed pack. The command
+accepts `--config`, `--no-config`, and `--language-packs-dir` (also
+`--plugins-dir`) as usual. Missing or damaged dictionaries raise errors,
+and `base` is rejected because it has no dictionary. Checks never download
+data, invoke morphological analyzers, or write user data. A missing word
+indicates dictionary coverage; it does not establish that the word is invalid.
+
 ## Language packs
 
 Basic (`base`) and English (`eng`) work immediately, without a download.
@@ -508,6 +557,7 @@ In config, `save_context` accepts `"flag-only"` (save when requested),
 
 ```sh
 bltzr blitz --help
+bltzr check-word --help
 bltzr dev --help
 man ./docs/bltzr.1
 ```

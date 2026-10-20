@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Run Blitzer development commands only from the expected external disk."""
+
+import os
+import plistlib
+import subprocess
+import sys
+from pathlib import Path
+
+
+VOLUME = Path("/Volumes/Iddhibiddhi")
+VOLUME_UUID = "E5E64C9B-5A93-4AA1-BA41-FA528B2A6996"
+CHECKOUT = VOLUME / "dev/blitzer-py"
+
+
+def main() -> int:
+    try:
+        result = subprocess.run(
+            ["/usr/sbin/diskutil", "info", "-plist", str(VOLUME)],
+            capture_output=True,
+            check=True,
+        )
+        info = plistlib.loads(result.stdout)
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        info = {}
+
+    if (
+        info.get("VolumeUUID") != VOLUME_UUID
+        or info.get("MountPoint") != str(VOLUME)
+        or not (CHECKOUT / ".git").is_dir()
+    ):
+        print(
+            "Connect Iddhibiddhi to use the Blitzer development environment.",
+            file=sys.stderr,
+        )
+        return 1
+
+    args = sys.argv[1:]
+    if args == ["--check"]:
+        print(CHECKOUT)
+        return 0
+    if args[:1] == ["--run"]:
+        if len(args) == 1:
+            print("Usage: bltzr-dev --run COMMAND [ARGS...]", file=sys.stderr)
+            return 2
+        os.chdir(CHECKOUT)
+        os.execvp(args[1], args[1:])
+    executable = CHECKOUT / ".venv/bin/bltzr"
+    if not executable.is_file():
+        print("Recreate the Blitzer development environment on Iddhibiddhi.", file=sys.stderr)
+        return 1
+    os.chdir(CHECKOUT)
+    os.execv(str(executable), [str(executable), *args])
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

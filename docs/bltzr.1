@@ -13,6 +13,11 @@ bltzr \- extract vocabulary for language study
 .B bltzr list-languages
 .RI [ OPTIONS ]
 .br
+.B bltzr check-word \-l
+.I CODE
+.I WORD...
+.RI [ OPTIONS ]
+.br
 .B bltzr install-plugin
 .I CODE_OR_DIRECTORY
 .RI [ OPTIONS ]
@@ -53,6 +58,31 @@ to standard error. An ambiguous input form can produce several lemma
 candidates. bltzr does not choose candidates based on sentence meaning.
 Dictionary coverage and word-boundary support vary by language.
 .SH COMMANDS
+.TP
+.B check-word
+Check one or more individual words in a local dictionary. Requires
+.BR \-l / \-\-language .
+Use \-\-match lemma|form|both (default both). Lemma mode requires the
+input itself to match a headword; form mode includes inflections and lemma
+self-forms. Form and both normally agree because every valid pack includes
+normalized self-forms. Matching applies the pack's Unicode normalization,
+lowercasing and substitutions. Empty words, prose and unsupported entries
+are errors; no prose segmentation or morphological analyzer is invoked.
+.IP
+Use \-\-format text|json (default text). Text emits the original input,
+a tab and true/false per line. JSON contains language, match and an ordered
+results array of word/found records. Order and duplicate inputs are preserved.
+All checks finish before output is printed. Exit status is 0 for completed
+checks, including misses, 1 for operational errors and 2 for usage errors.
+.IP
+Accepts \-C/\-\-config, \-n/\-\-no-config and
+\-P/\-\-language-packs-dir (also \-\-plugins-dir).
+Bundled English is available offline and an installed pack overrides it.
+Other languages require an installed pack; base has no dictionary and is
+rejected. Missing or damaged dictionaries are errors rather than misses.
+Known lists, vocabulary filters and history settings do not affect results.
+Checks perform no downloads or writes. A miss indicates dictionary coverage
+and does not establish that a word is invalid.
 .TP
 .B blitz
 Extract vocabulary. Requires

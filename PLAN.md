@@ -14,6 +14,11 @@ of the initial plan (especially the default exclusion policy).
 
 Implemented additions:
 
+- Direct dictionary membership through `BlitzerService.contains` and
+  `contains_many`, plus `bltzr check-word`, with lemma/form/both modes,
+  ordered batch results, and text/JSON CLI output. Existing pack self-forms
+  support normalized headword checks without a schema migration. See
+  README.md for the delivered interface and error behavior.
 - Display forms/lemmas independently from filtering forms/lemmas. Filtering
   defaults to exact forms; lemma filtering is an explicit option.
 - All five sort orders: textual frequency, alphabetical, appearance, measured

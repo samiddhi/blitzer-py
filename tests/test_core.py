@@ -246,7 +246,7 @@ def test_failed_build_leaves_no_pack_or_staging(tmp_path, source):
     service = BlitzerService(use_config=False, plugins_dir=tmp_path / "packs")
     with pytest.raises(ValueError):
         service.build_plugin(source)
-    assert not list(service.plugins_dir.iterdir())
+    assert [path.name for path in service.plugins_dir.iterdir()] == [".mutation.lock.guard"]
 
 
 def test_install_is_independent_remove_only_one(service, tmp_path):
@@ -409,7 +409,7 @@ def test_invalid_frequency_input_rolls_back(tmp_path, source):
     service = BlitzerService(use_config=False, plugins_dir=tmp_path / "packs")
     with pytest.raises(ValueError):
         service.build_plugin(source)
-    assert not list(service.plugins_dir.iterdir())
+    assert [path.name for path in service.plugins_dir.iterdir()] == [".mutation.lock.guard"]
 
 
 def test_invalid_row_is_not_an_unknown(service):

@@ -278,7 +278,7 @@ def _known_update_destination(
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option(VERSION, "--version", "-V")
 def cli():
-    """Extract vocabulary using local data-only language packs."""
+    """Extract vocabulary and check words using local language packs."""
 
 
 @cli.group("dev", hidden=True)
@@ -490,6 +490,55 @@ def blitz(
         click.echo(output, nl=False)
 
 
+@cli.command("capabilities")
+def capabilities():
+    """Print the additive machine-contract versions without inspecting user data."""
+    click.echo(json.dumps({
+        "schema_version": 1, "tool": "bltzr", "version": VERSION,
+        "configuration_inspection": 1, "language_discovery": 1,
+        "dictionary_membership": 1,
+    }, sort_keys=True))
+
+
+@cli.command("check-word")
+@click.argument("words", nargs=-1, required=True)
+@click.option("--language", "-l", required=True, help="Three-letter dictionary language code.")
+@click.option("--match", type=click.Choice(["lemma", "form", "both"]), default="both", show_default=True)
+@click.option("--format", "output_format", type=click.Choice(["text", "json"]), default="text", show_default=True)
+@click.option("--config", "-C", type=click.Path(dir_okay=False, path_type=Path))
+@click.option("--no-config", "-n", is_flag=True)
+@click.option("--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir", type=click.Path(file_okay=False, path_type=Path))
+def check_word(words, language, match, output_format, config, no_config, language_packs_dir):
+    """Check whether WORDS occur in a local dictionary.
+
+    Lemma matches headwords; form includes their stored inflections and
+    self-forms; both accepts either. Misses are successful checks (exit 0).
+    Text emits WORD, a tab, and true/false per input. No prose segmentation
+    or known-word filtering is performed.
+    """
+    with _errors():
+        found = _service(config, no_config, language_packs_dir).contains_many(
+            words, language, match=match
+        )
+        results = [{"word": word, "found": hit} for word, hit in zip(words, found)]
+        if output_format == "json":
+            click.echo(json.dumps({"language": language, "match": match, "results": results}, ensure_ascii=False))
+        else:
+            click.echo("\n".join(f"{row['word']}\t{str(row['found']).lower()}" for row in results))
+
+
+@cli.command("inspect")
+@click.option("--language", "-l", required=True)
+@click.option("--config", "-C", type=click.Path(dir_okay=False, path_type=Path))
+@click.option("--no-config", "-n", is_flag=True)
+@click.option("--language-packs-dir", "--plugins-dir", "-P", "language_packs_dir", type=click.Path(file_okay=False, path_type=Path))
+def inspect_configuration(language, config, no_config, language_packs_dir):
+    """Print effective configuration and actual pack hashes as read-only JSON."""
+    with _errors():
+        result = _service(config, no_config, language_packs_dir).inspect_configuration(language)
+        click.echo(json.dumps(result, ensure_ascii=False, sort_keys=True))
+
+
 @cli.command("list-languages")
 @click.option(
     "--config", "-C", type=click.Path(dir_okay=False, path_type=Path)
@@ -505,8 +554,8 @@ def list_languages(config, no_config, language_packs_dir):
         service = _service(config, no_config, language_packs_dir)
         click.echo(
             "\n".join(
-                f"{service.language_name(code)} ({code})"
-                for code in service.list_languages()
+                f"{row['name']} ({row['code']})" + (" [needs repair]" if row["status"] != "available" else "")
+                for row in service.discover_languages()
             )
         )
 
